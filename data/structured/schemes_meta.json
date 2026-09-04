@@ -1,0 +1,62 @@
+{
+  "Scheme-I": {
+    "name": "Scheme – I (ISI Mark / Product Certification)",
+    "governing_law": "Schedule II, Scheme I of BIS (Conformity Assessment) Regulations, 2018",
+    "scope": "Third-party certification mark (ISI Mark) granting license to manufacturers with established quality management and testing facilities.",
+    "eligibility": "Domestic and Foreign Manufacturers (FMCS). MSMEs eligible for Cluster Based Test Facility (CBTF) concessions.",
+    "concessions_msme": "Can share test facilities via CBTF under CMD-I/2:12:8 guidelines, up to 80% capital subsidy on testing infrastructure.",
+    "key_steps": [
+      "1. Identify applicable Indian Standard (IS) & check QCO mandatory status",
+      "2. Set up internal testing lab or link to verified CBTF cluster",
+      "3. Submit application online on Manakonline portal with Form-V & test reports",
+      "4. Preliminary factory inspection & sample drawing by BIS audit officer",
+      "5. Independent testing of drawn sample in BIS recognized lab",
+      "6. Grant of License (CML) and permission to affix ISI Mark",
+      "7. Ongoing market and factory surveillance"
+    ],
+    "timelines": "Normal process: 30–60 days. Simplified procedure for MSMEs: 30 days."
+  },
+  "Scheme-II": {
+    "name": "Scheme – II (Compulsory Registration Scheme / CRO)",
+    "governing_law": "Schedule II, Scheme II of BIS (Conformity Assessment) Regulations, 2018",
+    "scope": "Self-declaration of conformity based on test reports from BIS-recognized labs for Electronics, IT Goods, Solar PV, and Smart Devices.",
+    "eligibility": "Manufacturers of goods notified under MeitY and DPIIT CRO notifications.",
+    "key_steps": [
+      "1. Test product sample in a BIS recognized / accredited lab (report valid for 90 days)",
+      "2. Register online on CRS portal (crsbis.in)",
+      "3. Submit self-declaration of conformity along with valid test report and undertaking",
+      "4. Grant of Registration with unique R-number",
+      "5. Affix standard mark 'IS... R-XXXXXXXX' on product packaging and label"
+    ],
+    "timelines": "15–20 working days upon receipt of complete test report."
+  },
+  "Scheme-IV": {
+    "name": "Scheme – IV (Certificate of Conformity / CoC)",
+    "governing_law": "Schedule II, Scheme IV of BIS (Conformity Assessment) Regulations, 2018 (CMD-I/2:16:1)",
+    "scope": "Grant of Certificate of Conformity for specific batches or continuous production where full factory licensing under Scheme-I is not optimal.",
+    "eligibility": "Manufacturers or applicants meeting technical specifications or specific notifications.",
+    "key_steps": [
+      "1. Submit application along with product test report not older than 180 days (Clause 6.a)",
+      "2. Scrutiny of application and technical documents by BIS CMD-I",
+      "3. Factory assessment or inspection if stipulated in product-specific guidelines",
+      "4. Sample drawing & verification testing in BIS recognized laboratory",
+      "5. Evaluation of compliance against Annexure templates & declaration",
+      "6. Grant of Certificate of Conformity (valid for specified period / consignment)"
+    ],
+    "timelines": "20–45 days."
+  },
+  "CBTF": {
+    "name": "Cluster Based Test Facility (CBTF) for MSMEs",
+    "governing_law": "Guidelines Ref: CMD-I/2:12:8 (30 April 2021)",
+    "scope": "Permits Micro, Small & Medium Enterprises (MSMEs) located in an industrial cluster to share a common test facility as an alternative to in-house testing facilities for Scheme-I ISI Mark licensing.",
+    "eligibility": "MSMEs having valid Udyam registration, located within specified cluster radius (normally 25-50 km).",
+    "non_exempt_tests": "Visual examination up to 10x, routine dimensional check, and packaging tests must still be retained in-house (Clause 2.(i)).",
+    "procedure_to_avail": [
+      "1. Form or join an MSME cluster / industry association operating a CBTF",
+      "2. Ensure CBTF equipment matches testing requirements of relevant IS standard",
+      "3. Submit agreement between MSME unit and CBTF to BIS Regional Office",
+      "4. BIS conducts joint verification of CBTF under Annexure-B checklist",
+      "5. Facility code assigned; MSME licensed under Scheme-I utilizing CBTF for lot testing"
+    ]
+  }
+}

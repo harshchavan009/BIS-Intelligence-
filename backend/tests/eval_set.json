@@ -1,0 +1,182 @@
+[
+  {
+    "id": "EVAL-01",
+    "capability": "Standards Q&A",
+    "language": "en",
+    "query": "Which Indian Standard and mandatory QCO applies to cement bags for building and construction?",
+    "expected_document": "scheme1-ISI-mark.pdf",
+    "expected_is_number": "IS 269",
+    "expected_clause": "IS 269: 2015"
+  },
+  {
+    "id": "EVAL-02",
+    "capability": "Standards Q&A",
+    "language": "hi",
+    "query": "निर्माण के लिए सीमेंट बैग पर कौन सा भारतीय मानक और QCO लागू होता है?",
+    "expected_document": "scheme1-ISI-mark.pdf",
+    "expected_is_number": "IS 269",
+    "expected_clause": "IS 269"
+  },
+  {
+    "id": "EVAL-03",
+    "capability": "MSME CBTF Testing",
+    "language": "en",
+    "query": "What tests can MSMEs conduct through Cluster Based Test Facility (CBTF) instead of an in-house lab?",
+    "expected_document": "cbtf-msme-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "CMD-I/2:12:8 (Clause 2)"
+  },
+  {
+    "id": "EVAL-04",
+    "capability": "MSME CBTF Testing",
+    "language": "hi",
+    "query": "MSMEs अपनी इन-हाउस लैब बनाने के बदले क्लस्टर आधारित परीक्षण सुविधा (CBTF) का उपयोग कैसे कर सकती हैं?",
+    "expected_document": "cbtf-msme-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "CMD-I/2:12:8"
+  },
+  {
+    "id": "EVAL-05",
+    "capability": "Scheme Comparison",
+    "language": "en",
+    "query": "What is the difference between Scheme I (ISI Mark) and Scheme II (Compulsory Registration / CRO)?",
+    "expected_document": "scheme2-registration-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "Scheme-II"
+  },
+  {
+    "id": "EVAL-06",
+    "capability": "Scheme Comparison",
+    "language": "hi",
+    "query": "योजना I (ISI मार्क) और योजना II (CRO) में क्या अंतर है?",
+    "expected_document": "scheme2-registration-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "Scheme-II"
+  },
+  {
+    "id": "EVAL-07",
+    "capability": "Scheme-IV Timeline",
+    "language": "en",
+    "query": "Explain the step-by-step process and test report validity for Grant of Certificate of Conformity (CoC) under Scheme-IV.",
+    "expected_document": "scheme4-conformity.pdf",
+    "expected_is_number": null,
+    "expected_clause": "CMD-I/2:16:1"
+  },
+  {
+    "id": "EVAL-08",
+    "capability": "Scheme-IV Timeline",
+    "language": "hi",
+    "query": "योजना-IV के तहत अनुरूपता का प्रमाण पत्र (CoC) प्रदान करने की चरण-दर-चरण प्रक्रिया और 180 दिन की वैधता बताएं।",
+    "expected_document": "scheme4-conformity.pdf",
+    "expected_is_number": null,
+    "expected_clause": "CMD-I/2:16:1"
+  },
+  {
+    "id": "EVAL-09",
+    "capability": "Consumer ISI Verification",
+    "language": "en",
+    "query": "How can a consumer verify if an ISI mark is genuine and report substandard products under market surveillance?",
+    "expected_document": "market-surveillance-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "CMD-I/2:12:7"
+  },
+  {
+    "id": "EVAL-10",
+    "capability": "Consumer ISI Verification",
+    "language": "hi",
+    "query": "एक उपभोक्ता कैसे जांच सकता है कि ISI मार्क असली है या नकली, और घटिया उत्पाद की शिकायत का प्रारूप क्या है?",
+    "expected_document": "market-surveillance-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "CMD-I/2:12:7"
+  },
+  {
+    "id": "EVAL-11",
+    "capability": "Quality Control Orders",
+    "language": "en",
+    "query": "What is a Quality Control Order (QCO) and which ministry issues mandatory orders under the BIS Act?",
+    "expected_document": "qco-guidance.pdf",
+    "expected_is_number": null,
+    "expected_clause": "QCO"
+  },
+  {
+    "id": "EVAL-12",
+    "capability": "Quality Control Orders",
+    "language": "en",
+    "query": "Is import of products covered under mandatory QCO permitted without BIS license?",
+    "expected_document": "qco-guidance.pdf",
+    "expected_is_number": null,
+    "expected_clause": "QCO"
+  },
+  {
+    "id": "EVAL-13",
+    "capability": "Steel Standards",
+    "language": "en",
+    "query": "What standard governs High Strength Deformed Steel Bars and Wires for Concrete Reinforcement (TMT bars)?",
+    "expected_document": "scheme1-ISI-mark.pdf",
+    "expected_is_number": "IS 1786",
+    "expected_clause": "IS 1786"
+  },
+  {
+    "id": "EVAL-14",
+    "capability": "Electronics CRO",
+    "language": "en",
+    "query": "Which BIS scheme governs mobile phones, laptops, and smart watches under MeitY order?",
+    "expected_document": "scheme2-registration-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "Scheme-II"
+  },
+  {
+    "id": "EVAL-15",
+    "capability": "MSME Retained Tests",
+    "language": "en",
+    "query": "Which tests must MSMEs retain in-house and cannot outsource under CBTF guidelines?",
+    "expected_document": "cbtf-msme-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "Clause 2.(i)"
+  },
+  {
+    "id": "EVAL-16",
+    "capability": "Market Surveillance Form",
+    "language": "en",
+    "query": "Where is the format for reporting market surveillance feedback located in BIS guidelines?",
+    "expected_document": "market-surveillance-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "Annexure-I"
+  },
+  {
+    "id": "EVAL-17",
+    "capability": "Factory Testing Scheme-I",
+    "language": "en",
+    "query": "What are the specific guidelines for factory audit and grant of license under Scheme-I?",
+    "expected_document": "scheme1-specific-guidelines.pdf",
+    "expected_is_number": null,
+    "expected_clause": "Scheme-I"
+  },
+  {
+    "id": "EVAL-18",
+    "capability": "Certificate of Conformity Validity",
+    "language": "en",
+    "query": "How long is a test report valid when applying for Certificate of Conformity under Scheme-IV?",
+    "expected_document": "scheme4-conformity.pdf",
+    "expected_is_number": null,
+    "expected_clause": "180 days"
+  },
+  {
+    "id": "EVAL-19",
+    "capability": "Gold Hallmarking",
+    "language": "en",
+    "query": "What are the 3 mandatory marks on BIS hallmarked gold jewellery and what is HUID?",
+    "expected_document": "scheme1-ISI-mark.pdf",
+    "expected_is_number": "IS 1417",
+    "expected_clause": "Hallmark"
+  },
+  {
+    "id": "EVAL-20",
+    "capability": "Gold Hallmarking",
+    "language": "hi",
+    "query": "सोने के आभूषणों पर बीआईएस हॉलमार्क के 3 चिन्ह क्या हैं और HUID कोड क्या है?",
+    "expected_document": "scheme1-ISI-mark.pdf",
+    "expected_is_number": "IS 1417",
+    "expected_clause": "Hallmark"
+  }
+]

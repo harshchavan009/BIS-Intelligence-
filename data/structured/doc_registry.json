@@ -1,0 +1,65 @@
+[
+  {
+    "scheme": "Scheme-I (CBTF MSME)",
+    "doc_type": "Testing Facility Guidelines",
+    "effective_date": "30   April   2021",
+    "ref_number": "CMD-I/2:12:8                                      30",
+    "title": "Guidelines for utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs) under conformity assessment Scheme – I of Schedule – II of BIS (Conformity Assessment) Regulations, 2018",
+    "filename": "cbtf-msme-guidelines.pdf",
+    "total_pages": 19
+  },
+  {
+    "scheme": "Scheme-I (Surveillance)",
+    "doc_type": "Post-Market Surveillance Procedures",
+    "effective_date": "25 February 2026",
+    "ref_number": "CMD-I/2:12:7  25",
+    "title": "Guidelines for market surveillance during operation of licence for the conformity assessment Scheme – I of Schedule – II of BIS (Conformity Assessment) Regulations, 2018 1. This document stipulates the guidelines for surveillance by BIS w.r.t. monitoring operation",
+    "filename": "market-surveillance-guidelines.pdf",
+    "total_pages": 14
+  },
+  {
+    "scheme": "QCO Regulatory Guidance",
+    "doc_type": "Statutory Orders Guidance",
+    "effective_date": "2018-2026",
+    "ref_number": "BIS/HQ/REG-2018",
+    "title": "sections (1) and (2) of section 16 read in conjunction with section 17 and sub- section (3) of section 25 of the BIS Act, 2016 thereby bringing the products under BIS Mandatory Certification.",
+    "filename": "qco-guidance.pdf",
+    "total_pages": 3
+  },
+  {
+    "scheme": "BIS Standards",
+    "doc_type": "General Technical Guideline",
+    "effective_date": "11/11/2018",
+    "ref_number": ".",
+    "title": "Bureau of Indian Standards Regulatory Guideline",
+    "filename": "scheme1-ISI-mark.pdf",
+    "total_pages": 412
+  },
+  {
+    "scheme": "QCO Regulatory Guidance",
+    "doc_type": "Statutory Orders Guidance",
+    "effective_date": "2018-2026",
+    "ref_number": "ractory Cement.",
+    "title": "Scheme-I Specific Product Guidelines & Mandatory QCO Mapping",
+    "filename": "scheme1-specific-guidelines.pdf",
+    "total_pages": 11
+  },
+  {
+    "scheme": "Scheme-II (CRO)",
+    "doc_type": "Compulsory Registration Scheme",
+    "effective_date": "2018-2026",
+    "ref_number": "BIS/HQ/REG-2018",
+    "title": "Compulsory Registration Scheme (CRO) Guidelines - Scheme-II",
+    "filename": "scheme2-registration-guidelines.pdf",
+    "total_pages": 2
+  },
+  {
+    "scheme": "Scheme-IV",
+    "doc_type": "Certificate of Conformity (CoC) Guidelines",
+    "effective_date": "09/05/2019",
+    "ref_number": "CMD-I/2:16:1                    02",
+    "title": "GuidelinesforGrantofCertificateofConformityaspertheconformityassessment Scheme – IV of Schedule – II of BIS (Conformity Assessment) Regulations, 2018",
+    "filename": "scheme4-conformity.pdf",
+    "total_pages": 28
+  }
+]

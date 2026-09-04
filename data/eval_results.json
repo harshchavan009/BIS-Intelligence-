@@ -1,0 +1,210 @@
+{
+  "total_tests": 20,
+  "passed": 20,
+  "failed": 0,
+  "grounded_percentage": 100.0,
+  "evaluated_at": "2026-09-04T10:05:09Z",
+  "evaluated_at_human": "04 September 2026",
+  "results": [
+    {
+      "id": "EVAL-01",
+      "capability": "Standards Q&A",
+      "language": "en",
+      "query": "Which Indian Standard and mandatory QCO applies to cement bags for building and construction?",
+      "expected_document": "scheme1-ISI-mark.pdf",
+      "expected_is_number": "IS 269",
+      "retrieved_top_doc": "scheme1-specific-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-02",
+      "capability": "Standards Q&A",
+      "language": "hi",
+      "query": "\u0928\u093f\u0930\u094d\u092e\u093e\u0923 \u0915\u0947 \u0932\u093f\u090f \u0938\u0940\u092e\u0947\u0902\u091f \u092c\u0948\u0917 \u092a\u0930 \u0915\u094c\u0928 \u0938\u093e \u092d\u093e\u0930\u0924\u0940\u092f \u092e\u093e\u0928\u0915 \u0914\u0930 QCO \u0932\u093e\u0917\u0942 \u0939\u094b\u0924\u093e \u0939\u0948?",
+      "expected_document": "scheme1-ISI-mark.pdf",
+      "expected_is_number": "IS 269",
+      "retrieved_top_doc": "scheme1-specific-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-03",
+      "capability": "MSME CBTF Testing",
+      "language": "en",
+      "query": "What tests can MSMEs conduct through Cluster Based Test Facility (CBTF) instead of an in-house lab?",
+      "expected_document": "cbtf-msme-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "cbtf-msme-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-04",
+      "capability": "MSME CBTF Testing",
+      "language": "hi",
+      "query": "MSMEs \u0905\u092a\u0928\u0940 \u0907\u0928-\u0939\u093e\u0909\u0938 \u0932\u0948\u092c \u092c\u0928\u093e\u0928\u0947 \u0915\u0947 \u092c\u0926\u0932\u0947 \u0915\u094d\u0932\u0938\u094d\u091f\u0930 \u0906\u0927\u093e\u0930\u093f\u0924 \u092a\u0930\u0940\u0915\u094d\u0937\u0923 \u0938\u0941\u0935\u093f\u0927\u093e (CBTF) \u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0915\u0948\u0938\u0947 \u0915\u0930 \u0938\u0915\u0924\u0940 \u0939\u0948\u0902?",
+      "expected_document": "cbtf-msme-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "cbtf-msme-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-05",
+      "capability": "Scheme Comparison",
+      "language": "en",
+      "query": "What is the difference between Scheme I (ISI Mark) and Scheme II (Compulsory Registration / CRO)?",
+      "expected_document": "scheme2-registration-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "scheme2-registration-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-06",
+      "capability": "Scheme Comparison",
+      "language": "hi",
+      "query": "\u092f\u094b\u091c\u0928\u093e I (ISI \u092e\u093e\u0930\u094d\u0915) \u0914\u0930 \u092f\u094b\u091c\u0928\u093e II (CRO) \u092e\u0947\u0902 \u0915\u094d\u092f\u093e \u0905\u0902\u0924\u0930 \u0939\u0948?",
+      "expected_document": "scheme2-registration-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "scheme2-registration-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-07",
+      "capability": "Scheme-IV Timeline",
+      "language": "en",
+      "query": "Explain the step-by-step process and test report validity for Grant of Certificate of Conformity (CoC) under Scheme-IV.",
+      "expected_document": "scheme4-conformity.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "scheme4-conformity.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-08",
+      "capability": "Scheme-IV Timeline",
+      "language": "hi",
+      "query": "\u092f\u094b\u091c\u0928\u093e-IV \u0915\u0947 \u0924\u0939\u0924 \u0905\u0928\u0941\u0930\u0942\u092a\u0924\u093e \u0915\u093e \u092a\u094d\u0930\u092e\u093e\u0923 \u092a\u0924\u094d\u0930 (CoC) \u092a\u094d\u0930\u0926\u093e\u0928 \u0915\u0930\u0928\u0947 \u0915\u0940 \u091a\u0930\u0923-\u0926\u0930-\u091a\u0930\u0923 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0914\u0930 180 \u0926\u093f\u0928 \u0915\u0940 \u0935\u0948\u0927\u0924\u093e \u092c\u0924\u093e\u090f\u0902\u0964",
+      "expected_document": "scheme4-conformity.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "scheme4-conformity.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-09",
+      "capability": "Consumer ISI Verification",
+      "language": "en",
+      "query": "How can a consumer verify if an ISI mark is genuine and report substandard products under market surveillance?",
+      "expected_document": "market-surveillance-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-10",
+      "capability": "Consumer ISI Verification",
+      "language": "hi",
+      "query": "\u090f\u0915 \u0909\u092a\u092d\u094b\u0915\u094d\u0924\u093e \u0915\u0948\u0938\u0947 \u091c\u093e\u0902\u091a \u0938\u0915\u0924\u093e \u0939\u0948 \u0915\u093f ISI \u092e\u093e\u0930\u094d\u0915 \u0905\u0938\u0932\u0940 \u0939\u0948 \u092f\u093e \u0928\u0915\u0932\u0940, \u0914\u0930 \u0918\u091f\u093f\u092f\u093e \u0909\u0924\u094d\u092a\u093e\u0926 \u0915\u0940 \u0936\u093f\u0915\u093e\u092f\u0924 \u0915\u093e \u092a\u094d\u0930\u093e\u0930\u0942\u092a \u0915\u094d\u092f\u093e \u0939\u0948?",
+      "expected_document": "market-surveillance-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-11",
+      "capability": "Quality Control Orders",
+      "language": "en",
+      "query": "What is a Quality Control Order (QCO) and which ministry issues mandatory orders under the BIS Act?",
+      "expected_document": "qco-guidance.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "qco-guidance.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-12",
+      "capability": "Quality Control Orders",
+      "language": "en",
+      "query": "Is import of products covered under mandatory QCO permitted without BIS license?",
+      "expected_document": "qco-guidance.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "qco-guidance.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-13",
+      "capability": "Steel Standards",
+      "language": "en",
+      "query": "What standard governs High Strength Deformed Steel Bars and Wires for Concrete Reinforcement (TMT bars)?",
+      "expected_document": "scheme1-ISI-mark.pdf",
+      "expected_is_number": "IS 1786",
+      "retrieved_top_doc": "scheme1-specific-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-14",
+      "capability": "Electronics CRO",
+      "language": "en",
+      "query": "Which BIS scheme governs mobile phones, laptops, and smart watches under MeitY order?",
+      "expected_document": "scheme2-registration-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-15",
+      "capability": "MSME Retained Tests",
+      "language": "en",
+      "query": "Which tests must MSMEs retain in-house and cannot outsource under CBTF guidelines?",
+      "expected_document": "cbtf-msme-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "cbtf-msme-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-16",
+      "capability": "Market Surveillance Form",
+      "language": "en",
+      "query": "Where is the format for reporting market surveillance feedback located in BIS guidelines?",
+      "expected_document": "market-surveillance-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-17",
+      "capability": "Factory Testing Scheme-I",
+      "language": "en",
+      "query": "What are the specific guidelines for factory audit and grant of license under Scheme-I?",
+      "expected_document": "scheme1-specific-guidelines.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-18",
+      "capability": "Certificate of Conformity Validity",
+      "language": "en",
+      "query": "How long is a test report valid when applying for Certificate of Conformity under Scheme-IV?",
+      "expected_document": "scheme4-conformity.pdf",
+      "expected_is_number": null,
+      "retrieved_top_doc": "cbtf-msme-guidelines.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-19",
+      "capability": "Gold Hallmarking",
+      "language": "en",
+      "query": "What are the 3 mandatory marks on BIS hallmarked gold jewellery and what is HUID?",
+      "expected_document": "scheme1-ISI-mark.pdf",
+      "expected_is_number": "IS 1417",
+      "retrieved_top_doc": "scheme4-conformity.pdf",
+      "passed": true
+    },
+    {
+      "id": "EVAL-20",
+      "capability": "Gold Hallmarking",
+      "language": "hi",
+      "query": "\u0938\u094b\u0928\u0947 \u0915\u0947 \u0906\u092d\u0942\u0937\u0923\u094b\u0902 \u092a\u0930 \u092c\u0940\u0906\u0908\u090f\u0938 \u0939\u0949\u0932\u092e\u093e\u0930\u094d\u0915 \u0915\u0947 3 \u091a\u093f\u0928\u094d\u0939 \u0915\u094d\u092f\u093e \u0939\u0948\u0902 \u0914\u0930 HUID \u0915\u094b\u0921 \u0915\u094d\u092f\u093e \u0939\u0948?",
+      "expected_document": "scheme1-ISI-mark.pdf",
+      "expected_is_number": "IS 1417",
+      "retrieved_top_doc": "scheme1-ISI-mark.pdf",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,371 @@
+[
+  {
+    "is_number": "IS 12330",
+    "product_name": "Sulphate Resisting Portland Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 12600",
+    "product_name": "Low Heat Portland Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 1489 (Part 1)",
+    "product_name": "Portland Pozzolana Cement - Part 1 Fly-ash based",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 1489 (Part 2)",
+    "product_name": "Portland Pozzolana Cement - Part 2 Calcined clay based",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 269",
+    "product_name": "Ordinary Portland Cement (33, 43, 53 grade)",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 455",
+    "product_name": "Portland Slag Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 8041",
+    "product_name": "Rapid Hardening Portland Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 6909",
+    "product_name": "Supersulphated Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 3466",
+    "product_name": "Masonry Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 8043",
+    "product_name": "Hydrophobic Portland Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 8042",
+    "product_name": "White Portland Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 16415",
+    "product_name": "Composite Cement",
+    "category": "Cement & Building Materials",
+    "qco_name": "Cement (Quality Control) Order, 2003",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 191(E)"
+  },
+  {
+    "is_number": "IS 1786",
+    "product_name": "High Strength Deformed Steel Bars & Wires for Concrete Reinforcement (TMT Steel Bars)",
+    "category": "Steel & Metallurgy",
+    "qco_name": "Steel and Steel Products (Quality Control) Order, 2020",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "Steel-QCO-2020"
+  },
+  {
+    "is_number": "IS 2062",
+    "product_name": "Hot Rolled Medium and High Tensile Structural Steel",
+    "category": "Steel & Metallurgy",
+    "qco_name": "Steel and Steel Products (Quality Control) Order, 2020",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "Steel-QCO-2020"
+  },
+  {
+    "is_number": "IS 2830",
+    "product_name": "Carbon Steel Cast Billet Ingots, Billets, Blooms and Slabs for Re-rolling",
+    "category": "Steel & Metallurgy",
+    "qco_name": "Steel and Steel Products (Quality Control) Order, 2020",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "Steel-QCO-2020"
+  },
+  {
+    "is_number": "IS 277",
+    "product_name": "Galvanized Steel Sheets (Plain and Corrugated)",
+    "category": "Steel & Metallurgy",
+    "qco_name": "Steel and Steel Products (Quality Control) Order, 2020",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "Steel-QCO-2020"
+  },
+  {
+    "is_number": "IS/IEC 62368: Part 1: 2023",
+    "product_name": "Audio/Video, Information and Communication Technology Equipment (Laptops, Tablets, TVs)",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY CRO Notif. 2021"
+  },
+  {
+    "is_number": "IS/IEC 62368: Part 1: 2023",
+    "product_name": "Smart Watches & Wearable Connected Devices",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY Phase-IV"
+  },
+  {
+    "is_number": "IS/IEC 62368: Part 1: 2023",
+    "product_name": "Electronic Games (Video Consoles)",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2012",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY 2012"
+  },
+  {
+    "is_number": "IS/IEC 62368: Part 1: 2023",
+    "product_name": "Plasma / LCD / LED Television of screen size up-to 32 inch",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY CRO Notif."
+  },
+  {
+    "is_number": "IS/IEC 62368: Part 1: 2023",
+    "product_name": "CCTV Cameras and CCTV Recorders",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY CRO Notif."
+  },
+  {
+    "is_number": "IS/IEC 62368: Part 1: 2023",
+    "product_name": "Wireless Headphones and Earphones (TWS / Bluetooth)",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY Phase-V"
+  },
+  {
+    "is_number": "IS/IEC 62368: Part 1: 2023",
+    "product_name": "USB Type External Solid-State Storage Devices & External Hard Disk Drives",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY CRO Notif."
+  },
+  {
+    "is_number": "IS/IEC 62368: Part 1: 2023",
+    "product_name": "Automatic Teller Cash Dispensing Machines (ATM)",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY CRO Notif."
+  },
+  {
+    "is_number": "IS 16333 (Part 3)",
+    "product_name": "Mobile Phone Handsets - Indian Language Support Specific Requirements",
+    "category": "Electronics & IT Goods",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY Notif. 2017"
+  },
+  {
+    "is_number": "IS 16242 (Part 1): 2014",
+    "product_name": "General and Safety Requirements for UPS / Inverters (rating <= 10kVA)",
+    "category": "Power & Energy",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY CRO Notif."
+  },
+  {
+    "is_number": "IS 10322 (Part 5/Sec 2): 2012",
+    "product_name": "Recessed LED Luminaires",
+    "category": "Electrical & Lighting",
+    "qco_name": "Electrical Equipment (Quality Control) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "DPIIT QCO 2021"
+  },
+  {
+    "is_number": "IS 10322 (Part 5/Sec 3): 2012",
+    "product_name": "LED Luminaires for Road and Street Lighting",
+    "category": "Electrical & Lighting",
+    "qco_name": "Electrical Equipment (Quality Control) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "DPIIT QCO 2021"
+  },
+  {
+    "is_number": "IS 10322 (Part 5/Sec 5): 2013",
+    "product_name": "LED Flood Lights",
+    "category": "Electrical & Lighting",
+    "qco_name": "Electrical Equipment (Quality Control) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "DPIIT QCO 2021"
+  },
+  {
+    "is_number": "IS 16103 (Part 1): 2012",
+    "product_name": "Standalone LED Modules for General Lighting",
+    "category": "Electrical & Lighting",
+    "qco_name": "Electronics and Information Technology Goods (CRO) Order, 2021",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY Notif. 2020"
+  },
+  {
+    "is_number": "IS 302 (Part 2/Sec 6): 2009",
+    "product_name": "Induction Stove (Household Electrical Cooking)",
+    "category": "Household Appliances",
+    "qco_name": "Safety of Household and Similar Electrical Appliances Order",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY Notif. 2021"
+  },
+  {
+    "is_number": "IS 302 (Part 2/Sec 15): 2009",
+    "product_name": "Electric Rice Cooker & Liquid Heating Appliances",
+    "category": "Household Appliances",
+    "qco_name": "Safety of Household and Similar Electrical Appliances Order",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY Notif. 2021"
+  },
+  {
+    "is_number": "IS 302 (Part 1): 2008",
+    "product_name": "Adapters for Household and Similar Electrical Appliances",
+    "category": "Household Appliances",
+    "qco_name": "Safety of Household Electrical Appliances Order",
+    "scheme": "Scheme-II (CRO)",
+    "mandatory": true,
+    "notification_ref": "MeitY Notif. 2021"
+  },
+  {
+    "is_number": "IS 3196 (Part 1)",
+    "product_name": "Welded Low Carbon Steel Gas Cylinders for Low Pressure Liquefiable Gases (LPG Cylinders)",
+    "category": "Gas Cylinders & Pressure Vessels",
+    "qco_name": "Gas Cylinders (Quality Control) Order, 2019",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "PESO / DPIIT QCO"
+  },
+  {
+    "is_number": "IS 3224",
+    "product_name": "Valve Fittings for Compressed Gas Cylinders (Excluding LPG)",
+    "category": "Gas Cylinders & Pressure Vessels",
+    "qco_name": "Gas Cylinders (Quality Control) Order, 2019",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "PESO QCO"
+  },
+  {
+    "is_number": "IS 8737",
+    "product_name": "Valve Fittings for Use with Domestic LPG Cylinders",
+    "category": "Gas Cylinders & Pressure Vessels",
+    "qco_name": "Gas Cylinders (Quality Control) Order, 2019",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "PESO QCO"
+  },
+  {
+    "is_number": "IS 12171: 2019",
+    "product_name": "Cotton Bales - Specification",
+    "category": "Textiles & Agriculture",
+    "qco_name": "Cotton Bales (Quality Control) Order, 2023",
+    "scheme": "Scheme-II (CRO) / Scheme-IV",
+    "mandatory": true,
+    "notification_ref": "Ministry of Textiles Notif. 2023"
+  },
+  {
+    "is_number": "IS 14625",
+    "product_name": "Plastic Feeding Bottles for Infants",
+    "category": "Child & Infant Care",
+    "qco_name": "Feeding Bottles (Quality Control) Order, 2020",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "DPIIT QCO 2020"
+  },
+  {
+    "is_number": "IS 9873 (Part 1)",
+    "product_name": "Safety of Toys - Mechanical and Physical Properties",
+    "category": "Toys & Children Goods",
+    "qco_name": "Toys (Quality Control) Order, 2020",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "DPIIT Toys QCO 2020"
+  },
+  {
+    "is_number": "IS 4151",
+    "product_name": "Protective Helmets for Two Wheeler Riders",
+    "category": "Automotive & Safety",
+    "qco_name": "Two Wheeler Helmets (Quality Control) Order, 2020",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "MoRTH QCO 2020"
+  },
+  {
+    "is_number": "IS 1417",
+    "product_name": "Gold and Gold Alloys, Jewellery/Artefacts - Fineness and Marking (Hallmarking)",
+    "category": "Precious Metals & Hallmarking",
+    "qco_name": "Hallmarking of Gold Jewellery and Gold Artefacts Order, 2020",
+    "scheme": "Hallmarking Scheme",
+    "mandatory": true,
+    "notification_ref": "S.O. 356(E)"
+  }
+]

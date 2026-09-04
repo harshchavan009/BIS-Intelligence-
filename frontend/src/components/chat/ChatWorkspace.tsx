@@ -1,0 +1,497 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { useAppStore, SourceCitation } from '../../store/useAppStore';
+import { Send, ThumbsUp, ThumbsDown, ShieldCheck, Sparkles, RefreshCw, BookOpen, Layers, CheckCircle2, ArrowRight } from 'lucide-react';
+import { GroundedBadge } from '../common/GroundedBadge';
+
+interface Message {
+  id: string;
+  sender: 'user' | 'assistant';
+  text: string;
+  sources?: SourceCitation[];
+  groundedOverall?: boolean;
+  groundedPercentage?: number;
+  timestamp: string;
+  isStreaming?: boolean;
+}
+
+export const ChatWorkspace: React.FC = () => {
+  const { language, openSource, queryPrefill, setQueryPrefill } = useAppStore();
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [isStreaming, setIsStreaming] = useState(false);
+  const [feedbackGiven, setFeedbackGiven] = useState<{ [msgId: string]: number }>({});
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const samplePromptsEn = [
+    { 
+      label: "Cement QCO & IS Standards", 
+      desc: "Mandatory IS 269 standard for cement bags in construction",
+      query: "Which Indian Standard and QCO applies to cement bag for construction?" 
+    },
+    { 
+      label: "MSME Testing Concessions (CBTF)", 
+      desc: "Cluster Based Test Facilities to slash in-house lab costs",
+      query: "What tests can MSMEs conduct through Cluster Based Test Facility (CBTF) instead of an in-house lab?" 
+    },
+    { 
+      label: "Scheme Comparison (I vs II vs IV)", 
+      desc: "Differences between ISI mark, CRO registration, and CoC",
+      query: "What is the difference between Scheme I (ISI Mark), Scheme II (CRO), and Scheme IV (CoC)?" 
+    },
+    { 
+      label: "Scheme-IV Process Timeline", 
+      desc: "Procedural steps and 180-day test report validity",
+      query: "Explain the step-by-step process for Grant of Certificate of Conformity (CoC) under Scheme-IV." 
+    },
+    { 
+      label: "Verify Genuine ISI Mark", 
+      desc: "Spotting fake marks and Annexure-I complaint letter",
+      query: "How can a consumer verify if an ISI mark is genuine and report substandard products?" 
+    },
+    { 
+      label: "Gold Hallmarking & HUID", 
+      desc: "3 mandatory marks and 6-digit HUID code traceability",
+      query: "How do I verify BIS hallmark on gold jewellery and what is HUID?" 
+    }
+  ];
+
+  const samplePromptsHi = [
+    { 
+      label: "सीमेंट गुणवत्ता नियंत्रण (QCO)", 
+      desc: "निर्माण कार्यों में सीमेंट बैग पर अनिवार्य IS 269 मानक",
+      query: "निर्माण के लिए सीमेंट बैग पर कौन सा भारतीय मानक और QCO लागू होता है?" 
+    },
+    { 
+      label: "MSME क्लस्टर परीक्षण (CBTF)", 
+      desc: "इन-हाउस लैब के बदले साझा क्लस्टर प्रयोगशाला सुविधा",
+      query: "MSMEs अपनी इन-हाउस लैब बनाने के बदले क्लस्टर आधारित परीक्षण सुविधा (CBTF) का उपयोग कैसे कर सकती हैं?" 
+    },
+    { 
+      label: "योजना I, II और IV में अंतर", 
+      desc: "ISI मार्क, CRO और अनुरूपता प्रमाणपत्र में अंतर",
+      query: "योजना I (ISI मार्क), योजना II (CRO), और योजना IV (CoC) में क्या अंतर है?" 
+    },
+    { 
+      label: "CoC प्रक्रिया और 180-दिन वैधता", 
+      desc: "योजना-IV के तहत चरण-दर-चरण आवेदन एवं समय सीमा",
+      query: "योजना-IV के तहत अनुरूपता का प्रमाण पत्र (CoC) प्रदान करने की चरण-दर-चरण प्रक्रिया बताएं।" 
+    },
+    { 
+      label: "असली ISI मार्क और शिकायत", 
+      desc: "नकली ISI पहचानें और बाजार निगरानी शिकायत प्रारूप",
+      query: "एक उपभोक्ता कैसे जांच सकता है कि ISI मार्क असली है या नकली, और घटिया उत्पाद की शिकायत कैसे करें?" 
+    },
+    { 
+      label: "सोने की हॉलमार्किंग और HUID", 
+      desc: "3 अनिवार्य प्रतीक और 6-अंकों का लेज़र कोड",
+      query: "सोने के आभूषणों पर बीआईएस हॉलमार्क का सत्यापन कैसे करें और HUID क्या है?" 
+    }
+  ];
+
+  const currentPrompts = language === 'hi' ? samplePromptsHi : samplePromptsEn;
+
+  // Initialize with authoritative greeting
+  useEffect(() => {
+    if (messages.length === 0) {
+      setMessages([
+        {
+          id: 'welcome-msg',
+          sender: 'assistant',
+          text: language === 'hi' 
+            ? "नमस्ते। मैं भारतीय मानक ब्यूरो (BIS) का आधिकारिक एआई सहायक हूँ। आप भारतीय मानकों (IS), अनिवार्य गुणवत्ता नियंत्रण आदेशों (QCO), एमएसएमई हेतु क्लस्टर परीक्षण (CBTF), प्रमाणन योजनाओं और उपभोक्ता अधिकारों के बारे में पूछ सकते हैं। प्रत्येक उत्तर आधिकारिक विनियामक दस्तावेजों से प्रमाणित होगा।"
+            : "Welcome to the Bureau of Indian Standards (BIS) Intelligent Assistant. I provide source-grounded answers on Indian Standards (IS), mandatory Quality Control Orders (QCOs), MSME Cluster Test Facilities (CBTF), certification schemes (Scheme I / II / IV), and consumer rights. Every factual claim is backed by official regulatory clauses.",
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }
+      ]);
+    }
+  }, [language]);
+
+  // Handle prefill from other tabs
+  useEffect(() => {
+    if (queryPrefill) {
+      setInput(queryPrefill);
+      setQueryPrefill('');
+    }
+  }, [queryPrefill]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isStreaming]);
+
+  const userMessageCount = messages.filter((m) => m.sender === 'user').length;
+  const isInitialEmptyState = userMessageCount === 0;
+
+  const handleSend = async (userQuery?: string) => {
+    const queryText = userQuery || input;
+    if (!queryText.trim() || isStreaming) return;
+
+    const userMessageId = `user-${Date.now()}`;
+    const assistantMessageId = `assistant-${Date.now()}`;
+
+    const newMessages: Message[] = [
+      ...messages,
+      {
+        id: userMessageId,
+        sender: 'user',
+        text: queryText,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      },
+      {
+        id: assistantMessageId,
+        sender: 'assistant',
+        text: '',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        isStreaming: true
+      }
+    ];
+
+    setMessages(newMessages);
+    setInput('');
+    setIsStreaming(true);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: queryText,
+          language: language
+        })
+      });
+
+      if (!response.body) throw new Error('No response stream');
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let streamedText = '';
+      let sources: SourceCitation[] = [];
+      let groundedOverall = true;
+      let groundedPct = 100.0;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const rawChunk = decoder.decode(value, { stream: true });
+        const lines = rawChunk.split('\n');
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const eventData = JSON.parse(line.slice(6));
+              if (eventData.type === 'token') {
+                streamedText += eventData.data;
+                setMessages((prev) =>
+                  prev.map((msg) =>
+                    msg.id === assistantMessageId
+                      ? { ...msg, text: streamedText }
+                      : msg
+                  )
+                );
+              } else if (eventData.type === 'metadata') {
+                sources = eventData.data.sources || [];
+                groundedOverall = eventData.data.grounded_overall ?? true;
+                groundedPct = eventData.data.grounded_percentage ?? 100.0;
+              }
+            } catch (e) {
+              // Ignore partial JSON
+            }
+          }
+        }
+      }
+
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === assistantMessageId
+            ? {
+                ...msg,
+                text: streamedText,
+                sources,
+                groundedOverall,
+                groundedPercentage: groundedPct,
+                isStreaming: false
+              }
+            : msg
+        )
+      );
+    } catch (err) {
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === assistantMessageId
+            ? {
+                ...msg,
+                text: language === 'hi' 
+                  ? 'क्षमा करें, सर्वर से जुड़ने में त्रुटि हुई। कृपया पुनः प्रयास करें।'
+                  : 'An error occurred connecting to the service. Please retry.',
+                isStreaming: false
+              }
+            : msg
+        )
+      );
+    } finally {
+      setIsStreaming(false);
+    }
+  };
+
+  const handleFeedback = async (msgId: string, rating: number, queryText: string, answerText: string) => {
+    setFeedbackGiven((prev) => ({ ...prev, [msgId]: rating }));
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: queryText,
+          answer: answerText,
+          rating: rating
+        })
+      });
+    } catch (e) {
+      // Non-blocking
+    }
+  };
+
+  // Render inline citation buttons [1], [2]
+  const renderMessageContent = (msg: Message) => {
+    const text = msg.text;
+    const parts = text.split(/(\[\d+\])/g);
+
+    return (
+      <div className="leading-relaxed whitespace-pre-wrap font-sans text-[13.5px]">
+        {parts.map((part, idx) => {
+          const match = part.match(/\[(\d+)\]/);
+          if (match && msg.sources && msg.sources.length > 0) {
+            const sourceIndex = parseInt(match[1], 10) - 1;
+            const source = msg.sources[sourceIndex];
+            if (source) {
+              return (
+                <button
+                  key={idx}
+                  onClick={() => openSource(source)}
+                  title={`Click to inspect source PDF page: ${source.document_title} (${source.clause_ref})`}
+                  className="citation-chip inline-block select-none focus-visible:ring-2 focus-visible:ring-brass"
+                  aria-label={`View citation ${sourceIndex + 1}: ${source.clause_ref}`}
+                >
+                  [{sourceIndex + 1}]
+                </button>
+              );
+            }
+          }
+          return <span key={idx}>{part}</span>;
+        })}
+      </div>
+    );
+  };
+
+  return (
+    <div className="flex flex-col max-w-5xl mx-auto w-full px-4 sm:px-6 py-4">
+      {/* Workspace Header / Provenance Bar */}
+      <div className="bg-white border border-line rounded-t-lg px-4 py-2.5 flex items-center justify-between shadow-paper-sm">
+        <div className="flex items-center gap-2">
+          <BookOpen className="w-4 h-4 text-brass" />
+          <span className="text-xs font-semibold text-ink">
+            {language === 'hi' ? 'प्रमाणित विनियामक परामर्श कार्यक्षेत्र' : 'Verified Regulatory Consultation Workspace'}
+          </span>
+          <span className="text-[10px] text-gray-400">|</span>
+          <span className="text-[11px] text-gray-500 font-mono">
+            7 PDFs Indexed (325 Chunks)
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] text-verified-green font-medium flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+            <ShieldCheck className="w-3 h-3 text-verified-green" />
+            Active Source Grounding
+          </span>
+        </div>
+      </div>
+
+      {/* Messages Scroll Area - DYNAMIC HEIGHT (min-height without dead void) */}
+      <div 
+        className={`p-4 sm:p-6 bg-paper border-x border-line space-y-4 transition-all duration-200 ${
+          isInitialEmptyState 
+            ? 'min-h-[380px] flex flex-col justify-start' 
+            : 'h-[calc(100vh-16rem)] overflow-y-auto'
+        }`}
+      >
+        {messages.map((msg) => {
+          const isUser = msg.sender === 'user';
+          return (
+            <div
+              key={msg.id}
+              className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
+            >
+              <div className="flex items-center gap-2 mb-1 px-1 text-[11px] text-gray-500">
+                <span className="font-semibold">{isUser ? 'You' : 'BIS Intelligent Assistant'}</span>
+                <span>•</span>
+                <span>{msg.timestamp}</span>
+                {!isUser && msg.groundedOverall !== undefined && (
+                  <GroundedBadge minimal grounded={msg.groundedOverall} score={msg.groundedPercentage} />
+                )}
+              </div>
+
+              <div
+                className={`max-w-[88%] sm:max-w-[82%] rounded-lg p-4 shadow-paper-sm ${
+                  isUser
+                    ? 'bg-indigo-deep text-white rounded-tr-none'
+                    : 'bg-white text-ink border border-line rounded-tl-none'
+                }`}
+              >
+                {renderMessageContent(msg)}
+
+                {/* Sourced Citations Bar */}
+                {!isUser && msg.sources && msg.sources.length > 0 && (
+                  <div className="mt-3.5 pt-3 border-t border-line/60">
+                    <div className="text-[11px] font-semibold text-gray-600 mb-1.5 flex items-center gap-1.5">
+                      <span>Source Citations (Click to inspect highlighted official PDF page):</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {msg.sources.map((src, i) => (
+                        <button
+                          key={i}
+                          onClick={() => openSource(src)}
+                          className="inline-flex items-center gap-1 text-[11px] bg-[#F7F5EF] hover:bg-brass hover:text-white border border-line px-2 py-1 rounded transition-colors text-ink text-left focus-visible:ring-2 focus-visible:ring-brass"
+                          aria-label={`Inspect source ${i + 1}: ${src.clause_ref}`}
+                        >
+                          <span className="font-mono font-bold text-brass group-hover:text-white">[{i + 1}]</span>
+                          <span className="truncate max-w-[200px]">{src.clause_ref}</span>
+                          <span className="text-[10px] text-gray-400 font-mono">P.{src.page_number}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Feedback Controls for Assistant */}
+                {!isUser && !msg.isStreaming && msg.id !== 'welcome-msg' && (
+                  <div className="mt-3 flex items-center justify-between text-xs text-gray-500 pt-2 border-t border-gray-100">
+                    <span className="text-[10px] text-gray-400">
+                      Was this response accurate and helpful?
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleFeedback(msg.id, 1, '', msg.text)}
+                        className={`p-1 rounded hover:bg-gray-100 transition-colors focus-visible:ring-2 focus-visible:ring-brass ${
+                          feedbackGiven[msg.id] === 1 ? 'text-emerald-600 font-bold' : 'text-gray-400'
+                        }`}
+                        title="Helpful"
+                        aria-label="Thumbs up - response was helpful"
+                      >
+                        <ThumbsUp className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => handleFeedback(msg.id, -1, '', msg.text)}
+                        className={`p-1 rounded hover:bg-gray-100 transition-colors focus-visible:ring-2 focus-visible:ring-brass ${
+                          feedbackGiven[msg.id] === -1 ? 'text-red-600 font-bold' : 'text-gray-400'
+                        }`}
+                        title="Needs improvement"
+                        aria-label="Thumbs down - response needs improvement"
+                      >
+                        <ThumbsDown className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* POPULATED INITIAL EMPTY STATE: Render suggested query cards inside the space */}
+        {isInitialEmptyState && (
+          <div className="pt-2 space-y-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-gray-700 uppercase tracking-wider font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-brass" />
+              <span>{language === 'hi' ? 'सुझाए गए परामर्श प्रश्न (क्लिक करके प्रारंभ करें):' : 'Suggested Consultations (Click to start):'}</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {currentPrompts.map((p, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSend(p.query)}
+                  disabled={isStreaming}
+                  className="bg-white hover:bg-amber-50/50 border border-line hover:border-brass/70 rounded-lg p-3.5 text-left transition-all shadow-paper-sm hover:shadow-md group flex flex-col justify-between space-y-2 focus-visible:ring-2 focus-visible:ring-brass"
+                  aria-label={`Ask query: ${p.label}`}
+                >
+                  <div>
+                    <div className="text-xs font-bold text-ink group-hover:text-indigo-deep font-serif leading-snug">
+                      {p.label}
+                    </div>
+                    <div className="text-[11px] text-gray-500 mt-1 leading-relaxed line-clamp-2">
+                      {p.desc}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between pt-2 border-t border-gray-100 text-[10px] text-brass font-medium">
+                    <span>Ask assistant</span>
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* ACTIVE CONVERSATION SUGGESTION BAR: Only shown once user starts chatting */}
+      {!isInitialEmptyState && (
+        <div className="bg-paper-dark/50 border-x border-t border-line px-4 py-2 overflow-x-auto scrollbar-none flex items-center gap-1.5">
+          <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider flex-shrink-0 flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-brass" /> Follow-ups:
+          </span>
+          {currentPrompts.map((p, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleSend(p.query)}
+              disabled={isStreaming}
+              className="text-[11px] whitespace-nowrap bg-white hover:bg-paper-dark text-ink-muted hover:text-ink px-2.5 py-1 rounded border border-line transition-colors shadow-sm focus-visible:ring-2 focus-visible:ring-brass"
+              aria-label={`Suggested follow-up: ${p.label}`}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Input Composer Box */}
+      <div className="bg-white border border-line rounded-b-lg p-3 shadow-paper flex items-center gap-2">
+        <textarea
+          rows={1}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleSend();
+            }
+          }}
+          placeholder={
+            language === 'hi'
+              ? 'भारतीय मानक, QCO, MSME परीक्षण सुविधा (CBTF), या उपभोक्ता प्रश्न पूछें...'
+              : 'Ask regarding Indian Standards, QCOs, MSME CBTF cluster facilities, Scheme I/II/IV, or consumer rights...'
+          }
+          className="flex-1 resize-none border-0 focus:ring-0 text-sm placeholder:text-gray-400 focus:outline-none px-2 py-1 max-h-24 font-sans focus-visible:ring-1 focus-visible:ring-brass rounded"
+          aria-label="Ask the BIS Intelligent Assistant a regulatory question"
+        />
+        <button
+          onClick={() => handleSend()}
+          disabled={!input.trim() || isStreaming}
+          className="px-4 py-2 bg-indigo-deep hover:bg-indigo-deep-dark disabled:opacity-50 text-white rounded text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm flex-shrink-0 focus-visible:ring-2 focus-visible:ring-brass"
+          aria-label={isStreaming ? 'Synthesizing response' : 'Send question'}
+        >
+          {isStreaming ? (
+            <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+          ) : (
+            <Send className="w-3.5 h-3.5" />
+          )}
+          <span>{isStreaming ? (language === 'hi' ? 'उत्तर आ रहा है...' : 'Synthesizing...') : (language === 'hi' ? 'पूछें' : 'Send')}</span>
+        </button>
+      </div>
+
+      {/* Disclaimer footnote */}
+      <p className="text-[10.5px] text-gray-400 text-center mt-1.5 font-light">
+        Informational guidance based on official BIS regulatory documents. Not a substitute for an official determination by the Bureau of Indian Standards.
+      </p>
+    </div>
+  );
+};

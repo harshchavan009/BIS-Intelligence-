@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #10182B;
+  --indigo-deep: #1E2A5E;
+  --brass: #B9862F;
+  --paper: #F7F5EF;
+  --line: #DCD6C6;
+  --verified-green: #2F6B4F;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, .font-serif-standard {
+  font-family: 'Source Serif 4', Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+/* Hairline borders */
+.hairline-b {
+  border-bottom: 1px solid var(--line);
+}
+.hairline-t {
+  border-top: 1px solid var(--line);
+}
+.hairline-r {
+  border-right: 1px solid var(--line);
+}
+.hairline-l {
+  border-left: 1px solid var(--line);
+}
+.hairline-all {
+  border: 1px solid var(--line);
+}
+
+/* Subtle Document Paper Card */
+.paper-surface {
+  background-color: #FFFFFF;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(16, 24, 43, 0.04);
+}
+
+/* Citation Chip */
+.citation-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  margin: 0 0.15rem;
+  border-radius: 4px;
+  background-color: #F4EFE6;
+  color: var(--brass);
+  border: 1px solid #DFD5C3;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  vertical-align: baseline;
+}
+.citation-chip:hover {
+  background-color: var(--brass);
+  color: #FFFFFF;
+  border-color: var(--brass);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B5AD99;
+}
+
+/* Accessible Focus Outlines (WCAG AA) */
+:focus-visible {
+  outline: 2px solid var(--brass) !important;
+  outline-offset: 2px !important;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
