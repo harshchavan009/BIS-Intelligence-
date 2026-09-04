@@ -367,5 +367,32 @@
     "scheme": "Hallmarking Scheme",
     "mandatory": true,
     "notification_ref": "S.O. 356(E)"
+  },
+  {
+    "is_number": "IS 302 (Part 2/Sec 3): 2017",
+    "product_name": "Safety of Household and Similar Electrical Appliances - Electric Iron",
+    "category": "Household Appliances",
+    "qco_name": "Electrical Appliances (Quality Control) Order",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "S.O. 189(E)"
+  },
+  {
+    "is_number": "IS 2347: 2017",
+    "product_name": "Domestic Pressure Cooker - Specification",
+    "category": "Household Appliances",
+    "qco_name": "Domestic Pressure Cooker (Quality Control) Order, 2020",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "DPIIT QCO 2020"
+  },
+  {
+    "is_number": "IS 15683: 2018",
+    "product_name": "Portable Fire Extinguishers - Performance and Construction",
+    "category": "Fire Safety & Protection",
+    "qco_name": "Fire Extinguishers (Quality Control) Order",
+    "scheme": "Scheme-I (ISI Mark)",
+    "mandatory": true,
+    "notification_ref": "DPIIT Fire Safety QCO"
   }
 ]

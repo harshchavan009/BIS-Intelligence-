@@ -336,11 +336,11 @@ export const LandingHero: React.FC = () => {
                 {language === 'hi' ? 'मानक खोजक (Standards Finder)' : 'Standards Finder'}
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Deterministic product-to-standard mapping. Type any product description or IS number to retrieve ranked mandatory QCOs and schemes.
+                Deterministic product-to-standard mapping across 40+ standards in our 7-document pilot corpus. Type any product description or IS number to retrieve ranked mandatory QCOs and schemes.
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-line/60 flex items-center justify-between text-xs text-indigo-deep font-semibold group-hover:text-brass">
-              <span>Search 40+ Indexed Standards</span>
+              <span>{language === 'hi' ? '40+ मानक खोजें (7 पायलट विनियामक दस्तावेजों में)' : 'Search 40+ Standards (across 7-document pilot corpus)'}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </div>

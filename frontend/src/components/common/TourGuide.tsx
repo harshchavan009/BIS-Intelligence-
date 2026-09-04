@@ -27,8 +27,8 @@ const TOUR_STEPS: TourStep[] = [
     tab: 'finder',
     titleEn: 'Standards Finder & Mandatory QCOs',
     titleHi: 'मानक खोज एवं अनिवार्य QCO',
-    descEn: 'Search 40+ structured Indian Standards by keyword or product name. Instantly see if a Quality Control Order (QCO) makes certification legally mandatory for your goods.',
-    descHi: 'उत्पाद नाम या कीवर्ड द्वारा 40+ भारतीय मानकों में खोजें। तुरंत जानें कि क्या कोई गुणवत्ता नियंत्रण आदेश (QCO) आपके उत्पाद के लिए प्रमाणन कानूनी रूप से अनिवार्य बनाता है।',
+    descEn: 'Search 40+ structured Indian Standards across our 7-document pilot corpus by keyword or product name. Instantly see if a Quality Control Order (QCO) makes certification legally mandatory for your goods.',
+    descHi: 'हमारे 7-दस्तावेज़ पायलट कॉर्पस में 40+ भारतीय मानकों में खोजें। तुरंत जानें कि क्या कोई गुणवत्ता नियंत्रण आदेश (QCO) आपके उत्पाद के लिए प्रमाणन कानूनी रूप से अनिवार्य बनाता है।',
     badgeEn: 'Step 2 of 4: Standards Lookup',
     badgeHi: 'चरण 2 / 4: मानक खोज'
   },

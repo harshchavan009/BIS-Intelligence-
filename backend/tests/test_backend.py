@@ -37,6 +37,32 @@ class TestBISBackend(unittest.TestCase):
         self.assertTrue(any("455" in n for n in is_numbers), f"IS 455 missing from cement results: {is_numbers}")
         print("✓ Cement standards regression passed: IS 269, IS 12330, IS 1489, IS 455 all present")
 
+    def test_02c_standards_multi_query_smoke(self):
+        """Smoke test verifying a diverse range of product descriptions and raw IS numbers return results."""
+        smoke_queries = [
+            ("cement", "IS 269"),
+            ("steel", "IS 1786"),
+            ("laptop", "IS/IEC 62368"),
+            ("smartwatch", "IS/IEC 62368"),
+            ("IS 269", "IS 269"),
+            ("IS 1786", "IS 1786"),
+            ("electric iron", "IS 302"),
+            ("pressure cooker", "IS 2347"),
+            ("fire extinguisher", "IS 15683")
+        ]
+        for query_str, expected_substr in smoke_queries:
+            response = self.client.post("/api/standards/recommend", json={"query": query_str})
+            self.assertEqual(response.status_code, 200)
+            data = response.json()
+            self.assertGreater(data["total_found"], 0, f"Query '{query_str}' returned 0 results!")
+            is_numbers = [item["is_number"] for item in data["results"]]
+            self.assertTrue(
+                any(expected_substr in n for n in is_numbers),
+                f"Query '{query_str}' results {is_numbers} missing expected standard containing '{expected_substr}'"
+            )
+        print(f"✓ Standards multi-query smoke passed: {len(smoke_queries)} queries returned valid ranked results")
+
+
     def test_03_schemes(self):
         response = self.client.get("/api/schemes")
         self.assertEqual(response.status_code, 200)

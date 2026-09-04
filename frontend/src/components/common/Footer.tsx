@@ -145,7 +145,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="pt-1 border-t border-white/10 flex items-center gap-2 text-emerald-400 font-mono text-[10.5px]">
               <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>GIGW 3.0 & WCAG 2.1 AA Compliant</span>
+              <span>{language === 'hi' ? 'GIGW 3.0 एवं WCAG 2.1 AA दिशानिर्देशों के अनुरूप निर्मित' : 'Built to GIGW 3.0 & WCAG 2.1 AA Guidelines'}</span>
             </div>
           </div>
         </div>

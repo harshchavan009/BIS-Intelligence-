@@ -14,7 +14,6 @@ interface Step {
 export const SchemeExplorer: React.FC = () => {
   const { openSource, setQueryPrefill, setActiveTab, language } = useAppStore();
   const [selectedScheme, setSelectedScheme] = useState('Scheme-IV');
-  const [timelineSteps, setTimelineSteps] = useState<Step[]>([]);
   const [timelineSources, setTimelineSources] = useState<any[]>([]);
   const [loadingSteps, setLoadingSteps] = useState(false);
 
@@ -354,6 +353,10 @@ export const SchemeExplorer: React.FC = () => {
     }
   };
 
+  const [timelineSteps, setTimelineSteps] = useState<Step[]>(() => {
+    return (fallbackSteps['Scheme-IV'] || fallbackSteps['Scheme-I'])[language === 'hi' ? 'hi' : 'en'];
+  });
+
   const schemesOverview = [
     {
       id: 'Scheme-I',
@@ -410,15 +413,17 @@ export const SchemeExplorer: React.FC = () => {
         body: JSON.stringify({ scheme: schemeId, language: language })
       });
       const data = await res.json();
-      if (data.steps && data.steps.length > 0) {
+      if (data.steps && Array.isArray(data.steps) && data.steps.length > 0) {
         setTimelineSteps(data.steps);
+      } else {
+        setTimelineSteps(fallback[curLang]);
       }
-      if (data.sources && data.sources.length > 0) {
+      if (data.sources && Array.isArray(data.sources) && data.sources.length > 0) {
         setTimelineSources(data.sources);
       }
     } catch (e) {
       console.error('Error fetching scheme timeline:', e);
-      // Fallback remains active seamlessly
+      setTimelineSteps(fallback[curLang]);
     } finally {
       setLoadingSteps(false);
     }
@@ -527,13 +532,13 @@ export const SchemeExplorer: React.FC = () => {
           )}
         </div>
 
-        {loadingSteps ? (
+        {loadingSteps && timelineSteps.length === 0 ? (
           <div className="py-12 text-center text-xs text-gray-400 font-mono">
             {language === 'hi' ? 'आधिकारिक विनियमों से प्रक्रिया अनुक्रम लोड हो रहा है...' : 'Loading regulatory timeline from official clauses...'}
           </div>
         ) : (
           <div className="mt-8 space-y-6 relative before:absolute before:left-4 before:top-3 before:bottom-3 before:w-0.5 before:bg-line">
-            {timelineSteps.map((step) => (
+            {(timelineSteps.length > 0 ? timelineSteps : (fallbackSteps[selectedScheme] || fallbackSteps['Scheme-IV'])[language === 'hi' ? 'hi' : 'en']).map((step) => (
               <div key={step.step_number} className="relative pl-10 group">
                 {/* Step Circle Indicator */}
                 <div className="absolute left-0 top-0.5 w-8 h-8 rounded-full bg-paper border-2 border-brass text-brass flex items-center justify-center text-xs font-bold font-mono group-hover:bg-brass group-hover:text-white transition-colors">

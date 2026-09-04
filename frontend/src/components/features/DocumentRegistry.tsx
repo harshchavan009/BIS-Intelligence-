@@ -136,10 +136,10 @@ export const DocumentRegistry: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-serif text-ink">
-              {language === 'hi' ? 'आधिकारिक दस्तावेज रजिस्ट्री (7 अनुक्रमित पीडीएफ)' : 'Document Registry (7 Official Indexed PDFs)'}
+              {language === 'hi' ? 'आधिकारिक दस्तावेज रजिस्ट्री (7 अनुक्रमित पीडीएफ • 40+ मानक)' : 'Document Registry (7 Official Indexed PDFs Covering 40+ Standards)'}
             </h1>
             <p className="text-xs sm:text-sm text-gray-600 mt-1 max-w-3xl">
-              Transparent catalog of the 7 foundational regulatory publications indexed into ChromaDB vector storage (325 chunk segments).
+              Transparent catalog of the 7 foundational regulatory publications covering 40+ Indian Standards indexed into ChromaDB vector storage (325 chunk segments).
             </p>
           </div>
           <div className="p-3 bg-emerald-50 rounded-lg border border-emerald-200 text-right flex-shrink-0">

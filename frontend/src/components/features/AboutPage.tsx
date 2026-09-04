@@ -78,10 +78,12 @@ export const AboutPage: React.FC = () => {
           <div className="space-y-1">
             <h3 className="text-lg font-serif font-bold text-ink flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-brass" />
-              <span>Pilot Corpus Scope (The 7 Indexed Official PDFs)</span>
+              <span>{language === 'hi' ? 'पायलट कॉर्पस दायरा (7 आधिकारिक विनियामक पीडीएफ • 40+ मानक)' : 'Pilot Corpus Scope (7 Official Indexed PDFs Covering 40+ Standards)'}</span>
             </h3>
             <p className="text-xs text-gray-500">
-              The assistant operates on a scoped, high-impact pilot corpus representing major regulatory touchpoints:
+              {language === 'hi'
+                ? 'सहायक 7 प्रमुख विनियामक प्रकाशनों के पायलट कॉर्पस पर कार्य करता है, जो 40+ विशिष्ट भारतीय मानकों और अनिवार्य QCOs को कवर करते हैं:'
+                : 'The assistant operates on a scoped, high-impact pilot corpus of 7 foundational regulatory publications covering 40+ specific Indian Standards, schemes, and mandatory QCOs:'}
             </p>
           </div>
           <button

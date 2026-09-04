@@ -23,7 +23,11 @@ import { BranchContact } from './components/features/BranchContact';
 import { WebsitePolicies } from './components/features/WebsitePolicies';
 
 export const App: React.FC = () => {
-  const { activeTab } = useAppStore();
+  const { activeTab, fetchEvalBenchmark } = useAppStore();
+
+  React.useEffect(() => {
+    fetchEvalBenchmark();
+  }, [fetchEvalBenchmark]);
 
   return (
     <div className="min-h-screen bg-paper flex flex-col font-sans selection:bg-brass selection:text-white">

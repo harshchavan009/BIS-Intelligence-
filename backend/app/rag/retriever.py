@@ -37,14 +37,20 @@ class HybridRetriever:
         """
         Fast exact and fuzzy matching over extracted IS-number <-> product lookup table.
         Runs in <1ms deterministically.
+        Supports product descriptions, keywords, aliases, Hindi cross-lingual terms, and raw IS numbers.
         """
         if not self.products:
-            return []
+            if os.path.exists(self.structured_map_path):
+                with open(self.structured_map_path, "r", encoding="utf-8") as f:
+                    self.products = json.load(f)
+            else:
+                return []
 
-        q_lower = query.lower().strip()
+        q_raw = query.strip()
+        q_lower = q_raw.lower()
         matched = []
 
-        # Hindi keyword mapping for cross-lingual structured matching
+        # 1. Hindi keyword mapping for cross-lingual structured matching
         hindi_map = {
             "सीमेंट": "cement",
             "सोना": "gold",
@@ -55,15 +61,58 @@ class HybridRetriever:
             "खिलौने": "toys",
             "हेलमेट": "helmet",
             "तार": "wire",
-            "पंप": "pump"
+            "पंप": "pump",
+            "कुकर": "pressure cooker",
+            "इस्त्री": "electric iron"
         }
         for h_word, en_word in hindi_map.items():
             if h_word in q_lower:
                 q_lower += f" {en_word}"
 
-        # 1. Look for IS number patterns like 'IS 12330', 'IS12330', '12330'
-        is_num_match = re.search(r'\b(?:IS\s*[\/\:]*\s*[A-Z]*\s*)?(\d{3,5}(?:\s*\(Part\s*\d+\))?)\b', query, re.IGNORECASE)
-        extracted_num = is_num_match.group(1) if is_num_match else None
+        # 2. Decompounding and common industry alias expansion
+        alias_expansions = {
+            "smartwatch": "smart watch wearable",
+            "smartwatches": "smart watch wearable",
+            "tmt": "tmt steel bars deformed",
+            "tmt bars": "tmt steel bars deformed",
+            "lpg": "lpg cylinder gas",
+            "cylinders": "cylinder gas",
+            "cylinder": "gas cylinder lpg",
+            "opc": "ordinary portland cement",
+            "ppc": "portland pozzolana cement",
+            "laptops": "laptop",
+            "phones": "mobile phone",
+            "helmets": "helmet",
+            "toys": "toy",
+            "lights": "lighting led luminaires",
+            "leds": "led luminaires",
+            "cooker": "pressure cooker",
+            "cookers": "pressure cooker",
+            "iron": "electric iron",
+            "irons": "electric iron",
+            "fire extinguisher": "portable fire extinguishers",
+            "extinguishers": "fire extinguishers"
+        }
+        for alias, expansion in alias_expansions.items():
+            if re.search(rf'\b{re.escape(alias)}\b', q_lower):
+                q_lower += f" {expansion}"
+
+        # 3. Clean alphanumeric strings for exact IS number matching
+        clean_q_is = re.sub(r'[^a-z0-9]', '', q_lower)
+        # Extract digits sequence (e.g. 269, 12330, 1786, 62368, 1489, 455, 302, 2347, 15683)
+        digits_match = re.search(r'\b(\d{3,5}(?:\s*\(Part\s*\d+\))?)\b', q_raw, re.IGNORECASE)
+        extracted_digits = digits_match.group(1).replace(' ', '').lower() if digits_match else None
+
+        # Build search tokens with basic singularization
+        tokens = [w for w in re.split(r'\W+', q_lower) if len(w) > 1]
+        token_stems = set(tokens)
+        for t in tokens:
+            if t.endswith('ies'):
+                token_stems.add(t[:-3] + 'y')
+            elif t.endswith('es') and len(t) > 4:
+                token_stems.add(t[:-2])
+            elif t.endswith('s') and len(t) > 3:
+                token_stems.add(t[:-1])
 
         for item in self.products:
             score = 0.0
@@ -71,21 +120,28 @@ class HybridRetriever:
             p_name = item["product_name"].lower()
             p_is = item["is_number"].lower()
             p_cat = item["category"].lower()
+            clean_p_is = re.sub(r'[^a-z0-9]', '', p_is)
 
-            # Exact IS number match
-            if extracted_num and extracted_num.lower() in p_is:
+            # Check 1: Exact IS number match (normalized e.g. "is269" == "is269" or "is12330" in clean_p_is)
+            if clean_q_is == clean_p_is:
                 score = 1.0
                 match_type = "exact"
-            # Exact product match
+            elif clean_q_is.startswith("is") and len(clean_q_is) > 4 and clean_q_is in clean_p_is:
+                score = 1.0
+                match_type = "exact"
+            elif extracted_digits and (extracted_digits in clean_p_is or re.search(rf'\b{re.escape(extracted_digits)}\b', p_is)):
+                score = 1.0
+                match_type = "exact"
+            # Check 2: Exact or substring product match
             elif q_lower in p_name or p_name in q_lower:
                 score = 0.95
                 match_type = "exact"
             else:
-                # Token overlap / keyword match
-                q_words = [w for w in re.split(r'\W+', q_lower) if len(w) > 2]
-                overlap = sum(1 for w in q_words if w in p_name or w in p_cat or w in p_is)
+                # Check 3: Token overlap with stem matching
+                p_tokens = set(re.split(r'\W+', f"{p_name} {p_cat} {p_is}"))
+                overlap = len(token_stems.intersection(p_tokens))
                 if overlap > 0:
-                    score = 0.5 + (overlap * 0.15)
+                    score = 0.45 + (overlap * 0.15)
                     match_type = "fuzzy"
 
             if score > 0.4:
