@@ -55,3 +55,12 @@ This document records the sensible engineering calls and architectural decisions
 ### Decision 9: SQLite Default with PostgreSQL Compatibility
 - **Decision**: Use SQLAlchemy with SQLite by default (`sqlite:///./data/bis_assistant.db`), switchable to PostgreSQL via `DATABASE_URL`.
 - **Rationale**: Zero setup friction for single-command evaluation, but production-ready schema for PostgreSQL.
+
+### Decision 10: GIGW 3.0 Accessibility Chrome, Bilingual Parity & Security Hardening
+- **Decision**: Adopt Guidelines for Indian Government Websites (GIGW 3.0) conventions:
+  1. Top accessibility utility bar with genuine `.skip-link` pointing to `#main-content`, `A- / A / A+` font scaling via `--base-font-size`, screen-reader compatibility modal, and high-contrast toggle for low-vision users.
+  2. Full bilingual parity through JSON resource dictionaries (`en.json` and `hi.json`) rather than hardcoded strings, localizing all navigation, headings, buttons, and disclosures.
+  3. Non-technical usability enhancements: plain keyword search bar for MSMEs alongside AI chat, plain-language statutory glossary, FAQ center, PDF/print answer export, and regional branch office escalation directory (`1800-11-0420`).
+  4. Security hardening baseline: HSTS, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, strict CSP, CORS restricted to trusted frontend origins, auth-gated evaluator telemetry, DPDP Act 2023 compliant masked IP audit logging, and XML isolation (`<retrieved_context_data>`) to defend against RAG prompt injection.
+- **Rationale**: Elevates the prototype from an engineering experiment into an authentic, accessible, and defensible government digital service while preserving hackathon prototype disclosures.
+
