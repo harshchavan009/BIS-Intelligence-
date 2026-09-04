@@ -8,6 +8,8 @@
     "subtitle": "AI Assistant for Indian Standards & Conformity Assessment",
     "home": "Home",
     "assistant": "AI Assistant",
+    "services": "Services",
+    "resources": "Resources",
     "standards_finder": "Standards Finder",
     "schemes": "Schemes",
     "labs": "Lab Finder (CBTF)",
@@ -17,6 +19,8 @@
     "glossary": "Glossary",
     "faq": "FAQ",
     "contact": "Contact Branches",
+    "policies": "Website Policies",
+    "rti": "Right to Information (RTI)",
     "analytics": "Analytics",
     "about": "About"
   },
@@ -45,6 +49,7 @@
     "glossary": "Plain Language Regulatory Glossary",
     "faq": "Frequently Asked Questions (FAQ)",
     "contact": "BIS Branch Offices & Helpdesks",
+    "policies": "Website Policies & Statutory Disclosures",
     "analytics": "Evaluator Telemetry & Analytics",
     "about": "About BIS AI Assistant"
   },

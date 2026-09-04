@@ -4,7 +4,11 @@ import { ShieldCheck, Info, Database, Cpu, AlertTriangle, BookOpen, CheckCircle2
 import { SealMotif } from '../common/SealMotif';
 
 export const AboutPage: React.FC = () => {
-  const { setActiveTab, language } = useAppStore();
+  const { setActiveTab, language, evalBenchmark, fetchEvalBenchmark } = useAppStore();
+
+  React.useEffect(() => {
+    fetchEvalBenchmark();
+  }, []);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8 font-sans">
@@ -20,13 +24,20 @@ export const AboutPage: React.FC = () => {
           {language === 'hi' ? 'प्रणाली के बारे में एवं कार्यप्रणाली' : 'About / How This Assistant Works'}
         </h1>
         <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">
-          The BIS AI Intelligent Assistant is an AI-powered regulatory exploration system designed to make thousands of pages of Indian Standards, Quality Control Orders (QCOs), MSME testing guidelines, and conformity schemes instantly searchable and provably grounded for Indian manufacturers, startups, students, and citizens.
+          {language === 'hi'
+            ? 'बीआईएस एआई सहायक एक विनियामक खोज प्रणाली है जो भारतीय मानकों, अनिवार्य QCOs, एमएसएमई परीक्षण दिशानिर्देशों और प्रमाणन योजनाओं को पारदर्शी व स्रोत-संबद्ध बनाती है।'
+            : 'The BIS AI Intelligent Assistant is an AI-powered regulatory exploration system designed to make thousands of pages of Indian Standards, Quality Control Orders (QCOs), MSME testing guidelines, and conformity schemes instantly searchable and provably grounded for Indian manufacturers, startups, students, and citizens.'}
         </p>
-        <div className="pt-2 flex items-center gap-2 text-xs font-mono text-gray-500">
-          <span className="font-semibold text-ink">Last Updated:</span>
-          <span className="bg-paper px-2 py-0.5 rounded border border-line">04 September 2026</span>
+        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-mono text-gray-500">
+          <span className="font-semibold text-ink">Evaluation Status:</span>
+          <span className="text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+            {evalBenchmark.display_score} Grounded
+          </span>
           <span className="text-gray-400">|</span>
-          <span className="text-emerald-700 font-semibold">Evaluation Status: 100% Grounded</span>
+          <span className="text-gray-500">Last Evaluated:</span>
+          <span className="bg-paper px-2 py-0.5 rounded border border-line">{evalBenchmark.evaluated_at_human}</span>
+          <span className="text-gray-400">|</span>
+          <span className="text-gray-500">Suite: 20-Case Gold Harness (eval_set.json)</span>
         </div>
       </div>
 

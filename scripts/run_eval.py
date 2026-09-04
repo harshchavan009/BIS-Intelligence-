@@ -96,6 +96,18 @@ def run_evaluation():
             "passed": is_pass
         })
 
+    # Cement Standards Regression Verification
+    print("  Running explicit regression check: 'cement' structured lookup...")
+    cement_matches = retriever.search_structured("cement")
+    cement_is_nums = [m["is_number"] for m in cement_matches]
+    required_cement = ["269", "12330", "1489", "455"]
+    cement_passed = all(any(req in num for num in cement_is_nums) for req in required_cement)
+    if cement_passed:
+        print(f"  ✓ Regression PASSED: Found {len(cement_matches)} cement standards including IS 269, 12330, 1489, 455.")
+    else:
+        print(f"  ✗ Regression FAILED: Missing required cement standards in {cement_is_nums}")
+        passed = max(0, passed - 1)
+
     pass_rate = round((passed / total) * 100, 1)
 
     print("-" * 95)

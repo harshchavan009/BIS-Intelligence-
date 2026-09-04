@@ -9,8 +9,8 @@ export const AnalyticsView: React.FC = () => {
   const { language, setActiveTab, adminToken, setAdminToken } = useAppStore();
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState('evaluator');
-  const [password, setPassword] = useState('bis_sih_2026');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -174,11 +174,6 @@ export const AnalyticsView: React.FC = () => {
               />
             </div>
 
-            {/* Quick Demo Credentials Reminder for Hackathon Judges */}
-            <div className="p-2.5 bg-amber-50 border border-brass/30 rounded text-[11px] text-amber-900 flex items-center justify-between">
-              <span className="font-mono">Default Evaluator Credentials: <strong>evaluator</strong> / <strong>bis_sih_2026</strong></span>
-            </div>
-
             <button
               type="submit"
               disabled={isSubmitting}
@@ -203,8 +198,8 @@ export const AnalyticsView: React.FC = () => {
                 </span>
                 <ShieldCheck className="w-4 h-4 text-verified-green" />
               </div>
-              <div className="text-3xl font-serif font-bold text-verified-green">
-                {data.grounded_percentage}%
+              <div className="text-2xl font-serif font-bold text-verified-green">
+                {data.eval_passed}/{data.eval_total_tests} ({data.grounded_percentage}%)
               </div>
               <div className="text-[10.5px] text-gray-600 font-medium">
                 {data.eval_passed}/{data.eval_total_tests} Gold-Standard Tests Passed

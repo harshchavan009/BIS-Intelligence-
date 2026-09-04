@@ -151,21 +151,53 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Legal Links Bar */}
+      {/* Bottom Legal Links Bar: Consolidated Website Policies Hub & RTI */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-gray-400">
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1">
-          {legalLinks.map((item, idx) => (
-            <React.Fragment key={item.id}>
-              <button
-                onClick={() => setActiveLegalModal(item.id)}
-                className="hover:text-white hover:underline transition-colors focus-visible:ring-1 focus-visible:ring-brass rounded"
-                aria-label={`Open ${t(item.labelKey)}`}
-              >
-                {t(item.labelKey)}
-              </button>
-              {idx < legalLinks.length - 1 && <span className="text-gray-600 select-none">•</span>}
-            </React.Fragment>
-          ))}
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1.5">
+          <button
+            onClick={() => setActiveTab('policies')}
+            className="text-brass hover:text-white font-semibold underline-offset-2 hover:underline transition-colors flex items-center gap-1 focus-visible:ring-1 focus-visible:ring-brass rounded"
+          >
+            <span>{language === 'hi' ? 'वेबसाइट नीतियां (शर्तें / गोपनीयता / सुगमता)' : 'Website Policies (Terms / Privacy / GIGW)'}</span>
+          </button>
+          <span className="text-gray-600 select-none">•</span>
+          <button
+            onClick={() => setActiveTab('policies')}
+            className="hover:text-white hover:underline transition-colors focus-visible:ring-1 focus-visible:ring-brass rounded"
+          >
+            <span>{language === 'hi' ? 'सूचना का अधिकार (RTI)' : 'Right to Information (RTI)'}</span>
+          </button>
+          <span className="text-gray-600 select-none">•</span>
+          <a
+            href="https://rti.gov.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-brass transition-colors inline-flex items-center gap-0.5"
+          >
+            <span>rti.gov.in</span>
+            <ExternalLink className="w-2.5 h-2.5 text-gray-500" />
+          </a>
+          <span className="text-gray-600 select-none">•</span>
+          <button
+            onClick={() => setActiveLegalModal('sitemap')}
+            className="hover:text-white hover:underline transition-colors"
+          >
+            {t('footer.sitemap')}
+          </button>
+          <span className="text-gray-600 select-none">•</span>
+          <button
+            onClick={() => setActiveLegalModal('feedback')}
+            className="hover:text-white hover:underline transition-colors"
+          >
+            {t('footer.feedback')}
+          </button>
+          <span className="text-gray-600 select-none">•</span>
+          <button
+            onClick={() => setActiveLegalModal('grievance')}
+            className="hover:text-white hover:underline transition-colors"
+          >
+            {t('footer.grievance')}
+          </button>
         </div>
 
         <div className="text-gray-400 text-[11px] font-mono select-none text-center sm:text-right">

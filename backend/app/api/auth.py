@@ -23,11 +23,13 @@ class LoginRequest(BaseModel):
     username: str = Field(..., description="Evaluator / Officer Username")
     password: str = Field(..., description="Access Password")
 
+SESSION_TIMEOUT_SECONDS = 1800  # 30-minute evaluator session timeout
+
 def generate_session_token(username: str) -> str:
     raw = f"{username}:{time.time()}:{secrets.token_hex(16)}"
     sig = hmac.new(SECRET_KEY.encode(), raw.encode(), hashlib.sha256).hexdigest()
     token = f"{raw}:{sig}"
-    ACTIVE_SESSIONS[token] = time.time() + 86400 # 24 hour validity
+    ACTIVE_SESSIONS[token] = time.time() + SESSION_TIMEOUT_SECONDS
     return token
 
 def validate_session_token(token: Optional[str]) -> bool:
@@ -64,15 +66,15 @@ def get_current_evaluator(
 async def login(credentials: LoginRequest, response: Response):
     """
     Authenticate an evaluator to access protected telemetry and administrative analytics.
-    Default credentials for hackathon evaluation: evaluator / bis_sih_2026
+    Evaluator credentials are documented exclusively in README.md / Evaluator private guide.
     """
     if credentials.username == ADMIN_USERNAME and credentials.password == ADMIN_PASSWORD:
         token = generate_session_token(credentials.username)
-        # Set HttpOnly, SameSite cookie
+        # Set HttpOnly, SameSite cookie with 30-minute session lifetime
         response.set_cookie(
             key="bis_evaluator_session",
             value=token,
-            max_age=86400,
+            max_age=SESSION_TIMEOUT_SECONDS,
             httponly=True,
             samesite="lax",
             secure=False # Set to True in HTTPS production
@@ -82,12 +84,12 @@ async def login(credentials: LoginRequest, response: Response):
             "authenticated": True,
             "user": "BIS Domain Evaluator",
             "token": token,
-            "expires_in": 86400
+            "expires_in": SESSION_TIMEOUT_SECONDS
         }
     else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid credentials. For evaluation testing, use username 'evaluator' and password 'bis_sih_2026'."
+            detail="Invalid credentials. Access denied."
         )
 
 @router.get("/auth/verify")

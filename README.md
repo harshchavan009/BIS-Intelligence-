@@ -150,7 +150,21 @@ python3 scripts/run_eval.py
 
 ---
 
-## 8. High-Credibility Hardening & Transparency Features
+## 8. Evaluator / Judge Access & Telemetry Login
+
+The Analytics telemetry and evaluation metrics are protected by an institutional authentication gate. Evaluators and technical judges can access the protected view using the following evaluation credentials:
+
+- **Username**: `evaluator`
+- **Password**: `bis_sih_2026`
+- **Session Policy**: Strict 30-minute inactivity timeout (`SESSION_TIMEOUT_SECONDS = 1800`), stored via HttpOnly SameSite cookie and Bearer token.
+- **Access Route**: Navigate to `Analytics` from the main menu, or access `/api/analytics` directly with an authorization token.
+
+> [!NOTE]
+> In accordance with secure government software baselines, credentials are never rendered on public UI views. Demo credentials are documented solely in this README for evaluator inspection.
+
+---
+
+## 9. High-Credibility Hardening & Transparency Features
 
 - **Visual PDF Page Highlighting**: Clicking any inline citation badge (`[1]`, `[2]`) in the Assistant or feature cards opens the actual source PDF page rendered in high-resolution with the cited clause/text highlighted in official regulatory yellow.
 - **Dynamic Assistant Empty State**: The workspace features a flexible container height that eliminates dead void on first load, rendering an interactive grid of categorized consultation suggestions that collapses into a slim follow-up bar when conversation begins.

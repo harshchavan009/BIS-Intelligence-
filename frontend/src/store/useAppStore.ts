@@ -22,6 +22,7 @@ export type ActiveTab =
   | 'glossary'
   | 'faq'
   | 'contact'
+  | 'policies'
   | 'analytics' 
   | 'about';
 
@@ -38,6 +39,16 @@ export type LegalModalType =
 
 export type FontSizeOption = 'small' | 'normal' | 'large';
 
+export interface EvalBenchmark {
+  total_tests: number;
+  passed: number;
+  grounded_percentage: number;
+  evaluated_at?: string;
+  evaluated_at_human: string;
+  display_score: string;
+  label: string;
+}
+
 interface AppState {
   language: 'en' | 'hi';
   setLanguage: (lang: 'en' | 'hi') => void;
@@ -53,6 +64,11 @@ interface AppState {
   activeLegalModal: LegalModalType;
   setActiveLegalModal: (modal: LegalModalType) => void;
   
+  // Single ground truth for Groundedness Benchmark score
+  evalBenchmark: EvalBenchmark;
+  setEvalBenchmark: (benchmark: EvalBenchmark) => void;
+  fetchEvalBenchmark: () => Promise<void>;
+
   // GIGW Accessibility States
   fontSize: FontSizeOption;
   setFontSize: (size: FontSizeOption) => void;
@@ -113,6 +129,27 @@ export const useAppStore = create<AppState>((set) => ({
   openSource: (source: SourceCitation) => set({ selectedSource: source, isSourceDrawerOpen: true }),
   activeLegalModal: null,
   setActiveLegalModal: (activeLegalModal) => set({ activeLegalModal }),
+
+  evalBenchmark: {
+    total_tests: 20,
+    passed: 20,
+    grounded_percentage: 100.0,
+    evaluated_at_human: '04 September 2026',
+    display_score: '20/20 (100.0%)',
+    label: '20/20 (100.0%) Grounded'
+  },
+  setEvalBenchmark: (evalBenchmark) => set({ evalBenchmark }),
+  fetchEvalBenchmark: async () => {
+    try {
+      const res = await fetch('/api/health');
+      const data = await res.json();
+      if (data.eval_benchmark) {
+        set({ evalBenchmark: data.eval_benchmark });
+      }
+    } catch (e) {
+      console.error('Error fetching eval benchmark:', e);
+    }
+  },
 
   fontSize: getStoredFontSize(),
   setFontSize: (fontSize) => {

@@ -20,6 +20,7 @@ import { DocumentRegistry } from './components/features/DocumentRegistry';
 import { GlossaryPage } from './components/features/GlossaryPage';
 import { FAQPage } from './components/features/FAQPage';
 import { BranchContact } from './components/features/BranchContact';
+import { WebsitePolicies } from './components/features/WebsitePolicies';
 
 export const App: React.FC = () => {
   const { activeTab } = useAppStore();
@@ -44,6 +45,7 @@ export const App: React.FC = () => {
         {activeTab === 'glossary' && <GlossaryPage />}
         {activeTab === 'faq' && <FAQPage />}
         {activeTab === 'contact' && <BranchContact />}
+        {activeTab === 'policies' && <WebsitePolicies />}
         {activeTab === 'analytics' && <AnalyticsView />}
         {activeTab === 'about' && <AboutPage />}
         {activeTab === 'registry' && <DocumentRegistry />}

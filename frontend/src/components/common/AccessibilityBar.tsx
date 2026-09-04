@@ -31,7 +31,8 @@ export const AccessibilityBar: React.FC = () => {
           title={t('a11y.screen_reader_access')}
         >
           <Headphones className="w-3 h-3 text-brass" />
-          <span>{t('a11y.screen_reader_access')}</span>
+          <span className="hidden xs:inline sm:inline">{t('a11y.screen_reader_access')}</span>
+          <span className="sm:hidden text-[10px]">Reader</span>
         </button>
 
         <span className="text-white/20 hidden sm:inline">|</span>
@@ -75,7 +76,7 @@ export const AccessibilityBar: React.FC = () => {
         {/* High Contrast Mode Toggle */}
         <button
           onClick={() => setHighContrast(!highContrast)}
-          className={`flex items-center gap-1.5 px-2 py-0.5 rounded border transition-colors ${
+          className={`flex items-center gap-1 px-2 py-0.5 rounded border transition-colors ${
             highContrast 
               ? 'bg-[#FFD700] text-black border-[#FFD700] font-bold shadow-sm' 
               : 'bg-white/5 text-gray-300 border-white/15 hover:text-white hover:border-white/30'
@@ -84,7 +85,8 @@ export const AccessibilityBar: React.FC = () => {
           aria-pressed={highContrast}
         >
           <Eye className="w-3 h-3" />
-          <span>{highContrast ? t('a11y.standard_contrast') : t('a11y.high_contrast')}</span>
+          <span className="hidden sm:inline">{highContrast ? t('a11y.standard_contrast') : t('a11y.high_contrast')}</span>
+          <span className="sm:hidden text-[10px]">{highContrast ? 'STD' : 'HC'}</span>
         </button>
       </div>
 

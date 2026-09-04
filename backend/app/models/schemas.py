@@ -59,6 +59,7 @@ class SchemeInfo(BaseModel):
 class SchemeExplainRequest(BaseModel):
     scheme: str = Field(..., description="Scheme name, e.g. 'Scheme-I', 'Scheme-II', 'Scheme-IV', or 'CBTF'")
     product: Optional[str] = None
+    language: Optional[str] = "en"
 
 class TimelineStep(BaseModel):
     step_number: int

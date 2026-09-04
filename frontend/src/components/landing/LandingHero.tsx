@@ -1,11 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { Search, Layers, FlaskConical, ShieldCheck, ArrowRight, ExternalLink, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Search, Layers, FlaskConical, ShieldCheck, ArrowRight, ExternalLink, Sparkles, CheckCircle2, Bell } from 'lucide-react';
 import { SealMotif } from '../common/SealMotif';
 import { GroundedBadge } from '../common/GroundedBadge';
 
 export const LandingHero: React.FC = () => {
-  const { setActiveTab, setQueryPrefill, openSource, language } = useAppStore();
+  const { setActiveTab, setQueryPrefill, openSource, language, evalBenchmark, fetchEvalBenchmark } = useAppStore();
+
+  useEffect(() => {
+    fetchEvalBenchmark();
+  }, []);
+
+  const whatsNewItems = [
+    {
+      date: '25 Feb 2026',
+      title: 'CMD-I/2:12:7 Market Surveillance & BIS Care Mobile App Verification Guidelines',
+      titleHi: 'सीएमडी-I/2:12:7 बाजार निगरानी एवं बीआईएस केयर मोबाइल ऐप सत्यापन दिशानिर्देश',
+      ref: 'CMD-I/2:12:7'
+    },
+    {
+      date: '30 Apr 2021',
+      title: 'Cluster Based Test Facility (CBTF) Concessions for MSME In-House Testing',
+      titleHi: 'एमएसएमई इन-हाउस परीक्षण हेतु क्लस्टर आधारित परीक्षण सुविधा (CBTF) रियायतें',
+      ref: 'Ref: CMD-I/2:12:8'
+    },
+    {
+      date: '02 May 2019',
+      title: 'Scheme-IV Certificate of Conformity (CoC) 180-Day Test Report Validity Mandate',
+      titleHi: 'योजना-IV अनुरूपता प्रमाणपत्र (CoC) 180-दिवसीय परीक्षण रिपोर्ट वैधता अनिवार्यता',
+      ref: 'CMD-I/2:16:1'
+    },
+    {
+      date: '04 Jun 2018',
+      title: 'Gazette S.O. 191(E): BIS (Conformity Assessment) Regulations 2018 Master Schedule',
+      titleHi: 'राजपत्र S.O. 191(E): बीआईएस (अनुरूपता मूल्यांकन) विनियम 2018 मास्टर अनुसूची',
+      ref: 'S.O. 191(E)'
+    }
+  ];
 
   // Hero interactive live typing simulation for the first answer
   const sampleDemoAnswer = {
@@ -86,6 +117,26 @@ export const LandingHero: React.FC = () => {
 
   return (
     <div className="space-y-12 pb-16">
+      {/* What's New / Gazette Updates Ticker */}
+      <div className="bg-paper-light border-b border-line py-2 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex items-center gap-3 overflow-hidden text-xs">
+          <div className="flex items-center gap-1.5 px-2.5 py-0.5 bg-red-800 text-white rounded text-[10.5px] font-bold font-mono uppercase tracking-wider flex-shrink-0 animate-pulse">
+            <Bell className="w-3 h-3" />
+            <span>{language === 'hi' ? 'नवीनतम विनियामक अपडेट' : "What's New"}</span>
+          </div>
+          <div className="flex items-center gap-6 overflow-x-auto scrollbar-none text-ink text-[12px] font-medium py-0.5">
+            {whatsNewItems.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-2 whitespace-nowrap">
+                <span className="font-mono text-[11px] text-brass font-semibold">[{item.date}]</span>
+                <span className="text-gray-800">{language === 'hi' ? item.titleHi : item.title}</span>
+                <span className="text-[10px] text-gray-500 font-mono bg-paper px-1.5 py-0.5 rounded border border-line">{item.ref}</span>
+                {idx < whatsNewItems.length - 1 && <span className="text-gray-300 ml-2">•</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-paper pt-8 pb-12 sm:pb-16 border-b border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -169,8 +220,8 @@ export const LandingHero: React.FC = () => {
               {/* Regulatory Assurance Badges */}
               <div className="pt-4 grid grid-cols-3 gap-3 border-t border-line/60 max-w-lg">
                 <div>
-                  <div className="text-base font-bold text-ink font-serif">100%</div>
-                  <div className="text-[11px] text-gray-500">Source Grounded</div>
+                  <div className="text-base font-bold text-ink font-serif">{evalBenchmark.display_score}</div>
+                  <div className="text-[11px] text-gray-500">{language === 'hi' ? 'परीक्षित स्रोत संबद्ध' : 'Source Grounded'}</div>
                 </div>
                 <div>
                   <div className="text-base font-bold text-ink font-serif">7 PDFs</div>

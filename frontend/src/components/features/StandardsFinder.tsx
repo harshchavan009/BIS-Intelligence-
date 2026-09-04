@@ -33,8 +33,11 @@ export const StandardsFinder: React.FC = () => {
     'Gas Cylinders & Pressure Vessels'
   ];
 
-  const handleSearch = async (searchQuery: string) => {
+  const handleSearch = async (searchQuery: string, retainCategory = false) => {
     if (!searchQuery.trim()) return;
+    if (!retainCategory) {
+      setCategoryFilter('All');
+    }
     setLoading(true);
     try {
       const res = await fetch('/api/standards/recommend', {
@@ -55,7 +58,8 @@ export const StandardsFinder: React.FC = () => {
   useEffect(() => {
     const initialQ = queryPrefill.trim() || 'cement';
     setQuery(initialQ);
-    handleSearch(initialQ);
+    setCategoryFilter('All');
+    handleSearch(initialQ, false);
     if (queryPrefill) setQueryPrefill('');
   }, [queryPrefill]);
 
@@ -137,13 +141,28 @@ export const StandardsFinder: React.FC = () => {
         </div>
       </div>
 
-      {/* Results Section */}
-      <div className="space-y-3">
-        <div className="flex justify-between items-center text-xs text-gray-500 px-1">
-          <span>
-            Found <strong className="text-ink font-semibold">{filteredResults.length}</strong> standards matching "{query}"
-          </span>
-          <span className="font-mono text-[11px]">
+        {/* Results Count & Filter Status */}
+        <div className="flex flex-wrap justify-between items-center text-xs text-gray-500 px-1 gap-2">
+          <div className="flex items-center gap-2">
+            <span>
+              {language === 'hi' ? 'मिले परिणाम:' : 'Found'}{' '}
+              <strong className="text-ink font-semibold">{filteredResults.length}</strong>{' '}
+              {language === 'hi' ? 'मानक खोज हेतु' : 'standards matching'} "{query}"
+            </span>
+            {categoryFilter !== 'All' && (
+              <span className="inline-flex items-center gap-1 bg-brass/10 text-brass text-[11px] font-medium px-2 py-0.5 rounded border border-brass/20">
+                Filter: {categoryFilter}
+                <button
+                  onClick={() => setCategoryFilter('All')}
+                  className="ml-1 hover:text-red-700 font-bold"
+                  title="Clear category filter"
+                >
+                  ✕
+                </button>
+              </span>
+            )}
+          </div>
+          <span className="font-mono text-[11px] text-ink-muted">
             Lookup Strategy: Structured exact table + dense semantic fallback
           </span>
         </div>
@@ -151,10 +170,28 @@ export const StandardsFinder: React.FC = () => {
         {filteredResults.length === 0 && !loading && (
           <div className="bg-white border border-line rounded-lg p-8 text-center space-y-2">
             <BookOpen className="w-8 h-8 text-gray-300 mx-auto" />
-            <h4 className="text-sm font-semibold text-ink">No exact standard found for this keyword</h4>
-            <p className="text-xs text-gray-500 max-w-md mx-auto">
-              Try broader keywords like "cement", "steel", "laptop", "cylinder", "audio", or ask in the Assistant workspace for cross-reference.
-            </p>
+            <h4 className="text-sm font-semibold text-ink">
+              {language === 'hi' ? 'इस खोज के लिए कोई मानक नहीं मिला' : 'No exact standard found for this keyword'}
+            </h4>
+            {categoryFilter !== 'All' ? (
+              <div className="space-y-2">
+                <p className="text-xs text-gray-500">
+                  {results.length > 0
+                    ? `There are ${results.length} results in other categories. The active filter "${categoryFilter}" excludes them.`
+                    : `No standards found for "${query}" in category "${categoryFilter}".`}
+                </p>
+                <button
+                  onClick={() => setCategoryFilter('All')}
+                  className="px-3 py-1.5 bg-indigo-deep text-white text-xs rounded hover:bg-indigo-deep-dark transition-colors"
+                >
+                  Clear Category Filter (Show All {results.length} Results)
+                </button>
+              </div>
+            ) : (
+              <p className="text-xs text-gray-500 max-w-md mx-auto">
+                Try broader keywords like "cement", "steel", "laptop", "cylinder", "audio", or ask in the Assistant workspace for cross-reference.
+              </p>
+            )}
           </div>
         )}
 
@@ -231,6 +268,5 @@ export const StandardsFinder: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
   );
 };

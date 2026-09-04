@@ -22,8 +22,20 @@ class TestBISBackend(unittest.TestCase):
         data = response.json()
         self.assertGreater(data["total_found"], 0)
         is_numbers = [item["is_number"] for item in data["results"]]
-        self.assertTrue(any("12330" in n or "269" in n or "1489" in n for n in is_numbers))
         print("✓ Standards recommend passed:", len(data["results"]), "standards found:", is_numbers[:3])
+
+    def test_02b_cement_regression(self):
+        # Explicit regression test: querying 'cement' must always return IS 269, IS 12330, IS 1489, and IS 455
+        response = self.client.post("/api/standards/recommend", json={"query": "cement"})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertGreaterEqual(data["total_found"], 5)
+        is_numbers = [item["is_number"] for item in data["results"]]
+        self.assertTrue(any("269" in n for n in is_numbers), f"IS 269 missing from cement results: {is_numbers}")
+        self.assertTrue(any("12330" in n for n in is_numbers), f"IS 12330 missing from cement results: {is_numbers}")
+        self.assertTrue(any("1489" in n for n in is_numbers), f"IS 1489 missing from cement results: {is_numbers}")
+        self.assertTrue(any("455" in n for n in is_numbers), f"IS 455 missing from cement results: {is_numbers}")
+        print("✓ Cement standards regression passed: IS 269, IS 12330, IS 1489, IS 455 all present")
 
     def test_03_schemes(self):
         response = self.client.get("/api/schemes")
