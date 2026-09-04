@@ -3,17 +3,39 @@ import { useAppStore } from '../../store/useAppStore';
 import { BarChart3, FileText, Database, ShieldCheck, ThumbsUp, Layers, RefreshCw, CheckCircle2, Play, AlertCircle } from 'lucide-react';
 import { SealMotif } from '../common/SealMotif';
 
+import { Lock, LogOut, KeyRound } from 'lucide-react';
+
 export const AnalyticsView: React.FC = () => {
-  const { language, setActiveTab } = useAppStore();
+  const { language, setActiveTab, adminToken, setAdminToken } = useAppStore();
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState('evaluator');
+  const [password, setPassword] = useState('bis_sih_2026');
+  const [loginError, setLoginError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = async (tokenOverride?: string) => {
+    const activeToken = tokenOverride !== undefined ? tokenOverride : adminToken;
+    if (!activeToken) {
+      setLoading(false);
+      setData(null);
+      return;
+    }
+
     setLoading(true);
     try {
-      const res = await fetch('/api/analytics');
-      const json = await res.json();
-      setData(json);
+      const res = await fetch('/api/analytics', {
+        headers: {
+          'Authorization': `Bearer ${activeToken}`
+        }
+      });
+      if (res.status === 401) {
+        setAdminToken(null);
+        setData(null);
+      } else {
+        const json = await res.json();
+        setData(json);
+      }
     } catch (e) {
       console.error(e);
     } finally {
@@ -21,9 +43,38 @@ export const AnalyticsView: React.FC = () => {
     }
   };
 
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setLoginError('');
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const resData = await res.json();
+      if (res.ok && resData.token) {
+        setAdminToken(resData.token);
+        fetchAnalytics(resData.token);
+      } else {
+        setLoginError(resData.detail || 'Authentication failed. Please verify evaluator credentials.');
+      }
+    } catch (err) {
+      setLoginError('Network connection error during evaluator authentication.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleLogout = () => {
+    setAdminToken(null);
+    setData(null);
+  };
+
   useEffect(() => {
     fetchAnalytics();
-  }, []);
+  }, [adminToken]);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6 font-sans">
@@ -46,17 +97,99 @@ export const AnalyticsView: React.FC = () => {
                 : 'Real-time telemetry extracted from active SQLite tables and the automated 20-case evaluation harness.'}
             </p>
           </div>
-          <button
-            onClick={fetchAnalytics}
-            className="p-2 bg-paper hover:bg-paper-dark border border-line rounded text-ink transition-colors self-start sm:self-auto flex items-center gap-1.5 text-xs font-medium focus-visible:ring-2 focus-visible:ring-brass"
-            title="Refresh metrics"
-            aria-label="Refresh live analytics data"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-            <span>Refresh Telemetry</span>
-          </button>
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            {data && (
+              <>
+                <button
+                  onClick={() => fetchAnalytics()}
+                  className="p-2 bg-paper hover:bg-paper-dark border border-line rounded text-ink transition-colors flex items-center gap-1.5 text-xs font-medium focus-visible:ring-2 focus-visible:ring-brass"
+                  title="Refresh metrics"
+                  aria-label="Refresh live analytics data"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+                  <span className="hidden sm:inline">Refresh</span>
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="px-3 py-2 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 rounded text-xs font-medium flex items-center gap-1.5 transition-colors"
+                  title="Log out from Evaluator session"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span>Log Out</span>
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Evaluator Login Challenge Card (Section 5 Requirement: Auth-Gated Internal Telemetry) */}
+      {!data && (
+        <div className="bg-white border border-line rounded-lg p-6 sm:p-8 shadow-paper-sm max-w-xl mx-auto space-y-6 animate-in fade-in duration-200">
+          <div className="text-center space-y-2">
+            <div className="w-12 h-12 rounded-full bg-amber-50 text-brass border border-brass/40 mx-auto flex items-center justify-center">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h2 className="text-xl font-bold font-serif text-ink">
+              {language === 'hi' ? 'मूल्यांकनकर्ता प्रमाणीकरण आवश्यक' : 'Evaluator Authentication Required'}
+            </h2>
+            <p className="text-xs text-stone-600 leading-relaxed">
+              {language === 'hi'
+                ? 'आंतरिक परिचालन टेलीमेट्री और मूल्यांकन हार्नेस केवल अधिकृत स्मार्ट इंडिया हैकथॉन मूल्यांकनकर्ताओं हेतु सुरक्षित हैं।'
+                : 'Live system telemetry, regression eval runs, and database query logs are restricted to authorized Smart India Hackathon evaluators.'}
+            </p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            {loginError && (
+              <div className="p-3 bg-red-50 border border-red-200 rounded text-xs text-red-700 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{loginError}</span>
+              </div>
+            )}
+
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-stone-700 block">
+                {language === 'hi' ? 'मूल्यांकनकर्ता आईडी / उपयोगकर्ता नाम' : 'Evaluator ID / Username'}
+              </label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="w-full px-3 py-2 text-xs border border-line rounded bg-paper-light focus:outline-none focus:border-brass text-ink font-mono"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-stone-700 block">
+                {language === 'hi' ? 'सुरक्षा पासकोड' : 'Security Passcode'}
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-3 py-2 text-xs border border-line rounded bg-paper-light focus:outline-none focus:border-brass text-ink font-mono"
+              />
+            </div>
+
+            {/* Quick Demo Credentials Reminder for Hackathon Judges */}
+            <div className="p-2.5 bg-amber-50 border border-brass/30 rounded text-[11px] text-amber-900 flex items-center justify-between">
+              <span className="font-mono">Default Evaluator Credentials: <strong>evaluator</strong> / <strong>bis_sih_2026</strong></span>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-2.5 bg-indigo-deep hover:bg-ink text-white font-semibold rounded text-xs transition-colors flex items-center justify-center gap-2 shadow-sm"
+            >
+              <KeyRound className="w-4 h-4 text-brass" />
+              <span>{isSubmitting ? 'Verifying Session...' : (language === 'hi' ? 'लॉगिन करें' : 'Authorize & View Telemetry')}</span>
+            </button>
+          </form>
+        </div>
+      )}
 
       {data && (
         <>

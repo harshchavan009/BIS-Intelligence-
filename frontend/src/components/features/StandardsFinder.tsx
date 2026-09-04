@@ -16,7 +16,7 @@ interface StandardItem {
 }
 
 export const StandardsFinder: React.FC = () => {
-  const { setQueryPrefill, setActiveTab, openSource, language } = useAppStore();
+  const { queryPrefill, setQueryPrefill, setActiveTab, openSource, language } = useAppStore();
   const [query, setQuery] = useState('cement');
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [results, setResults] = useState<StandardItem[]>([]);
@@ -53,8 +53,11 @@ export const StandardsFinder: React.FC = () => {
   };
 
   useEffect(() => {
-    handleSearch(query);
-  }, []);
+    const initialQ = queryPrefill.trim() || 'cement';
+    setQuery(initialQ);
+    handleSearch(initialQ);
+    if (queryPrefill) setQueryPrefill('');
+  }, [queryPrefill]);
 
   const filteredResults = categoryFilter === 'All'
     ? results

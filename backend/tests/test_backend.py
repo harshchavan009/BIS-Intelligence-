@@ -50,13 +50,36 @@ class TestBISBackend(unittest.TestCase):
         self.assertGreater(len(data["eligible_msme_provisions"]), 0)
         print("✓ Labs CBTF suggest passed:", len(data["eligible_msme_provisions"]), "provisions")
 
-    def test_06_analytics(self):
-        response = self.client.get("/api/analytics")
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
+    def test_06_analytics_auth_gated(self):
+        # 1. Verify 401 when unauthenticated
+        unauth_resp = self.client.get("/api/analytics")
+        self.assertEqual(unauth_resp.status_code, 401)
+        self.assertIn("Authentication required", unauth_resp.json()["detail"])
+
+        # 2. Authenticate as Evaluator
+        login_resp = self.client.post("/api/auth/login", json={"username": "evaluator", "password": "bis_sih_2026"})
+        self.assertEqual(login_resp.status_code, 200)
+        token = login_resp.json()["token"]
+        self.assertTrue(len(token) > 20)
+
+        # 3. Access with valid Evaluator session token
+        auth_resp = self.client.get("/api/analytics", headers={"Authorization": f"Bearer {token}"})
+        self.assertEqual(auth_resp.status_code, 200)
+        data = auth_resp.json()
         self.assertGreaterEqual(data["documents_indexed"], 7)
         self.assertGreaterEqual(data["chunks_stored"], 300)
-        print("✓ Analytics passed:", data["documents_indexed"], "documents,", data["chunks_stored"], "chunks")
+        print("✓ Auth-gated Analytics passed: 401 unauth enforced, 200 with evaluator token")
+
+    def test_06b_security_headers(self):
+        resp = self.client.get("/api/health")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("strict-transport-security", resp.headers)
+        self.assertEqual(resp.headers.get("x-frame-options"), "DENY")
+        self.assertEqual(resp.headers.get("x-content-type-options"), "nosniff")
+        self.assertEqual(resp.headers.get("referrer-policy"), "strict-origin-when-cross-origin")
+        self.assertIn("camera=()", resp.headers.get("permissions-policy", ""))
+        self.assertIn("default-src 'self'", resp.headers.get("content-security-policy", ""))
+        print("✓ Security headers verified: HSTS, X-Frame-Options: DENY, nosniff, CSP, Permissions-Policy")
 
     def test_07_verify_cml(self):
         # Valid seed

@@ -15,6 +15,7 @@ class ChatRequest(BaseModel):
     language: str = Field("en", description="Preferred response language: 'en' or 'hi'")
     capability: Optional[str] = Field("auto", description="Explicit capability or 'auto'")
     conversation_id: Optional[str] = Field(None, description="Client session ID")
+    captcha_token: Optional[str] = Field(None, description="Anti-abuse CAPTCHA verification token")
 
 class ChatResponse(BaseModel):
     answer: str

@@ -240,6 +240,32 @@ def extract_structured_tables(kb_dir: str, structured_dir: str):
     print(f"Extracted schemes metadata -> {schemes_file}")
 
 
+SUSPICIOUS_INJECTION_PHRASES = [
+    "ignore previous instructions",
+    "ignore all previous instructions",
+    "ignore the above instructions",
+    "system prompt",
+    "you are now",
+    "bypass safety",
+    "forget all instructions",
+    "developer mode",
+    "jailbreak",
+    "disregard the above",
+    "do not follow the guidelines"
+]
+
+def scan_text_for_prompt_injection(text: str, source_info: str) -> bool:
+    """
+    Security scan: Check documents and chunks for hidden instruction-like phrases.
+    Flags suspicious content for human audit prior to indexing.
+    """
+    text_lower = text.lower()
+    for phrase in SUSPICIOUS_INJECTION_PHRASES:
+        if phrase in text_lower:
+            print(f"[SECURITY AUDIT FLAG] Suspicious instruction-like phrase detected: '{phrase}' in {source_info}")
+            return True
+    return False
+
 def chunk_regulatory_document(pdf_path: str, header_meta: dict) -> list:
     """
     Hierarchical clause-based chunking.
@@ -307,6 +333,9 @@ def chunk_regulatory_document(pdf_path: str, header_meta: dict) -> list:
             clean_text = " ".join(c_text.split())
             if len(clean_text) < 40:
                 continue
+
+            # Ingestion-time security inspection
+            scan_text_for_prompt_injection(clean_text, f"{fname} (p.{page_num}, {c_ref})")
 
             # If chunk is overly long (>1800 chars), split into semantic sub-paragraphs
             if len(clean_text) > 1800:

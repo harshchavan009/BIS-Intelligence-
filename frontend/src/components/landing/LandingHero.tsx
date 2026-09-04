@@ -34,6 +34,7 @@ export const LandingHero: React.FC = () => {
 
   const [typedText, setTypedText] = useState('');
   const [typingDone, setTypingDone] = useState(false);
+  const [plainSearchInput, setPlainSearchInput] = useState('');
 
   useEffect(() => {
     let index = 0;
@@ -118,7 +119,7 @@ export const LandingHero: React.FC = () => {
                   onClick={() => setActiveTab('chat')}
                   className="px-5 py-2.5 bg-indigo-deep hover:bg-indigo-deep-dark text-white rounded-md text-xs font-semibold flex items-center gap-2 shadow-paper transition-all"
                 >
-                  <span>{language === 'hi' ? 'कार्यक्षेत्र में प्रश्न पूछें' : 'Open Assistant Workspace'}</span>
+                  <span>{language === 'hi' ? 'एआई सहायक से पूछें' : 'Open AI Assistant'}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
                 <button
@@ -128,6 +129,41 @@ export const LandingHero: React.FC = () => {
                   <Search className="w-3.5 h-3.5 text-brass" />
                   <span>{language === 'hi' ? 'मानक खोजें (Product Finder)' : 'Find My Standard'}</span>
                 </button>
+              </div>
+
+              {/* Plain Keyword Search Bar Alternative for MSMEs (Section 4 Requirement) */}
+              <div className="bg-white border border-line rounded-lg p-3.5 shadow-paper-sm max-w-xl space-y-2">
+                <div className="flex items-center justify-between text-[11.5px] font-semibold text-stone-700">
+                  <span className="flex items-center gap-1.5">
+                    <Search className="w-3.5 h-3.5 text-brass" />
+                    <span>{language === 'hi' ? 'एमएसएमई हेतु सरल कीवर्ड खोज (बिना चैट के):' : 'Plain Keyword Search for MSMEs (No AI Chat Required):'}</span>
+                  </span>
+                  <span className="text-[10px] text-stone-400 font-mono hidden sm:inline">Direct IS Registry</span>
+                </div>
+                <form 
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (plainSearchInput.trim()) {
+                      setQueryPrefill(plainSearchInput);
+                      setActiveTab('finder');
+                    }
+                  }}
+                  className="flex items-center gap-2"
+                >
+                  <input
+                    type="text"
+                    value={plainSearchInput}
+                    onChange={(e) => setPlainSearchInput(e.target.value)}
+                    placeholder={language === 'hi' ? 'उदा. सीमेंट, स्टील टीएमटी, बिजली की प्रेस, IS 269...' : 'e.g. Cement, Steel TMT, Electric Iron, IS 269...'}
+                    className="flex-1 px-3 py-2 text-xs border border-line rounded bg-paper-light focus:outline-none focus:border-brass text-ink"
+                  />
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-brass text-white text-xs font-semibold rounded hover:bg-brass-dark transition-colors whitespace-nowrap shadow-sm"
+                  >
+                    {language === 'hi' ? 'खोजें' : 'Search Standards'}
+                  </button>
+                </form>
               </div>
 
               {/* Regulatory Assurance Badges */}

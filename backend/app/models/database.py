@@ -45,6 +45,23 @@ class DemoCache(Base):
     sources_json = Column(Text, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
+class AuditLog(Base):
+    """
+    Security and administrative audit trail.
+    Data Minimization Compliance (India Digital Personal Data Protection Act, 2023):
+    - Client IPs are anonymized/masked (e.g. SHA-256 hash or masked subnet).
+    - No PII is logged in plain text.
+    - Records security actions, rate anomalies, verification checks, and admin logins.
+    """
+    __tablename__ = "audit_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow)
+    action = Column(String(100), nullable=False)  # e.g., AUTH_LOGIN, VERIFY_CML, VERIFY_HUID, RATE_ANOMALY
+    masked_ip = Column(String(64), nullable=False)
+    status = Column(String(50), nullable=False)   # SUCCESS, FAILURE, FLAGGED
+    details = Column(Text, nullable=True)
+
 def init_db():
     Base.metadata.create_all(bind=engine)
 

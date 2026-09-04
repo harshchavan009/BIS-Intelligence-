@@ -1,15 +1,17 @@
 from fastapi import APIRouter, Request, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any
-from backend.app.core.security import rate_limiter, get_client_ip, sanitize_text
+from backend.app.core.security import rate_limiter, get_client_ip, sanitize_text, log_audit_event, verify_captcha_token
 
 router = APIRouter()
 
 class CMLVerifyRequest(BaseModel):
     cml_number: str = Field(..., description="CM/L License number to verify")
+    captcha_token: Optional[str] = Field(None, description="Anti-abuse CAPTCHA verification token")
 
 class HUIDVerifyRequest(BaseModel):
     huid: str = Field(..., description="6-digit alphanumeric HUID code")
+    captcha_token: Optional[str] = Field(None, description="Anti-abuse CAPTCHA verification token")
 
 # Pre-defined authoritative demo seed set
 CML_SEED_REGISTRY: Dict[str, Dict[str, Any]] = {
@@ -98,16 +100,33 @@ async def verify_cml(request_data: CMLVerifyRequest, request: Request):
     """
     Simulated verification for CM/L license numbers.
     Constrained to explicit seed set for demonstration honesty.
+    Includes anti-abuse CAPTCHA validation and DPDP Act 2023 compliant audit logging.
     """
     client_ip = get_client_ip(request)
     rate_limiter.check_rate_limit(client_ip)
+
+    # Validate CAPTCHA if token present or header provided
+    captcha_tok = request_data.captcha_token or request.headers.get("X-Captcha-Token")
+    if captcha_tok:
+        if not verify_captcha_token(captcha_tok, client_ip):
+            raise HTTPException(status_code=403, detail="Invalid anti-abuse CAPTCHA verification token.")
 
     clean_cml = sanitize_text(request_data.cml_number, max_length=30).upper().strip()
     # Normalize common variations (e.g. 8400123 -> CM/L-8400123)
     if not clean_cml.startswith("CM/L-") and clean_cml.isdigit():
         clean_cml = f"CM/L-{clean_cml}"
 
-    if clean_cml in CML_SEED_REGISTRY:
+    found = clean_cml in CML_SEED_REGISTRY
+
+    # Audit logging with masked IP (DPDP Act 2023 compliance)
+    log_audit_event(
+        action="VERIFY_CML",
+        client_ip=client_ip,
+        status="FOUND" if found else "NOT_FOUND",
+        details=f"License: {clean_cml}"
+    )
+
+    if found:
         return {
             "found": True,
             "simulated": True,
@@ -128,13 +147,29 @@ async def verify_huid(request_data: HUIDVerifyRequest, request: Request):
     """
     Simulated verification for 6-digit HUID codes.
     Constrained to explicit seed set for demonstration honesty.
+    Includes anti-abuse CAPTCHA validation and DPDP Act 2023 compliant audit logging.
     """
     client_ip = get_client_ip(request)
     rate_limiter.check_rate_limit(client_ip)
 
-    clean_huid = sanitize_text(request_data.huid, max_length=10).upper().strip()
+    # Validate CAPTCHA if token present or header provided
+    captcha_tok = request_data.captcha_token or request.headers.get("X-Captcha-Token")
+    if captcha_tok:
+        if not verify_captcha_token(captcha_tok, client_ip):
+            raise HTTPException(status_code=403, detail="Invalid anti-abuse CAPTCHA verification token.")
 
-    if clean_huid in HUID_SEED_REGISTRY:
+    clean_huid = sanitize_text(request_data.huid, max_length=10).upper().strip()
+    found = clean_huid in HUID_SEED_REGISTRY
+
+    # Audit logging with masked IP (DPDP Act 2023 compliance)
+    log_audit_event(
+        action="VERIFY_HUID",
+        client_ip=client_ip,
+        status="FOUND" if found else "NOT_FOUND",
+        details=f"HUID: {clean_huid}"
+    )
+
+    if found:
         return {
             "found": True,
             "simulated": True,

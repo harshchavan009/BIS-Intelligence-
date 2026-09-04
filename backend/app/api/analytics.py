@@ -6,12 +6,16 @@ from sqlalchemy import func
 from backend.app.core.config import settings
 from backend.app.models.database import get_db, QueryLog, Feedback
 from backend.app.models.schemas import AnalyticsResponse
+from backend.app.api.auth import get_current_evaluator
 import chromadb
 
 router = APIRouter()
 
 @router.get("/analytics", response_model=AnalyticsResponse)
-async def get_analytics(db: Session = Depends(get_db)):
+async def get_analytics(
+    db: Session = Depends(get_db),
+    evaluator: str = Depends(get_current_evaluator)
+):
     """
     Returns verified live telemetry:
     - Real query counts from QueryLog table (increments live with every chat turn)

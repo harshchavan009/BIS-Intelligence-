@@ -30,17 +30,19 @@ This document outlines the institutional roadmap for transitioning the **BIS AI 
 
 ---
 
-### 3. Compliance & Security Certifications
-*Ensuring full alignment with Government of India digital standards and sovereign cybersecurity frameworks.*
+### 3. Compliance, Security Certifications & Sovereign Infrastructure
+*Ensuring full alignment with Government of India digital standards, CERT-In cybersecurity baseline, and sovereign hosting.*
 
+- **Security Certification (Formal CERT-In Empanelled Audit):**
+  - **Mandatory Pre-Launch Audit:** Engaging a CERT-In empanelled cybersecurity auditing agency to conduct a formal Vulnerability Assessment and Penetration Testing (VAPT) and source code security review prior to any authorized public launch.
+  - **Compliance Certificate:** Securing the official STQC / CERT-In compliance certificate confirming zero High/Critical vulnerabilities across APIs, RAG pipelines, and web interfaces.
+  - **Periodic Re-Audit Cadence:** Mandated bi-annual security reviews or immediate re-certification following major architectural/pipeline releases.
+- **Sovereign Cloud & Network Infrastructure:**
+  - **Empanelled Government Cloud Hosting:** Migration from prototype containers to MeitY-empanelled sovereign infrastructure (NIC National Data Centres / MeghRaj Government Cloud) ensuring strict 100% domestic data residency within Indian borders.
+  - **Enterprise Web Application Firewall (WAF) & DDoS Protection:** Deployment of network-layer WAF and multi-tiered DDoS mitigation through NIC/CERT-In infrastructure to shield against distributed botnets and layer-7 application attacks.
+  - **Official `.gov.in` Domain Governance:** Formal domain allocation and DNSSEC registration under `bis.gov.in` administered by ERNET India / National Informatics Centre (NIC), with strict CAA and DMARC enforcement.
 - **GIGW 3.0 Conformance (Guidelines for Indian Government Websites):**
   - Full adherence to GIGW 3.0 standards for public service portals, including bilingual parity, keyboard-only accessibility, screen reader optimization (NVDA, JAWS), and mobile responsive design.
-- **STQC Audit & Certification:**
-  - Formal security testing and code audit conducted by the Standardization Testing and Quality Certification (STQC) Directorate under MeitY.
-  - Remediation of OWASP Top 10 vulnerabilities, secure cryptographic credential storage, and session validation.
-- **Empanelled Cloud Hosting (MeitY Empanelled Cloud Service Providers):**
-  - Migration from local evaluation servers to a sovereign, certified cloud provider (e.g., NIC MeghRaj / AWS India GovCloud / Azure India Central).
-  - Virtual Private Cloud (VPC) isolation, data residency strictly confined to Indian territorial boundaries.
 - **Digital Personal Data Protection (DPDP) Act 2023 Review:**
   - Strict adherence to data minimization principles; no citizen PII stored.
   - End-to-end encrypted audit logging for grievance tracking and transparency reporting.

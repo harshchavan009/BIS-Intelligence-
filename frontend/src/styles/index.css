@@ -3,12 +3,18 @@
 @tailwind utilities;
 
 :root {
+  --base-font-size: 16px;
   --ink: #10182B;
   --indigo-deep: #1E2A5E;
   --brass: #B9862F;
   --paper: #F7F5EF;
   --line: #DCD6C6;
   --verified-green: #2F6B4F;
+}
+
+html {
+  font-size: var(--base-font-size, 16px);
+  scroll-behavior: smooth;
 }
 
 body {
@@ -19,6 +25,70 @@ body {
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Genuine GIGW Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 1rem;
+  background-color: #10182B;
+  color: #FFFFFF;
+  padding: 0.6rem 1.2rem;
+  z-index: 99999;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: 2px solid #B9862F;
+  border-radius: 0 0 6px 6px;
+  text-decoration: underline;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: top 0.15s ease-in-out;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* High Contrast Mode for Low Vision Accessibility (GIGW & WCAG AAA) */
+html.high-contrast {
+  --ink: #FFFFFF;
+  --indigo-deep: #000000;
+  --brass: #FFD700;
+  --paper: #050505;
+  --line: #FFFFFF;
+  --verified-green: #00FF66;
+  filter: contrast(110%);
+}
+html.high-contrast body {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+html.high-contrast .paper-surface,
+html.high-contrast .bg-white,
+html.high-contrast .bg-paper,
+html.high-contrast .bg-paper-light {
+  background-color: #0d0d0d !important;
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+html.high-contrast a,
+html.high-contrast button {
+  color: #FFD700 !important;
+}
+html.high-contrast .text-ink {
+  color: #FFFFFF !important;
+}
+html.high-contrast .text-ink-muted,
+html.high-contrast .text-stone-500,
+html.high-contrast .text-stone-600,
+html.high-contrast .text-gray-500,
+html.high-contrast .text-gray-600 {
+  color: #E2E8F0 !important;
+}
+html.high-contrast .border-line,
+html.high-contrast .hairline-all,
+html.high-contrast .hairline-b,
+html.high-contrast .hairline-t {
+  border-color: #666666 !important;
 }
 
 h1, h2, h3, .font-serif-standard {
@@ -94,6 +164,20 @@ h1, h2, h3, .font-serif-standard {
 :focus-visible {
   outline: 2px solid var(--brass) !important;
   outline-offset: 2px !important;
+}
+
+/* Mobile Touch Targets (Section 4 requirement: 44x44px minimum) */
+@media (max-width: 768px) {
+  nav button,
+  nav a,
+  .mobile-touch-target,
+  button.touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* Reduced Motion Support */

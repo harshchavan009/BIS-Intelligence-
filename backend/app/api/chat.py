@@ -9,7 +9,7 @@ from backend.app.rag.retriever import retriever
 from backend.app.rag.groundedness import checker
 from backend.app.rag.prompts import get_system_prompt
 from backend.app.core.llm_provider import get_llm_provider
-from backend.app.core.security import rate_limiter, get_client_ip, sanitize_text
+from backend.app.core.security import rate_limiter, get_client_ip, sanitize_text, verify_captcha_token, log_audit_event
 
 router = APIRouter()
 
@@ -24,6 +24,16 @@ async def chat_stream(request_data: ChatRequest, request: Request):
     # 1. Rate limiting & input sanitization
     client_ip = get_client_ip(request)
     rate_limiter.check_rate_limit(client_ip)
+
+    # Validate CAPTCHA if provided
+    captcha_tok = request_data.captcha_token or request.headers.get("X-Captcha-Token")
+    if captcha_tok:
+        if not verify_captcha_token(captcha_tok, client_ip):
+            log_audit_event("CHAT_ABUSE_BLOCKED", client_ip, "BLOCKED", "Invalid CAPTCHA token")
+            return StreamingResponse(
+                (f"data: {json.dumps({'type': 'error', 'data': 'Anti-abuse CAPTCHA verification failed. Please refresh and try again.'})}\n\n" for _ in range(1)),
+                media_type="text/event-stream"
+            )
 
     query = sanitize_text(request_data.message, max_length=1000)
     lang = request_data.language or "en"
