@@ -62,10 +62,28 @@ async def health_check(db: Session = Depends(get_db)):
         except Exception:
             pass
 
+    # Process memory footprint telemetry
+    memory_info = {}
+    try:
+        import psutil
+        p = psutil.Process()
+        rss_mb = round(p.memory_info().rss / 1024 / 1024, 1)
+        vmem = psutil.virtual_memory()
+        memory_info = {
+            "process_rss_mb": rss_mb,
+            "system_available_mb": round(vmem.available / 1024 / 1024, 1),
+            "status": "healthy" if rss_mb < 450 else "high_usage"
+        }
+    except Exception:
+        memory_info = {"status": "unmeasured"}
+
     return {
         "status": "ready",
         "system": settings.PROJECT_NAME,
         "version": settings.VERSION,
+        "app_mode": settings.APP_MODE,
+        "embedding_mode": settings.EMBEDDING_MODE,
+        "memory": memory_info,
         "database": db_status,
         "chroma_vector_store": {
             "status": chroma_status,
@@ -80,3 +98,4 @@ async def health_check(db: Session = Depends(get_db)):
         "llm_provider": settings.LLM_PROVIDER,
         "readiness": "100% DEMO READY (Offline & Online capable)"
     }
+

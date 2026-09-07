@@ -1,11 +1,18 @@
 import os
 import shutil
+import hashlib
 from typing import Dict, Any
 from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
 from backend.app.core.config import settings
 from backend.app.api.auth import get_current_evaluator
-from scripts.ingest_pdf import run_pdf_ingestion_pipeline, compute_sha256
-from scripts.generate_canonical_data import build_standards_csv, build_knowledge_base_seed
+
+def compute_sha256(filepath: str) -> str:
+    """Calculates SHA-256 checksum without importing heavy ML pipeline."""
+    hasher = hashlib.sha256()
+    with open(filepath, "rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            hasher.update(chunk)
+    return hasher.hexdigest()
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -40,6 +47,8 @@ async def trigger_reingest(evaluator: str = Depends(get_current_evaluator)) -> D
     Restricted to authenticated admin / evaluator.
     """
     try:
+        from scripts.generate_canonical_data import build_standards_csv, build_knowledge_base_seed
+        from scripts.ingest_pdf import run_pdf_ingestion_pipeline
         build_standards_csv()
         build_knowledge_base_seed()
         run_pdf_ingestion_pipeline()

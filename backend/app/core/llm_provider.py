@@ -5,7 +5,6 @@ from typing import AsyncGenerator, Dict, Any, List, Optional
 from abc import ABC, abstractmethod
 import sqlite3
 import numpy as np
-from sentence_transformers import SentenceTransformer
 from backend.app.core.config import settings
 
 class BaseLLMProvider(ABC):
@@ -39,17 +38,8 @@ class OfflineDemoProvider(BaseLLMProvider):
     """
     def __init__(self, embedding_model=None):
         self.cache_data = []
-        self.cache_embeddings = None
         self._load_cache()
-        if embedding_model is not None:
-            self.model = embedding_model
-        else:
-            try:
-                from backend.app.rag.retriever import retriever
-                self.model = retriever.model
-            except Exception:
-                self.model = SentenceTransformer(settings.EMBEDDING_MODEL)
-        self._precompute_cache_embeddings()
+        self._custom_model = embedding_model
 
     def _load_cache(self):
         cache_file = os.path.join(settings.STRUCTURED_DIR, "demo_cache.json")
@@ -60,38 +50,55 @@ class OfflineDemoProvider(BaseLLMProvider):
             except Exception:
                 self.cache_data = []
 
-    def _precompute_cache_embeddings(self):
-        if not self.cache_data:
-            return
-        try:
-            texts = [item.get("query", "") for item in self.cache_data]
-            self.cache_embeddings = self.model.encode(texts, normalize_embeddings=True)
-        except Exception as e:
-            print(f"Failed to precompute cache embeddings: {e}")
-            self.cache_embeddings = None
-
     def _find_cache_match(self, query: str, language: str = "en") -> Optional[Dict[str, Any]]:
         if not self.cache_data:
             return None
 
         q_lower = query.lower().strip()
-        # Direct word match check
+        # 1. Direct word / substring match
         for item in self.cache_data:
             cached_q = item["query"].lower()
             cached_hi = item.get("query_hi", "").lower()
             if q_lower in cached_q or cached_q in q_lower or (cached_hi and q_lower in cached_hi):
                 return item
 
-        # Vectorized cosine matching in <2ms
-        if self.cache_embeddings is not None and len(self.cache_embeddings) > 0:
-            try:
-                q_emb = self.model.encode(query, normalize_embeddings=True)
-                sims = np.dot(self.cache_embeddings, q_emb)
+        # 2. Fast token overlap / Jaccard similarity match (Zero extra RAM, <0.1ms execution)
+        import re
+        q_tokens = set(re.findall(r'\w+', q_lower))
+        best_match = None
+        best_sim = 0.0
+        for item in self.cache_data:
+            c_tokens = set(re.findall(r'\w+', item["query"].lower()))
+            hi_tokens = set(re.findall(r'\w+', item.get("query_hi", "").lower()))
+            if q_tokens and c_tokens:
+                overlap = len(q_tokens & c_tokens) / len(q_tokens | c_tokens)
+                if overlap > best_sim:
+                    best_sim = overlap
+                    best_match = item
+            if q_tokens and hi_tokens:
+                overlap_hi = len(q_tokens & hi_tokens) / len(q_tokens | hi_tokens)
+                if overlap_hi > best_sim:
+                    best_sim = overlap_hi
+                    best_match = item
+
+        if best_sim >= 0.45:
+            return best_match
+
+        # 3. Optional dense semantic cosine matching if model was already loaded lazily
+        try:
+            from backend.app.rag.retriever import retriever
+            embedder = self._custom_model or (retriever._model if retriever._model is not None else None)
+            if embedder is not None:
+                q_emb = embedder.encode(query, normalize_embeddings=True)
+                # Compute on-the-fly similarity against cached queries
+                texts = [item.get("query", "") for item in self.cache_data]
+                c_embs = embedder.encode(texts, normalize_embeddings=True)
+                sims = np.dot(c_embs, q_emb)
                 best_idx = int(np.argmax(sims))
                 if sims[best_idx] > 0.72:
                     return self.cache_data[best_idx]
-            except Exception:
-                pass
+        except Exception:
+            pass
 
         return None
 

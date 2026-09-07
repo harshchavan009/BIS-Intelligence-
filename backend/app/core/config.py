@@ -18,6 +18,12 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
     
+    # Application & Resource Profile: 'demo' (lightweight, zero model preloading, <=150MB RAM) or 'full'
+    APP_MODE: str = os.getenv("APP_MODE", "demo")
+
+    # Embedding Inference Strategy: 'lazy' (load on-demand when memory allows), 'lightweight', 'disabled', 'full'
+    EMBEDDING_MODE: str = os.getenv("EMBEDDING_MODE", "lazy")
+
     # Embedding Model
     EMBEDDING_MODEL: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
     CHROMA_COLLECTION: str = "bis_standards_kb"

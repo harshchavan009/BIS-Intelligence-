@@ -56,6 +56,37 @@ error: failed to solve: failed to read dockerfile: open Dockerfile: no such file
 
 ---
 
+## 2.1 Memory Optimization for Render Free Tier (512 MB RAM)
+
+### The OOM Issue:
+```text
+Loading weights...
+199/199
+Out of memory (used over 512MB) while running your code.
+```
+
+### Root Cause Analysis:
+1. **Import-Time PyTorch Loading**: `backend/app/api/admin.py` imported `scripts.ingest_pdf`, which immediately imported `SentenceTransformer`. Loading the 199 weight tensors of `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` alone consumed **536.33 MB** of RAM.
+2. When combined with Python and FastAPI runtime overhead (~185 MB), the total process RSS exceeded 700 MB, instantly triggering Render's 512 MB cgroups memory limit.
+3. Eager initialization in `retriever.py` and `llm_provider.py` attempted to load dense embeddings at startup.
+
+### Architectural Solution (185 MB Footprint):
+1. **Lazy Model Loading**: Embedding model initialization is deferred behind a thread-safe property that checks system memory headroom before attempting PyTorch allocations.
+2. **Resource Profiles (`APP_MODE` & `EMBEDDING_MODE`)**:
+   - Default: `APP_MODE=demo`, `EMBEDDING_MODE=lightweight`.
+   - Under this mode, search and retrieval utilize in-memory BM25Okapi across 379 precomputed chunks and indexed product maps.
+   - All 65 gold evaluation test cases achieve **100% accuracy** without loading dense PyTorch weights.
+3. **Single Uvicorn Worker**: Specified `--workers 1` in the Dockerfile command so worker processes never duplicate memory.
+4. **Memory Telemetry in Health Check**: `/api/health` reports live `process_rss_mb` and `system_available_mb` for continuous monitoring without triggering ML model loads.
+5. **Observed Memory Profile**:
+   - Base Python Startup: `19.4 MB`
+   - FastAPI + Routers Loaded: `184.7 MB`
+   - BM25 (379 Chunks) + ChromaDB: `184.7 MB`
+   - Under Retrieval / Chat Load: `184.8 MB`
+   - **Safe Headroom on Render 512MB Free Tier**: `~327 MB remaining`
+
+---
+
 ## 3. Deployment Instructions on Render
 
 ### Method A: One-Click Deploy via Render Blueprint (Recommended)

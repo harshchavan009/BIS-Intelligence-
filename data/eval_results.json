@@ -4,7 +4,7 @@
   "failed": 0,
   "grounded_percentage": 100.0,
   "accuracy_percentage": 100.0,
-  "evaluated_at": "2026-09-07T08:24:12Z",
+  "evaluated_at": "2026-09-07T09:21:35Z",
   "evaluated_at_human": "07 September 2026",
   "category_summary": {
     "Cement & Building Materials": {
@@ -226,7 +226,7 @@
       "expected_is_number": "IS 1786",
       "expected_clause": "Regulation 3",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme1-specific-guidelines.pdf",
+      "retrieved_top_doc": "None",
       "passed": true
     },
     {
@@ -296,7 +296,7 @@
       "expected_is_number": "IS 4151",
       "expected_clause": "Regulation 3",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme1-ISI-mark.pdf",
+      "retrieved_top_doc": "qco-guidance.pdf",
       "passed": true
     },
     {
@@ -338,7 +338,7 @@
       "expected_is_number": "IS 15683",
       "expected_clause": "Regulation 3",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme1-ISI-mark.pdf",
+      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
       "passed": true
     },
     {
@@ -436,7 +436,7 @@
       "expected_is_number": "IS 16333 (Part 3)",
       "expected_clause": "Clause 5.1",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme1-ISI-mark.pdf",
+      "retrieved_top_doc": "scheme2-registration-guidelines.pdf",
       "passed": true
     },
     {
@@ -744,7 +744,7 @@
       "expected_is_number": null,
       "expected_clause": "CMD-I/2:12:8",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme1-ISI-mark.pdf",
+      "retrieved_top_doc": "scheme4-conformity.pdf",
       "passed": true
     },
     {
@@ -814,7 +814,7 @@
       "expected_is_number": null,
       "expected_clause": "CMD-I/2:12:7",
       "is_abstention": false,
-      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
+      "retrieved_top_doc": "N/A",
       "passed": true
     },
     {
@@ -884,7 +884,7 @@
       "expected_is_number": null,
       "expected_clause": "Section 16",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme1-ISI-mark.pdf",
+      "retrieved_top_doc": "qco-guidance.pdf",
       "passed": true
     },
     {
@@ -912,7 +912,7 @@
       "expected_is_number": "IS 1417",
       "expected_clause": "HUID",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme4-conformity.pdf",
+      "retrieved_top_doc": "cbtf-msme-guidelines.pdf",
       "passed": true
     },
     {
@@ -940,7 +940,7 @@
       "expected_is_number": null,
       "expected_clause": "Form-V",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme4-conformity.pdf",
+      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
       "passed": true
     },
     {
@@ -954,7 +954,7 @@
       "expected_is_number": null,
       "expected_clause": "Regulation 3",
       "is_abstention": false,
-      "retrieved_top_doc": "market-surveillance-guidelines.pdf",
+      "retrieved_top_doc": "cbtf-msme-guidelines.pdf",
       "passed": true
     },
     {

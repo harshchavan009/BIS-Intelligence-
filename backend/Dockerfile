@@ -44,10 +44,12 @@ RUN python scripts/ingest.py && python scripts/seed_demo_cache.py
 # Configure runtime environment
 ENV PORT=8000 \
     PYTHONUNBUFFERED=1 \
+    APP_MODE=demo \
+    EMBEDDING_MODE=lightweight \
     LLM_PROVIDER=offline
 
 EXPOSE 8000
 
 # Render dynamically injects $PORT at runtime (e.g. 10000).
-# Using shell execution so $PORT expands dynamically.
-CMD python -m uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8000}
+# Using single worker to preserve 512MB RAM budget.
+CMD python -m uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1

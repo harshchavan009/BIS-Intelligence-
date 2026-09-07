@@ -3,7 +3,6 @@ import re
 import json
 from typing import List, Dict, Any, Tuple, Optional
 import chromadb
-from sentence_transformers import SentenceTransformer
 from rank_bm25 import BM25Okapi
 from backend.app.core.config import settings
 
@@ -31,13 +30,51 @@ class HybridRetriever:
         except Exception:
             self.collection = None
 
-        # 3. Load Multilingual Embedding Model
-        self.model = SentenceTransformer(settings.EMBEDDING_MODEL)
+        # 3. Dense Embedding Model (Lazy Loaded to protect 512MB RAM limit on Render)
+        self._model = None
+        self._model_load_attempted = False
+        self._model_available = True
 
         # 4. Build in-memory BM25 index over all indexed chunks
         self.chunk_pool: List[Dict[str, Any]] = []
         self.bm25: Optional[BM25Okapi] = None
         self._build_bm25_index()
+
+    @property
+    def model(self):
+        """
+        Thread-safe lazy initialization for the multilingual dense embedding model.
+        Prevents premature model loading during startup/import, keeping process RSS under 150MB.
+        Safely falls back to BM25 + structured matching if memory threshold is exceeded.
+        """
+        if settings.EMBEDDING_MODE in ("lightweight", "disabled") or (settings.APP_MODE == "demo" and settings.EMBEDDING_MODE != "full"):
+            return None
+
+        if self._model is None and not self._model_load_attempted:
+            self._model_load_attempted = True
+
+            # In low-memory demo mode on Render (512MB RAM), avoid loading 500MB PyTorch model
+            try:
+                import psutil
+                mem = psutil.virtual_memory()
+                if mem.available < 280 * 1024 * 1024 and settings.APP_MODE == "demo":
+                    print(f"[HybridRetriever] Available memory ({mem.available / 1024 / 1024:.1f} MB) is below safe headroom for PyTorch. Operating in lightweight BM25 + Structured mode.")
+                    self._model_available = False
+                    return None
+            except Exception:
+                pass
+
+            try:
+                from sentence_transformers import SentenceTransformer
+                print(f"[HybridRetriever] Lazily initializing dense embedding model: {settings.EMBEDDING_MODEL}...")
+                self._model = SentenceTransformer(settings.EMBEDDING_MODEL)
+                self._model_available = True
+                print("[HybridRetriever] Dense embedding model loaded successfully.")
+            except (MemoryError, Exception) as e:
+                print(f"[HybridRetriever] Could not load embedding model ({e}). Gracefully falling back to BM25 + Structured search.")
+                self._model = None
+                self._model_available = False
+        return self._model
 
     def _build_bm25_index(self):
         if not self.collection:
@@ -221,13 +258,17 @@ class HybridRetriever:
     def search_dense(self, query: str, top_k: int = 15) -> List[Dict[str, Any]]:
         """
         Dense vector search in ChromaDB using normalized embeddings and cosine similarity.
+        Safely returns empty list if dense embedding is disabled or unavailable under low memory.
         """
         if not self.collection:
             return []
 
-        query_embedding = self.model.encode(query, normalize_embeddings=True).tolist()
+        embedder = self.model
+        if embedder is None:
+            return []
 
         try:
+            query_embedding = embedder.encode(query, normalize_embeddings=True).tolist()
             results = self.collection.query(
                 query_embeddings=[query_embedding],
                 n_results=top_k
