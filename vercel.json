@@ -1,0 +1,19 @@
+{
+  "framework": "vite",
+  "buildCommand": "cd frontend && npm run build",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    {
+      "source": "/api",
+      "destination": "https://bis-intelligence-5.onrender.com/api"
+    },
+    {
+      "source": "/api/:match*",
+      "destination": "https://bis-intelligence-5.onrender.com/api/:match*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -33,7 +33,8 @@ ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost:8000",
-    "http://127.0.0.1:8000"
+    "http://127.0.0.1:8000",
+    "https://bis-intelligence.vercel.app"
 ]
 env_origins = os.environ.get("ALLOWED_ORIGINS", "")
 if env_origins:
@@ -44,8 +45,8 @@ app.add_middleware(
     allow_origins=ALLOWED_ORIGINS,
     allow_origin_regex=r"https://.*(onrender\.com|railway\.app|vercel\.app|netlify\.app)",
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type", "X-Requested-With", "X-CSRF-Token"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "X-Requested-With", "X-CSRF-Token", "X-Captcha-Token"],
 )
 
 # 3. Top-Level Health Check Endpoint (Render & Cloud Uptime Monitors)
