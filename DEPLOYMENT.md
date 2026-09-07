@@ -47,9 +47,10 @@ error: failed to solve: failed to read dockerfile: open Dockerfile: no such file
 1. Converted `backend/Dockerfile` into a **multi-stage build**:
    - **Stage 1 (`node:18-alpine`)**: Builds the Vite frontend bundle into `frontend/dist`.
    - **Stage 2 (`python:3.11-slim`)**: Installs backend requirements from `backend/requirements.txt`, copies backend code, data, scripts, and compiled `frontend/dist`, bakes vector index and SQLite cache, and binds Uvicorn to `0.0.0.0:${PORT:-8000}`.
-2. Updated `render.yaml` with explicit:
+2. Provided the complete multi-stage Dockerfile both at repository root (`./Dockerfile`) and at `./backend/Dockerfile` with `dockerContext: .`, ensuring Render automatically detects and succeeds regardless of whether Dockerfile Path is left default (`Dockerfile`) or customized (`backend/Dockerfile`).
+3. Updated `render.yaml` with explicit:
    - `runtime: docker`
-   - `dockerfilePath: ./backend/Dockerfile`
+   - `dockerfilePath: ./Dockerfile`
    - `dockerContext: .`
    - `healthCheckPath: /api/health`
 
@@ -75,7 +76,7 @@ If configuring manually via the Render UI:
    - **Branch**: `main`
    - **Root Directory**: *(Leave blank / empty)*
    - **Runtime / Environment**: `Docker`
-   - **Dockerfile Path**: `backend/Dockerfile`
+   - **Dockerfile Path**: `Dockerfile` (or `backend/Dockerfile`)
    - **Docker Build Context**: `.`
    - **Instance Type**: Free (or Starter for 0s cold start)
 4. Under **Advanced Settings**:
