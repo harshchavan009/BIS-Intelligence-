@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
-import { Search, ShieldAlert, CheckCircle, ExternalLink, ArrowRight, Filter, BookOpen } from 'lucide-react';
+import { Search, ShieldAlert, CheckCircle, ExternalLink, ArrowRight, Filter, BookOpen, X } from 'lucide-react';
 import { PageHeader } from '../common/PageHeader';
 import { Card } from '../common/Card';
 
@@ -142,10 +142,11 @@ export const StandardsFinder: React.FC = () => {
                 Filter: {categoryFilter}
                 <button
                   onClick={() => setCategoryFilter('All')}
-                  className="ml-1 hover:text-red-700 font-bold"
+                  className="ml-1 hover:text-red-700 p-0.5 rounded transition-colors"
                   title="Clear category filter"
+                  aria-label="Clear category filter"
                 >
-                  ✕
+                  <X className="w-3 h-3" />
                 </button>
               </span>
             )}
@@ -207,7 +208,7 @@ export const StandardsFinder: React.FC = () => {
                   </span>
                 </div>
 
-                <h3 className="text-sm font-bold text-ink font-serif leading-snug">
+                <h3 className="text-sm font-bold text-ink leading-snug">
                   {item.product_name}
                 </h3>
 

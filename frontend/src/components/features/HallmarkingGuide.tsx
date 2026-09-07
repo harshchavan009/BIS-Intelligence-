@@ -55,18 +55,18 @@ export const HallmarkingGuide: React.FC = () => {
         }
       >
         {/* Pluggable General Guidance Banner */}
-        <div className="p-3 bg-amber-50 border border-amber-200 rounded-md flex items-center gap-2 text-xs text-amber-900">
-          <Info className="w-4 h-4 text-amber-600 flex-shrink-0" />
+        <div className="p-3 bg-slate-50 border border-slate-300 rounded-md flex items-center gap-2.5 text-xs text-slate-800 shadow-xs">
+          <Info className="w-4 h-4 text-slate-500 flex-shrink-0" />
           <span>
             <strong>General Regulatory Guidance: </strong>
-            This module provides general statutory guidance. Adding a dedicated hallmarking PDF to <code className="bg-white px-1 rounded font-mono text-[10.5px]">data/knowledge_base/</code> automatically indexes and lights up deep clause citations without code changes.
+            This module provides general statutory guidance. Dedicated hallmarking publications in <code className="bg-white px-1.5 py-0.5 rounded font-mono text-[10.5px] border border-slate-200">data/knowledge_base/</code> are indexed into ChromaDB vector storage for clause citation retrieval.
           </span>
         </div>
       </PageHeader>
 
       {/* The 3 Essential Hallmark Symbols */}
       <Card padding="lg" className="space-y-4">
-        <h3 className="text-sm font-bold text-ink font-serif">
+        <h3 className="text-sm font-bold text-ink">
           The 3 Mandatory Marks on Genuine BIS Hallmarked Gold Jewellery
         </h3>
 
@@ -120,7 +120,7 @@ export const HallmarkingGuide: React.FC = () => {
 
       {/* Interactive HUID Verifier */}
       <Card padding="lg" className="space-y-4">
-        <h3 className="text-sm font-bold text-ink font-serif flex items-center gap-2">
+        <h3 className="text-sm font-bold text-ink flex items-center gap-2">
           <Smartphone className="w-4 h-4 text-brass" />
           <span>Interactive HUID Verifier</span>
         </h3>

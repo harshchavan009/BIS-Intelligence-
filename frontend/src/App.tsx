@@ -26,11 +26,35 @@ import { SitemapPage } from './components/features/SitemapPage';
 import { CookieConsent } from './components/common/CookieConsent';
 
 export const App: React.FC = () => {
-  const { activeTab, fetchEvalBenchmark, fontSize, highContrast, language } = useAppStore();
+  const { activeTab, setActiveTab, fetchEvalBenchmark, fontSize, highContrast, language } = useAppStore();
 
   React.useEffect(() => {
     fetchEvalBenchmark();
   }, [fetchEvalBenchmark]);
+
+  // Support direct route or hash for /evaluator-console or /internal/analytics
+  React.useEffect(() => {
+    const handleUrlRoute = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (
+        path.includes('evaluator') || 
+        path.includes('internal/analytics') || 
+        hash.includes('evaluator') || 
+        hash.includes('internal/analytics') ||
+        hash.includes('analytics')
+      ) {
+        setActiveTab('analytics');
+      }
+    };
+    handleUrlRoute();
+    window.addEventListener('popstate', handleUrlRoute);
+    window.addEventListener('hashchange', handleUrlRoute);
+    return () => {
+      window.removeEventListener('popstate', handleUrlRoute);
+      window.removeEventListener('hashchange', handleUrlRoute);
+    };
+  }, [setActiveTab]);
 
   // Synchronize persistent GIGW accessibility preferences to document root
   React.useEffect(() => {

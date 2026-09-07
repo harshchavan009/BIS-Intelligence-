@@ -96,7 +96,7 @@ export const LabFinder: React.FC = () => {
                 </button>
               )}
             </div>
-            <p className="text-sm font-serif text-ink leading-relaxed">
+            <p className="text-sm font-sans text-ink leading-relaxed">
               {data.cbtf_guidance}
             </p>
           </Card>
@@ -104,7 +104,7 @@ export const LabFinder: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Eligible Concessions */}
             <Card padding="md" className="space-y-3">
-              <div className="flex items-center gap-2 text-indigo-deep font-serif font-bold text-sm">
+              <div className="flex items-center gap-2 text-indigo-deep font-bold text-sm">
                 <Building2 className="w-4 h-4 text-brass" />
                 <span>Eligible CBTF Provisions for MSMEs</span>
               </div>
@@ -120,7 +120,7 @@ export const LabFinder: React.FC = () => {
 
             {/* Mandatory Retained Tests */}
             <Card padding="md" className="space-y-3">
-              <div className="flex items-center gap-2 text-amber-900 font-serif font-bold text-sm">
+              <div className="flex items-center gap-2 text-slate-800 font-bold text-sm">
                 <AlertTriangle className="w-4 h-4 text-amber-600" />
                 <span>Mandatory Retained In-House Tests</span>
               </div>
@@ -140,7 +140,7 @@ export const LabFinder: React.FC = () => {
 
           {/* Verification Process */}
           <Card padding="lg" className="space-y-4">
-            <h3 className="text-sm font-bold text-ink font-serif flex items-center gap-2">
+            <h3 className="text-sm font-bold text-ink flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-verified-green" />
               <span>How to Request BIS Joint Verification of a CBTF Lab</span>
             </h3>

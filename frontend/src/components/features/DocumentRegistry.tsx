@@ -159,10 +159,10 @@ export const DocumentRegistry: React.FC = () => {
       </div>
 
       {/* Registry Table */}
-      <Card padding="none" className="overflow-hidden">
+      <div className="rounded-xl overflow-hidden border border-line shadow-sm bg-white">
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
-            <thead className="bg-paper border-b border-line font-mono text-[10px] uppercase text-gray-600 tracking-wider">
+            <thead className="sticky top-0 bg-[#F2EFE9] border-b border-line font-mono text-[10px] uppercase text-stone-700 tracking-wider z-10 shadow-xs">
               <tr>
                 <th className="py-3 px-4">Document ID</th>
                 <th className="py-3 px-4">Official Publication Title</th>
@@ -172,14 +172,14 @@ export const DocumentRegistry: React.FC = () => {
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-line/60">
+            <tbody className="divide-y divide-line/40">
               {filteredDocs.map((doc) => (
-                <tr key={doc.id} className="hover:bg-paper/40 transition-colors">
+                <tr key={doc.id} className="odd:bg-[#FAF9F5] even:bg-white hover:bg-amber-50/40 transition-colors">
                   <td className="py-3.5 px-4 font-mono font-bold text-brass">
                     {doc.id}
                   </td>
                   <td className="py-3.5 px-4 max-w-sm">
-                    <div className="font-serif font-bold text-ink text-sm leading-snug">
+                    <div className="font-semibold text-ink text-sm leading-snug">
                       {doc.title}
                     </div>
                     <div className="text-[11px] text-gray-500 font-sans mt-0.5 line-clamp-2">
@@ -228,7 +228,7 @@ export const DocumentRegistry: React.FC = () => {
             </tbody>
           </table>
         </div>
-      </Card>
+      </div>
 
       {/* Required Bottom Callout (Section 2.3) */}
       <div className="p-4 bg-[#F4EFE6] border border-[#E3DAC9] rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink-muted">

@@ -192,19 +192,19 @@ export const FAQPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Accordion List */}
-      <div className="space-y-3">
+      {/* Accordion List - Standardized 48px+ Vertical Rhythm */}
+      <div className="mt-10 sm:mt-12 space-y-3.5">
         {filteredFaqs.map((faq) => {
           const isOpen = openId === faq.id;
           return (
             <Card 
               key={faq.id}
               padding="none"
-              className="overflow-hidden"
+              className="overflow-hidden shadow-sm"
             >
               <button
                 onClick={() => setOpenId(isOpen ? null : faq.id)}
-                className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 hover:bg-paper-light transition-colors"
+                className="w-full text-left px-6 py-4.5 flex items-center justify-between gap-4 hover:bg-paper-light transition-colors cursor-pointer"
                 aria-expanded={isOpen}
               >
                 <span className="font-semibold text-sm sm:text-base text-ink flex items-center gap-3">
@@ -221,7 +221,7 @@ export const FAQPage: React.FC = () => {
               </button>
 
               {isOpen && (
-                <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-stone-700 space-y-3 border-t border-line/60 bg-[#FAF9F5]">
+                <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-stone-700 space-y-3.5 border-t border-line/60 bg-[#FAF9F5]">
                   <p className="leading-relaxed">
                     {language === 'hi' ? faq.aHi : faq.aEn}
                   </p>
@@ -239,7 +239,7 @@ export const FAQPage: React.FC = () => {
                         setQueryPrefill(faq.qEn);
                         setActiveTab('chat');
                       }}
-                      className="text-brass hover:text-indigo-deep font-semibold text-xs flex items-center gap-1 hover:underline"
+                      className="btn-tertiary text-xs font-semibold"
                     >
                       <span>{language === 'hi' ? 'इस पर एआई से विस्तृत जानकारी लें' : 'Ask AI for clause citations'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />

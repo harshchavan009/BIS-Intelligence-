@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from scripts.generate_canonical_data import build_standards_csv, build_knowledge_base_seed
 from scripts.ingest_pdf import run_pdf_ingestion_pipeline
+from scripts.ingest_hallmarking import run_hallmarking_ingestion
 
 def main():
     print(">>> Step 1: Generating Canonical Datasets...")
@@ -23,6 +24,9 @@ def main():
 
     print("\n>>> Step 2: Running Layout-Aware Ingestion Pipeline...")
     run_pdf_ingestion_pipeline()
+
+    print("\n>>> Step 3: Running Hallmarking Reference Corpus Ingestion Pipeline...")
+    run_hallmarking_ingestion()
     print("\n>>> All ingestion tasks completed successfully!")
 
 if __name__ == "__main__":

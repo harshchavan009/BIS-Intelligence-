@@ -300,7 +300,7 @@ export const GlossaryPage: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <span className="text-xl font-bold font-serif text-ink flex items-center gap-2">
+                  <span className="text-xl font-bold font-sans text-ink flex items-center gap-2 tracking-tight">
                     {item.term}
                     <span className="text-xs px-2 py-0.5 rounded bg-amber-50 text-brass border border-brass/30 font-sans font-semibold">
                       {item.category}
@@ -338,7 +338,7 @@ export const GlossaryPage: React.FC = () => {
                   setQueryPrefill(`Explain ${item.term} (${item.fullName}) compliance requirements`);
                   setActiveTab('chat');
                 }}
-                className="text-brass hover:text-indigo-deep font-semibold flex items-center gap-1 hover:underline transition-colors"
+                className="btn-tertiary text-xs font-semibold"
               >
                 <span>{language === 'hi' ? 'एआई से पूछें' : 'Ask AI'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />

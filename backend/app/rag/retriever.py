@@ -23,6 +23,18 @@ class HybridRetriever:
             with open(self.structured_map_path, "r", encoding="utf-8") as f:
                 self.products = json.load(f)
 
+        self.labs_master_path = os.path.join(settings.STRUCTURED_DIR, "hallmarking_labs_master.json")
+        self.hallmarking_labs = []
+        if os.path.exists(self.labs_master_path):
+            with open(self.labs_master_path, "r", encoding="utf-8") as f:
+                self.hallmarking_labs = json.load(f)
+
+        self.ahc_master_path = os.path.join(settings.STRUCTURED_DIR, "ahc_centres_master.json")
+        self.ahc_centres = []
+        if os.path.exists(self.ahc_master_path):
+            with open(self.ahc_master_path, "r", encoding="utf-8") as f:
+                self.ahc_centres = json.load(f)
+
         # 2. Connect to ChromaDB
         self.chroma_client = chromadb.PersistentClient(path=settings.CHROMA_DIR)
         try:
@@ -91,19 +103,24 @@ class HybridRetriever:
                 chunk_entry = {
                     "id": doc_id,
                     "document_title": meta.get("document_title", "BIS Regulatory Document"),
-                    "source_file": meta.get("source_file", ""),
-                    "clause_ref": meta.get("clause_ref", "General"),
+                    "source_file": meta.get("source_file") or meta.get("source_doc", ""),
+                    "source_doc": meta.get("source_doc") or meta.get("source_file", ""),
+                    "clause_ref": meta.get("clause_ref") or meta.get("clause_number", "General"),
+                    "clause_number": meta.get("clause_number", ""),
                     "scheme": meta.get("scheme", ""),
                     "doc_type": meta.get("doc_type", ""),
                     "page_number": int(meta.get("page_number", 1)),
-                    "effective_date": meta.get("effective_date", ""),
+                    "effective_date": meta.get("effective_date") or meta.get("as_of_date", ""),
+                    "as_of_date": meta.get("as_of_date", ""),
+                    "state": meta.get("state", ""),
+                    "osl_code": meta.get("osl_code", ""),
                     "sha256": meta.get("sha256", ""),
                     "text": doc_text
                 }
                 self.chunk_pool.append(chunk_entry)
 
-                # Composite tokenization for BM25 (title + clause + text)
-                full_text = f"{chunk_entry['document_title']} {chunk_entry['clause_ref']} {doc_text}"
+                # Composite tokenization for BM25 (title + clause + state + osl + text)
+                full_text = f"{chunk_entry['document_title']} {chunk_entry['clause_ref']} {chunk_entry['state']} {chunk_entry['osl_code']} {doc_text}"
                 tokens = self._tokenize(full_text)
                 corpus_tokens.append(tokens)
 
@@ -137,7 +154,9 @@ class HybridRetriever:
             return "QCO Regulatory Guidance"
         if any(k in q for k in ["gas cylinder", "lpg", "is 3196", "is 3224", "is 8737", "peso"]):
             return "Gas Cylinders & Pressure Vessels"
-        if any(k in q for k in ["gold", "silver", "hallmark", "huid", "हॉलमार्क", "is 1417"]):
+        if any(k in q for k in ["lab", "labs", "laboratory", "laboratories", "osl", "recognized lab", "recognised lab", "barc", "iit", "icar", "drdo", "iocl"]):
+            return "Testing Laboratories"
+        if any(k in q for k in ["gold", "silver", "hallmark", "hallmarking", "jeweller", "jewellers", "ahc", "huid", "हॉलमार्क", "is 1417", "ppt", "fineness", "carat", "caratage", "outlet", "central assistance"]):
             return "Precious Metals & Hallmarking"
         return None
 
@@ -202,6 +221,98 @@ class HybridRetriever:
             if re.search(rf'\b{re.escape(alias)}\b', q_lower):
                 q_lower += f" {expansion}"
 
+        # 1. Exact OSL Code Match (7-digit identifier)
+        osl_match = re.search(r'\b([5-9]\d{6})\b', q_raw)
+        if osl_match and self.hallmarking_labs:
+            target_osl = osl_match.group(1)
+            for lab in self.hallmarking_labs:
+                if lab.get("osl_code") == target_osl:
+                    matched.append({
+                        "product_name": f"{lab['name']} (OSL: {target_osl})",
+                        "is_number": f"OSL Code: {target_osl}",
+                        "category": f"BIS {lab.get('group', 'Recognised')} Laboratory",
+                        "scheme": lab.get("group", "GROUP-1"),
+                        "standard_title": f"Status: {lab.get('status', 'Private')} | State: {lab.get('state', '')} | Valid: {lab.get('valid_up_to', '')}",
+                        "relevance_score": 1.0,
+                        "match_type": "exact",
+                        "lab_details": lab
+                    })
+
+        # 2. Lab Name Match / Recognition Status
+        if any(k in q_lower for k in ["lab", "laboratory", "recognized", "recognised", "osl", "barc", "iit", "icar", "drdo", "iocl"]) and self.hallmarking_labs:
+            for lab in self.hallmarking_labs:
+                lab_name_lower = lab["name"].lower()
+                clean_lab_name = re.sub(r'[^a-z0-9]', '', lab_name_lower)
+                clean_q = re.sub(r'[^a-z0-9]', '', q_lower)
+                # Exact match or significant containment
+                if (clean_lab_name in clean_q or 
+                    (len(clean_lab_name) > 15 and clean_lab_name[:18] in clean_q) or
+                    (len(lab["name"]) > 10 and any(part.strip().lower() in q_lower for part in re.split(r'[,()\-]+', lab["name"]) if len(part.strip()) > 8))):
+                    matched.append({
+                        "product_name": lab["name"],
+                        "is_number": f"OSL Code: {lab.get('osl_code', 'N/A')}",
+                        "category": f"BIS {lab.get('group', 'Recognised')} Laboratory",
+                        "scheme": lab.get("group", "GROUP-1"),
+                        "standard_title": f"State: {lab.get('state', '')} | Status: {lab.get('status', '')} | Valid: {lab.get('valid_up_to', '')}",
+                        "relevance_score": 0.98,
+                        "match_type": "exact",
+                        "lab_details": lab
+                    })
+
+        # 3. State-wise Laboratory Query (e.g. 'List labs in Delhi')
+        state_query_match = re.search(r'\b(?:in|of|at|for)\s+([a-zA-Z\s\.\&]+)', q_lower)
+        if any(k in q_lower for k in ["lab", "labs", "laboratory", "laboratories"]) and self.hallmarking_labs:
+            for pat, st_name in [
+                ("delhi", "Delhi"), ("maharashtra", "Maharashtra"), ("gujarat", "Gujarat"),
+                ("rajasthan", "Rajasthan"), ("tamil nadu|tamilnadu", "Tamil Nadu"),
+                ("karnataka", "Karnataka"), ("uttar pradesh|u\.p\.", "Uttar Pradesh"),
+                ("punjab", "Punjab"), ("haryana", "Haryana"), ("kerala", "Kerala"),
+                ("west bengal|w\.b\.", "West Bengal"), ("odisha|orissa", "Odisha"),
+                ("bihar", "Bihar"), ("jharkhand", "Jharkhand"), ("assam", "Assam"),
+                ("telangana", "Telangana"), ("andhra pradesh|a\.p\.", "Andhra Pradesh"),
+                ("uttarakhand", "Uttarakhand"), ("madhya pradesh|m\.p\.", "Madhya Pradesh")
+            ]:
+                if re.search(rf'\b({pat})\b', q_lower):
+                    state_labs = [l for l in self.hallmarking_labs if l.get("state", "").lower() == st_name.lower()]
+                    if state_labs:
+                        matched.append({
+                            "product_name": f"BIS Recognized Laboratories in {st_name} ({len(state_labs)} Labs)",
+                            "is_number": f"{len(state_labs)} Laboratories",
+                            "category": "State Laboratory Roster",
+                            "scheme": "GROUP-1 & GROUP-2",
+                            "standard_title": f"Official list of {len(state_labs)} BIS recognized/utilized laboratories in {st_name}.",
+                            "relevance_score": 0.95,
+                            "match_type": "exact",
+                            "total_count": len(state_labs)
+                        })
+                    break
+
+        # 4. Assaying & Hallmarking (A&H) Centres Central Assistance Query
+        if any(k in q_lower for k in ["a&h", "ahc", "assaying", "central assistance", "assistance"]) and self.ahc_centres:
+            for pat, st_name in [
+                ("rajasthan", "Rajasthan"), ("delhi", "Delhi"), ("maharashtra", "Maharashtra"),
+                ("gujarat", "Gujarat"), ("tamil nadu|tamilnadu", "Tamil Nadu"),
+                ("karnataka", "Karnataka"), ("uttar pradesh|u\.p\.", "Uttar Pradesh"),
+                ("punjab", "Punjab"), ("haryana", "Haryana"), ("kerala", "Kerala"),
+                ("west bengal|w\.b\.", "West Bengal"), ("odisha|orissa", "Odisha"),
+                ("bihar", "Bihar"), ("jharkhand", "Jharkhand"), ("assam", "Assam"),
+                ("telangana", "Telangana"), ("andhra pradesh|a\.p\.", "Andhra Pradesh")
+            ]:
+                if re.search(rf'\b({pat})\b', q_lower):
+                    state_ahcs = [a for a in self.ahc_centres if a.get("state", "").lower() == st_name.lower()]
+                    if state_ahcs:
+                        matched.append({
+                            "product_name": f"A&H Centres with Central Assistance in {st_name} ({len(state_ahcs)} Centres)",
+                            "is_number": f"{len(state_ahcs)} A&H Centres",
+                            "category": "Assaying & Hallmarking Centres",
+                            "scheme": "Central Assistance Scheme",
+                            "standard_title": f"A&H centres setup at deficient locations in {st_name} with central financial assistance.",
+                            "relevance_score": 0.95,
+                            "match_type": "exact",
+                            "total_count": len(state_ahcs)
+                        })
+                    break
+
         clean_q_is = re.sub(r'[^a-z0-9]', '', q_lower)
         digits_match = re.search(r'\b(\d{3,5}(?:\s*\(Part\s*\d+\))?)\b', q_raw, re.IGNORECASE)
         extracted_digits = digits_match.group(1).replace(' ', '').lower() if digits_match else None
@@ -252,6 +363,10 @@ class HybridRetriever:
                 item_copy["match_type"] = match_type
                 matched.append(item_copy)
 
+        # Filter out noisy weak product fuzzy matches when query is specific to hallmarking/labs
+        if any(k in q_lower for k in ["hallmark", "jeweller", "huid", "ppt", "fineness", "ahc", "laboratory", "laboratories", "osl code"]) and not any(k in q_lower for k in ["cement", "steel", "cylinder", "wire", "cable", "transformer"]):
+            matched = [m for m in matched if m.get("match_type") == "exact" or m.get("relevance_score", 0) >= 0.85]
+
         matched.sort(key=lambda x: x["relevance_score"], reverse=True)
         return matched[:10]
 
@@ -289,8 +404,14 @@ class HybridRetriever:
                 chunks.append({
                     "id": results["ids"][0][i],
                     "document_title": meta.get("document_title", "BIS Standard Document"),
-                    "source_file": meta.get("source_file", ""),
-                    "clause_ref": meta.get("clause_ref", "General"),
+                    "source_file": meta.get("source_file") or meta.get("source_doc", ""),
+                    "source_doc": meta.get("source_doc") or meta.get("source_file", ""),
+                    "doc_type": meta.get("doc_type", ""),
+                    "clause_ref": meta.get("clause_ref") or meta.get("clause_number", "General"),
+                    "clause_number": meta.get("clause_number", ""),
+                    "state": meta.get("state", ""),
+                    "osl_code": meta.get("osl_code", ""),
+                    "as_of_date": meta.get("as_of_date", ""),
                     "scheme": meta.get("scheme", ""),
                     "page_number": int(meta.get("page_number", 1)),
                     "excerpt": doc_text,
@@ -324,7 +445,13 @@ class HybridRetriever:
                 "id": chunk["id"],
                 "document_title": chunk["document_title"],
                 "source_file": chunk["source_file"],
+                "source_doc": chunk.get("source_doc", chunk["source_file"]),
+                "doc_type": chunk.get("doc_type", ""),
                 "clause_ref": chunk["clause_ref"],
+                "clause_number": chunk.get("clause_number", ""),
+                "state": chunk.get("state", ""),
+                "osl_code": chunk.get("osl_code", ""),
+                "as_of_date": chunk.get("as_of_date", ""),
                 "scheme": chunk["scheme"],
                 "page_number": chunk["page_number"],
                 "excerpt": chunk["text"],
@@ -337,10 +464,20 @@ class HybridRetriever:
 
     def is_out_of_corpus(self, query: str, top_dense: List[Dict[str, Any]], top_bm25: List[Dict[str, Any]], structured: List[Dict[str, Any]]) -> Tuple[bool, str]:
         """
-        Evaluates whether query falls outside the indexed 7 pilot BIS publications.
+        Evaluates whether query falls outside the indexed BIS publications.
         Returns (is_out_of_corpus: bool, reason_or_abstention: str).
         """
         q = query.lower()
+
+        # Explicit in-scope keywords for Hallmarking & Laboratories Reference Corpus
+        hallmarking_in_scope = [
+            "hallmark", "hallmarked", "hallmarking", "huid", "jeweller", "jewellery", "gold", "silver",
+            "fineness", "ppt", "40 ppt", "5 ppt", "2 ppt", "counter sample", "surveillance",
+            "laboratory", "laboratories", "lab", "labs", "osl", "barc", "iit", "icar", "drdo", "iocl",
+            "central assistance", "a&h", "ahc", "is 1417", "is 2112"
+        ]
+        if any(k in q for k in hallmarking_in_scope):
+            return False, ""
 
         # Explicit out-of-scope triggers (aerospace FAA, FDA medical/cosmetic drugs, US FCC, nuclear ASME, ISO 9001 generic enterprise)
         out_of_scope_keywords = [
@@ -351,7 +488,7 @@ class HybridRetriever:
             "european union ce mark declaration"
         ]
         if any(k in q for k in out_of_scope_keywords):
-            return True, "The requested query is not covered within the indexed 7 pilot BIS regulatory publications."
+            return True, "The requested query is not covered within the indexed BIS regulatory publications."
 
         # If there is a strong structured match, it is in-corpus
         if structured and structured[0].get("relevance_score", 0) >= 0.7:
@@ -363,7 +500,7 @@ class HybridRetriever:
 
         # Floor: dense similarity must be >= 0.46 or BM25 score >= 4.0 or structured score >= 0.5
         if max_dense_sim < 0.46 and max_bm25 < 4.0:
-            return True, "The requested query is not covered within the indexed 7 pilot BIS regulatory publications."
+            return True, "The requested query is not covered within the indexed BIS regulatory publications."
 
         return False, ""
 
@@ -391,7 +528,13 @@ class HybridRetriever:
                 "id": cid,
                 "document_title": r["document_title"],
                 "source_file": r["source_file"],
+                "source_doc": r.get("source_doc", r["source_file"]),
+                "doc_type": r.get("doc_type", ""),
                 "clause_ref": r["clause_ref"],
+                "clause_number": r.get("clause_number", ""),
+                "state": r.get("state", ""),
+                "osl_code": r.get("osl_code", ""),
+                "as_of_date": r.get("as_of_date", ""),
                 "scheme": r["scheme"],
                 "page_number": r["page_number"],
                 "excerpt": r["excerpt"],
@@ -417,7 +560,13 @@ class HybridRetriever:
                     "id": cid,
                     "document_title": r["document_title"],
                     "source_file": r["source_file"],
+                    "source_doc": r.get("source_doc", r["source_file"]),
+                    "doc_type": r.get("doc_type", ""),
                     "clause_ref": r["clause_ref"],
+                    "clause_number": r.get("clause_number", ""),
+                    "state": r.get("state", ""),
+                    "osl_code": r.get("osl_code", ""),
+                    "as_of_date": r.get("as_of_date", ""),
                     "scheme": r["scheme"],
                     "page_number": r["page_number"],
                     "excerpt": r["excerpt"],
@@ -432,19 +581,21 @@ class HybridRetriever:
         # Category boost
         if target_category:
             for cid, c in candidates.items():
-                if target_category.lower() in c.get("scheme", "").lower() or target_category.lower() in c.get("source_file", "").lower():
+                if (target_category.lower() in c.get("scheme", "").lower() or 
+                    target_category.lower() in c.get("source_file", "").lower() or
+                    target_category.lower() in c.get("doc_type", "").lower() or
+                    target_category.lower() in c.get("document_title", "").lower()):
                     c["rrf_score"] += 0.015
 
         # Sort candidates by combined RRF score descending
         fused = sorted(candidates.values(), key=lambda x: x["rrf_score"], reverse=True)
 
-        # Deduplicate candidates with identical (source_file, clause_ref, page_number)
+        # Deduplicate candidates by unique chunk ID
         unique_fused = []
         seen = set()
         for c in fused:
-            key = (c["source_file"], c["clause_ref"], c["page_number"])
-            if key not in seen:
-                seen.add(key)
+            if c["id"] not in seen:
+                seen.add(c["id"])
                 # Assign normalized composite score for display
                 c["score"] = round(min(1.0, c.get("dense_score", 0.6) * 0.7 + (c["rrf_score"] * 30.0) * 0.3), 3)
                 unique_fused.append(c)

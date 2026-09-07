@@ -61,6 +61,10 @@ export const Footer: React.FC = () => {
                 year: 'numeric'
               })}
             </div>
+            <div className="pt-1.5 border-t border-white/10 flex items-center gap-2 text-emerald-400 font-mono text-[10.5px]">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>{language === 'hi' ? 'सुरक्षा ऑडिटेड (सिम्युलेटेड) | STQC पैनलबद्ध प्रारूप' : 'Security Audited (Simulated) | STQC Empanelled Format'}</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-2 pt-1 text-[11px] font-mono text-emerald-400">

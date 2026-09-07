@@ -27,23 +27,25 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const paddingClasses = {
     none: '',
-    sm: 'p-3.5',
+    sm: 'p-4',
     md: 'p-5 sm:p-6',
     lg: 'p-6 sm:p-8'
   }[padding];
 
-  const hoverClasses = hover || onClick
-    ? 'hover:shadow-paper hover:border-brass/50 transition-all cursor-pointer'
-    : 'transition-all';
+  const isInteractive = Boolean(hover || onClick);
+
+  const elevationClasses = isInteractive
+    ? 'shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,0,0,0.1)] hover:border-brass/60 transition-all duration-200 ease-out cursor-pointer'
+    : 'shadow-none transition-colors';
 
   return (
     <Component
       id={id}
-      role={role}
-      tabIndex={tabIndex}
+      role={role || (onClick ? 'button' : undefined)}
+      tabIndex={tabIndex ?? (onClick ? 0 : undefined)}
       onKeyDown={onKeyDown}
       onClick={onClick}
-      className={`bg-white border border-line rounded-lg shadow-paper-sm ${paddingClasses} ${hoverClasses} ${className}`}
+      className={`bg-white border border-line rounded-xl ${paddingClasses} ${elevationClasses} ${className}`}
     >
       {children}
     </Component>

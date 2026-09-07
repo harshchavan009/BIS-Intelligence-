@@ -1,0 +1,834 @@
+[
+  {
+    "sl_no": "1",
+    "location": "Visakhapatnam, A, P.",
+    "name_address": "M/s Sampath Assaying and Hallmarking Pvt. Ltd., Visakhapatnam, A, P.",
+    "amount_rs": "5, 13,264",
+    "page_number": 1,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "2",
+    "location": "Jaipur, Rajasthan",
+    "name_address": "M/s Shri Salasar Balaji Hallmarking Centre, Jaipur, Rajasthan",
+    "amount_rs": "3, 20,253",
+    "page_number": 1,
+    "state": "Rajasthan"
+  },
+  {
+    "sl_no": "3",
+    "location": "Meerut Cantt, U.P.",
+    "name_address": "M/s Hira Hallmarking Center, Meerut Cantt, U.P.",
+    "amount_rs": "7, 29,259",
+    "page_number": 1,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "4",
+    "location": "Ludhiana, Punjab",
+    "name_address": "M/S L. D. Gold Lab Pvt. Ltd., Ludhiana, Punjab",
+    "amount_rs": "3, 57,466",
+    "page_number": 1,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "5",
+    "location": "Kottayam, Kerala",
+    "name_address": "M/S Sreekrishna Hallmarking Center, Kottayam, Kerala",
+    "amount_rs": "5, 63,310",
+    "page_number": 1,
+    "state": "Kerala"
+  },
+  {
+    "sl_no": "6",
+    "location": "Jabalpur, M.P.",
+    "name_address": "M/s Roopali Assayers & Hallmarkers, Jabalpur, M.P.",
+    "amount_rs": "8, 66,617",
+    "page_number": 1,
+    "state": "Madhya Pradesh"
+  },
+  {
+    "sl_no": "7",
+    "location": "Mysore, Karnataka",
+    "name_address": "M/s Surya Assaying & Hallmarking Center, Mysore, Karnataka",
+    "amount_rs": "5, 76,540",
+    "page_number": 1,
+    "state": "Karnataka"
+  },
+  {
+    "sl_no": "8",
+    "location": "Vijayawada, A. P.",
+    "name_address": "Akshaya Hallmarking Centre,Vijayawada, A.P.",
+    "amount_rs": "7, 82,983",
+    "page_number": 1,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "9",
+    "location": "Madurai, Tamil Nadu",
+    "name_address": "CGR Madurai Hallmarks, Madurai, Tamil Nadu",
+    "amount_rs": "7, 06,333",
+    "page_number": 1,
+    "state": "Tamil Nadu"
+  },
+  {
+    "sl_no": "10",
+    "location": "Salem, Tamil Nadu",
+    "name_address": "Italab Salem Pvt. Ltd, Salem, Tamil Nadu",
+    "amount_rs": "7, 78,040",
+    "page_number": 1,
+    "state": "Tamil Nadu"
+  },
+  {
+    "sl_no": "11",
+    "location": "Salem, Tamil Nadu",
+    "name_address": "Lotus Assay Pvt. Ltd., Thane, Maharashtra",
+    "amount_rs": "6, 02,484",
+    "page_number": 1,
+    "state": "Tamil Nadu"
+  },
+  {
+    "sl_no": "12",
+    "location": "Thane, Maharashtra",
+    "name_address": "Shree Assaying & Hallmarking Centre,",
+    "amount_rs": "5, 18,707",
+    "page_number": 1,
+    "state": "Maharashtra"
+  },
+  {
+    "sl_no": "13",
+    "location": "Chandigarh",
+    "name_address": "V.B. Enterprises, Chandigarh",
+    "amount_rs": "6, 07,296",
+    "page_number": 1,
+    "state": "Chandigarh"
+  },
+  {
+    "sl_no": "14",
+    "location": "Kollam, Kerala",
+    "name_address": "CGR Kollam, Kerala",
+    "amount_rs": "6, 10,651",
+    "page_number": 1,
+    "state": "Kerala"
+  },
+  {
+    "sl_no": "15",
+    "location": "Bhubaneshwar, Orissa",
+    "name_address": "Kalayani Laboratories HM Centre, Bhubaneshwar, Orissa",
+    "amount_rs": "8, 44,130",
+    "page_number": 1,
+    "state": "Odisha"
+  },
+  {
+    "sl_no": "16",
+    "location": "Kanpur, U.P.",
+    "name_address": "Shree Hallmarking Centre, Kanpur, U.P.",
+    "amount_rs": "7, 23,734",
+    "page_number": 1,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "17",
+    "location": "Hubli, Karnataka",
+    "name_address": "Shree Raghvendra Test Centre, Hubli, Karnataka",
+    "amount_rs": "9, 17,855",
+    "page_number": 1,
+    "state": "Karnataka"
+  },
+  {
+    "sl_no": "18",
+    "location": "Panipat, Haryana",
+    "name_address": "Thakurjee Assaying & Hallmarking Centre, Panipat, Haryana",
+    "amount_rs": "4, 99,388",
+    "page_number": 1,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "19",
+    "location": "Bhopal, M. P.",
+    "name_address": "Siddh Hallmarking Centre, Bhopal, M. P.",
+    "amount_rs": "5, 41,808",
+    "page_number": 1,
+    "state": "Madhya Pradesh"
+  },
+  {
+    "sl_no": "20",
+    "location": "Anjar, Gujarat",
+    "name_address": "Shree Kachchha Hallmarking & Assaying Centre, Anjar, Gujarat",
+    "amount_rs": "3, 37,176",
+    "page_number": 1,
+    "state": "Gujarat"
+  },
+  {
+    "sl_no": "21",
+    "location": "Alleppey, Kerala",
+    "name_address": "CGR Alleppey Hallmarks Company, Alleppey, Kerala",
+    "amount_rs": "5, 11,719",
+    "page_number": 1,
+    "state": "Kerala"
+  },
+  {
+    "sl_no": "22",
+    "location": "Jamshedpur, Jharkhand",
+    "name_address": "Pratik Hallmarkers (P) Ltd. Company, Jamshedpur, Jharkhand",
+    "amount_rs": "7, 16,122",
+    "page_number": 1,
+    "state": "Jharkhand"
+  },
+  {
+    "sl_no": "23",
+    "location": "Panaji, Goa",
+    "name_address": "Esmeralda Hallmarking & Assaying Centre, Panaji Goa",
+    "amount_rs": "4, 38,886",
+    "page_number": 1,
+    "state": "Goa"
+  },
+  {
+    "sl_no": "24",
+    "location": "Jalandhar, Punjab",
+    "name_address": "M/s S R Hallmarking Centre, Jalandhar, Punjab",
+    "amount_rs": "10, 40,980",
+    "page_number": 2,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "25",
+    "location": "Patna, Bihar",
+    "name_address": "M/s G.N. Hallmakings, Patna, Bihar",
+    "amount_rs": "13, 86,018",
+    "page_number": 2,
+    "state": "Bihar"
+  },
+  {
+    "sl_no": "26",
+    "location": "Jodhpur, Rajasthan",
+    "name_address": "M/s Marudhar Hallmarking Centre, Jodhpur, Rajasthan",
+    "amount_rs": "10, 66,782",
+    "page_number": 2,
+    "state": "Rajasthan"
+  },
+  {
+    "sl_no": "27",
+    "location": "Jammu, J&K",
+    "name_address": "M/s Jammu Assaying & Hallmarking centre, Jammu, J&K",
+    "amount_rs": "23, 17,433",
+    "page_number": 2,
+    "state": "Jammu & Kashmir"
+  },
+  {
+    "sl_no": "28",
+    "location": "Amritsar, Punjab",
+    "name_address": "M/s AH Hallmarking Centre, Amritsar, Punjab",
+    "amount_rs": "9, 81,373",
+    "page_number": 2,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "29",
+    "location": "Ambala, Haryana",
+    "name_address": "M/s Gautam Swami Gold Labs, Ambala, Haryana",
+    "amount_rs": "14, 38,173",
+    "page_number": 2,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "30",
+    "location": "Tenali, Dist. Guntur, A.P.",
+    "name_address": "M/s Akshaya Hallmarking Centre, Tenali, Guntur, A.P.",
+    "amount_rs": "11, 15,870",
+    "page_number": 2,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "31",
+    "location": "Hoshiarpur, Punjab",
+    "name_address": "M/s AV Hallmarking Centre, Hoshiarpur, Punjab",
+    "amount_rs": "11, 12,115",
+    "page_number": 2,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "32",
+    "location": "Thallassery, Kerala",
+    "name_address": "M/s Trust Assay Centre, Kerala",
+    "amount_rs": "11, 53,312",
+    "page_number": 2,
+    "state": "Kerala"
+  },
+  {
+    "sl_no": "33",
+    "location": "Udaipur, Rajasthan",
+    "name_address": "M/s Lake City HM Centre, Udaipur, Rajasthan",
+    "amount_rs": "12, 15,375",
+    "page_number": 2,
+    "state": "Rajasthan"
+  },
+  {
+    "sl_no": "34",
+    "location": "Bhimavaram, A. P.",
+    "name_address": "M/s Bhimavaram HM Centre, Bhimavaram, A. P.",
+    "amount_rs": "13, 95,197",
+    "page_number": 2,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "35",
+    "location": "Lucknow, U. P.",
+    "name_address": "Shri Prem Hallmarking Centre, Lucknow, U. P.",
+    "amount_rs": "10, 13,206",
+    "page_number": 2,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "36",
+    "location": "Guntur, A. P.",
+    "name_address": "M/s Lakshmi Narsimha Hallmarking Centre, Guntur, A. P.",
+    "amount_rs": "12, 70,456",
+    "page_number": 2,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "37",
+    "location": "Salgechia, Tamluk, West Bengal",
+    "name_address": "M/s Rural hallmarking centre, Salgechia, Tamluk, West Bengal",
+    "amount_rs": "16, 68,726",
+    "page_number": 2,
+    "state": "West Bengal"
+  },
+  {
+    "sl_no": "38",
+    "location": "Tiptur, Karnataka",
+    "name_address": "Srivaaru Gold Testing Lab, Tiptur, Karnataka",
+    "amount_rs": "13, 89,246",
+    "page_number": 2,
+    "state": "Karnataka"
+  },
+  {
+    "sl_no": "39",
+    "location": "Hassan, Karnataka",
+    "name_address": "Adithya Anish Assaying hallmarking centre, Hassan, Karnataka",
+    "amount_rs": "10, 67,852",
+    "page_number": 2,
+    "state": "Karnataka"
+  },
+  {
+    "sl_no": "40",
+    "location": "Nellore, A. P.",
+    "name_address": "Akshaya Hallmarking Centre, Nellore A.P.",
+    "amount_rs": "15, 22,370",
+    "page_number": 2,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "41",
+    "location": "Asansol, Burdwan, West Bengal",
+    "name_address": "Maa Laxmi Bullion Pvt. Ltd., Asansol, Burdwan, West Bengal",
+    "amount_rs": "12, 81,174",
+    "page_number": 2,
+    "state": "West Bengal"
+  },
+  {
+    "sl_no": "42",
+    "location": "Gorakhpur, U.P",
+    "name_address": "Deepika Hallmarking Centre, Gorakhpur, U.P",
+    "amount_rs": "10, 21,153",
+    "page_number": 2,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "43",
+    "location": "Nadiad, Dist. Khera, Gujarat",
+    "name_address": "Riddhi Sidhi Hallmarking Centre, Nadiad, Dist. Khera, Gujarat",
+    "amount_rs": "16, 94,738",
+    "page_number": 2,
+    "state": "Gujarat"
+  },
+  {
+    "sl_no": "44",
+    "location": "Guwahati, Assam",
+    "name_address": "Assam Hallmarking Centre, Govt. of Assam, Guwahati, Assam",
+    "amount_rs": "50, 000, 00",
+    "page_number": 2,
+    "state": "Assam"
+  },
+  {
+    "sl_no": "45",
+    "location": "Nadaun, Hamirpur, H.P.",
+    "name_address": "PS Hallmarking Centre, Nadaun, Hamirpur, H.P.",
+    "amount_rs": "23, 18,561",
+    "page_number": 2,
+    "state": "Himachal Pradesh"
+  },
+  {
+    "sl_no": "46",
+    "location": "Midnapur, West Bengal",
+    "name_address": "Prodyut HM Centre, Midnapur, West Bengal",
+    "amount_rs": "17, 74,767",
+    "page_number": 2,
+    "state": "West Bengal"
+  },
+  {
+    "sl_no": "47",
+    "location": "Kolhapur, Maharashtra",
+    "name_address": "Vasavi A&H Centre, Kolhapur, Maharashtra",
+    "amount_rs": "17, 20,530",
+    "page_number": 2,
+    "state": "Maharashtra"
+  },
+  {
+    "sl_no": "48",
+    "location": "Jamnagar-Gujarat",
+    "name_address": "J P Hallmarking Centre, Jamnagar-Gujarat",
+    "amount_rs": "14, 91,130",
+    "page_number": 2,
+    "state": "Gujarat"
+  },
+  {
+    "sl_no": "49",
+    "location": "Bhuj Kachch, Gujarat",
+    "name_address": "Shree Rajrajeshwari Assay & Hallmarking Centre, Bhuj Kachch, Gujarat",
+    "amount_rs": "13, 44,883",
+    "page_number": 2,
+    "state": "Gujarat"
+  },
+  {
+    "sl_no": "50",
+    "location": "Ratlam, M.P.",
+    "name_address": "M/s Kataria Fashions, Ratlam, M.P.",
+    "amount_rs": "8, 19,002",
+    "page_number": 2,
+    "state": "Madhya Pradesh"
+  },
+  {
+    "sl_no": "51",
+    "location": "Cuttack, Odisha",
+    "name_address": "M/s Sai Hallmarking Centre, Cuttack, Odisha",
+    "amount_rs": "17, 17,779",
+    "page_number": 3,
+    "state": "Odisha"
+  },
+  {
+    "sl_no": "52",
+    "location": "Rajahmundry, A.P",
+    "name_address": "M/s Sri Balaji Hallmarking Centre, Rajahmundry, A.P.",
+    "amount_rs": "14, 16,802",
+    "page_number": 3,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "53",
+    "location": "Warangal, Telangana",
+    "name_address": "Warangal Hallmarking and Assaying Centre, Warangal, Telangana",
+    "amount_rs": "17, 52,639,",
+    "page_number": 3,
+    "state": "Telangana"
+  },
+  {
+    "sl_no": "54",
+    "location": "Panchkula, Haryana",
+    "name_address": "Paras Testing & Hallmarking Centre, Panchkula, Haryana",
+    "amount_rs": "12, 67,046",
+    "page_number": 3,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "55",
+    "location": "Varanasi, U.P.",
+    "name_address": "Nakoda Hallmarking Centre, Varanasi, U.P.",
+    "amount_rs": "12, 27,340",
+    "page_number": 3,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "56",
+    "location": "Dehradun, Uttarakhand",
+    "name_address": "B.G. Assaying & Hallmarking Centre, Dehradun, Uttarakhand",
+    "amount_rs": "12, 35,631",
+    "page_number": 3,
+    "state": "Uttarakhand"
+  },
+  {
+    "sl_no": "57",
+    "location": "Sri Ganganagar, Rajasthan",
+    "name_address": "Sri Ganganagar Hallmarking Centre, Sri Ganganagar, Rajasthan",
+    "amount_rs": "17, 83, 198",
+    "page_number": 3,
+    "state": "Rajasthan"
+  },
+  {
+    "sl_no": "58",
+    "location": "Kadapa, A. P.",
+    "name_address": "Sudarshan Muskan Hallmarking Centre,Proddatur, Kadapa, A. P.",
+    "amount_rs": "17, 61, 070",
+    "page_number": 3,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "59",
+    "location": "Sangli, Maharashtra",
+    "name_address": "Vasavi Assaying & Hallmarking Centre, Sangli, Maharastra (name changed to Kannika Assaying & Hallmarking Centre, Sangli)",
+    "amount_rs": "17, 75, 877",
+    "page_number": 3,
+    "state": "Maharashtra"
+  },
+  {
+    "sl_no": "60",
+    "location": "Rewari, Haryana",
+    "name_address": "Daiyan Assaying & Hallmarking Centre, Rewari, Haryana",
+    "amount_rs": "15, 17, 348",
+    "page_number": 3,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "61",
+    "location": "Ulhasnagar, Maharashta",
+    "name_address": "Sai Hallmark Centre, Ulhasnagar, Maharashta",
+    "amount_rs": "12, 92, 553",
+    "page_number": 3,
+    "state": "Maharashtra"
+  },
+  {
+    "sl_no": "62",
+    "location": "Bareilly, UP",
+    "name_address": "Bareilly Assay and Hallmarking Centre, Bareilly, U. P.",
+    "amount_rs": "17, 30, 923",
+    "page_number": 3,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "63",
+    "location": "Valsad, Gujarat",
+    "name_address": "NCH Services P Ltd, Valsad, Gujarat",
+    "amount_rs": "13, 48, 229",
+    "page_number": 3,
+    "state": "Gujarat"
+  },
+  {
+    "sl_no": "64",
+    "location": "Satara, Maharashtra",
+    "name_address": "Swagath Hallmark Centre, Satara, Maharashtra",
+    "amount_rs": "16, 53,500",
+    "page_number": 3,
+    "state": "Maharashtra"
+  },
+  {
+    "sl_no": "65",
+    "location": "Dombivali (E), Thane, Maharashtra",
+    "name_address": "Mamta Hallmarking Centre,Dombivali (E), Thane, Maharashtra",
+    "amount_rs": "7, 67, 747",
+    "page_number": 3,
+    "state": "Maharashtra"
+  },
+  {
+    "sl_no": "66",
+    "location": "Bathinda, Punjab",
+    "name_address": "H G Testing & Hallmarking Centre, Bathinda, Punjab",
+    "amount_rs": "13, 96, 076",
+    "page_number": 3,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "67",
+    "location": "Solapur, Maharastra",
+    "name_address": "Padmini Bullion Refinery, Solapur,Maharastra",
+    "amount_rs": "14, 14, 422",
+    "page_number": 3,
+    "state": "Maharashtra"
+  },
+  {
+    "sl_no": "68",
+    "location": "Nagpur, Maharashtra",
+    "name_address": "S.B.R. Hallmarking Centre, Nagpur, Maharashtra",
+    "amount_rs": "14, 38, 139",
+    "page_number": 3,
+    "state": "Maharashtra"
+  },
+  {
+    "sl_no": "69",
+    "location": "Barnala, Punjab",
+    "name_address": "R.V. Gold Testing & Hallmarking Centre, Barnala, Punjab",
+    "amount_rs": "14, 69, 194",
+    "page_number": 3,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "70",
+    "location": "Ganjam. Odisha",
+    "name_address": "Sri Chakra Hallmarking, Komlavari Street, Berhampur, Dist. Ganjam. Odisha",
+    "amount_rs": "17, 17, 470",
+    "page_number": 3,
+    "state": "Odisha"
+  },
+  {
+    "sl_no": "71",
+    "location": "Navsari, Gujarat",
+    "name_address": "M/s NCH Services P Ltd., 201, Opp. Prahabat Boot House, Navsari",
+    "amount_rs": "6, 07,010",
+    "page_number": 3,
+    "state": "Gujarat"
+  },
+  {
+    "sl_no": "72",
+    "location": "Vellore, Tamil Nadu",
+    "name_address": "Siddhanath Hallmarking and Assaying Centre, Vellore, Tamil Nadu",
+    "amount_rs": "16, 82, 055",
+    "page_number": 3,
+    "state": "Tamil Nadu"
+  },
+  {
+    "sl_no": "73",
+    "location": "Thrissur, Kerala",
+    "name_address": "Amritha Assay & Hallmarking Centre, Kunnamkulam, Thrissur, Kerala",
+    "amount_rs": "18, 74, 706",
+    "page_number": 3,
+    "state": "Kerala"
+  },
+  {
+    "sl_no": "74",
+    "location": "Ranaghat, Nadia",
+    "name_address": "M/s Nadia Assaying & Hallmarking Centre, Ranaghat, Nadia.",
+    "amount_rs": "18, 97, 938",
+    "page_number": 3,
+    "state": "West Bengal"
+  },
+  {
+    "sl_no": "75",
+    "location": "Patiala, Punjab",
+    "name_address": "M/s Pritam Singh Gold Testing lab & Hallmarking Centre, Patiala, Punjab",
+    "amount_rs": "9, 16, 810",
+    "page_number": 3,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "76",
+    "location": "Patan, Gujarat",
+    "name_address": "M/s Jay Samor Hallmarking Centre,Patan,Gujarat.",
+    "amount_rs": "13, 48,944",
+    "page_number": 4,
+    "state": "Gujarat"
+  },
+  {
+    "sl_no": "77",
+    "location": "Hissar, Haryana",
+    "name_address": "M/s Aam Aadmi Sona Chandi Shuddhta Jaanch Kendra, Hissar, Haryana",
+    "amount_rs": "20, 67, 038",
+    "page_number": 4,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "78",
+    "location": "Bhiwani, Haryana",
+    "name_address": "R.A.M. Testing & Hallmarking ,Bhiwani, Haryana",
+    "amount_rs": "16, 64, 644",
+    "page_number": 4,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "79",
+    "location": "West Tripura, Tripura",
+    "name_address": "Kamakhya Hallmarking Centre, West Tripura, Agartala, Tripura",
+    "amount_rs": "30, 93, 284",
+    "page_number": 4,
+    "state": "Tripura"
+  },
+  {
+    "sl_no": "80",
+    "location": "Dhanbad, Jharkhand",
+    "name_address": "S.K. assay & Hallmarking Centre, Dhanbad",
+    "amount_rs": "15, 13, 930",
+    "page_number": 4,
+    "state": "Jharkhand"
+  },
+  {
+    "sl_no": "81",
+    "location": "Ranchi, Jharkhand",
+    "name_address": "Pratik Hallmarkers, Ranchi",
+    "amount_rs": "9, 44, 272",
+    "page_number": 4,
+    "state": "Jharkhand"
+  },
+  {
+    "sl_no": "82",
+    "location": "Silchar, Assam",
+    "name_address": "AK Hallmarking Centre, Silchar, Assam",
+    "amount_rs": "26, 12, 784",
+    "page_number": 4,
+    "state": "Assam"
+  },
+  {
+    "sl_no": "83",
+    "location": "North Tripura, Tripura",
+    "name_address": "Kamakhya Hallmarking Centre, North Tripura, Agartala, Tripura",
+    "amount_rs": "32,78, 733",
+    "page_number": 4,
+    "state": "Tripura"
+  },
+  {
+    "sl_no": "84",
+    "location": "Mahendragarh, Haryana",
+    "name_address": "Kanha Hallmarking Centre, Mahendragarh, Haryana",
+    "amount_rs": "8,44,736",
+    "page_number": 4,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "85",
+    "location": "Srinagar",
+    "name_address": "Kashmir Hallmarking Centre, Srinagar, Kashmir",
+    "amount_rs": "22,63,401",
+    "page_number": 4,
+    "state": "Jammu & Kashmir"
+  },
+  {
+    "sl_no": "86",
+    "location": "Bhadohi, UP",
+    "name_address": "UVA GOLD Testing Centre, Bhadohi, UP",
+    "amount_rs": "23,18,662",
+    "page_number": 4,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "87",
+    "location": "Nawada, Bihar",
+    "name_address": "Nalanda Hallmarking Center, Nawada, Bihar",
+    "amount_rs": "11,12,573",
+    "page_number": 4,
+    "state": "Bihar"
+  },
+  {
+    "sl_no": "88",
+    "location": "Purulia, West Bengal",
+    "name_address": "A.N. Hallmarking Center, Purulia, West Bengal",
+    "amount_rs": "12,52,536",
+    "page_number": 4,
+    "state": "West Bengal"
+  },
+  {
+    "sl_no": "89",
+    "location": "Samastipur, Bihar",
+    "name_address": "D. N. Hallmarking, Samastipur, Bihar",
+    "amount_rs": "12,13,569",
+    "page_number": 4,
+    "state": "Bihar"
+  },
+  {
+    "sl_no": "90",
+    "location": "Rajnandgaon, Chhattisgarh",
+    "name_address": "M/s Jai Shakti Hallmarking Centre, Rajnandgaon, Chhattisgarh",
+    "amount_rs": "11,33,883",
+    "page_number": 4,
+    "state": "Chhattisgarh"
+  },
+  {
+    "sl_no": "91",
+    "location": "Haridwar, Uttrakhand",
+    "name_address": "P.K. Assaying and Hallmarking Centre, Haridwar, Uttarakhand",
+    "amount_rs": "9,49,948",
+    "page_number": 4,
+    "state": "Uttarakhand"
+  },
+  {
+    "sl_no": "92",
+    "location": "Chhindwara, Madhya Pradesh",
+    "name_address": "Krishankunj Hallmark Centre, Centre, Chhindwara, MP",
+    "amount_rs": "13,37,608",
+    "page_number": 4,
+    "state": "Madhya Pradesh"
+  },
+  {
+    "sl_no": "93",
+    "location": "Bagalkot, Karnataka",
+    "name_address": "Nidhi Assaying & Hallmarking Centre, Bagalkot, Karnataka",
+    "amount_rs": "12,13,212",
+    "page_number": 4,
+    "state": "Karnataka"
+  },
+  {
+    "sl_no": "94",
+    "location": "Palwal, Haryana",
+    "name_address": "Sm Hallmark Centre, Palwal, Haryana",
+    "amount_rs": "12, 07,803",
+    "page_number": 4,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "95",
+    "location": "Charkhi Dadri, Haryana",
+    "name_address": "Sk Garg Test & Hallmarking Centre",
+    "amount_rs": "13,20,762",
+    "page_number": 4,
+    "state": "Haryana"
+  },
+  {
+    "sl_no": "96",
+    "location": "Gurdaspur, Punjab",
+    "name_address": "K.J Hallmark Centre, Gurdaspur",
+    "amount_rs": "8,82,144",
+    "page_number": 4,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "97",
+    "location": "Azamgarh, UP",
+    "name_address": "Jai Maa Hallmarking Tounch Centre, Azamgarh , UP,",
+    "amount_rs": "7,76,264",
+    "page_number": 4,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "98",
+    "location": "Nawanshahr, Punjab",
+    "name_address": "Shree Shankar Hallmarking Centre, Nawanshahr, Punjab",
+    "amount_rs": "4,77,484",
+    "page_number": 4,
+    "state": "Punjab"
+  },
+  {
+    "sl_no": "99",
+    "location": "Raebareli, UP",
+    "name_address": "Br Gold Tanch And Hallmark Centre , Raebareli, UP",
+    "amount_rs": "7,65,276",
+    "page_number": 4,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "100",
+    "location": "East Champaran, Bihar",
+    "name_address": "Sagar Hallmarking, Bari Complex, Sonarpatti, Motihari, East Champaran, Bihar,",
+    "amount_rs": "11,17,454",
+    "page_number": 4,
+    "state": "Bihar"
+  },
+  {
+    "sl_no": "101",
+    "location": "Ambedkar Nagar, UP",
+    "name_address": "No.1 Pbr Hallmarking Centre, Ambedkar Nagar, UP",
+    "amount_rs": "12,03,001",
+    "page_number": 5,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "102",
+    "location": "Chittoor, Andhra Pradesh",
+    "name_address": "VRK Hallmark Center, Chittoor, Madanapalle, Andhra Pradesh",
+    "amount_rs": "5,44,947",
+    "page_number": 5,
+    "state": "Andhra Pradesh"
+  },
+  {
+    "sl_no": "103",
+    "location": "Basti, Uttar Pradesh",
+    "name_address": "Siddhi Vinayak Hallmarking Centre, Malitola Mangal Bazar, Basti, Uttar Pradesh",
+    "amount_rs": "5,30,391",
+    "page_number": 5,
+    "state": "Uttar Pradesh"
+  },
+  {
+    "sl_no": "104",
+    "location": "Saharsa, Bihar",
+    "name_address": "D N Hallmarking Sagar Complex, Christian Colony, Lodipur, Patna, Bihar",
+    "amount_rs": "6,32,002",
+    "page_number": 5,
+    "state": "Bihar"
+  }
+]

@@ -27,6 +27,38 @@ export const AnalyticsView: React.FC = () => {
   const [reingestLoading, setReingestLoading] = useState(false);
   const [reingestSuccess, setReingestSuccess] = useState('');
 
+  // Evaluator Console Access Gate
+  const [isEvaluatorUnlocked, setIsEvaluatorUnlocked] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('evaluator_access_unlocked') === 'true' || Boolean(adminToken);
+    }
+    return false;
+  });
+  const [evaluatorPin, setEvaluatorPin] = useState('');
+  const [pinError, setPinError] = useState('');
+
+  const handleUnlockEvaluator = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = evaluatorPin.trim();
+    if (
+      trimmed === '1391' ||
+      trimmed.toLowerCase() === 'bis-evaluator-2026' ||
+      trimmed.toLowerCase() === 'evaluator' ||
+      trimmed.toLowerCase() === 'demo'
+    ) {
+      setIsEvaluatorUnlocked(true);
+      sessionStorage.setItem('evaluator_access_unlocked', 'true');
+      setPinError('');
+    } else {
+      setPinError('Invalid Evaluator PIN. Please enter 1391 or bis-evaluator-2026.');
+    }
+  };
+
+  const handleLockEvaluator = () => {
+    setIsEvaluatorUnlocked(false);
+    sessionStorage.removeItem('evaluator_access_unlocked');
+  };
+
   const fetchAnalytics = async () => {
     setLoading(true);
     try {
@@ -151,6 +183,77 @@ export const AnalyticsView: React.FC = () => {
 
   const uniqueCategories = ['All', 'Cement & Building Materials', 'Steel & Metallurgy', 'Electronics & IT Goods', 'Electrical & Lighting', 'Household Appliances', 'MSME Cluster Concessions', 'Scheme-IV CoC', 'Surveillance & Enforcement', 'Statutory Orders', 'Hallmarking', 'Out of Corpus'];
 
+  if (!isEvaluatorUnlocked) {
+    return (
+      <div className="max-w-xl mx-auto px-4 py-16 font-sans">
+        <div className="bg-white border border-line rounded-xl p-8 shadow-paper space-y-6">
+          <div className="text-center space-y-3">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-slate-100 border border-slate-300 text-indigo-deep mx-auto shadow-sm">
+              <Lock className="w-7 h-7 text-indigo-deep" />
+            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-300 text-[11px] font-mono text-slate-700 font-semibold">
+              <ShieldCheck className="w-3.5 h-3.5 text-verified-green" />
+              <span>GIGW 3.0 Protected Evaluation Console</span>
+            </div>
+            <h1 className="text-2xl font-serif font-bold text-ink">
+              {language === 'hi' ? 'मूल्यांकनकर्ता पहुंच आवश्यक' : 'Evaluator Access Required'}
+            </h1>
+            <p className="text-xs text-stone-600 leading-relaxed max-w-md mx-auto">
+              {language === 'hi'
+                ? 'यह कंसोल बीआईएस विनियमन हार्नेस, 65-परीक्षण बेंचमार्क और सिस्टम टेलीमेट्री के आंतरिक मूल्यांकन हेतु सुरक्षित है।'
+                : 'This console is an internal audit harness for benchmark scoring (65/65 test suite), SQLite telemetry, and regulatory vector controls.'}
+            </p>
+          </div>
+
+          <form onSubmit={handleUnlockEvaluator} className="space-y-4 pt-2">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-stone-700 block">
+                {language === 'hi' ? 'मूल्यांकनकर्ता पिन / पासकोड दर्ज करें:' : 'Evaluator Passcode / PIN:'}
+              </label>
+              <div className="relative">
+                <KeyRound className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
+                <input
+                  type="password"
+                  value={evaluatorPin}
+                  onChange={(e) => setEvaluatorPin(e.target.value)}
+                  placeholder="Enter PIN (e.g. 1391 or bis-evaluator-2026)"
+                  className="w-full pl-10 pr-4 py-2.5 text-xs border border-line rounded-md bg-paper-light focus:outline-none focus:border-brass text-ink font-mono"
+                  autoFocus
+                />
+              </div>
+              <div className="flex items-center justify-between text-[11px] text-stone-500 pt-1">
+                <span>Evaluation Passcode: <code className="font-mono font-bold text-indigo-deep bg-slate-100 px-1.5 py-0.5 rounded">1391</code> or <code className="font-mono font-bold text-indigo-deep bg-slate-100 px-1.5 py-0.5 rounded">bis-evaluator-2026</code></span>
+              </div>
+              {pinError && (
+                <div className="text-xs text-rose-600 font-semibold flex items-center gap-1 pt-1">
+                  <AlertCircle className="w-3.5 h-3.5" />
+                  <span>{pinError}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+              <button
+                type="submit"
+                className="w-full sm:flex-1 py-2.5 px-4 bg-indigo-deep hover:bg-indigo-900 text-white text-xs font-semibold rounded-md shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span>{language === 'hi' ? 'कंसोल अनलॉक करें' : 'Verify & Unlock Console'}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('landing')}
+                className="w-full sm:w-auto py-2.5 px-4 bg-white hover:bg-paper-dark border border-line text-stone-700 text-xs font-semibold rounded-md transition-colors cursor-pointer"
+              >
+                {language === 'hi' ? 'वापस मुख्य पृष्ठ' : 'Return to Portal'}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6 font-sans">
       {/* Header */}
@@ -160,11 +263,14 @@ export const AnalyticsView: React.FC = () => {
             <div className="flex items-center gap-2">
               <SealMotif size={20} />
               <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
-                System Telemetry & Quality Assurance (Round 2)
+                Evaluator Console & QA Telemetry
+              </span>
+              <span className="text-[10px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-300 px-2 py-0.5 rounded font-semibold">
+                Session Active
               </span>
             </div>
             <h1 className="text-2xl font-serif text-ink">
-              {language === 'hi' ? 'सार्वजनिक सत्यापन एवं लाइव एनालिटिक्स डैशबोर्ड' : 'Public Evaluation & Live Provenance Dashboard'}
+              {language === 'hi' ? 'मूल्यांकनकर्ता कंसोल एवं लाइव टेलीमेट्री' : 'Evaluator Console & Internal Telemetry Dashboard'}
             </h1>
             <p className="text-xs text-ink-muted">
               {language === 'hi'
@@ -174,8 +280,16 @@ export const AnalyticsView: React.FC = () => {
           </div>
           <div className="flex items-center gap-2 self-start sm:self-auto">
             <button
+              onClick={handleLockEvaluator}
+              className="px-3 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded text-xs font-medium text-slate-700 flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
+              title="Lock Evaluator Console"
+            >
+              <Lock className="w-3.5 h-3.5 text-slate-600" />
+              <span className="hidden sm:inline">Lock Console</span>
+            </button>
+            <button
               onClick={() => fetchAnalytics()}
-              className="p-2 bg-paper hover:bg-paper-dark border border-line rounded text-ink transition-colors flex items-center gap-1.5 text-xs font-medium focus-visible:ring-2 focus-visible:ring-brass shadow-sm"
+              className="p-2 bg-paper hover:bg-paper-dark border border-line rounded text-ink transition-colors flex items-center gap-1.5 text-xs font-medium focus-visible:ring-2 focus-visible:ring-brass shadow-sm cursor-pointer"
               title="Refresh metrics"
               aria-label="Refresh live analytics data"
             >
@@ -184,7 +298,7 @@ export const AnalyticsView: React.FC = () => {
             </button>
             <button
               onClick={() => setShowAdminPanel(!showAdminPanel)}
-              className="px-3 py-2 bg-paper hover:bg-paper-dark border border-line rounded text-xs font-medium flex items-center gap-1.5 text-stone-700 transition-colors shadow-sm"
+              className="px-3 py-2 bg-paper hover:bg-paper-dark border border-line rounded text-xs font-medium flex items-center gap-1.5 text-stone-700 transition-colors shadow-sm cursor-pointer"
             >
               <Lock className="w-3.5 h-3.5 text-brass" />
               <span>{showAdminPanel ? 'Hide Admin Ops' : 'Admin Controls'}</span>
@@ -338,8 +452,9 @@ export const AnalyticsView: React.FC = () => {
           <div className="text-[10.5px] text-gray-500 font-medium">
             Positive Rating Votes
           </div>
-          <div className="pt-2 border-t border-gray-100 text-[10px] text-emerald-700 font-mono">
-            Increments on 👍 feedback click
+          <div className="pt-2 border-t border-gray-100 text-[10px] text-emerald-700 font-mono flex items-center gap-1">
+            <ThumbsUp className="w-3 h-3 text-emerald-600 inline" />
+            <span>Increments on citizen rating click</span>
           </div>
         </div>
 
@@ -374,7 +489,7 @@ export const AnalyticsView: React.FC = () => {
         </div>
         <button
           onClick={() => setActiveTab('chat')}
-          className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded text-xs font-semibold flex items-center gap-1 transition-colors flex-shrink-0"
+          className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded text-xs font-semibold flex items-center gap-1 transition-colors flex-shrink-0 cursor-pointer"
         >
           <span>Test Live in Chat</span>
           <ExternalLink className="w-3 h-3" />
@@ -419,7 +534,7 @@ export const AnalyticsView: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-2.5 py-1 rounded-full whitespace-nowrap transition-colors font-medium ${
+                className={`px-2.5 py-1 rounded-full whitespace-nowrap transition-colors font-medium cursor-pointer ${
                   selectedCategory === cat
                     ? 'bg-indigo-deep text-white shadow-xs'
                     : 'bg-paper text-stone-600 hover:bg-paper-dark border border-line'
@@ -432,40 +547,40 @@ export const AnalyticsView: React.FC = () => {
         </div>
 
         {/* Cases Table */}
-        <div className="overflow-x-auto border border-line rounded">
+        <div className="overflow-x-auto border border-line rounded-xl shadow-sm overflow-hidden max-h-[520px]">
           <table className="w-full text-xs text-left">
-            <thead className="bg-paper border-b border-line text-stone-600 uppercase font-mono text-[10px]">
+            <thead className="sticky top-0 bg-[#F2EFE9] border-b border-line text-stone-700 uppercase font-mono text-[10px] tracking-wider z-10 shadow-xs">
               <tr>
-                <th className="py-2.5 px-3 w-16">ID</th>
-                <th className="py-2.5 px-3 w-40">Category & Scheme</th>
-                <th className="py-2.5 px-3">Evaluation Query Prompt</th>
-                <th className="py-2.5 px-3 w-44">Target Standard / Clause</th>
-                <th className="py-2.5 px-3 w-44">Retrieved Source Document</th>
-                <th className="py-2.5 px-3 w-20 text-right">Result</th>
+                <th className="py-3 px-3.5 w-16">ID</th>
+                <th className="py-3 px-3.5 w-40">Category & Scheme</th>
+                <th className="py-3 px-3.5">Evaluation Query Prompt</th>
+                <th className="py-3 px-3.5 w-44">Target Standard / Clause</th>
+                <th className="py-3 px-3.5 w-44">Retrieved Source Document</th>
+                <th className="py-3 px-3.5 w-20 text-right">Result</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-line/60">
+            <tbody className="divide-y divide-line/40">
               {filteredCases.map((c: any) => (
-                <tr key={c.id} className="hover:bg-paper/30 transition-colors">
-                  <td className="py-2.5 px-3 font-mono font-bold text-stone-800">{c.id}</td>
-                  <td className="py-2.5 px-3">
+                <tr key={c.id} className="odd:bg-[#FAF9F5] even:bg-white hover:bg-amber-50/40 transition-colors">
+                  <td className="py-3.5 px-3.5 font-mono font-bold text-stone-800">{c.id}</td>
+                  <td className="py-3.5 px-3.5">
                     <span className="block font-semibold text-ink text-[11px]">{c.category}</span>
                     <span className="text-[10px] font-mono text-indigo-deep">{c.scheme} ({c.language.toUpperCase()})</span>
                   </td>
-                  <td className="py-2.5 px-3 text-stone-700 leading-snug max-w-xs">{c.query}</td>
-                  <td className="py-2.5 px-3 font-mono text-[11px] text-ink">
+                  <td className="py-3.5 px-3.5 text-stone-700 leading-snug max-w-xs">{c.query}</td>
+                  <td className="py-3.5 px-3.5 font-mono text-[11px] text-ink">
                     {c.is_abstention ? (
-                      <span className="text-amber-800 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
+                      <span className="text-amber-800 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 font-semibold">
                         Score Floor Abstention
                       </span>
                     ) : (
                       c.expected_is_number || c.expected_clause || c.expected_document
                     )}
                   </td>
-                  <td className="py-2.5 px-3 font-mono text-[10.5px] text-stone-600 truncate max-w-[180px]" title={c.retrieved_top_doc}>
+                  <td className="py-3.5 px-3.5 font-mono text-[10.5px] text-stone-600 truncate max-w-[180px]" title={c.retrieved_top_doc}>
                     {c.retrieved_top_doc}
                   </td>
-                  <td className="py-2.5 px-3 text-right">
+                  <td className="py-3.5 px-3.5 text-right">
                     <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                       <Check className="w-3 h-3 text-emerald-600" />
                       PASSED
@@ -490,23 +605,23 @@ export const AnalyticsView: React.FC = () => {
           </span>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto border border-line rounded-xl shadow-sm overflow-hidden">
           <table className="w-full text-xs text-left">
-            <thead className="bg-paper border-y border-line text-gray-600 uppercase font-mono text-[10px]">
+            <thead className="sticky top-0 bg-[#F2EFE9] border-b border-line text-stone-700 uppercase font-mono text-[10px] tracking-wider z-10 shadow-xs">
               <tr>
-                <th className="py-2.5 px-4">Standard Domain</th>
-                <th className="py-2.5 px-4">Governing Publication</th>
-                <th className="py-2.5 px-4 text-right">Consultations</th>
-                <th className="py-2.5 px-4 text-right">Grounding Status</th>
+                <th className="py-3 px-4">Standard Domain</th>
+                <th className="py-3 px-4">Governing Publication</th>
+                <th className="py-3 px-4 text-right">Consultations</th>
+                <th className="py-3 px-4 text-right">Grounding Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-line/60">
+            <tbody className="divide-y divide-line/40">
               {data?.top_categories?.map((cat: any, idx: number) => (
-                <tr key={idx} className="hover:bg-paper/40 transition-colors">
-                  <td className="py-3 px-4 font-semibold text-ink">{cat.category}</td>
-                  <td className="py-3 px-4 text-indigo-deep font-medium">{cat.scheme}</td>
-                  <td className="py-3 px-4 text-right font-mono font-bold text-ink">{cat.queries}</td>
-                  <td className="py-3 px-4 text-right">
+                <tr key={idx} className="odd:bg-[#FAF9F5] even:bg-white hover:bg-amber-50/40 transition-colors">
+                  <td className="py-3.5 px-4 font-semibold text-ink">{cat.category}</td>
+                  <td className="py-3.5 px-4 text-indigo-deep font-medium">{cat.scheme}</td>
+                  <td className="py-3.5 px-4 text-right font-mono font-bold text-ink">{cat.queries}</td>
+                  <td className="py-3.5 px-4 text-right">
                     <span className="inline-flex items-center gap-1 text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold">
                       <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                       100% Grounded
