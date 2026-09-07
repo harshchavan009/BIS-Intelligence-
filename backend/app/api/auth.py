@@ -63,7 +63,7 @@ def get_current_evaluator(
     return "BIS Domain Evaluator"
 
 @router.post("/auth/login")
-async def login(credentials: LoginRequest, response: Response):
+async def login(credentials: LoginRequest, response: Response, request: Request):
     """
     Authenticate an evaluator to access protected telemetry and administrative analytics.
     Evaluator credentials are documented exclusively in README.md / Evaluator private guide.
@@ -74,13 +74,14 @@ async def login(credentials: LoginRequest, response: Response):
     if is_demo or is_admin:
         token = generate_session_token(credentials.username)
         # Set HttpOnly, SameSite cookie with 30-minute session lifetime
+        is_secure = request.url.scheme == "https" or os.getenv("ENV") == "production"
         response.set_cookie(
             key="bis_evaluator_session",
             value=token,
             max_age=SESSION_TIMEOUT_SECONDS,
             httponly=True,
             samesite="lax",
-            secure=False # Set to True in HTTPS production
+            secure=is_secure
         )
         return {
             "status": "success",

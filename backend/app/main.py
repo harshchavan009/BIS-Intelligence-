@@ -32,7 +32,6 @@ app.add_middleware(SecurityHeadersMiddleware)
 ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://10.86.5.46:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000"
 ]
@@ -49,7 +48,12 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type", "X-Requested-With", "X-CSRF-Token"],
 )
 
-# 3. Register Routers
+# 3. Top-Level Health Check Endpoint (Render & Cloud Uptime Monitors)
+@app.get("/health", tags=["Health Check"])
+async def root_health():
+    return {"status": "healthy", "service": "bis-ai-assistant"}
+
+# 4. Register Routers
 app.include_router(auth_router, prefix=settings.API_V1_STR, tags=["Authentication & Access Control"])
 app.include_router(admin_router, prefix=settings.API_V1_STR, tags=["Admin & Document Ingestion"])
 app.include_router(chat_router, prefix=settings.API_V1_STR, tags=["Chat & Q&A"])
@@ -62,9 +66,10 @@ app.include_router(analytics_router, prefix=settings.API_V1_STR, tags=["Live Ana
 app.include_router(health_router, prefix=settings.API_V1_STR, tags=["Health Check"])
 app.include_router(verify_router, prefix=settings.API_V1_STR, tags=["Simulated Verification"])
 
-# 4. Mount Production SPA Frontend if built
+# 5. Mount Production SPA Frontend if built
 frontend_dist = os.path.join(settings.BASE_DIR, "frontend", "dist")
 if os.path.exists(frontend_dist):
+    from fastapi import HTTPException
     from fastapi.staticfiles import StaticFiles
     from starlette.responses import FileResponse
 
@@ -75,7 +80,7 @@ if os.path.exists(frontend_dist):
     @app.get("/{full_path:path}")
     async def serve_spa(full_path: str):
         if full_path.startswith("api/") or full_path == "api":
-            return {"detail": "Not Found"}
+            raise HTTPException(status_code=404, detail="API endpoint not found")
         file_path = os.path.join(frontend_dist, full_path)
         if os.path.exists(file_path) and os.path.isfile(file_path):
             return FileResponse(file_path)

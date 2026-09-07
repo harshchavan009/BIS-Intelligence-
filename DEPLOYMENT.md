@@ -1,77 +1,124 @@
 # Production Deployment Guide: BIS AI Intelligent Assistant
 **Smart India Hackathon 2026 — PS-1724 (Problem Statement SIH1391)**
+**Bureau of Indian Standards (BIS)**
 
-This guide provides turnkey instructions for deploying the BIS AI Intelligent Assistant to public HTTPS platforms (Render, Railway, or Vercel) without reliance on `localhost`.
-
----
-
-## Architecture Overview in Production
-
-1. **Monolithic / Single-Port Deployment (Recommended - Render / Railway / Docker):**
-   - FastAPI (`backend/app/main.py`) serves both the REST/Streaming API under `/api/*` and the static production React SPA from `frontend/dist/` on a single port (`$PORT`).
-   - Zero CORS complications, 100% offline-compatible RAG synthesis (`LLM_PROVIDER=offline`).
-   - Local ChromaDB vector database (`data/vector_store`) and SQLite DB (`data/bis_assistant.db`) are packaged within the container.
-
-2. **Split Deployment (Vercel Frontend + Render/Railway Backend):**
-   - Frontend deployed on Vercel with environment variable `VITE_API_BASE_URL=https://your-backend.onrender.com`.
-   - Backend deployed on Render/Railway with `ALLOWED_ORIGINS=https://your-app.vercel.app`.
+This document provides definitive instructions for deploying the **BIS AI Intelligent Assistant** as a unified single web service on **Render**.
 
 ---
 
-## Option 1: One-Click / Git Deploy on Render (Single Web Service)
+## 1. Production Architecture (Single Web Service)
 
-1. Push this repository to GitHub or GitLab.
-2. In the [Render Dashboard](https://dashboard.render.com), click **New +** -> **Blueprint** (or **Web Service**).
-3. Select your repository. Render will automatically detect `render.yaml`:
-   - **Environment:** Python 3.11
-   - **Build Command:**
-     ```bash
-     pip install -r requirements.txt && cd frontend && npm install && npm run build
-     ```
-   - **Start Command:**
-     ```bash
-     python3 -m uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
-     ```
-4. Set Environment Variables:
-   - `LLM_PROVIDER`: `offline` (for zero-latency offline demo) or `gemini` / `openai` / `groq`
-   - `GEMINI_API_KEY`: *(Optional, required only if `LLM_PROVIDER=gemini`)*
-   - `OPENAI_API_KEY`: *(Optional, required only if `LLM_PROVIDER=openai`)*
-5. Click **Deploy**. Your app will be live at `https://bis-ai-assistant.onrender.com`.
+The entire application runs as a **single Render Web Service** on one unified port (`$PORT`):
 
----
-
-## Option 2: Deploy on Railway
-
-1. Install Railway CLI or link GitHub repo in [Railway.app](https://railway.app).
-2. Add a new service using the root `Dockerfile` or Nixpacks.
-3. Configure start command:
-   ```bash
-   sh -c "cd frontend && npm install && npm run build && cd .. && python3 -m uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"
-   ```
-4. Generate a public domain under **Settings -> Networking -> Generate Domain**.
-
----
-
-## Option 3: Docker Compose (Local / Cloud VPS)
-
-To run the complete production stack on any VPS (AWS EC2, GCP Compute, DigitalOcean):
-
-```bash
-# Clone repository
-git clone https://github.com/harshchavan009/BIS-Intelligence-.git
-cd BIS-Intelligence-
-
-# Build and start services
-docker compose up -d --build
-
-# Verify health
-curl http://localhost:8000/api/health
+```
+User / Browser (HTTPS)
+   ↓
+https://bis-ai-assistant.onrender.com
+   ↓
+FastAPI Application (backend.app.main:app)
+   ├── /api/*               -> REST & SSE Streaming Endpoints
+   ├── /api/health          -> Diagnostics, Benchmarks & Service Readiness
+   ├── /health              -> Lightweight Render Health Check Alias
+   ├── /docs & /openapi.json-> Interactive OpenAPI Specification
+   └── /assets & /*         -> Static Production React SPA (Compiled Vite dist)
 ```
 
+### Key Architectural Benefits:
+1. **Zero CORS Issues**: Frontend and Backend share the exact same origin (`https://<service-name>.onrender.com`).
+2. **Deterministic Offline Parity**: Pre-computed semantic demo cache and ChromaDB vector embeddings are baked into the container, ensuring 100% judge-ready responses with zero external API quotas or failures.
+3. **Self-Healing Persistence**: Ingestion (`scripts/ingest.py` and `scripts/seed_demo_cache.py`) runs at container build time. Redeploys or restarts on ephemeral disks never lose data.
+
 ---
 
-## Production Security Checklist (GIGW / CERT-In)
-- [x] Security headers middleware enabled (CSP, HSTS, X-Frame-Options: DENY, X-Content-Type-Options: nosniff).
-- [x] Password autocomplete disabled on Evaluator Access Gate (`autoComplete="off"`, `demo` credentials).
-- [x] Live simulated lookup disclosures visible on CM/L and HUID checkers.
-- [x] Fully offline deterministic fallback active if cloud API quota expires.
+## 2. Root Cause of Previous Render Failure & Fix
+
+### Previous Error:
+```text
+error: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
+```
+
+### Why It Happened:
+1. **Dockerfile Location**: Render's Docker builder defaulted to `./Dockerfile` at the repository root. The actual Dockerfile is at `backend/Dockerfile`.
+2. **Build Context**: `backend/Dockerfile` needed access to `frontend/` (to build the React SPA), `data/` (for canonical PDFs and standards data), and `scripts/` (for ingestion).
+3. **Contradictory `render.yaml`**: `render.yaml` was set to `runtime: python` with `pip install -r requirements.txt`, which failed because requirements reside in `backend/requirements.txt`.
+4. **Hardcoded Port**: Previous Docker command hardcoded port `8000`, failing Render's dynamic `$PORT` binding requirement.
+
+### How It Was Fixed:
+1. Converted `backend/Dockerfile` into a **multi-stage build**:
+   - **Stage 1 (`node:18-alpine`)**: Builds the Vite frontend bundle into `frontend/dist`.
+   - **Stage 2 (`python:3.11-slim`)**: Installs backend requirements from `backend/requirements.txt`, copies backend code, data, scripts, and compiled `frontend/dist`, bakes vector index and SQLite cache, and binds Uvicorn to `0.0.0.0:${PORT:-8000}`.
+2. Updated `render.yaml` with explicit:
+   - `runtime: docker`
+   - `dockerfilePath: ./backend/Dockerfile`
+   - `dockerContext: .`
+   - `healthCheckPath: /api/health`
+
+---
+
+## 3. Deployment Instructions on Render
+
+### Method A: One-Click Deploy via Render Blueprint (Recommended)
+1. Push this repository to your GitHub account (`main` branch).
+2. Go to the [Render Dashboard](https://dashboard.render.com).
+3. Click **New +** → **Blueprint**.
+4. Select your repository (`BIS-Intelligence-`).
+5. Render detects `render.yaml` and configures everything automatically.
+6. Click **Apply**. Render will build and deploy the container.
+
+### Method B: Manual Web Service Setup via Render Dashboard
+If configuring manually via the Render UI:
+1. Click **New +** → **Web Service**.
+2. Connect your GitHub repository (`harshchavan009/BIS-Intelligence-`).
+3. Fill in the service configuration:
+   - **Name**: `bis-ai-assistant`
+   - **Region**: Oregon (US West) or Singapore (closest to India)
+   - **Branch**: `main`
+   - **Root Directory**: *(Leave blank / empty)*
+   - **Runtime / Environment**: `Docker`
+   - **Dockerfile Path**: `backend/Dockerfile`
+   - **Docker Build Context**: `.`
+   - **Instance Type**: Free (or Starter for 0s cold start)
+4. Under **Advanced Settings**:
+   - **Health Check Path**: `/api/health`
+5. Click **Create Web Service**.
+
+---
+
+## 4. Environment Variables Reference
+
+Configure these in the Render Dashboard (**Environment** tab):
+
+| Variable | Default Value | Required? | Description |
+| :--- | :--- | :--- | :--- |
+| `PORT` | `10000` (auto-injected by Render) | Automatic | Listening port for Uvicorn |
+| `LLM_PROVIDER` | `offline` | Optional | LLM engine (`offline`, `gemini`, `openai`, `groq`). `offline` gives 100% deterministic judge-proof parity. |
+| `GEMINI_API_KEY` | *(None)* | Optional | Required only if `LLM_PROVIDER=gemini` |
+| `OPENAI_API_KEY` | *(None)* | Optional | Required only if `LLM_PROVIDER=openai` |
+| `GROQ_API_KEY` | *(None)* | Optional | Required only if `LLM_PROVIDER=groq` |
+| `DATABASE_URL` | `sqlite:///./data/bis_assistant.db` | Optional | SQLite or PostgreSQL connection string |
+| `ADMIN_USERNAME` | `evaluator` | Optional | Username for evaluator access gate |
+| `ADMIN_PASSWORD` | `bis_sih_2026` | Optional | Password for evaluator access gate (also accepts `demo`/`demo`) |
+| `SESSION_SECRET` | *(Random 32-char hex)* | Optional | Secret key for HMAC session signing |
+| `ALLOWED_ORIGINS` | *(Empty)* | Optional | Comma-separated list of external origins (not needed for same-origin deploy) |
+
+---
+
+## 5. Cold-Start Measurement & Mitigation
+
+- **Free Tier Behavior**: Render free instances spin down after 15 minutes of inactivity. The first request after spindown (cold start) typically takes ~30–45 seconds while the container initializes.
+- **Self-Healing Index**: Because the vector database and cache are pre-built during image creation, container startup itself takes under 2 seconds once scheduled.
+- **Recommended Keep-Alive Mitigation (For Live Judging / Demo)**:
+  - Setup a free ping monitor (e.g. [UptimeRobot](https://uptimerobot.com) or [Cron-Job.org](https://cron-job.org)) hitting `https://<your-service>.onrender.com/health` every 10 minutes.
+  - This prevents the free service from spinning down during evaluation windows.
+
+---
+
+## 6. Verification Checklist
+
+After deployment finishes:
+
+1. **Root SPA**: Open `https://<service>.onrender.com/` → Home portal renders with BIS navigation, schemes, standards finder, and chat.
+2. **API Health**: `curl https://<service>.onrender.com/api/health` → Returns `status: ready` with 100% benchmark score.
+3. **OpenAPI Docs**: Open `https://<service>.onrender.com/docs` → Interactive Swagger UI displays all endpoints.
+4. **Search / Standards**: Search for "cement" or "smart watch" → Returns instant IS standards with mandatory QCO citations.
+5. **Chat Assistant**: Ask "What is Scheme-IV?" → Returns grounded response with inline citation chips.

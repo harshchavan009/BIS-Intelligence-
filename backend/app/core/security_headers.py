@@ -37,7 +37,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
             "font-src 'self' https://fonts.gstatic.com data:; "
             "img-src 'self' data: blob:; "
-            "connect-src 'self' https: wss: http://localhost:* http://127.0.0.1:* http://10.86.5.46:*; "
+            "connect-src 'self' https: wss: http://localhost:* http://127.0.0.1:*; "
             "frame-ancestors 'none'; "
             "object-src 'none'; "
             "base-uri 'self';"

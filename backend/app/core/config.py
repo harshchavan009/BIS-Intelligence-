@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api"
     
     # LLM Provider: 'gemini', 'openai', 'groq', 'offline'
-    LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "gemini")
+    LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "offline")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", os.getenv("GOOGLE_API_KEY", ""))
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
