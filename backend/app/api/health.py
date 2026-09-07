@@ -4,7 +4,6 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 from backend.app.core.config import settings
 from backend.app.models.database import get_db
-import chromadb
 
 router = APIRouter()
 
@@ -23,9 +22,12 @@ async def health_check(db: Session = Depends(get_db)):
     chroma_status = "healthy"
     chunks_count = 0
     try:
-        client = chromadb.PersistentClient(path=settings.CHROMA_DIR)
-        coll = client.get_collection(settings.CHROMA_COLLECTION)
-        chunks_count = coll.count()
+        from backend.app.rag.retriever import retriever
+        if retriever.collection is not None:
+            chunks_count = retriever.collection.count()
+            chroma_status = "healthy"
+        else:
+            chroma_status = "uninitialized"
     except Exception as e:
         chroma_status = f"error: {str(e)}"
 

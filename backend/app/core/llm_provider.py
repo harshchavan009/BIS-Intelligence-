@@ -1,3 +1,4 @@
+from __future__ import annotations
 import os
 import json
 import asyncio
@@ -102,7 +103,7 @@ class OfflineDemoProvider(BaseLLMProvider):
 
         return None
 
-    def _synthesize_from_chunks(self, prompt: str, retrieved_chunks: List[Dict[str, Any]], language: str = "en") -> Tuple_Answer:
+    def _synthesize_from_chunks(self, prompt: str, retrieved_chunks: List[Dict[str, Any]], language: str = "en") -> str:
         if not retrieved_chunks:
             if language == "hi":
                 return "मुझे अनुक्रमित बीआईएस विनियामक दस्तावेजों में इस प्रश्न के लिए प्रासंगिक जानकारी नहीं मिली। कृपया उत्पाद का नाम या विशिष्ट मानक संख्या निर्दिष्ट करें।"
@@ -224,15 +225,20 @@ class GeminiProvider(BaseLLMProvider):
 _offline_provider_instance: Optional[OfflineDemoProvider] = None
 
 def get_llm_provider() -> BaseLLMProvider:
+    """
+    Lazy thread-safe provider factory.
+    Does not initialize models at startup. Falls back safely to OfflineDemoProvider.
+    """
     global _offline_provider_instance
-    provider_name = settings.LLM_PROVIDER.lower()
-    if provider_name == "gemini" and settings.GEMINI_API_KEY and not settings.GEMINI_API_KEY.startswith("dummy"):
-        return GeminiProvider(settings.GEMINI_API_KEY)
+    provider_name = (settings.LLM_PROVIDER or "offline").lower()
     
-    # Default: Robust Offline Grounded Engine (100% reliable for hackathon demo)
+    if provider_name == "gemini" and settings.GEMINI_API_KEY and not settings.GEMINI_API_KEY.startswith("dummy"):
+        try:
+            return GeminiProvider(settings.GEMINI_API_KEY)
+        except Exception as e:
+            print(f"[LLMProvider] Failed to initialize GeminiProvider ({e}), using OfflineDemoProvider fallback.")
+
     if _offline_provider_instance is None:
         _offline_provider_instance = OfflineDemoProvider()
     return _offline_provider_instance
 
-# Helper type
-Tuple_Answer = str
