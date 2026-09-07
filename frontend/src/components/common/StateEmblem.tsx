@@ -2,104 +2,40 @@ import React from 'react';
 
 interface StateEmblemProps {
   className?: string;
-  size?: number;
+  size?: number; // Height in pixels (~28-32px per GIGW guidelines)
+  variant?: 'gold' | 'white' | 'dark';
 }
 
-export const StateEmblem: React.FC<StateEmblemProps> = ({ className = '', size = 30 }) => {
+/**
+ * Official State Emblem of India (Lion Capital of Ashoka with Satyameva Jayate).
+ * Rendered with authentic vector geometry per the State Emblem of India specifications.
+ */
+export const StateEmblem: React.FC<StateEmblemProps> = ({ 
+  className = '', 
+  size = 30,
+  variant = 'gold'
+}) => {
+  const src = variant === 'white' 
+    ? '/emblem-india-white.svg' 
+    : variant === 'dark' 
+      ? '/emblem-india.svg' 
+      : '/emblem-india-gold.svg';
+
+  // The official State Emblem has viewBox aspect ratio 145.52 x 231.92 (~0.627)
+  const width = Math.round((size * 145.52) / 231.92);
+
   return (
-    <svg
-      width={size}
+    <img
+      src={src}
+      alt="State Emblem of India"
+      title="State Emblem of India"
+      width={width}
       height={size}
-      viewBox="0 0 100 120"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={`inline-block select-none ${className}`}
-      aria-label="State Emblem of India"
-      role="img"
-    >
-      <title>State Emblem of India</title>
-      {/* Central Lion Head */}
-      <path
-        d="M50 12 C44 12 40 16 40 22 C40 26 42 29 45 32 C43 35 44 40 46 44 C44 46 43 49 43 52 C43 57 46 61 50 63 C54 61 57 57 57 52 C57 49 56 46 54 44 C56 40 57 35 55 32 C58 29 60 26 60 22 C60 16 56 12 50 12 Z"
-        fill="#B9862F"
-      />
-      {/* Central Lion Mane & Face Details */}
-      <path
-        d="M47 24 C47 22 48 21 50 21 C52 21 53 22 53 24 C53 26 52 27 50 27 C48 27 47 26 47 24 Z"
-        fill="#10182B"
-      />
-      <path
-        d="M48 30 L52 30 L50 34 Z"
-        fill="#10182B"
-      />
-      <path
-        d="M44 38 C47 40 53 40 56 38 C54 43 46 43 44 38 Z"
-        fill="#10182B"
-      />
-
-      {/* Left Lion Head (Profile) */}
-      <path
-        d="M38 18 C33 17 29 20 28 26 C27 30 29 34 32 37 C30 40 30 45 32 49 C30 51 29 54 29 57 C29 61 32 64 36 66 C38 62 39 58 39 53 C39 48 38 44 38 41 C40 37 40 32 39 28 C40 24 39 21 38 18 Z"
-        fill="#B9862F"
-      />
-      {/* Left Lion Eye & Mane */}
-      <circle cx="33" cy="27" r="1.5" fill="#10182B" />
-      <path d="M28 32 C31 34 35 33 36 31" stroke="#10182B" strokeWidth="1" strokeLinecap="round" />
-
-      {/* Right Lion Head (Profile) */}
-      <path
-        d="M62 18 C67 17 71 20 72 26 C73 30 71 34 68 37 C70 40 70 45 68 49 C70 51 71 54 71 57 C71 61 68 64 64 66 C62 62 61 58 61 53 C61 48 62 44 62 41 C60 37 60 32 61 28 C60 24 61 21 62 18 Z"
-        fill="#B9862F"
-      />
-      {/* Right Lion Eye & Mane */}
-      <circle cx="67" cy="27" r="1.5" fill="#10182B" />
-      <path d="M72 32 C69 34 65 33 64 31" stroke="#10182B" strokeWidth="1" strokeLinecap="round" />
-
-      {/* Pillars and Base Pedestal */}
-      <path
-        d="M35 66 C35 66 42 68 50 68 C58 68 65 66 65 66 L67 76 C67 76 59 78 50 78 C41 78 33 76 33 76 L35 66 Z"
-        fill="#B9862F"
-      />
-
-      {/* Abacus Band with Ashoka Chakra */}
-      <rect x="22" y="78" width="56" height="18" rx="2" fill="#B9862F" />
-      {/* Ashoka Chakra in Center of Abacus */}
-      <circle cx="50" cy="87" r="7" fill="#10182B" />
-      <circle cx="50" cy="87" r="5.5" stroke="#B9862F" strokeWidth="1" />
-      <circle cx="50" cy="87" r="1.5" fill="#B9862F" />
-      {/* 8 Chakra Spokes */}
-      <line x1="50" y1="81.5" x2="50" y2="92.5" stroke="#B9862F" strokeWidth="0.8" />
-      <line x1="44.5" y1="87" x2="55.5" y2="87" stroke="#B9862F" strokeWidth="0.8" />
-      <line x1="46" y1="83" x2="54" y2="91" stroke="#B9862F" strokeWidth="0.8" />
-      <line x1="46" y1="91" x2="54" y2="83" stroke="#B9862F" strokeWidth="0.8" />
-
-      {/* Galloping Horse (Left of Chakra) */}
-      <path
-        d="M26 89 C27 86 31 85 34 87 C33 89 31 91 28 92 C26 91 25 90 26 89 Z"
-        fill="#10182B"
-      />
-      {/* Bull (Right of Chakra) */}
-      <path
-        d="M74 89 C73 86 69 85 66 87 C67 89 69 91 72 92 C74 91 75 90 74 89 Z"
-        fill="#10182B"
-      />
-
-      {/* Bell Capital / Lotus Base */}
-      <path
-        d="M26 98 C32 96 68 96 74 98 L76 104 C68 106 32 106 24 104 L26 98 Z"
-        fill="#B9862F"
-      />
-      {/* Base Plinth */}
-      <rect x="20" y="105" width="60" height="4" rx="1" fill="#B9862F" />
-
-      {/* Satyameva Jayate Line / Script Motif */}
-      <rect x="28" y="112" width="44" height="2" rx="1" fill="#B9862F" opacity="0.9" />
-      <path
-        d="M32 116 H36 M39 116 H44 M47 116 H53 M56 116 H61 M64 116 H68"
-        stroke="#B9862F"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-    </svg>
+      className={`inline-block select-none shrink-0 ${className}`}
+      style={{ height: `${size}px`, width: `${width}px`, objectFit: 'contain' }}
+      loading="eager"
+      decoding="async"
+    />
   );
 };
+

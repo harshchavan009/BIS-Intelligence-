@@ -173,7 +173,7 @@ export const Navbar: React.FC = () => {
       {/* 2. Ministry / Government Identity Bar */}
       <div className="bg-ink text-gray-300 text-[11px] py-1 px-4 sm:px-8 flex justify-between items-center border-b border-white/5">
         <div className="flex items-center gap-2.5">
-          <StateEmblem size={28} className="text-brass shrink-0" />
+          <StateEmblem size={30} className="shrink-0" />
           <div className="flex items-center gap-2">
             <span className="text-brass font-semibold tracking-wide text-[11px]">{t('nav.gov_india')}</span>
             <span className="text-gray-500">|</span>

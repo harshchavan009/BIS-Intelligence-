@@ -325,8 +325,8 @@ export const WebsitePolicies: React.FC = () => {
                   The front-end design system, retrieval pipeline, and evaluation harness are open and inspectable for technical and regulatory audit. Reproduction of the system for commercial re-sale without authorization is prohibited.
                 </p>
                 <p>
-                  <strong>3. State Emblem Protection: </strong>
-                  In accordance with the State Emblem of India (Prohibition of Improper Use) Act, 2005, this portal does not display the restricted national emblem (Lion Capital of Ashoka), using instead an original geometric standards seal.
+                  <strong>3. State Emblem & Identity: </strong>
+                  In accordance with the State Emblem of India (Prohibition of Improper Use) Act, 2005, the State Emblem (Lion Capital of Ashoka) and ministry identity marks are displayed strictly for governmental demonstration and institutional alignment under GIGW 3.0 guidelines. Commercial reproduction or unauthorized replication is prohibited.
                 </p>
               </div>
             </div>
