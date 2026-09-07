@@ -87,6 +87,36 @@ Out of memory (used over 512MB) while running your code.
 
 ---
 
+## 2.2 Build-Time & Container Optimization (Fixing CUDA Bloat & Build Timeout)
+
+### The Issue (from Render Build Log):
+```text
+Collecting cuda-toolkit==13.0.3
+Collecting nvidia-cudnn-cu13==9.24.0.43
+Duration: 6m25s -> Exited with status 1 while running your code.
+```
+
+### Why It Happened:
+1. **Default PyTorch CUDA Bloat**: In `backend/requirements.txt`, `sentence-transformers` brought standard PyTorch for Linux x86_64, which by default downloads **over 3.5 GB of NVIDIA CUDA packages** (`nvidia-cudnn`, `cuda-toolkit`, `nvidia-cublas`).
+2. **Slow Build & Disk Ceiling**: On a CPU cloud instance like Render, downloading 3.5 GB of CUDA packages took over 6 minutes, hitting build timeouts and exhausting builder resources.
+3. **Redundant Build-Time Ingestion**: `data/chroma_db` was in `.gitignore`, forcing `Dockerfile` to re-run `python scripts/ingest.py` at build time. This attempted to connect to Hugging Face Hub, download model weights, and compute 379 embeddings on the build runner.
+
+### How It Was Fixed:
+1. **CPU-Only PyTorch Index**:
+   ```dockerfile
+   RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+       pip install --no-cache-dir -r backend/requirements.txt
+   ```
+   Pre-installing CPU-only `torch` from the official PyTorch CPU wheel index reduced the download size to ~180 MB and completely eliminated 3.5 GB of NVIDIA CUDA dependencies.
+2. **Committed Precomputed Vector Index**:
+   - Whitelisted `data/chroma_db/**` (5.4 MB) and `data/bis_assistant.db` (128 KB) in `.gitignore`.
+   - The entire verified vector database of 379 chunks and SQLite database are now baked directly into the repository.
+3. **Fast Build-Time Seeding**:
+   - Replaced `RUN python scripts/ingest.py` with `RUN python scripts/seed_demo_cache.py`.
+   - Docker build finishes in under 2 minutes with zero external Hugging Face model downloads.
+
+---
+
 ## 3. Deployment Instructions on Render
 
 ### Method A: One-Click Deploy via Render Blueprint (Recommended)
