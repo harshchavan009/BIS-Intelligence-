@@ -42,7 +42,8 @@ playwright-report/
 *.db
 *.sqlite
 *.sqlite3
-data/chroma_db/
+!data/bis_assistant.db
+!data/chroma_db/**
 data/page_images_cache/
 data/test_out/
 
