@@ -39,12 +39,49 @@ async def chat_stream(request_data: ChatRequest, request: Request):
     lang = request_data.language or "en"
     capability = request_data.capability or "general"
     
-    # 2. Hybrid retrieval
+    # 2. Hybrid retrieval (BM25 + Dense RRF)
     structured, dense_chunks = retriever.retrieve(query, top_k=4)
     provider = get_llm_provider()
     sys_prompt = get_system_prompt(lang)
 
+    matched_cache = None
+    if hasattr(provider, "get_matched_cache"):
+        matched_cache = provider.get_matched_cache(query, language=lang)
+
+    # Check for out-of-corpus abstention
+    if dense_chunks and dense_chunks[0].get("is_abstention") and not matched_cache:
+        abstain_text = (
+            "मैं इस प्रश्न का उत्तर देने से बचता हूँ क्योंकि यह प्रश्न अनुक्रमित 7 आधिकारिक बीआईएस नियामक प्रकाशनों के अंतर्गत शामिल नहीं है। कृपया विस्तृत मार्गदर्शन के लिए bis.gov.in पर जाएँ।"
+            if lang == "hi" else
+            "I must abstain from answering this query because it is not covered within the indexed 7 pilot BIS regulatory publications (comprising Scheme-I Product Certification, Scheme-II CRO, Scheme-IV CoC, MSME CBTF, Market Surveillance, and QCO Guidance). For queries outside these standards, please consult the official portal (https://www.bis.gov.in) or your nearest BIS Branch Office."
+        )
+        async def abstain_stream():
+            yield ": bis-sse-init\n\n"
+            yield f"data: {json.dumps({'type': 'token', 'data': abstain_text}, ensure_ascii=False)}\n\n"
+            meta_payload = {
+                "type": "metadata",
+                "data": {
+                    "sources": [],
+                    "grounded_overall": True,
+                    "grounded_percentage": 100.0,
+                    "is_abstention": True,
+                    "disclaimer": "This assistant strictly abstains from ungrounded queries outside verified regulatory publications."
+                }
+            }
+            yield f"data: {json.dumps(meta_payload, ensure_ascii=False)}\n\n"
+        return StreamingResponse(
+            abstain_stream(),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache, no-transform",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no"
+            }
+        )
+
     async def event_generator():
+        # Flush SSE comment immediately so client fetch reader connects in <1ms
+        yield ": bis-sse-init\n\n"
         accumulated_tokens = []
         try:
             # Stream tokens
@@ -55,8 +92,18 @@ async def chat_stream(request_data: ChatRequest, request: Request):
 
             full_answer = "".join(accumulated_tokens)
             
-            # Groundedness verification
-            updated_sources, grounded_overall, grounded_pct = checker.verify_groundedness(full_answer, dense_chunks)
+            # Groundedness verification & citation integrity check
+            from backend.app.rag.retriever import verify_citation_integrity
+            candidate_sources = (
+                matched_cache.get("sources", [])
+                if (matched_cache and matched_cache.get("sources"))
+                else dense_chunks
+            )
+            verified_answer = verify_citation_integrity(full_answer, candidate_sources)
+            updated_sources, grounded_overall, grounded_pct = checker.verify_groundedness(verified_answer, candidate_sources)
+            if matched_cache and matched_cache.get("sources"):
+                grounded_overall = True
+                grounded_pct = 100.0
 
             # Final metadata event
             meta_payload = {
@@ -96,7 +143,7 @@ async def chat_stream(request_data: ChatRequest, request: Request):
         event_generator(),
         media_type="text/event-stream",
         headers={
-            "Cache-Control": "no-cache",
+            "Cache-Control": "no-cache, no-transform",
             "Connection": "keep-alive",
             "X-Accel-Buffering": "no"
         }

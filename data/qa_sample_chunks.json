@@ -1,0 +1,340 @@
+{
+  "qa_sample_metadata": {
+    "total_chunks_indexed": 379,
+    "samples_extracted": 30,
+    "sampling_rate": "8%",
+    "audit_timestamp": "2026-09-07T08:40:00Z"
+  },
+  "samples": [
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE - V - 4.",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 13,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "4. This advance certification fee will be carried over to the next year on every renewal."
+    },
+    {
+      "source_file": "cbtf-msme-guidelines.pdf",
+      "document_title": "Guidelines for Utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs)",
+      "clause_ref": "ANNEXURE\nCODE - 5.",
+      "scheme": "Scheme-I (CBTF MSME)",
+      "doc_type": "Testing Facility Guidelines",
+      "page_number": 19,
+      "effective_date": "2021-04-30",
+      "sha256": "3cfd761e5c7f91feabd5bf5c524c914beaf428f27e0f96caac0be5846ffbb1de",
+      "text": "5. Confidentiality: We shall maintain adequate confidentiality with respect to the sample under test and the test results."
+    },
+    {
+      "source_file": "cbtf-msme-guidelines.pdf",
+      "document_title": "Guidelines for Utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs)",
+      "clause_ref": "ANNEXURE-III - (b)",
+      "scheme": "Scheme-I (CBTF MSME)",
+      "doc_type": "Testing Facility Guidelines",
+      "page_number": 2,
+      "effective_date": "2021-04-30",
+      "sha256": "3cfd761e5c7f91feabd5bf5c524c914beaf428f27e0f96caac0be5846ffbb1de",
+      "text": "(b) Within the premises of any manufacturer (licensee or applicant) - see figure 2."
+    },
+    {
+      "source_file": "qco-guidance.pdf",
+      "document_title": "Guidance Document on Quality Control Orders (QCOs) Under Section 16 of BIS Act, 2016",
+      "clause_ref": "10.",
+      "scheme": "QCO Regulatory Guidance",
+      "doc_type": "Statutory Orders Guidance",
+      "page_number": 3,
+      "effective_date": "2023-01-10",
+      "sha256": "cd386c12fe9ec50f53f788dd7de501a1638fff19e2f8938fecb68c8fc6c17c2c",
+      "text": "10. Clarifications on QCO 10.1 If any person is having issues/queries/clarifications related to applicability of QCO on a particular product or implementation of QCO or any matters connected therewith or incidental thereto like extension in the date of implementation of QCO, exemptions, stock-in-hand as on the date of implementation of the Order etc., t hey may approach the concerned Line Ministry/Department of the Central Government that has issued the QCO. 10.2 If any person is having queries/clarifications related to coverage of any product under Indian Standard covered under QCO, they may approach BIS."
+    },
+    {
+      "source_file": "market-surveillance-guidelines.pdf",
+      "document_title": "Guidelines for Market Surveillance During Operation of Licence Under Scheme-I",
+      "clause_ref": "ANNEXURE-III - (v)",
+      "scheme": "Scheme-I (Surveillance)",
+      "doc_type": "Post-Market Surveillance Procedures",
+      "page_number": 13,
+      "effective_date": "2021-06-15",
+      "sha256": "e2fb91aa4f7d98f2afa9f8ec32bdf6a580a6bfd309bb6bcc4a4f16da08b6e771",
+      "text": "(v) AGENT(s) shall remain bound by confidentiality even after opting/retiring from the BIS's panel."
+    },
+    {
+      "source_file": "market-surveillance-guidelines.pdf",
+      "document_title": "Guidelines for Market Surveillance During Operation of Licence Under Scheme-I",
+      "clause_ref": "ANNEXURE-I - 7.",
+      "scheme": "Scheme-I (Surveillance)",
+      "doc_type": "Post-Market Surveillance Procedures",
+      "page_number": 10,
+      "effective_date": "2021-06-15",
+      "sha256": "e2fb91aa4f7d98f2afa9f8ec32bdf6a580a6bfd309bb6bcc4a4f16da08b6e771",
+      "text": "7. Provision for raising query and receiving responses from BO (multiple times) This section is to be utilised for communicating with the Agent (if applicable) who has drawn the sample and the BO. Any observations/clarifications required from the agent is to be sought using this section. The response of the agent will be received through this section. Multiple queries can be submitted by the CO using this facility. PART III Test Request"
+    },
+    {
+      "source_file": "market-surveillance-guidelines.pdf",
+      "document_title": "Guidelines for Market Surveillance During Operation of Licence Under Scheme-I",
+      "clause_ref": "(i)",
+      "scheme": "Scheme-I (Surveillance)",
+      "doc_type": "Post-Market Surveillance Procedures",
+      "page_number": 2,
+      "effective_date": "2021-06-15",
+      "sha256": "e2fb91aa4f7d98f2afa9f8ec32bdf6a580a6bfd309bb6bcc4a4f16da08b6e771",
+      "text": "(i) Procurement of product samples from market: Generally, two samples per year may be procured for each licence from the market for independent testing in third party laboratory(ies) subject to risk based assessment & dynamic surveillance. Product wise guidance document on surveillance amenability (MS/DP/ Feedback/Organised Buyers) and frequency may be referred for post-market surveillance. Subject to risk based assessment & dynamic surveillance, this frequency may be enhanced for non-compliant manufacturers. Based on compliance level of manufacturer in previous two years, the market surveillance frequency may be enhanced to three/four per year. General"
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE  - XII",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 28,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "09/05/2019 20190501 - Scheme4 Grant of CoC - Guidelines - Google Docs https://docs.google.com/document/d/1SSk4gBezeNqYLwS2URZKRkM0AmDr4GoFjtPMBfYPLr4/edit 28/28"
+    },
+    {
+      "source_file": "cbtf-msme-guidelines.pdf",
+      "document_title": "Guidelines for Utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs)",
+      "clause_ref": "ANNEXURE\nCODE",
+      "scheme": "Scheme-I (CBTF MSME)",
+      "doc_type": "Testing Facility Guidelines",
+      "page_number": 19,
+      "effective_date": "2021-04-30",
+      "sha256": "3cfd761e5c7f91feabd5bf5c524c914beaf428f27e0f96caac0be5846ffbb1de",
+      "text": "Annexure Code of Ethics (The code of ethics shall be furnished, signed and sealed by Proprietor or Director or Partner of the testing facility on testing facility' s official stationery (letter-head)). We, M/s _____________________________________________________________________ Testing facility located at _____________________________________________ ____________________________________________________________________________, a cluster testing facility under the Cluster Based Testing facility Scheme of the Bureau of Indian Standards, do, hereby, undertake that:"
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE - IX - 3.",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 18,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "3. WeundertaketopaytotheBISanymoneysodemandednotwithstandinganydisputeordisputes raisedbytheManufacturerinanysuitorproceedingpendingbeforeanycourtortribunalrelating thereto,ourliabilityunderthispresentbeingabsoluteandunequivocal.Thepaymentsomadebyus underthisbondshallbe validdischarge of our liabilityfor paymentthereunder, andthe Manufacturer shall have no claim against us for making such payment."
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE- I - 6.",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 2,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "6. a)Thetestreport(s)oftheproductshallnotbemorethan180daysold.The periodfor counting180daysshallbe fromthedateof issueof thetest report(s)tothedateofreceiptoftheapplicationintheBO.Incaseofmultiple testreport(s)foroneproduct,thelatestproducttestreportshallnotbemore than180daysoldandtheoldestproducttestreportshallnotbemorethan365 days old. b)If a BOis of theopinionthatthetestreport(s)to be consideredfor grantofCoCneedtobeacceptedbeyondspecifiedtimenormsduetogenuine reasons,thecasemaybeputupfortheapprovalof concernedDDGRwith properjustification.DDGRafter dueconsiderationofthefactsin the recordedjustification,maytakeadecisionwhethertoallowacceptanceofthe test report(s) which are not within the time limits specified above. Partial test report(s)"
+    },
+    {
+      "source_file": "cbtf-msme-guidelines.pdf",
+      "document_title": "Guidelines for Utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs)",
+      "clause_ref": "ANNEXURE-III - 4.",
+      "scheme": "Scheme-I (CBTF MSME)",
+      "doc_type": "Testing Facility Guidelines",
+      "page_number": 15,
+      "effective_date": "2021-04-30",
+      "sha256": "3cfd761e5c7f91feabd5bf5c524c914beaf428f27e0f96caac0be5846ffbb1de",
+      "text": "4. Guidelines 4.1 General Guidelines i) These guidelines shall be applicable for operation of testing facilitycatering to the need of the cluster of industries (known as cluster testing facility). ii) Testing facilities available at the testing facility shall be decided based on the type of industry in the cluster. Testing Testing facilityshall test only those products and raw materials which are manufactured by the industry cluster. Testing facilityshould have"
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE- VI - 22.",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 6,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "22. Theinspectionfeeshallbepayable,inadvance,aspersub-paragraph(5)of paragraph5 of Scheme- IV of Schedule- II of BIS(Conformity Assessment) Regulations, 2018. Testing fee 23. The testing fee of the sample(s) shall be borne by the applicant."
+    },
+    {
+      "source_file": "scheme1-ISI-mark.pdf",
+      "document_title": "Bureau of Indian Standards (Conformity Assessment) Regulations, 2018 - Scheme-I Product Certification (ISI Mark)",
+      "clause_ref": "General Provisions",
+      "scheme": "Scheme-I (ISI Mark)",
+      "doc_type": "Product Certification Master Regulations",
+      "page_number": 29,
+      "effective_date": "2018-06-04",
+      "sha256": "531e12c5a8a15a1bd6a9b4f01e2cb8e9f9c3c9e1afb763a0362da518e0a27666",
+      "text": "81 आई स 702:1988 1 टि ₹ 63,000.00 ₹ 51,000.00 ₹ 17.50 सभी ₹ 0.00 0 ₹ 0.00 20122016 82 आई स 704:1984 1 पीस ₹ 52,000.00 ₹ 42,000.00 ₹ 0.14 सभी ₹ 0.00 0 ₹ 0.00 30122016 83 आई स 710:2010 1 र्गव मीटर ₹ 84,000.00 ₹ 68,000.00 ₹ 0.18 सभी ₹ 0.00 0 ₹ 0.00 30122016 84 आई स 711:1970 1 टि ₹ 55,000.00 ₹ 44,000.00 ₹ 8.00 सभी ₹ 0.00 0 ₹ 0.00 20122016 85 आई स 712:1984 1 टि ₹ 46,000.00 ₹ 37,000.00 ₹ 1.75 सभी ₹ 0.00 0 ₹ 0.00 24082016 86 आई स 717:1998 1 मीठिक टि ₹ 51,000.00 ₹ 41,000.00 ₹ 5.00 सभी ₹ 0.00 0 ₹ 0.00 26122016 87 आई स 723:1972 1 टि ₹ 46,000.00 ₹ 37,000.00 ₹ 90.00 सभी ₹ 0.00 0 ₹ 0.00 21122016 88 आई स 745:2003 1 र्गव मीटर ₹ 56,000.00 ₹ 45,000.00 ₹ 0.15 सभी ₹ 0.00 0 ₹ 0.00 25082017 89 आई स 758:1988 100 र्गव मीटर ₹ 47,000.00 ₹ 38,000.00 ₹ 12.00 सभी ₹ 0.00 0 ₹ 0.00 20122016 90 आई स 774:2004 1 पीस ₹ 74,000.00 ₹ 60,000.00 ₹ 3.50 सभी ₹ 0.00 0 ₹ 0.00 28072017 91 आई स 778:1984 1 पीस ₹ 57,000.00 ₹ 46,000.00 ₹ 0.60 सभी ₹ 0.00 0 ₹ 0.00 30122016 92 आई स 779:1994 1 पीस ₹ 1,30,000.00 ₹ 1,04,000.00 ₹ 1.75 सभी ₹ 0.00 0 ₹ 0.00 30122016 93 आई स 781:1984 1 पीस ₹ 49,000.00 ₹ 40,000.00 ₹ 0.45 सभी ₹ 0.00 0 ₹ 0.00 28072017 94 आई स 784:2001 1 टि ₹ 46,000.00 ₹ 37,000.00 ₹ 8.70 सभी ₹ 0.00 0 ₹ 0.00 24082016 95 आई स 797:1982 1 टि ₹ 46,000.00 ₹ 37,000.00 ₹ 0.90 सभी ₹ 0.00 0 ₹ 0.00 24082016 96 आई स 799:1985 100 ीटर ₹ 59,000.00 ₹ 48,000.00 ₹ 4.20 सभी ₹ 0.00 0 ₹ 0.00 24012017 97 आई स 814:2004 1000 पीस ₹ 1,09,000.00 ₹ 88,000.00 ₹ 1.80 60000 इकाई ₹ 0.90 िेि ₹ 0.00 06082017 98 आई स 848:2006 1 टि ₹ 46,000.00 ₹ 37,000.00 ₹ 26.00 सभी ₹ 0.00 0 ₹ 0.00 24082016 99 आई स 863:1988 100 र्गव मीटर ₹ 47,000.00 ₹ 38,000.00 ₹ 16.00 सभी ₹ 0.00 0 ₹ 0.00 20122016 100 आई स 868:1990 100ाक.र्ग्ा ₹ 58,000.00 ₹ 47,000.00 ₹ 20.20 सभी ₹ 0.00 0 ₹ 0.00 20122016 101 आई स 878:2008 100 पीस ₹ 56,000.00 ₹ 45,000.00 ₹ 1.10 सभी ₹ 0.00 0 ₹ 0.00 06082017 102 आई स 884:1985 1 पीस ₹ 53,000.00 ₹ 43,000.00 ₹ 120.00 सभी ₹ 0.00 0 ₹ 0.00 30122016"
+    },
+    {
+      "source_file": "cbtf-msme-guidelines.pdf",
+      "document_title": "Guidelines for Utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs)",
+      "clause_ref": "ANNEXURE-I - (b)",
+      "scheme": "Scheme-I (CBTF MSME)",
+      "doc_type": "Testing Facility Guidelines",
+      "page_number": 3,
+      "effective_date": "2021-04-30",
+      "sha256": "3cfd761e5c7f91feabd5bf5c524c914beaf428f27e0f96caac0be5846ffbb1de",
+      "text": "(b) CBTF facility (duly signed by the manufacturer and CBTF management)"
+    },
+    {
+      "source_file": "cbtf-msme-guidelines.pdf",
+      "document_title": "Guidelines for Utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs)",
+      "clause_ref": "ANNEXURE-I - (a)",
+      "scheme": "Scheme-I (CBTF MSME)",
+      "doc_type": "Testing Facility Guidelines",
+      "page_number": 3,
+      "effective_date": "2021-04-30",
+      "sha256": "3cfd761e5c7f91feabd5bf5c524c914beaf428f27e0f96caac0be5846ffbb1de",
+      "text": "(a) factory facility (duly signed by the manufacturer)"
+    },
+    {
+      "source_file": "cbtf-msme-guidelines.pdf",
+      "document_title": "Guidelines for Utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs)",
+      "clause_ref": "ANNEXURE TO (Part 3)",
+      "scheme": "Scheme-I (CBTF MSME)",
+      "doc_type": "Testing Facility Guidelines",
+      "page_number": 16,
+      "effective_date": "2021-04-30",
+      "sha256": "3cfd761e5c7f91feabd5bf5c524c914beaf428f27e0f96caac0be5846ffbb1de",
+      "text": "Space shall also be provided separately for storage of samples/ remnants. ii) The testing facility shall be house in pucca structure and not in kuccha sheds. iii) The testing facility shall maintain and control the environmental conditions, if required as per relevant Indian Standard. iv) Effective separation shall be provided between the incompatible testing activities or"
+    },
+    {
+      "source_file": "market-surveillance-guidelines.pdf",
+      "document_title": "Guidelines for Market Surveillance During Operation of Licence Under Scheme-I",
+      "clause_ref": "ANNEXURE-I - (f)",
+      "scheme": "Scheme-I (Surveillance)",
+      "doc_type": "Post-Market Surveillance Procedures",
+      "page_number": 9,
+      "effective_date": "2021-06-15",
+      "sha256": "e2fb91aa4f7d98f2afa9f8ec32bdf6a580a6bfd309bb6bcc4a4f16da08b6e771",
+      "text": "(f) Information about misuse of ISI mark: CO is required to confirm that the variety(ies) of received sample on which ISI mark is being used by licensee are covered in the existing scope the licensee. Any observed non-compliance is to be reported. Cases where date of manufacturing printed on label/packaging falls during a period when the license was not operative or samples bearing ISI mark manufactured after expiry of a license is available in market also constitute misuse of ISI mark. There is a possibility that samples bearing ISI mark without CM/L number or without IS number are collected from market. Also it may so happen that the manufacturing unit address mentioned on sample/packaging is not matching with the address for which license has been granted. All such situations mentioned above may be investigated for further suitable action(s). The CO is required to give remarks in such cases and record his/her observations in the text field."
+    },
+    {
+      "source_file": "market-surveillance-guidelines.pdf",
+      "document_title": "Guidelines for Market Surveillance During Operation of Licence Under Scheme-I",
+      "clause_ref": "ANNEXURE-II",
+      "scheme": "Scheme-I (Surveillance)",
+      "doc_type": "Post-Market Surveillance Procedures",
+      "page_number": 12,
+      "effective_date": "2021-06-15",
+      "sha256": "e2fb91aa4f7d98f2afa9f8ec32bdf6a580a6bfd309bb6bcc4a4f16da08b6e771",
+      "text": "Format for user feedback on marked product Your Ref : .......BO/CML - Date : Kind attn: Head, ................ Branch Office ....bo@bis.gov.in Bureau of Indian Standards, BO Address: ............................................ 1 Manufacturer 2 Brand name (if any) 3 Details of product bearing Mark (IS, CML, Batch No, Date of manufacturing etc., if available) (Separate sheet for more details can also be attached) 4 Are you satisfied with the product Yes / No 4a Reason(s) of being not satisfied with the product (if applicable) 5 Any other feedback or suggestion(s) Signature: .................................. Name: ....................................... Designation: .............................. Contact (Phone/E-mail): ................"
+    },
+    {
+      "source_file": "scheme2-registration-guidelines.pdf",
+      "document_title": "Compulsory Registration Scheme (CRO) Guidelines - Scheme-II for Electronics & IT Goods",
+      "clause_ref": "ANNEXURE S (Part 1)",
+      "scheme": "Scheme-II (CRO)",
+      "doc_type": "Compulsory Registration Operational Manual",
+      "page_number": 1,
+      "effective_date": "2021-08-20",
+      "sha256": "11cd8a1c0150172e4f2c93448d7ae0c8e251fab39dcf09076fb8752060cc7cd2",
+      "text": "Sl. No. IS No. Title Product Category Notification Sl. No. IS No. Title Product Category Notification Sl. No. IS No. Title Product Category Notification 1 IS/IEC 62368: Part 1: 2023 Audio/Video, Information and Communication Technology Equipment - Part 1 Safety Requirements Electronic Games (Video) rd October 2012 SubsequentAmendments 1."
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "Annexure - II",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 9,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "Annexure - II Self-evaluation cum verification report"
+    },
+    {
+      "source_file": "cbtf-msme-guidelines.pdf",
+      "document_title": "Guidelines for Utilisation of Cluster Based Test Facility (CBTF) by Micro, Small & Medium Enterprises (MSMEs)",
+      "clause_ref": "ANNEXURE-I",
+      "scheme": "Scheme-I (CBTF MSME)",
+      "doc_type": "Testing Facility Guidelines",
+      "page_number": 3,
+      "effective_date": "2021-04-30",
+      "sha256": "3cfd761e5c7f91feabd5bf5c524c914beaf428f27e0f96caac0be5846ffbb1de",
+      "text": "Draft 3 Figure 2 (refer Sr. No. 3(i)(b)) Undertakings, responsibilities of manufacturer"
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE - III",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 4,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "09/05/2019 20190501 - Scheme4 Grant of CoC - Guidelines - Google Docs https://docs.google.com/document/d/1SSk4gBezeNqYLwS2URZKRkM0AmDr4GoFjtPMBfYPLr4/edit 4/28 ix)Forthetestswhicharepermittedtobesubcontractedandnotavailable withthemanufacturer, copyof theagreementorconsentletterfromthe outside laboratory for which arrangement for sub-contracting is made x)InspectionandtestingplanasperForm- IIIproposedtobefollowedand discussion on the adequacy of the plan xi) Undertakingfor longdurationtestas perthetemplateattachedas"
+    },
+    {
+      "source_file": "market-surveillance-guidelines.pdf",
+      "document_title": "Guidelines for Market Surveillance During Operation of Licence Under Scheme-I",
+      "clause_ref": "ANNEXURE-I - 2.",
+      "scheme": "Scheme-I (Surveillance)",
+      "doc_type": "Post-Market Surveillance Procedures",
+      "page_number": 8,
+      "effective_date": "2021-06-15",
+      "sha256": "e2fb91aa4f7d98f2afa9f8ec32bdf6a580a6bfd309bb6bcc4a4f16da08b6e771",
+      "text": "2. Name & Designation of Certification Officer (CO)/Agent: As the CO/ BIS Staff Agent will login to the app using his/her credentials these details will appear automatically in the app. In case the CO/ BIS Staff /Agent is accompanied by a second CO/ BIS Staff /Agent, name of designation of second officer is to be filled in this section."
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE-XI - 5.",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 25,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "5. Rights and responsibilities of manufacturer 5.1 The BIS CoCgrantedto the manufacturershallonlybe withrespectto ....................(mentionproduct)asperIS/Specifiedrequirements................... (mention IS Number/document). 5.2 RightsandresponsibilitiesofthemanufacturershallbeasconveyedtohimbyBIS from time to time, and the manufacturer shall abide by the same."
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE - VI",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 15,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "09/05/2019 20190501 - Scheme4 Grant of CoC - Guidelines - Google Docs https://docs.google.com/document/d/1SSk4gBezeNqYLwS2URZKRkM0AmDr4GoFjtPMBfYPLr4/edit 15/28"
+    },
+    {
+      "source_file": "scheme4-conformity.pdf",
+      "document_title": "Guidelines for Grant of Certificate of Conformity (CoC) Under Scheme-IV",
+      "clause_ref": "ANNEXURE-XI - 2.",
+      "scheme": "Scheme-IV (CoC)",
+      "doc_type": "Certificate of Conformity (CoC) Guidelines",
+      "page_number": 23,
+      "effective_date": "2021-11-12",
+      "sha256": "3afeff1f1beedc0f3d6a7111905c1d484aa6415272de3b20a6998934204870db",
+      "text": "2. Fee 2.1 In considerationof BISgrantingCoCto themanufacturerandthemanufacturer agreeingtoabidebytheprovisionsofthisagreementandthevariousobligationsand responsibilitiesand BIS performingits part underthe BISAct,2016,the manufacturershallpayto BISthenecessaryfee,asapplicablefromtimetotime, undertheschemesuchasadvanceAnnualCertificateofConformityfee,renewal applicationfee andanyotherfee as determinedunderthe BIS(Conformity Assessment) Regulations, 2018. 2.2 Themanufactureralsoagreesto bearallexpenses,includingcostto BISofthe man-daysspentbyBIScertificationofficer(s)inconnectionwiththeinspectionat themanufacturingpremisesand/orat thetestinglaboratory(fromthetimeof departurefromtheplaceofpostingtillreturnthereto),andtestingfeeasthecase may be, as decided by BIS in its absolute discretion."
+    },
+    {
+      "source_file": "scheme1-ISI-mark.pdf",
+      "document_title": "Bureau of Indian Standards (Conformity Assessment) Regulations, 2018 - Scheme-I Product Certification (ISI Mark)",
+      "clause_ref": "General Provisions",
+      "scheme": "Scheme-I (ISI Mark)",
+      "doc_type": "Product Certification Master Regulations",
+      "page_number": 27,
+      "effective_date": "2018-06-04",
+      "sha256": "531e12c5a8a15a1bd6a9b4f01e2cb8e9f9c3c9e1afb763a0362da518e0a27666",
+      "text": "39 आई स 341:1973 1 ीटर/1 ाक.र्ग्ा. ₹ 90,000.00 ₹ 72,000.00 ₹ 0.26 सभी ₹ 0.00 0 ₹ 0.00 20122016 40 आई स 362:1991 100 पीस ₹ 47,000.00 ₹ 38,000.00 ₹ 1.75 सभी ₹ 0.00 0 ₹ 0.00 13112017 41 आई स 363:1993 100 पीस ₹ 46,000.00 ₹ 37,000.00 ₹ 5.75 सभी ₹ 0.00 0 ₹ 0.00 24082016 42 आई स 366:1991 1 पीस ₹ 87,000.00 ₹ 70,000.00 ₹ 1.30 सभी ₹ 0.00 0 ₹ 0.00 30122016 43 आई स 368:2014 1 पीस ₹ 89,000.00 ₹ 72,000.00 ₹ 1.30 सभी ₹ 0.00 0 ₹ 0.00 17072017 44 आई स 369:1992 1 पीस ₹ 1,00,000.00 ₹ 80,000.00 ₹ 1.70 सभी ₹ 0.00 0 ₹ 0.00 30122016 45 आई स 371:1999 100 पीस ₹ 61,000.00 ₹ 49,000.00 ₹ 2.30 सभी ₹ 0.00 0 ₹ 0.00 30122016 46 आई स 374:1979 1 पीस ₹ 65,000.00 ₹ 52,000.00 ₹ 1.75 सभी ₹ 0.00 0 ₹ 0.00 30122016 47 आई स 398:भाग 5:1992 1 टि ₹ 46,000.00 ₹ 37,000.00 ₹ 34.60 सभी ₹ 0.00 0 ₹ 0.00 24082016 48 आई स 398:भाग 4:1994 1 टि ₹ 46,000.00 ₹ 37,000.00 ₹ 46.00 सभी ₹ 0.00 0 ₹ 0.00 30122016 49 आई स 398:भाग 1:1996 1 टि ₹ 53,000.00 ₹ 43,000.00 ₹ 34.60 सभी ₹ 0.00 0 ₹ 0.00 30122016 50 आई स 398:भाग 2:1996 1 टि ₹ 53,000.00 ₹ 43,000.00 ₹ 90.00 सभी ₹ 0.00 0 ₹ 0.00 30122016 51 आई स 411:1991 100 ाक.र्ग्ा ₹ 46,000.00 ₹ 37,000.00 ₹ 1.40 सभी ₹ 0.00 0 ₹ 0.00 24082016 52 आई स 418:2004 100 पीस ₹ 1,57,000.00 ₹ 1,26,000.00 ₹ 1.60 सभी ₹ 0.00 0 ₹ 0.00 28072017 53 आई स 419:1967 1 ीटर/ ाक.र्ग्ा ₹ 49,000.00 ₹ 40,000.00 ₹ 0.05 सभी ₹ 0.00 0 ₹ 0.00 20122016 54 आई स 427:2013 1 ीटर/1 ाक.र्ग्ा. ₹ 68,000.00 ₹ 55,000.00 ₹ 0.26 सभी ₹ 0.00 0 ₹ 0.00 20122016 55 आई स 428:2013 1 ीटर/1 ाक.र्ग्ा. ₹ 68,000.00 ₹ 55,000.00 ₹ 0.26 सभी ₹ 0.00 0 ₹ 0.00 20122016 56 आई स 432:भाग 1:1982 1 टि ₹ 47,000.00 ₹ 38,000.00 ₹ 3.00 सभी ₹ 0.00 0 ₹ 0.00 30122016 57 आई स 432:भाग2:1982 1 टि ₹ 53,000.00 ₹ 43,000.00 ₹ 3.00 सभी ₹ 0.00 0 ₹ 0.00 30122016"
+    },
+    {
+      "source_file": "market-surveillance-guidelines.pdf",
+      "document_title": "Guidelines for Market Surveillance During Operation of Licence Under Scheme-I",
+      "clause_ref": "ANNEXURE-I",
+      "scheme": "Scheme-I (Surveillance)",
+      "doc_type": "Post-Market Surveillance Procedures",
+      "page_number": 10,
+      "effective_date": "2021-06-15",
+      "sha256": "e2fb91aa4f7d98f2afa9f8ec32bdf6a580a6bfd309bb6bcc4a4f16da08b6e771",
+      "text": "Such samples are to be brought to the notice of Head BO & dealing officer for appropriate action(s), including enforcement actions, if any."
+    },
+    {
+      "source_file": "scheme1-specific-guidelines.pdf",
+      "document_title": "Product-Specific Guidelines for Grant of Licence Under Scheme-I (Cement, Refractories & Steel)",
+      "clause_ref": "5.",
+      "scheme": "Scheme-I (Specific Guidelines)",
+      "doc_type": "Product-Specific Engineering Guidelines",
+      "page_number": 2,
+      "effective_date": "2022-03-01",
+      "sha256": "b55209c480fdfbbd60aeb32dd5823bed6b7b2963a60a7dc9fc222dd889d954fe",
+      "text": "5. Oil Pressure Stoves (Q.C) Order, 199736 IS 2787 Multi-burner oil pressure stoves37 IS 1342 Oil pressure stoves 38 IS 13098 Automotive vehicles -Tubes for pneumatic tyres39 IS 15627 Automotive vehicles- Pneumatic tyres for two and three-wheeled motor vehicles40 IS 15633 Automotive vehicles-Pneumatic tyres for passenger car vehicles- Diagonal and radial ply41 IS 15636 Automotive vehicles- Pneumatic tyres for commercial vehicles-Diagonal and radial ply 42 IS 14899 Liquefied petroleum gas containers for automotive use"
+    }
+  ]
+}

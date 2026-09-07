@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { useTranslation } from '../../i18n/useTranslation';
-import { X, Eye, Headphones, CheckCircle2, Volume2 } from 'lucide-react';
+import { X, Eye, Headphones, CheckCircle2, Volume2, ExternalLink } from 'lucide-react';
 
 export const ScreenReaderModal: React.FC = () => {
   const { screenReaderModalOpen, setScreenReaderModalOpen } = useAppStore();
@@ -43,20 +43,49 @@ export const ScreenReaderModal: React.FC = () => {
           <div className="bg-paper-light border border-line rounded p-4 space-y-3">
             <h3 className="font-semibold text-xs uppercase tracking-wider text-brass flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              {language === 'hi' ? 'समर्थित स्क्रीन रीडर्स' : 'Supported Screen Readers'}
+              {language === 'hi' ? 'समर्थित स्क्रीन रीडर्स एवं सेटअप गाइड' : 'Supported Screen Readers & Setup Guidance'}
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-              <div className="p-2 bg-white rounded border border-line/60">
-                <span className="font-semibold block">NVDA (Windows)</span>
-                <span className="text-stone-500">Free / Open Source</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+              <div className="p-3 bg-white rounded border border-line/60 flex flex-col justify-between space-y-2">
+                <div>
+                  <span className="font-bold text-ink block">NVDA (Windows)</span>
+                  <span className="text-stone-500 text-[11px]">Free & Open Source</span>
+                </div>
+                <a
+                  href="https://www.nvaccess.org/download/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] text-indigo-deep hover:text-brass font-medium underline"
+                  aria-label="Download NVDA Screen Reader (external link)"
+                >
+                  <span>Download NVDA</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
-              <div className="p-2 bg-white rounded border border-line/60">
-                <span className="font-semibold block">JAWS (Windows)</span>
-                <span className="text-stone-500">Commercial Standard</span>
+              <div className="p-3 bg-white rounded border border-line/60 flex flex-col justify-between space-y-2">
+                <div>
+                  <span className="font-bold text-ink block">JAWS (Windows)</span>
+                  <span className="text-stone-500 text-[11px]">Commercial Standard</span>
+                </div>
+                <a
+                  href="https://www.freedomscientific.com/products/software/jaws/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] text-indigo-deep hover:text-brass font-medium underline"
+                  aria-label="Freedom Scientific JAWS Software (external link)"
+                >
+                  <span>JAWS Official Info</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
-              <div className="p-2 bg-white rounded border border-line/60">
-                <span className="font-semibold block">VoiceOver (macOS/iOS)</span>
-                <span className="text-stone-500">Built-in Apple Screen Reader</span>
+              <div className="p-3 bg-white rounded border border-line/60 flex flex-col justify-between space-y-2">
+                <div>
+                  <span className="font-bold text-ink block">VoiceOver</span>
+                  <span className="text-stone-500 text-[11px]">macOS & iOS Built-in</span>
+                </div>
+                <span className="text-[10.5px] text-stone-600 font-mono">
+                  Cmd + F5 to activate
+                </span>
               </div>
             </div>
           </div>

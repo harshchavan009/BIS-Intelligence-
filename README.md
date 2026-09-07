@@ -175,3 +175,24 @@ The Analytics telemetry and evaluation metrics are protected by an institutional
 - **Institutional Legal Footer**: Persistent navy/brass footer on every page with active modal dialogs for Terms of Use (prototype disclaimer), Privacy Policy, Accessibility Statement (WCAG AA), Hyperlinking Policy, Copyright, Sitemap, Feedback, and Grievance Officer.
 - **Security & Per-IP Rate Limiting**: All public endpoints enforce a 20 req/min sliding-window rate limit and input sanitization against XSS and prompt injection.
 - **Phase-2 Production Roadmap**: Complete institutional transition plan documented in [`ROADMAP.md`](./ROADMAP.md) covering automated gazette pipelines, live registry APIs, GIGW 3.0, Bhashini multilingual expansion, and STQC security certifications.
+
+---
+
+## 10. GIGW 3.0 Compliance, Governance & Sovereign Readiness
+
+| Criterion | Implementation Status | Regulatory / Standard Reference |
+| :--- | :--- | :--- |
+| **Skip to Main Content** | First focusable element (`.skip-link`) in DOM order on every route | GIGW 3.0 §5.2.1 / WCAG 2.1 AA (2.4.1) |
+| **Consistent Global Layout** | Identical accessible Header, Breadcrumbs & Institutional Footer across all 15 routes | GIGW 3.0 §4.1.2 |
+| **Persistent Text Sizing** | Dynamic `A-` / `A` / `A+` controls persisted across sessions in `localStorage` (`bis_font_size`) | GIGW 3.0 §5.3.4 |
+| **High Contrast Mode** | Recoloring for low vision with high-contrast text and borders without turning canvas black | GIGW 3.0 §5.3.3 / WCAG AAA Contrast |
+| **Screen Reader Access** | Direct official setup instructions and download links for NVDA and JAWS | GIGW 3.0 §5.1.4 |
+| **Bilingual Parity** | Full Hindi + English content across all routes, nav, breadcrumbs, search, and feature cards | Official Languages Act / GIGW 3.0 §3.1 |
+| **Crawlable Sitemap & Robots** | Visible interactive `/sitemap` route + static `/sitemap.xml` & `/robots.txt` | GIGW 3.0 §4.3.1 / SEO Best Practice |
+| **Help Center & Non-Technical Guide** | Interactive 5-tab user guide covering AI queries, standards finder, and gold verification | GIGW 3.0 §4.4.2 |
+| **Statutory Policy Disclosures** | Comprehensive 9-part policy suite: Security (VDP), Content Lifecycle, Cookies, and RTI process | GIGW 3.0 Chapter 6 / IT Act 2000 |
+| **Content Approval Workflow** | Cryptographic SHA-256 verification, regression evaluation, and Joint Director sign-off | Detailed in [`ROADMAP.md`](./ROADMAP.md) |
+| **Citizen Grievance SLA** | Formal initial redressal commitment within **5 working days** | GIGW 3.0 Citizen Charter |
+| **Sovereign Hosting & Data Localization** | 100% Indian data residency on NIC MeghRaj Government Cloud; zero external data transit | MeitY Guidelines on Cloud Procurement |
+| **Roadmap to Production Certification** | Mandatory STQC conformance audit and CERT-In empanelled VAPT certification planned before `.gov.in` launch | CERT-In Cyber Security Guidelines |
+

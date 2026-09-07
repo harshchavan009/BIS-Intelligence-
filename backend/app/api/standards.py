@@ -50,7 +50,7 @@ async def recommend_standards(request_data: StandardsRecommendRequest, request: 
             page_number=c["page_number"],
             excerpt=c["excerpt"],
             grounded=True,
-            score=c["score"]
+            score=c.get("score", 1.0)
         )
         for c in dense_chunks
     ]

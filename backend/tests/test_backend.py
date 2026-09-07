@@ -89,24 +89,29 @@ class TestBISBackend(unittest.TestCase):
         print("✓ Labs CBTF suggest passed:", len(data["eligible_msme_provisions"]), "provisions")
 
     def test_06_analytics_auth_gated(self):
-        # 1. Verify 401 when unauthenticated
-        unauth_resp = self.client.get("/api/analytics")
+        # 1. Verify public analytics is accessible without auth (Round 2 requirement)
+        public_resp = self.client.get("/api/analytics")
+        self.assertEqual(public_resp.status_code, 200)
+        data = public_resp.json()
+        self.assertGreaterEqual(data["documents_indexed"], 7)
+        self.assertGreaterEqual(data["chunks_stored"], 300)
+
+        # 2. Verify protected endpoint enforces 401 when unauthenticated
+        unauth_resp = self.client.get("/api/auth/verify")
         self.assertEqual(unauth_resp.status_code, 401)
         self.assertIn("Authentication required", unauth_resp.json()["detail"])
 
-        # 2. Authenticate as Evaluator
+        # 3. Authenticate as Evaluator
         login_resp = self.client.post("/api/auth/login", json={"username": "evaluator", "password": "bis_sih_2026"})
         self.assertEqual(login_resp.status_code, 200)
         token = login_resp.json()["token"]
         self.assertTrue(len(token) > 20)
 
-        # 3. Access with valid Evaluator session token
-        auth_resp = self.client.get("/api/analytics", headers={"Authorization": f"Bearer {token}"})
+        # 4. Access protected endpoint with valid Evaluator session token
+        auth_resp = self.client.get("/api/auth/verify", headers={"Authorization": f"Bearer {token}"})
         self.assertEqual(auth_resp.status_code, 200)
-        data = auth_resp.json()
-        self.assertGreaterEqual(data["documents_indexed"], 7)
-        self.assertGreaterEqual(data["chunks_stored"], 300)
-        print("✓ Auth-gated Analytics passed: 401 unauth enforced, 200 with evaluator token")
+        self.assertEqual(auth_resp.json()["authenticated"], True)
+        print("✓ Public analytics and auth-gated endpoints both passed")
 
     def test_06b_security_headers(self):
         resp = self.client.get("/api/health")

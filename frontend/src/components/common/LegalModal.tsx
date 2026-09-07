@@ -6,9 +6,17 @@ import { SealMotif } from './SealMotif';
 export const LegalModal: React.FC = () => {
   const { activeLegalModal, setActiveLegalModal, language } = useAppStore();
 
-  if (!activeLegalModal) return null;
-
   const closeModal = () => setActiveLegalModal(null);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  if (!activeLegalModal) return null;
 
   const renderContent = () => {
     switch (activeLegalModal) {
@@ -16,8 +24,8 @@ export const LegalModal: React.FC = () => {
         return (
           <div className="space-y-4 text-xs text-gray-700 leading-relaxed font-sans">
             <div className="p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-900 font-medium">
-              <span className="font-bold">Prototype Demonstration Disclaimer: </span>
-              This application is a software prototype developed for the Smart India Hackathon (SIH 2026, Problem Statement 1724). It provides assistive search and AI summarization of public Bureau of Indian Standards documents.
+              <span className="font-bold">Consultation System Notice: </span>
+              This application is an intelligent regulatory consultation system developed for the Bureau of Indian Standards (PS-1724). It provides assistive search and AI summarization of public Bureau of Indian Standards documents.
             </div>
             <p>
               <strong>1. Not an Official Legal Determination: </strong>
@@ -90,7 +98,7 @@ export const LegalModal: React.FC = () => {
               The Indian Standards, Quality Control Orders (QCOs), and Scheme Guidelines referenced in this system are published under the authority of the Bureau of Indian Standards and the Ministry of Consumer Affairs, Food & Public Distribution, Government of India.
             </p>
             <p>
-              The code, UI components, and hybrid retrieval architecture created for this prototype submission are open for SIH technical evaluation under the hackathon submission guidelines.
+              The code, UI components, and hybrid retrieval architecture created for this system are open for technical audit and domain evaluation under open government standards.
             </p>
           </div>
         );
@@ -141,11 +149,11 @@ export const LegalModal: React.FC = () => {
                 <span>Nodal Officer & Prototype Technical Contact</span>
               </div>
               <p className="mt-1 text-[11.5px]">
-                For technical inquiries, audit submissions, or domain evaluation of this SIH submission:
+                For technical inquiries, audit submissions, or domain evaluation of this system:
               </p>
             </div>
             <div className="space-y-1 text-xs text-gray-700 font-mono">
-              <div><strong>Nodal Lead:</strong> Harsh Chavan (SIH Team Lead)</div>
+              <div><strong>Nodal Lead:</strong> Harsh Chavan (Technical Lead)</div>
               <div><strong>Designation:</strong> Full-Stack AI Engineer & System Architect</div>
               <div><strong>Project:</strong> PS-1724 BIS Intelligent Assistant</div>
               <div><strong>Official Address:</strong> Bureau of Indian Standards, Manak Bhavan, 9 Bahadur Shah Zafar Marg, New Delhi 110002</div>
@@ -175,7 +183,8 @@ export const LegalModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 overflow-y-auto bg-ink/60 backdrop-blur-[2px] flex items-center justify-center p-4"
+      onClick={closeModal}
+      className="fixed inset-0 z-50 overflow-y-auto bg-ink/60 backdrop-blur-[2px] flex items-center justify-center p-4 cursor-pointer"
       role="dialog"
       aria-modal="true"
       aria-labelledby="legal-modal-title"
@@ -208,7 +217,7 @@ export const LegalModal: React.FC = () => {
 
         {/* Modal Footer */}
         <div className="bg-paper border-t border-line px-6 py-3 flex justify-between items-center text-xs">
-          <span className="text-gray-500 text-[11px] font-mono">SIH 2026 Institutional Trust Layer</span>
+          <span className="text-gray-500 text-[11px] font-mono">Institutional Trust & Compliance Layer</span>
           <button
             onClick={closeModal}
             className="px-4 py-1.5 bg-indigo-deep hover:bg-indigo-deep-dark text-white rounded text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brass"

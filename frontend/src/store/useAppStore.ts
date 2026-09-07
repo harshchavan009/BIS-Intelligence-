@@ -24,7 +24,9 @@ export type ActiveTab =
   | 'contact'
   | 'policies'
   | 'analytics' 
-  | 'about';
+  | 'about'
+  | 'help'
+  | 'sitemap';
 
 export type LegalModalType = 
   | 'terms' 
@@ -84,7 +86,18 @@ interface AppState {
   // Evaluator Auth
   adminToken: string | null;
   setAdminToken: (token: string | null) => void;
+
+  // GIGW Cookie / Local Storage Consent
+  cookieConsentDismissed: boolean;
+  setCookieConsentDismissed: (dismissed: boolean) => void;
 }
+
+const getStoredCookieConsent = (): boolean => {
+  try {
+    return localStorage.getItem('bis_cookie_consent') === 'true';
+  } catch (e) {}
+  return false;
+};
 
 const getStoredFontSize = (): FontSizeOption => {
   try {
@@ -194,5 +207,13 @@ export const useAppStore = create<AppState>((set) => ({
       else localStorage.removeItem('bis_evaluator_token');
     } catch (e) {}
     set({ adminToken });
+  },
+
+  cookieConsentDismissed: getStoredCookieConsent(),
+  setCookieConsentDismissed: (cookieConsentDismissed) => {
+    try {
+      localStorage.setItem('bis_cookie_consent', String(cookieConsentDismissed));
+    } catch (e) {}
+    set({ cookieConsentDismissed });
   }
 }));

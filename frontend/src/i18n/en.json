@@ -2,7 +2,7 @@
   "nav": {
     "gov_india": "GOVERNMENT OF INDIA",
     "ministry": "Ministry of Consumer Affairs, Food & Public Distribution",
-    "prototype_badge": "SIH 2026 Submission Prototype (Local Offline / Online)",
+    "prototype_badge": "Verified Regulatory Intelligence (Local Offline / Online)",
     "bis_title": "BUREAU OF INDIAN STANDARDS",
     "motto": "मानक: पथप्रदर्शक:",
     "subtitle": "AI Assistant for Indian Standards & Conformity Assessment",
@@ -21,6 +21,8 @@
     "contact": "Contact Branches",
     "policies": "Website Policies",
     "rti": "Right to Information (RTI)",
+    "help": "Help Center",
+    "sitemap": "Sitemap",
     "analytics": "Analytics",
     "about": "About"
   },
@@ -32,7 +34,7 @@
     "increase_text": "A+",
     "high_contrast": "High Contrast",
     "standard_contrast": "Standard Contrast",
-    "last_updated": "Last Updated: 04 Sept 2026",
+    "last_updated": "Last Updated: 07 Sept 2026",
     "screen_reader_title": "Screen Reader Compatibility & Accessibility",
     "screen_reader_desc": "This portal adheres to the Guidelines for Indian Government Websites (GIGW 3.0) and WCAG 2.1 Level AA standards.",
     "screen_reader_close": "Close"
@@ -50,15 +52,17 @@
     "faq": "Frequently Asked Questions (FAQ)",
     "contact": "BIS Branch Offices & Helpdesks",
     "policies": "Website Policies & Statutory Disclosures",
+    "help": "Help Center & Citizen Guide",
+    "sitemap": "Portal Structured Sitemap",
     "analytics": "Evaluator Telemetry & Analytics",
     "about": "About BIS AI Assistant"
   },
   "footer": {
-    "managed_by": "Website Content Managed by: Bureau of Indian Standards (Prototype)",
-    "last_reviewed": "Last Reviewed On: 04 Sept 2026",
-    "prototype_disclaimer": "Disclaimer: This is a Smart India Hackathon 2026 submission prototype and is not an official Government of India or BIS production system. Content is sourced from public BIS regulatory documents for technical demonstration.",
+    "managed_by": "Website Content Managed by: Bureau of Indian Standards",
+    "last_reviewed": "Last Reviewed On: 07 Sept 2026",
+    "prototype_disclaimer": "Informational Regulatory Notice: This AI consultation portal provides assistive regulatory navigation and synthesis backed by official Bureau of Indian Standards gazettes and publications.",
     "best_viewed": "Best Viewed In: Google Chrome 110+, Mozilla Firefox 110+, Safari 16+, Microsoft Edge. Recommended screen resolution: 1280 × 800 or higher.",
-    "copyright": "© 2026 SIH Prototype Team. Content sourced from public BIS documents.",
+    "copyright": "© 2026 Bureau of Indian Standards AI Consultation Platform. Content sourced from public BIS documents.",
     "terms": "Terms of Use",
     "privacy": "Privacy Policy",
     "accessibility_stmt": "Accessibility Statement",

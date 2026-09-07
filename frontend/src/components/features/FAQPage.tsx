@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { useTranslation } from '../../i18n/useTranslation';
 import { HelpCircle, ChevronDown, ChevronUp, ArrowRight, ShieldCheck, DollarSign, Clock, FileCheck } from 'lucide-react';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 
 interface FAQItem {
   id: string;
@@ -103,6 +105,51 @@ const FAQ_DATA: FAQItem[] = [
     aEn: "Section 29 of the BIS Act, 2016 prescribes stringent criminal penalties for unauthorized use of standard marks, including imprisonment up to two years, a fine of not less than ₹2,00,000 (which may extend to ten times the value of goods), and confiscation of entire inventory.",
     aHi: "बीआईएस अधिनियम 2016 की धारा 29 के तहत दो साल तक का कारावास, न्यूनतम ₹2,00,000 जुर्माना (या माल के मूल्य का 10 गुना) और पूरा स्टॉक जब्त करने का कड़ा कानूनी प्रावधान है।",
     highlight: "Section 29: Up to 2 years imprisonment + 10x fine"
+  },
+  {
+    id: "faq-11",
+    category: "Process & Cost",
+    qEn: "How long is a Scheme-I ISI Mark licence initially granted for, and how is it renewed?",
+    qHi: "स्कीम-I आईएसआई मार्क लाइसेंस शुरू में कितने समय के लिए दिया जाता है, और इसका नवीनीकरण कैसे होता है?",
+    aEn: "Under Regulation 7 of the Conformity Assessment Regulations 2018, a Scheme-I licence is initially granted for a minimum period of 1 year. Upon satisfactory compliance history and factory audit records, it can be renewed for up to 5 years at a time.",
+    aHi: "अनुरूपता निर्धारण विनियम 2018 के विनियमन 7 के तहत, स्कीम-I लाइसेंस शुरू में न्यूनतम 1 वर्ष के लिए दिया जाता है। संतोषजनक अनुपालन पर इसे एक बार में 5 वर्ष तक नवीनीकृत किया जा सकता है।",
+    highlight: "Initial: 1 year | Renewal: up to 5 years"
+  },
+  {
+    id: "faq-12",
+    category: "Mandatory",
+    qEn: "How can consumers lodge complaints against sub-standard ISI marked goods?",
+    qHi: "उपभोक्ता घटिया आईएसआई चिह्नित उत्पादों के खिलाफ शिकायत कैसे दर्ज करा सकते हैं?",
+    aEn: "Consumers can lodge complaints directly through the official BIS CARE mobile app ('Lodge Complaint' feature), via the public grievance portal on bis.gov.in, or by emailing complaints@bis.gov.in. BIS conducts investigation testing and takes punitive enforcement action.",
+    aHi: "उपभोक्ता बीआईएस केयर मोबाइल ऐप ('शिकायत दर्ज करें' फीचर), पोर्टल (bis.gov.in) पर या complaints@bis.gov.in पर ईमेल करके शिकायत दर्ज करा सकते हैं। बीआईएस जांच परीक्षण करता है और कानूनी कार्रवाई करता है।",
+    highlight: "BIS CARE App: 1-Click Grievance Filing"
+  },
+  {
+    id: "faq-13",
+    category: "Process & Cost",
+    qEn: "Can multiple product models be covered under a single Scheme-II CRO registration?",
+    qHi: "क्या एक ही स्कीम-II पंजीकरण के तहत कई इलेक्ट्रॉनिक मॉडलों को शामिल किया जा सकता है?",
+    aEn: "Yes. Under BIS 'Series Guidelines' for CRO, if models share identical safety-critical components, PCB architecture, and enclosure design, they can be grouped into a single series registration based on a lead model test report, saving significant testing fees.",
+    aHi: "हाँ। सीआरओ के 'श्रृंखला दिशानिर्देश' के तहत, यदि मॉडल समान सुरक्षा घटकों और डिजाइन को साझा करते हैं, तो उन्हें एक मुख्य मॉडल की रिपोर्ट के आधार पर एक ही श्रृंखला में समूहीकृत किया जा सकता है।",
+    highlight: "Series Guidelines save up to 60% testing cost"
+  },
+  {
+    id: "faq-14",
+    category: "Mandatory",
+    qEn: "What is the mandatory standard for TMT steel reinforcement bars in India?",
+    qHi: "भारत में टीएमटी स्टील सुदृढीकरण बार के लिए अनिवार्य मानक क्या है?",
+    aEn: "IS 1786: 2008 covers High Strength Deformed Steel Bars and Wires for Concrete Reinforcement (TMT bars). It is strictly mandatory under the Steel and Steel Products (Quality Control) Order, 2020.",
+    aHi: "IS 1786: 2008 कंक्रीट सुदृढीकरण के लिए उच्च शक्ति वाले स्टील बार और तारों (टीएमटी बार) को कवर करता है। यह इस्पात और इस्पात उत्पाद (गुणवत्ता नियंत्रण) आदेश, 2020 के तहत अनिवार्य है।",
+    highlight: "IS 1786: 2008 (Steel QCO 2020)"
+  },
+  {
+    id: "faq-15",
+    category: "MSME Support",
+    qEn: "Where can manufacturers get their products tested for BIS certification?",
+    qHi: "निर्माता बीआईएस प्रमाणन के लिए अपने उत्पादों का परीक्षण कहाँ करा सकते हैं?",
+    aEn: "Testing can be performed at the BIS Central Laboratory (Sahibabad), Regional Laboratories (Chennai, Kolkata, Mohali, Mumbai), or any of the 150+ BIS-recognized and NABL-accredited commercial test laboratories listed on the LIMS portal.",
+    aHi: "परीक्षण बीआईएस केंद्रीय प्रयोगशाला (साहिबाबाद), 4 क्षेत्रीय प्रयोगशालाओं या लिम्स (LIMS) पोर्टल पर सूचीबद्ध 150 से अधिक बीआईएस-मान्यता प्राप्त और एनएबीएल-प्रत्यायित प्रयोगशालाओं में कराया जा सकता है।",
+    highlight: "150+ BIS-Recognized & NABL Labs"
   }
 ];
 
@@ -118,21 +165,15 @@ export const FAQPage: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Header */}
-      <div className="bg-indigo-deep text-white rounded-lg p-6 sm:p-8 border border-brass/30 shadow-md">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-brass/20 text-brass border border-brass/40 text-xs font-mono mb-3">
-          <HelpCircle className="w-3.5 h-3.5" />
-          <span>{language === 'hi' ? 'सामान्य प्रश्नोत्तरी' : 'Citizen & MSME Help Center'}</span>
-        </div>
-        <h1 className="text-2xl sm:text-3xl font-serif-standard font-bold tracking-tight mb-2">
-          {language === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न (FAQ)' : 'Frequently Asked Questions (FAQ)'}
-        </h1>
-        <p className="text-stone-300 text-sm leading-relaxed">
-          {language === 'hi'
-            ? 'भारतीय मानकों, प्रमाणन शुल्क, समय-सीमा और एमएसएमई सुविधाओं से संबंधित महत्वपूर्ण व्यावहारिक प्रश्न।'
-            : 'Authoritative answers to the most common real-world questions on Indian Standards, licensing costs, timelines, and compliance.'}
-        </p>
-      </div>
+      {/* Unified Shared Header */}
+      <PageHeader
+        eyebrow={language === 'hi' ? 'सामान्य प्रश्नोत्तरी' : 'Citizen & MSME Help Center'}
+        title={language === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न (FAQ)' : 'Frequently Asked Questions (FAQ)'}
+        description={language === 'hi'
+          ? 'भारतीय मानकों, प्रमाणन शुल्क, समय-सीमा और एमएसएमई सुविधाओं से संबंधित महत्वपूर्ण व्यावहारिक प्रश्न।'
+          : 'Authoritative answers to the most common real-world questions on Indian Standards, licensing costs, timelines, and compliance.'}
+        icon={<HelpCircle className="w-5 h-5 text-brass" />}
+      />
 
       {/* Category Filter */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1">
@@ -156,9 +197,10 @@ export const FAQPage: React.FC = () => {
         {filteredFaqs.map((faq) => {
           const isOpen = openId === faq.id;
           return (
-            <div 
+            <Card 
               key={faq.id}
-              className="bg-white border border-line rounded-lg overflow-hidden transition-all shadow-sm"
+              padding="none"
+              className="overflow-hidden"
             >
               <button
                 onClick={() => setOpenId(isOpen ? null : faq.id)}
@@ -205,7 +247,7 @@ export const FAQPage: React.FC = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </Card>
           );
         })}
       </div>

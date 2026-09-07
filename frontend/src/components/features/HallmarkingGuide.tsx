@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { Gem, ShieldCheck, CheckCircle2, AlertCircle, ArrowRight, Smartphone, Info } from 'lucide-react';
-import { SealMotif } from '../common/SealMotif';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 import { SimulatedBadge } from '../common/SimulatedBadge';
 
 export const HallmarkingGuide: React.FC = () => {
@@ -44,34 +45,27 @@ export const HallmarkingGuide: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       {/* Header */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm">
-        <div className="flex items-center gap-2 mb-1">
-          <SealMotif size={20} />
-          <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
-            Precious Metals Conformity Framework
-          </span>
-        </div>
-        <h1 className="text-2xl font-serif text-ink">
-          {language === 'hi' ? 'सोने की हॉलमार्किंग एवं HUID सत्यापन' : 'Gold Hallmarking & HUID Verification'}
-        </h1>
-        <p className="text-xs text-ink-muted mt-1 max-w-3xl">
-          {language === 'hi'
+      <PageHeader
+        eyebrow="Precious Metals Conformity Framework"
+        title={language === 'hi' ? 'सोने की हॉलमार्किंग एवं HUID सत्यापन' : 'Gold Hallmarking & HUID Verification'}
+        description={
+          language === 'hi'
             ? 'सोने के आभूषणों पर अनिवार्य बीआईएस हॉलमार्क के 3 प्रतीक पहचानें और 6-अंकों के HUID कोड का सत्यापन करें।'
-            : 'Official guidance on mandatory hallmarking of gold jewellery and artefacts under the Bureau of Indian Standards Hallmarking Scheme.'}
-        </p>
-
+            : 'Official guidance on mandatory hallmarking of gold jewellery and artefacts under the Bureau of Indian Standards Hallmarking Scheme.'
+        }
+      >
         {/* Pluggable General Guidance Banner */}
-        <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-md flex items-center gap-2 text-xs text-amber-900">
+        <div className="p-3 bg-amber-50 border border-amber-200 rounded-md flex items-center gap-2 text-xs text-amber-900">
           <Info className="w-4 h-4 text-amber-600 flex-shrink-0" />
           <span>
             <strong>General Regulatory Guidance: </strong>
             This module provides general statutory guidance. Adding a dedicated hallmarking PDF to <code className="bg-white px-1 rounded font-mono text-[10.5px]">data/knowledge_base/</code> automatically indexes and lights up deep clause citations without code changes.
           </span>
         </div>
-      </div>
+      </PageHeader>
 
       {/* The 3 Essential Hallmark Symbols */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-4">
+      <Card padding="lg" className="space-y-4">
         <h3 className="text-sm font-bold text-ink font-serif">
           The 3 Mandatory Marks on Genuine BIS Hallmarked Gold Jewellery
         </h3>
@@ -122,17 +116,17 @@ export const HallmarkingGuide: React.FC = () => {
             </p>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* Interactive HUID Verifier */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-4">
+      <Card padding="lg" className="space-y-4">
         <h3 className="text-sm font-bold text-ink font-serif flex items-center gap-2">
           <Smartphone className="w-4 h-4 text-brass" />
           <span>Interactive HUID Verifier</span>
         </h3>
 
         {/* Simulated Badge Requirement 1.2 */}
-        <SimulatedBadge defaultExpanded={false} />
+        <SimulatedBadge defaultExpanded={true} />
 
         <p className="text-xs text-gray-600">
           Enter the 6-digit alphanumeric HUID stamped on any gold article to simulate hallmarking registry inspection:
@@ -237,7 +231,7 @@ export const HallmarkingGuide: React.FC = () => {
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

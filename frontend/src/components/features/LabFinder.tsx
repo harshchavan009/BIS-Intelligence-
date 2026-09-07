@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { FlaskConical, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck, BookOpen, Building2 } from 'lucide-react';
-import { SealMotif } from '../common/SealMotif';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 
 export const LabFinder: React.FC = () => {
   const { openSource, setQueryPrefill, setActiveTab, language } = useAppStore();
@@ -33,34 +34,27 @@ export const LabFinder: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       {/* Header */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm">
-        <div className="flex items-center gap-2 mb-1">
-          <SealMotif size={20} />
-          <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
-            MSME Testing Facility Framework (CMD-I/2:12:8)
-          </span>
-        </div>
-        <h1 className="text-2xl font-serif text-ink">
-          {language === 'hi' ? 'क्लस्टर आधारित परीक्षण सुविधा (CBTF) खोजक' : 'MSME Cluster Based Test Facility (CBTF) Finder'}
-        </h1>
-        <p className="text-xs text-ink-muted mt-1 max-w-3xl">
-          {language === 'hi'
+      <PageHeader
+        eyebrow="MSME Testing Facility Framework (CMD-I/2:12:8)"
+        title={language === 'hi' ? 'क्लस्टर आधारित परीक्षण सुविधा (CBTF) खोजक' : 'MSME Cluster Based Test Facility (CBTF) Finder'}
+        description={
+          language === 'hi'
             ? 'सूक्ष्म, लघु और मध्यम उद्यमों (MSMEs) के लिए साझा परीक्षण प्रयोगशाला दिशानिर्देश। जानें कि बिना भारी पूंजी निवेश के ISI मार्क हेतु परीक्षण कैसे साझा करें।'
-            : 'Operational guidelines for Micro, Small & Medium Enterprises (MSMEs) to utilize shared Cluster Based Test Facilities (CBTFs) as an alternative to setting up costly in-house testing labs for Scheme-I licensing.'}
-        </p>
-
+            : 'Operational guidelines for Micro, Small & Medium Enterprises (MSMEs) to utilize shared Cluster Based Test Facilities (CBTFs) as an alternative to setting up costly in-house testing labs for Scheme-I licensing.'
+        }
+      >
         {/* Honesty Banner: General Regulatory Scope */}
-        <div className="mt-4 p-2.5 bg-amber-50 border border-amber-200 rounded-md flex items-center gap-2 text-xs text-amber-900">
+        <div className="p-2.5 bg-amber-50 border border-amber-200 rounded-md flex items-center gap-2 text-xs text-amber-900">
           <BookOpen className="w-4 h-4 text-amber-600 flex-shrink-0" />
           <span>
             <strong>CBTF Guideline Scope: </strong>
             Shared cluster test provisions are grounded in official guidelines <em>CMD-I/2:12:8</em>. For sectors without an active cluster facility, the assistant identifies mandatory in-house tests that cannot be outsourced.
           </span>
         </div>
-      </div>
+      </PageHeader>
 
       {/* Product Input Card */}
-      <div className="bg-white border border-line rounded-lg p-5 shadow-paper-sm flex flex-col sm:flex-row items-center gap-3">
+      <Card padding="md" className="flex flex-col sm:flex-row items-center gap-3">
         <div className="flex-1 w-full">
           <label className="text-[11px] font-semibold text-gray-500 uppercase block mb-1">
             Specify Manufacturing Product / Sector:
@@ -82,12 +76,12 @@ export const LabFinder: React.FC = () => {
           <FlaskConical className="w-3.5 h-3.5" />
           <span>{loading ? 'Evaluating...' : 'Get CBTF Guidance'}</span>
         </button>
-      </div>
+      </Card>
 
       {data && (
         <div className="space-y-6">
           {/* Executive Overview Banner */}
-          <div className="p-5 bg-white border-l-4 border-l-brass border border-line rounded-lg shadow-paper-sm space-y-2">
+          <Card padding="md" className="border-l-4 border-l-brass space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-mono text-brass font-bold uppercase">
                 Regulatory Provision
@@ -105,11 +99,11 @@ export const LabFinder: React.FC = () => {
             <p className="text-sm font-serif text-ink leading-relaxed">
               {data.cbtf_guidance}
             </p>
-          </div>
+          </Card>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Eligible Concessions */}
-            <div className="bg-white border border-line rounded-lg p-5 shadow-paper-sm space-y-3">
+            <Card padding="md" className="space-y-3">
               <div className="flex items-center gap-2 text-indigo-deep font-serif font-bold text-sm">
                 <Building2 className="w-4 h-4 text-brass" />
                 <span>Eligible CBTF Provisions for MSMEs</span>
@@ -122,10 +116,10 @@ export const LabFinder: React.FC = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Card>
 
             {/* Mandatory Retained Tests */}
-            <div className="bg-white border border-line rounded-lg p-5 shadow-paper-sm space-y-3">
+            <Card padding="md" className="space-y-3">
               <div className="flex items-center gap-2 text-amber-900 font-serif font-bold text-sm">
                 <AlertTriangle className="w-4 h-4 text-amber-600" />
                 <span>Mandatory Retained In-House Tests</span>
@@ -141,11 +135,11 @@ export const LabFinder: React.FC = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Card>
           </div>
 
           {/* Verification Process */}
-          <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-4">
+          <Card padding="lg" className="space-y-4">
             <h3 className="text-sm font-bold text-ink font-serif flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-verified-green" />
               <span>How to Request BIS Joint Verification of a CBTF Lab</span>
@@ -171,7 +165,7 @@ export const LabFinder: React.FC = () => {
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
-          </div>
+          </Card>
         </div>
       )}
     </div>

@@ -21,7 +21,9 @@ import {
   Lock,
   ExternalLink,
   Shield,
-  Scale
+  Scale,
+  LifeBuoy,
+  Compass
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -43,7 +45,7 @@ export const Navbar: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close mobile menu on Esc key
+  // Close mobile menu or open dropdowns on Esc key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -54,6 +56,21 @@ export const Navbar: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  const handleItemKeyDown = (e: React.KeyboardEvent, index: number, total: number, prefix: string) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const next = document.getElementById(`${prefix}-item-${(index + 1) % total}`);
+      next?.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prev = document.getElementById(`${prefix}-item-${(index - 1 + total) % total}`);
+      prev?.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setOpenDropdown(null);
+    }
+  };
 
   const servicesItems: { id: ActiveTab; labelKey: string; descEn: string; descHi: string; icon: React.FC<{ className?: string }> }[] = [
     {
@@ -95,6 +112,13 @@ export const Navbar: React.FC = () => {
 
   const resourcesItems: { id: ActiveTab; labelKey: string; descEn: string; descHi: string; icon: React.FC<{ className?: string }> }[] = [
     {
+      id: 'help',
+      labelKey: 'nav.help',
+      descEn: 'Citizen step-by-step guide for AI search, standards finder, and lab locator',
+      descHi: 'एआई खोज, मानक खोजक और परीक्षण सुविधाओं हेतु नागरिक मार्गदर्शिका',
+      icon: LifeBuoy
+    },
+    {
       id: 'glossary',
       labelKey: 'nav.glossary',
       descEn: 'Institutional definitions for standards, schemes, and conformity assessment terms',
@@ -121,11 +145,18 @@ export const Navbar: React.FC = () => {
       descEn: 'Terms of Use, Privacy, Accessibility (GIGW 3.0), Hyperlinking, and RTI disclosures',
       descHi: 'उपयोग की शर्तें, गोपनीयता, सुगमता (GIGW 3.0), हाइपरलिंकिंग और RTI प्रकटीकरण',
       icon: Scale
+    },
+    {
+      id: 'sitemap',
+      labelKey: 'nav.sitemap',
+      descEn: 'Structured crawlable directory of all portal routes, tools, and regulatory resources',
+      descHi: 'सभी पोर्टल पृष्ठों, उपकरणों और नियामक संसाधनों की श्रेणीबद्ध सूची',
+      icon: Compass
     }
   ];
 
   const isServicesActive = ['finder', 'schemes', 'labs', 'consumer', 'hallmarking'].includes(activeTab);
-  const isResourcesActive = ['glossary', 'faq', 'registry', 'policies'].includes(activeTab);
+  const isResourcesActive = ['help', 'glossary', 'faq', 'registry', 'policies', 'sitemap'].includes(activeTab);
 
   const navigateTo = (tab: ActiveTab) => {
     setActiveTab(tab);
@@ -193,9 +224,18 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
+      {/* Backdrop overlay when any dropdown is active */}
+      {openDropdown && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[1px] transition-opacity cursor-pointer animate-in fade-in duration-100"
+          onClick={() => setOpenDropdown(null)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* 4. Desktop Mega-Menu Navigation Bar (Structured into 7 Clean Groupings) */}
       <nav 
-        className="hidden lg:block bg-indigo-deep-dark/90 border-t border-white/10 px-4 sm:px-8 relative"
+        className="hidden lg:block bg-indigo-deep-dark/90 border-t border-white/10 px-4 sm:px-8 relative z-50"
         aria-label="Main Navigation"
       >
         <div className="max-w-7xl mx-auto flex items-center space-x-1 py-1 text-xs">
@@ -229,6 +269,13 @@ export const Navbar: React.FC = () => {
           <div className="relative">
             <button
               onClick={() => setOpenDropdown(openDropdown === 'services' ? null : 'services')}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowDown') {
+                  e.preventDefault();
+                  setOpenDropdown('services');
+                  setTimeout(() => document.getElementById('services-item-0')?.focus(), 50);
+                }
+              }}
               className={`px-3 py-2 rounded-md font-medium transition-all flex items-center gap-1.5 ${
                 isServicesActive || openDropdown === 'services'
                   ? 'bg-brass text-white shadow-sm font-semibold'
@@ -245,26 +292,31 @@ export const Navbar: React.FC = () => {
             {/* Services Mega-Menu Dropdown Panel */}
             {openDropdown === 'services' && (
               <div 
-                className="absolute left-0 top-full mt-1.5 w-80 sm:w-96 bg-white text-ink rounded-lg shadow-paper-lg border border-line p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
+                className="absolute left-0 top-full mt-2 w-80 sm:w-96 bg-white text-ink rounded-lg shadow-2xl border-2 border-line/80 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 ring-1 ring-black/10"
                 role="menu"
+                aria-label="Services Submenu"
               >
-                <div className="px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-400 border-b border-line/60">
-                  {language === 'hi' ? 'मानक एवं प्रमाणन सेवाएं' : 'Standards & Certification Services'}
+                <div className="px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-500 border-b border-line/60 flex items-center justify-between">
+                  <span>{language === 'hi' ? 'मानक एवं प्रमाणन सेवाएं' : 'Standards & Certification Services'}</span>
+                  <span className="text-[9px] font-sans text-gray-400 font-normal">Esc to close</span>
                 </div>
-                <div className="py-1 space-y-0.5">
-                  {servicesItems.map((item) => {
+                <div className="py-1 space-y-1">
+                  {servicesItems.map((item, idx) => {
                     const Icon = item.icon;
                     const isCur = activeTab === item.id;
                     return (
                       <button
                         key={item.id}
+                        id={`services-item-${idx}`}
                         onClick={() => navigateTo(item.id)}
-                        className={`w-full text-left p-2.5 rounded-md transition-colors flex items-start gap-3 ${
-                          isCur ? 'bg-paper-dark border-l-2 border-brass' : 'hover:bg-paper'
+                        onKeyDown={(e) => handleItemKeyDown(e, idx, servicesItems.length, 'services')}
+                        className={`w-full text-left p-2.5 rounded-md transition-colors flex items-start gap-3 focus:outline-none focus:ring-2 focus:ring-brass ${
+                          isCur ? 'bg-paper-dark border-l-2 border-brass font-medium' : 'hover:bg-paper'
                         }`}
                         role="menuitem"
+                        tabIndex={0}
                       >
-                        <div className={`p-1.5 rounded ${isCur ? 'bg-brass text-white' : 'bg-paper text-indigo-deep'}`}>
+                        <div className={`p-1.5 rounded shrink-0 ${isCur ? 'bg-brass text-white' : 'bg-paper text-indigo-deep'}`}>
                           <Icon className="w-4 h-4" />
                         </div>
                         <div className="flex-1">
@@ -287,6 +339,13 @@ export const Navbar: React.FC = () => {
           <div className="relative">
             <button
               onClick={() => setOpenDropdown(openDropdown === 'resources' ? null : 'resources')}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowDown') {
+                  e.preventDefault();
+                  setOpenDropdown('resources');
+                  setTimeout(() => document.getElementById('resources-item-0')?.focus(), 50);
+                }
+              }}
               className={`px-3 py-2 rounded-md font-medium transition-all flex items-center gap-1.5 ${
                 isResourcesActive || openDropdown === 'resources'
                   ? 'bg-brass text-white shadow-sm font-semibold'
@@ -303,26 +362,31 @@ export const Navbar: React.FC = () => {
             {/* Resources Mega-Menu Dropdown Panel */}
             {openDropdown === 'resources' && (
               <div 
-                className="absolute left-0 top-full mt-1.5 w-80 sm:w-96 bg-white text-ink rounded-lg shadow-paper-lg border border-line p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
+                className="absolute left-0 top-full mt-2 w-80 sm:w-96 bg-white text-ink rounded-lg shadow-2xl border-2 border-line/80 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 ring-1 ring-black/10"
                 role="menu"
+                aria-label="Resources Submenu"
               >
-                <div className="px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-400 border-b border-line/60">
-                  {language === 'hi' ? 'नियामक संदर्भ एवं नीतियां' : 'Regulatory References & Governance'}
+                <div className="px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-500 border-b border-line/60 flex items-center justify-between">
+                  <span>{language === 'hi' ? 'नियामक संदर्भ एवं नीतियां' : 'Regulatory References & Governance'}</span>
+                  <span className="text-[9px] font-sans text-gray-400 font-normal">Esc to close</span>
                 </div>
-                <div className="py-1 space-y-0.5">
-                  {resourcesItems.map((item) => {
+                <div className="py-1 space-y-1">
+                  {resourcesItems.map((item, idx) => {
                     const Icon = item.icon;
                     const isCur = activeTab === item.id;
                     return (
                       <button
                         key={item.id}
+                        id={`resources-item-${idx}`}
                         onClick={() => navigateTo(item.id)}
-                        className={`w-full text-left p-2.5 rounded-md transition-colors flex items-start gap-3 ${
-                          isCur ? 'bg-paper-dark border-l-2 border-brass' : 'hover:bg-paper'
+                        onKeyDown={(e) => handleItemKeyDown(e, idx, resourcesItems.length, 'resources')}
+                        className={`w-full text-left p-2.5 rounded-md transition-colors flex items-start gap-3 focus:outline-none focus:ring-2 focus:ring-brass ${
+                          isCur ? 'bg-paper-dark border-l-2 border-brass font-medium' : 'hover:bg-paper'
                         }`}
                         role="menuitem"
+                        tabIndex={0}
                       >
-                        <div className={`p-1.5 rounded ${isCur ? 'bg-brass text-white' : 'bg-paper text-indigo-deep'}`}>
+                        <div className={`p-1.5 rounded shrink-0 ${isCur ? 'bg-brass text-white' : 'bg-paper text-indigo-deep'}`}>
                           <Icon className="w-4 h-4" />
                         </div>
                         <div className="flex-1">
@@ -514,7 +578,7 @@ export const Navbar: React.FC = () => {
 
             {/* Drawer Footer Notice */}
             <div className="p-3 bg-ink text-[10px] text-gray-400 font-mono border-t border-white/10 text-center">
-              SIH 2026 Submission Prototype • GIGW 3.0
+              Bureau of Indian Standards • GIGW 3.0 Compliant
             </div>
           </div>
         </div>

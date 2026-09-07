@@ -1,0 +1,6 @@
+# robots.txt for Bureau of Indian Standards AI Portal (GIGW 3.0 Compliant)
+User-agent: *
+Allow: /
+
+# Crawlable XML Sitemap
+Sitemap: https://bis-ai.gov.in/sitemap.xml

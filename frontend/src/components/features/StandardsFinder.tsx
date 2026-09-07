@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { Search, ShieldAlert, CheckCircle, ExternalLink, ArrowRight, Filter, BookOpen } from 'lucide-react';
-import { SealMotif } from '../common/SealMotif';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 
 interface StandardItem {
   is_number: string;
@@ -69,29 +70,16 @@ export const StandardsFinder: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-      {/* Header */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <SealMotif size={20} />
-              <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
-                Institutional Product-to-Standard Engine
-              </span>
-            </div>
-            <h1 className="text-2xl font-serif text-ink">
-              {language === 'hi' ? 'भारतीय मानक एवं QCO खोजक' : 'Indian Standards & Mandatory QCO Finder'}
-            </h1>
-            <p className="text-xs text-ink-muted">
-              {language === 'hi'
-                ? 'उत्पाद का नाम या IS नंबर दर्ज करें। सटीक मिलान और अनिवार्य गुणवत्ता नियंत्रण आदेश (QCO) की स्थिति देखें।'
-                : 'Search product descriptions or IS numbers to view mandatory QCO orders, applicable schemes, and gazette references.'}
-            </p>
-          </div>
-        </div>
-
+      {/* Shared Unified Header */}
+      <PageHeader
+        eyebrow={language === 'hi' ? 'संस्थागत उत्पाद-से-मानक इंजन' : 'Institutional Product-to-Standard Engine'}
+        title={language === 'hi' ? 'भारतीय मानक एवं QCO खोजक' : 'Indian Standards & Mandatory QCO Finder'}
+        description={language === 'hi'
+          ? 'उत्पाद का नाम या IS नंबर दर्ज करें। सटीक मिलान और अनिवार्य गुणवत्ता नियंत्रण आदेश (QCO) की स्थिति देखें।'
+          : 'Search product descriptions or IS numbers to view mandatory QCO orders, applicable schemes, and gazette references.'}
+      >
         {/* Search Bar */}
-        <div className="mt-5 flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <div className="relative flex-1">
             <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-3" />
             <input
@@ -100,13 +88,13 @@ export const StandardsFinder: React.FC = () => {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch(query)}
               placeholder="e.g. cement bag, smart watch, TMT bars, IS 12330, LED lights, LPG cylinder..."
-              className="w-full pl-10 pr-4 py-2.5 bg-paper border border-line rounded-md text-sm text-ink placeholder:text-gray-400 focus:outline-none focus:border-brass focus:ring-1 focus:ring-brass"
+              className="w-full pl-10 pr-4 py-2.5 bg-paper border border-line rounded-md text-sm text-ink placeholder:text-gray-400 focus:outline-none focus:border-brass focus:ring-1 focus:ring-brass font-sans"
             />
           </div>
           <button
             onClick={() => handleSearch(query)}
             disabled={loading}
-            className="px-5 py-2.5 bg-indigo-deep hover:bg-indigo-deep-dark text-white rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5"
+            className="px-5 py-2.5 bg-indigo-deep hover:bg-indigo-deep-dark text-white rounded-md text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 shrink-0 shadow-sm"
           >
             <Search className="w-3.5 h-3.5" />
             <span>{loading ? 'Searching...' : 'Find My Standard'}</span>
@@ -139,7 +127,7 @@ export const StandardsFinder: React.FC = () => {
             Products marked <span className="font-bold text-red-700">Mandatory QCO</span> carry statutory gazette enforcement. For voluntary standards or pilot categories not yet gazetted, the assistant provides general technical guidance.
           </span>
         </div>
-      </div>
+      </PageHeader>
 
         {/* Results Count & Filter Status */}
         <div className="flex flex-wrap justify-between items-center text-xs text-gray-500 px-1 gap-2">
@@ -197,9 +185,11 @@ export const StandardsFinder: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredResults.map((item, idx) => (
-            <div
+            <Card
               key={idx}
-              className="bg-white border border-line rounded-lg p-5 shadow-paper-sm hover:border-brass/50 transition-all flex flex-col justify-between space-y-4"
+              hover
+              padding="md"
+              className="flex flex-col justify-between space-y-4"
             >
               <div className="space-y-2">
                 <div className="flex items-start justify-between gap-2">
@@ -221,22 +211,27 @@ export const StandardsFinder: React.FC = () => {
                   {item.product_name}
                 </h3>
 
-                <div className="text-xs text-gray-500 space-y-1 pt-1 border-t border-line/40">
+                <div className="text-xs text-gray-500 space-y-1.5 pt-1.5 border-t border-line/40">
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Category:</span>
-                    <span className="font-medium text-ink">{item.category}</span>
+                    <span className="text-gray-400 shrink-0">Category:</span>
+                    <span className="font-medium text-ink text-right">{item.category}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Applicable Scheme:</span>
-                    <span className="font-medium text-indigo-deep">{item.scheme}</span>
+                    <span className="text-gray-400 shrink-0">Applicable Scheme:</span>
+                    <span className="font-medium text-indigo-deep text-right">{item.scheme}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Order Name:</span>
-                    <span className="font-medium text-ink truncate max-w-[240px]">{item.qco_name}</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                    <span className="text-gray-400 shrink-0">Order Name:</span>
+                    <span 
+                      className="font-medium text-ink text-left sm:text-right break-words hover:text-indigo-deep cursor-help transition-colors"
+                      title={`${item.qco_name} (Click to inspect source excerpt below)`}
+                    >
+                      {item.qco_name}
+                    </span>
                   </div>
                   {item.notification_ref && (
                     <div className="flex justify-between">
-                      <span className="text-gray-400">Notification Ref:</span>
+                      <span className="text-gray-400 shrink-0">Notification Ref:</span>
                       <span className="font-mono text-[11px] text-gray-600">{item.notification_ref}</span>
                     </div>
                   )}
@@ -244,10 +239,10 @@ export const StandardsFinder: React.FC = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-2 border-t border-line/60 flex items-center justify-between">
+              <div className="pt-2.5 border-t border-line/60 flex items-center justify-between">
                 <button
                   onClick={() => {
-                    setQueryPrefill(`What are the testing and certification requirements for ${item.product_name} (${item.is_number})?`);
+                    setQueryPrefill(`What are the testing and certification requirements for ${item.product_name} (${item.is_number}) under ${item.qco_name}?`);
                     setActiveTab('chat');
                   }}
                   className="text-xs text-indigo-deep hover:text-brass font-medium flex items-center gap-1 transition-colors"
@@ -257,14 +252,20 @@ export const StandardsFinder: React.FC = () => {
                 </button>
                 {sources.length > 0 && (
                   <button
-                    onClick={() => openSource(sources[0])}
+                    onClick={() => {
+                      const matchedSource = sources.find((s: any) => 
+                        s.excerpt?.toLowerCase().includes(item.is_number.toLowerCase()) || 
+                        s.excerpt?.toLowerCase().includes(item.product_name.toLowerCase())
+                      ) || sources[0];
+                      openSource(matchedSource);
+                    }}
                     className="text-[11px] text-gray-500 hover:text-ink underline"
                   >
                     View Source Clause
                   </button>
                 )}
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

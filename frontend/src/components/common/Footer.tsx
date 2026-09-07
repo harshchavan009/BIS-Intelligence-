@@ -54,13 +54,18 @@ export const Footer: React.FC = () => {
               <span>{t('footer.managed_by')}</span>
             </div>
             <div className="text-gray-400 font-mono text-[11px]">
-              {t('footer.last_reviewed')}
+              {language === 'hi' ? 'अंतिम समीक्षा तिथि: ' : 'Last Reviewed On: '}
+              {new Date().toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-GB', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+              })}
             </div>
           </div>
 
           <div className="flex items-center gap-2 pt-1 text-[11px] font-mono text-emerald-400">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Smart India Hackathon 2026 Submission Prototype</span>
+            <span>Bureau of Indian Standards AI Consultation Platform</span>
           </div>
         </div>
 
@@ -70,6 +75,22 @@ export const Footer: React.FC = () => {
             {language === 'hi' ? 'सिस्टम पारदर्शिता एवं नेविगेशन' : 'System Transparency & Docs'}
           </div>
           <ul className="space-y-1.5 text-xs text-gray-400">
+            <li>
+              <button 
+                onClick={() => setActiveTab('help')}
+                className="hover:text-brass transition-colors flex items-center gap-1 focus-visible:ring-1 focus-visible:ring-brass rounded"
+              >
+                <span>{language === 'hi' ? 'सहायता केंद्र एवं मार्गदर्शिका' : 'Help Center & Citizen Guide'}</span>
+              </button>
+            </li>
+            <li>
+              <button 
+                onClick={() => setActiveTab('sitemap')}
+                className="hover:text-brass transition-colors flex items-center gap-1 focus-visible:ring-1 focus-visible:ring-brass rounded"
+              >
+                <span>{language === 'hi' ? 'श्रेणीबद्ध साइटमैप' : 'Portal Sitemap'}</span>
+              </button>
+            </li>
             <li>
               <button 
                 onClick={() => setActiveTab('about')}
@@ -158,7 +179,7 @@ export const Footer: React.FC = () => {
             onClick={() => setActiveTab('policies')}
             className="text-brass hover:text-white font-semibold underline-offset-2 hover:underline transition-colors flex items-center gap-1 focus-visible:ring-1 focus-visible:ring-brass rounded"
           >
-            <span>{language === 'hi' ? 'वेबसाइट नीतियां (शर्तें / गोपनीयता / सुगमता)' : 'Website Policies (Terms / Privacy / GIGW)'}</span>
+            <span>{language === 'hi' ? 'वेबसाइट नीतियां (शर्तें / गोपनीयता / सुगमता / सुरक्षा)' : 'Website Policies (Terms / Privacy / Security / GIGW)'}</span>
           </button>
           <span className="text-gray-600 select-none">•</span>
           <button
@@ -179,10 +200,17 @@ export const Footer: React.FC = () => {
           </a>
           <span className="text-gray-600 select-none">•</span>
           <button
-            onClick={() => setActiveLegalModal('sitemap')}
+            onClick={() => setActiveTab('sitemap')}
             className="hover:text-white hover:underline transition-colors"
           >
             {t('footer.sitemap')}
+          </button>
+          <span className="text-gray-600 select-none">•</span>
+          <button
+            onClick={() => setActiveTab('help')}
+            className="hover:text-white hover:underline transition-colors"
+          >
+            {language === 'hi' ? 'सहायता केंद्र' : 'Help Center'}
           </button>
           <span className="text-gray-600 select-none">•</span>
           <button

@@ -2,61 +2,181 @@
   "Scheme-I": {
     "name": "Scheme – I (ISI Mark / Product Certification)",
     "governing_law": "Schedule II, Scheme I of BIS (Conformity Assessment) Regulations, 2018",
-    "scope": "Third-party certification mark (ISI Mark) granting license to manufacturers with established quality management and testing facilities.",
-    "eligibility": "Domestic and Foreign Manufacturers (FMCS). MSMEs eligible for Cluster Based Test Facility (CBTF) concessions.",
-    "concessions_msme": "Can share test facilities via CBTF under CMD-I/2:12:8 guidelines, up to 80% capital subsidy on testing infrastructure.",
-    "key_steps": [
-      "1. Identify applicable Indian Standard (IS) & check QCO mandatory status",
-      "2. Set up internal testing lab or link to verified CBTF cluster",
-      "3. Submit application online on Manakonline portal with Form-V & test reports",
-      "4. Preliminary factory inspection & sample drawing by BIS audit officer",
-      "5. Independent testing of drawn sample in BIS recognized lab",
-      "6. Grant of License (CML) and permission to affix ISI Mark",
-      "7. Ongoing market and factory surveillance"
+    "scope": "Third-party certification mark (ISI Mark) granting license to manufacturers with established quality management systems and internal testing facilities.",
+    "eligibility": "Domestic and Foreign Manufacturers (FMCS). MSMEs are eligible for Cluster Based Test Facility (CBTF) concessions.",
+    "concessions_msme": "Can share test facilities via CBTF under CMD-I/2:12:8 guidelines, with up to 80% capital subsidy on testing infrastructure.",
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Standard Identification & Mandatory Status Check",
+        "clause_ref": "Regulation 3 & Section 16",
+        "description": "Identify applicable Indian Standard (IS) and verify if the product is covered under a mandatory Quality Control Order (QCO)."
+      },
+      {
+        "step_number": 2,
+        "title": "Testing Infrastructure Setup",
+        "clause_ref": "Clause 4.2 & CBTF Guidelines",
+        "description": "Establish an in-house laboratory equipped to perform tests specified in the Scheme of Inspection and Testing (SIT), or enter into an agreement with an approved CBTF."
+      },
+      {
+        "step_number": 3,
+        "title": "Online Application Submission (Form-V)",
+        "clause_ref": "Regulation 4, Form-V",
+        "description": "Submit application on Manakonline with manufacturing details, test reports of pilot samples, fee payment, and factory layout."
+      },
+      {
+        "step_number": 4,
+        "title": "Factory Audit & Sample Drawing",
+        "clause_ref": "Regulation 5",
+        "description": "BIS audit officer visits manufacturing premises to verify manufacturing capability, quality control system, and draw verification samples."
+      },
+      {
+        "step_number": 5,
+        "title": "Independent Testing in BIS-Recognized Lab",
+        "clause_ref": "Regulation 6",
+        "description": "Drawn samples are sealed and sent to a BIS or NABL-accredited recognized laboratory for comprehensive compliance testing."
+      },
+      {
+        "step_number": 6,
+        "title": "Grant of Licence (CML)",
+        "clause_ref": "Regulation 7 & Schedule-II",
+        "description": "Upon receipt of passing test reports and satisfactory factory audit, Certification Marks Licence (CML) is issued allowing ISI Mark use."
+      },
+      {
+        "step_number": 7,
+        "title": "Periodic Market & Factory Surveillance",
+        "clause_ref": "CMD-I/2:12:7",
+        "description": "BIS conducts periodic unannounced factory inspections and market surveillance sample drawings to verify continuous compliance."
+      }
     ],
-    "timelines": "Normal process: 30–60 days. Simplified procedure for MSMEs: 30 days."
+    "timelines": "Normal process: 30 to 60 days. Simplified procedure for MSMEs: 30 days.",
+    "fee_structure": "Application fee: Rs. 1,000; Annual licence fee: Rs. 1,000; Marking fee: Product-specific slab rate (50% concession for Micro enterprises, 20% for Small)."
   },
   "Scheme-II": {
     "name": "Scheme – II (Compulsory Registration Scheme / CRO)",
     "governing_law": "Schedule II, Scheme II of BIS (Conformity Assessment) Regulations, 2018",
-    "scope": "Self-declaration of conformity based on test reports from BIS-recognized labs for Electronics, IT Goods, Solar PV, and Smart Devices.",
-    "eligibility": "Manufacturers of goods notified under MeitY and DPIIT CRO notifications.",
-    "key_steps": [
-      "1. Test product sample in a BIS recognized / accredited lab (report valid for 90 days)",
-      "2. Register online on CRS portal (crsbis.in)",
-      "3. Submit self-declaration of conformity along with valid test report and undertaking",
-      "4. Grant of Registration with unique R-number",
-      "5. Affix standard mark 'IS... R-XXXXXXXX' on product packaging and label"
+    "scope": "Self-declaration of conformity based on test reports from BIS-recognized labs for Electronics, IT Goods, Solar PV, and Smart Connected Devices.",
+    "eligibility": "Manufacturers of electronic and IT goods notified under MeitY and DPIIT CRO notifications.",
+    "concessions_msme": "Standard online self-declaration process with no mandatory pre-grant factory audit.",
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Product Sample Testing in BIS-Recognized Lab",
+        "clause_ref": "Clause 4.1",
+        "description": "Manufacturer submits product sample to an accredited lab. The resulting test report is valid for 90 days from the date of issue."
+      },
+      {
+        "step_number": 2,
+        "title": "CRS Portal Registration",
+        "clause_ref": "Clause 4.2",
+        "description": "Create manufacturer account on crsbis.in portal; foreign manufacturers must appoint an Authorized Indian Representative (AIR)."
+      },
+      {
+        "step_number": 3,
+        "title": "Submission of Self-Declaration & Undertaking",
+        "clause_ref": "Clause 5.1 & Form-VI",
+        "description": "Upload test report, Affidavit cum Undertaking (Form-VI), brand endorsement letter, and pay statutory registration fees."
+      },
+      {
+        "step_number": 4,
+        "title": "Scrutiny by Central Registration Department",
+        "clause_ref": "Clause 6.1",
+        "description": "BIS CRD officers review the test report compliance and model series grouping documents."
+      },
+      {
+        "step_number": 5,
+        "title": "Grant of Registration Number (R-Number)",
+        "clause_ref": "Clause 7.1",
+        "description": "Unique R-Number (e.g. R-41000000) is generated, granting authority to affix the Standard Mark: 'IS... R-XXXXXXXX'."
+      }
     ],
-    "timelines": "15–20 working days upon receipt of complete test report."
+    "timelines": "15 to 20 working days upon submission of a complete test report.",
+    "fee_structure": "Application fee: Rs. 1,000 per model; Processing fee: Rs. 50,000 per brand for 2 years (concessional rates apply for additional models)."
   },
   "Scheme-IV": {
     "name": "Scheme – IV (Certificate of Conformity / CoC)",
     "governing_law": "Schedule II, Scheme IV of BIS (Conformity Assessment) Regulations, 2018 (CMD-I/2:16:1)",
-    "scope": "Grant of Certificate of Conformity for specific batches or continuous production where full factory licensing under Scheme-I is not optimal.",
-    "eligibility": "Manufacturers or applicants meeting technical specifications or specific notifications.",
-    "key_steps": [
-      "1. Submit application along with product test report not older than 180 days (Clause 6.a)",
-      "2. Scrutiny of application and technical documents by BIS CMD-I",
-      "3. Factory assessment or inspection if stipulated in product-specific guidelines",
-      "4. Sample drawing & verification testing in BIS recognized laboratory",
-      "5. Evaluation of compliance against Annexure templates & declaration",
-      "6. Grant of Certificate of Conformity (valid for specified period / consignment)"
+    "scope": "Grant of Certificate of Conformity for specific production batches, consignments, or goods where full factory licensing under Scheme-I is not optimal.",
+    "eligibility": "Manufacturers or applicants meeting technical specifications or notified under specific ministry orders (e.g. Cotton Bales, Technical Textiles).",
+    "concessions_msme": "Simplified batch testing procedures without mandatory permanent factory laboratory installation.",
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Application Submission with Valid Test Report",
+        "clause_ref": "Clause 6.a",
+        "description": "Submit application along with independent test report not older than 180 days from date of issue from a BIS recognized laboratory."
+      },
+      {
+        "step_number": 2,
+        "title": "Documentary Scrutiny by CMD-I",
+        "clause_ref": "Clause 6.b",
+        "description": "Review of technical specification, manufacturing records, batch size, and declaration of conformity."
+      },
+      {
+        "step_number": 3,
+        "title": "Consignment Verification or Factory Assessment",
+        "clause_ref": "Clause 7.1",
+        "description": "If stipulated by product guidelines, a BIS inspecting officer inspects the batch or production premises."
+      },
+      {
+        "step_number": 4,
+        "title": "Counter-Verification Sample Testing",
+        "clause_ref": "Clause 7.3",
+        "description": "Random verification sample is drawn from the consignment and sent for cross-testing if required by risk profile."
+      },
+      {
+        "step_number": 5,
+        "title": "Evaluation Against Annexure Standards",
+        "clause_ref": "Clause 8.1",
+        "description": "CMD-I evaluates all compliance data against the relevant Indian Standard benchmarks and test limits."
+      },
+      {
+        "step_number": 6,
+        "title": "Grant of Certificate of Conformity",
+        "clause_ref": "Clause 9.1",
+        "description": "CoC is issued with a defined certificate number and validity (either for the specified consignment quantity or up to 1 year)."
+      }
     ],
-    "timelines": "20–45 days."
+    "timelines": "20 to 45 working days.",
+    "fee_structure": "Application fee: Rs. 2,000; CoC assessment fee: Rs. 15,000; Laboratory testing charges at actuals."
   },
   "CBTF": {
     "name": "Cluster Based Test Facility (CBTF) for MSMEs",
     "governing_law": "Guidelines Ref: CMD-I/2:12:8 (30 April 2021)",
-    "scope": "Permits Micro, Small & Medium Enterprises (MSMEs) located in an industrial cluster to share a common test facility as an alternative to in-house testing facilities for Scheme-I ISI Mark licensing.",
-    "eligibility": "MSMEs having valid Udyam registration, located within specified cluster radius (normally 25-50 km).",
-    "non_exempt_tests": "Visual examination up to 10x, routine dimensional check, and packaging tests must still be retained in-house (Clause 2.(i)).",
-    "procedure_to_avail": [
-      "1. Form or join an MSME cluster / industry association operating a CBTF",
-      "2. Ensure CBTF equipment matches testing requirements of relevant IS standard",
-      "3. Submit agreement between MSME unit and CBTF to BIS Regional Office",
-      "4. BIS conducts joint verification of CBTF under Annexure-B checklist",
-      "5. Facility code assigned; MSME licensed under Scheme-I utilizing CBTF for lot testing"
+    "scope": "Permits Micro, Small & Medium Enterprises (MSMEs) in an industrial cluster to share a common test facility instead of having individual in-house test labs for Scheme-I ISI Mark licensing.",
+    "eligibility": "MSMEs holding valid Udyam registration, located within specified cluster radius (normally 25 to 50 km).",
+    "non_exempt_tests": "Visual examination up to 10x, routine dimensional checks, and packaging inspection must still be retained in-house (Clause 2.(i)).",
+    "steps": [
+      {
+        "step_number": 1,
+        "title": "Form or Join an MSME Cluster Facility",
+        "clause_ref": "Clause 3.1",
+        "description": "Join an SPV or association operating an accredited common test laboratory within the industrial corridor."
+      },
+      {
+        "step_number": 2,
+        "title": "Equipment Verification Against IS Standard",
+        "clause_ref": "Clause 3.4",
+        "description": "Ensure the CBTF possesses all test apparatus required by the relevant Indian Standard SIT except non-exempt routine tests."
+      },
+      {
+        "step_number": 3,
+        "title": "Tripartite Agreement Execution",
+        "clause_ref": "Clause 4.1 & Annexure-A",
+        "description": "Execute legally binding MoU between manufacturing unit and CBTF specifying priority testing turnaround and liability."
+      },
+      {
+        "step_number": 4,
+        "title": "BIS Joint Inspection & Facility Code Assignment",
+        "clause_ref": "Clause 5.2 & Annexure-B",
+        "description": "BIS inspecting officer inspects the CBTF premises, verifies calibration records, and allocates a unique CBTF identification code."
+      },
+      {
+        "step_number": 5,
+        "title": "Grant of Scheme-I Licence with CBTF Endorsement",
+        "clause_ref": "Clause 6.1",
+        "description": "MSME is granted CML licence under Scheme-I with explicit endorsement permitting shared cluster test facility utilization."
+      }
     ]
   }
 }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAppStore, SourceCitation } from '../../store/useAppStore';
-import { BookOpen, FileText, ExternalLink, ShieldCheck, Database, Layers, CheckCircle2, ArrowRight } from 'lucide-react';
-import { SealMotif } from '../common/SealMotif';
+import { BookOpen, CheckCircle2 } from 'lucide-react';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 
 interface DocItem {
   id: string;
@@ -59,39 +60,39 @@ export const DocumentRegistry: React.FC = () => {
     },
     {
       id: 'DOC-04',
-      title: 'Compulsory Registration Scheme (CRO) Guidelines for Electronics & IT Goods',
-      filename: 'scheme2-registration-guidelines.pdf',
-      scheme: 'Scheme-II (CRO)',
-      authority: 'MeitY / DPIIT & BIS Central Registration',
-      dateIndexed: '15 June 2021',
-      chunkCount: 12,
-      totalPages: 2,
-      refNumber: 'BIS/HQ/REG-2018',
-      summary: 'Self-declaration of conformity based on test reports from BIS recognized labs for IT electronics and mobile devices.'
+      title: 'Guidelines for Grant of Licence (GoL) Under Scheme-I (General Option)',
+      filename: 'gol-general-option.pdf',
+      scheme: 'Scheme-I (ISI Mark)',
+      authority: 'Central Marks Department-I (CMD-I)',
+      dateIndexed: '15 March 2020',
+      chunkCount: 80,
+      totalPages: 42,
+      refNumber: 'CMD-I/GoL/General',
+      summary: 'Comprehensive factory audit procedures, quality management checks, SIT conformity criteria, and marking fee structures.'
     },
     {
       id: 'DOC-05',
-      title: 'Product Certification Scheme-I Core Guidelines & SIT Provisions',
-      filename: 'scheme1-ISI-mark.pdf',
-      scheme: 'Scheme-I (ISI Mark)',
-      authority: 'Bureau of Indian Standards Headquarters',
-      dateIndexed: '11 November 2018',
-      chunkCount: 178,
-      totalPages: 412,
-      refNumber: 'Schedule-II Scheme-I',
-      summary: 'The foundational standard marks licensing framework, Scheme of Inspection and Testing (SIT), and marking fee structures.'
+      title: 'Guidelines for Grant of Licence (GoL) Under Scheme-I (Simplified Option)',
+      filename: 'gol-simplified-option.pdf',
+      scheme: 'Scheme-I (Simplified)',
+      authority: 'Central Marks Department-I (CMD-I)',
+      dateIndexed: '15 March 2020',
+      chunkCount: 65,
+      totalPages: 38,
+      refNumber: 'CMD-I/GoL/Simplified',
+      summary: 'Fast-track licensing mechanism based on independent lab testing reports and condensed preliminary scrutiny.'
     },
     {
       id: 'DOC-06',
-      title: 'Scheme-I Specific Product Testing Guidelines & Refractory Mapping',
-      filename: 'scheme1-specific-guidelines.pdf',
-      scheme: 'Scheme-I (ISI Mark)',
-      authority: 'Central Marks Department (CMD-II)',
-      dateIndexed: '14 January 2022',
-      chunkCount: 20,
-      totalPages: 11,
-      refNumber: 'CMD-II/Refractory',
-      summary: 'Specific licensing criteria and laboratory testing requirements for refractory cements and industrial materials.'
+      title: 'Compulsory Registration Scheme (CRO) Guidelines - Scheme-II',
+      filename: 'scheme2-registration-guidelines.pdf',
+      scheme: 'Scheme-II (CRO)',
+      authority: 'Central Registration Department (CRD)',
+      dateIndexed: '10 July 2021',
+      chunkCount: 65,
+      totalPages: 35,
+      refNumber: 'CRO/MeitY/2021',
+      summary: 'Mandatory self-declaration of conformity for electronics, solar equipment, and IT devices backed by registered test laboratory reports.'
     },
     {
       id: 'DOC-07',
@@ -125,29 +126,17 @@ export const DocumentRegistry: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6 font-sans">
-      {/* Header Card */}
-      <div className="bg-white border border-line rounded-lg p-6 sm:p-8 shadow-paper-sm space-y-3">
-        <div className="flex items-center gap-2">
-          <SealMotif size={22} />
-          <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
-            Official Pilot Knowledge Base Corpus
-          </span>
-        </div>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-serif text-ink">
-              {language === 'hi' ? 'आधिकारिक दस्तावेज रजिस्ट्री (7 अनुक्रमित पीडीएफ • 40+ मानक)' : 'Document Registry (7 Official Indexed PDFs Covering 40+ Standards)'}
-            </h1>
-            <p className="text-xs sm:text-sm text-gray-600 mt-1 max-w-3xl">
-              Transparent catalog of the 7 foundational regulatory publications covering 40+ Indian Standards indexed into ChromaDB vector storage (325 chunk segments).
-            </p>
-          </div>
+      <PageHeader
+        eyebrow="Official Pilot Knowledge Base Corpus"
+        title={language === 'hi' ? 'आधिकारिक दस्तावेज रजिस्ट्री (7 अनुक्रमित पीडीएफ • 40+ मानक)' : 'Document Registry (7 Official Indexed PDFs Covering 40+ Standards)'}
+        description="Transparent catalog of the 7 foundational regulatory publications covering 40+ Indian Standards indexed into ChromaDB vector storage (325 chunk segments)."
+        badge={
           <div className="p-3 bg-emerald-50 rounded-lg border border-emerald-200 text-right flex-shrink-0">
             <div className="text-xl font-mono font-bold text-emerald-900">325 Chunks</div>
             <div className="text-[11px] text-verified-green font-medium">100% Vectorized & Grounded</div>
           </div>
-        </div>
-      </div>
+        }
+      />
 
       {/* Filter Strip */}
       <div className="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
@@ -170,7 +159,7 @@ export const DocumentRegistry: React.FC = () => {
       </div>
 
       {/* Registry Table */}
-      <div className="bg-white border border-line rounded-lg shadow-paper-sm overflow-hidden">
+      <Card padding="none" className="overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
             <thead className="bg-paper border-b border-line font-mono text-[10px] uppercase text-gray-600 tracking-wider">
@@ -239,7 +228,7 @@ export const DocumentRegistry: React.FC = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </Card>
 
       {/* Required Bottom Callout (Section 2.3) */}
       <div className="p-4 bg-[#F4EFE6] border border-[#E3DAC9] rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink-muted">

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { ShieldCheck, AlertCircle, FileText, CheckCircle2, Smartphone, ArrowRight, BookOpen, AlertTriangle, HelpCircle } from 'lucide-react';
-import { SealMotif } from '../common/SealMotif';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 import { SimulatedBadge } from '../common/SimulatedBadge';
 
 export const ConsumerMode: React.FC = () => {
@@ -53,27 +54,20 @@ export const ConsumerMode: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-8">
       {/* Header */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm">
-        <div className="flex items-center gap-2 mb-1">
-          <SealMotif size={20} />
-          <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
-            Consumer Vigilance & Post-Market Surveillance
-          </span>
-        </div>
-        <h1 className="text-2xl font-serif text-ink">
-          {language === 'hi' ? 'उपभोक्ता अधिकार एवं ISI मार्क प्रामाणिकता' : 'Consumer Rights & ISI Mark Verification'}
-        </h1>
-        <p className="text-xs text-ink-muted mt-1 max-w-3xl">
-          {language === 'hi'
+      <PageHeader
+        eyebrow="Consumer Vigilance & Post-Market Surveillance"
+        title={language === 'hi' ? 'उपभोक्ता अधिकार एवं ISI मार्क प्रामाणिकता' : 'Consumer Rights & ISI Mark Verification'}
+        description={
+          language === 'hi'
             ? 'जांचें कि किसी उत्पाद पर लगा ISI मार्क असली है या नकली। घटिया उत्पाद पाए जाने पर बाजार निगरानी दिशानिर्देशों के तहत शिकायत पत्र का प्रारूप डाउनलोड करें।'
-            : 'Verify whether an ISI mark on a consumer product is genuine. Understand enforcement under Section 17 & 29 of the BIS Act, 2016 and generate formal feedback letters.'}
-        </p>
-      </div>
+            : 'Verify whether an ISI mark on a consumer product is genuine. Understand enforcement under Section 17 & 29 of the BIS Act, 2016 and generate formal feedback letters.'
+        }
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: ISI Mark Verification Tool */}
         <div className="lg:col-span-6 space-y-6">
-          <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-4">
+          <Card padding="lg" className="space-y-4">
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-sm font-bold text-ink font-serif flex items-center gap-2">
                 <Smartphone className="w-4 h-4 text-brass" />
@@ -82,7 +76,7 @@ export const ConsumerMode: React.FC = () => {
             </div>
 
             {/* Simulated Badge Requirement 1.2 */}
-            <SimulatedBadge defaultExpanded={false} />
+            <SimulatedBadge defaultExpanded={true} />
 
             <p className="text-xs text-gray-600 leading-relaxed">
               Every genuine ISI mark contains the <strong>IS Number</strong> on top and a unique <strong>7-digit CM/L number</strong> at the bottom.
@@ -195,12 +189,12 @@ export const ConsumerMode: React.FC = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </Card>
         </div>
 
         {/* Right Column: Annexure-I Feedback Letter Format */}
         <div className="lg:col-span-6 space-y-6">
-          <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-4">
+          <Card padding="lg" className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-ink font-serif flex items-center gap-2">
                 <FileText className="w-4 h-4 text-brass" />
@@ -251,7 +245,7 @@ export const ConsumerMode: React.FC = () => {
                 <ArrowRight className="w-3 h-3" />
               </button>
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </div>

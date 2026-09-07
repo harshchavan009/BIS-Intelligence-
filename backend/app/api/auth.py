@@ -68,7 +68,10 @@ async def login(credentials: LoginRequest, response: Response):
     Authenticate an evaluator to access protected telemetry and administrative analytics.
     Evaluator credentials are documented exclusively in README.md / Evaluator private guide.
     """
-    if credentials.username == ADMIN_USERNAME and credentials.password == ADMIN_PASSWORD:
+    is_demo = (credentials.username.strip() == "demo" and credentials.password.strip() == "demo")
+    is_admin = (credentials.username.strip() == ADMIN_USERNAME and credentials.password.strip() == ADMIN_PASSWORD)
+    
+    if is_demo or is_admin:
         token = generate_session_token(credentials.username)
         # Set HttpOnly, SameSite cookie with 30-minute session lifetime
         response.set_cookie(
@@ -82,14 +85,14 @@ async def login(credentials: LoginRequest, response: Response):
         return {
             "status": "success",
             "authenticated": True,
-            "user": "BIS Domain Evaluator",
+            "user": "BIS Domain Evaluator (Demo Session)" if is_demo else "BIS Domain Evaluator",
             "token": token,
             "expires_in": SESSION_TIMEOUT_SECONDS
         }
     else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid credentials. Access denied."
+            detail="Invalid credentials. Use demo / demo for evaluation access."
         )
 
 @router.get("/auth/verify")

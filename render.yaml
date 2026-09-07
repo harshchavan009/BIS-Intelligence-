@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: bis-ai-assistant
+    runtime: python
+    buildCommand: "pip install -r requirements.txt && cd frontend && npm install && npm run build"
+    startCommand: "python3 -m uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: NODE_VERSION
+        value: 18.20.0
+      - key: LLM_PROVIDER
+        value: offline
+      - key: DATABASE_URL
+        value: sqlite:///./data/bis_assistant.db

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { ShieldCheck, Info, Database, Cpu, AlertTriangle, BookOpen, CheckCircle2, ArrowRight } from 'lucide-react';
-import { SealMotif } from '../common/SealMotif';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 
 export const AboutPage: React.FC = () => {
   const { setActiveTab, language, evalBenchmark, fetchEvalBenchmark } = useAppStore();
@@ -13,21 +14,15 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8 font-sans">
       {/* Header */}
-      <div className="bg-white border border-line rounded-lg p-6 sm:p-8 shadow-paper-sm space-y-3">
-        <div className="flex items-center gap-2">
-          <SealMotif size={22} />
-          <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
-            System Architecture & Regulatory Governance
-          </span>
-        </div>
-        <h1 className="text-2xl sm:text-3xl font-serif text-ink">
-          {language === 'hi' ? 'प्रणाली के बारे में एवं कार्यप्रणाली' : 'About / How This Assistant Works'}
-        </h1>
-        <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">
-          {language === 'hi'
+      <PageHeader
+        eyebrow="System Architecture & Regulatory Governance"
+        title={language === 'hi' ? 'प्रणाली के बारे में एवं कार्यप्रणाली' : 'About / How This Assistant Works'}
+        description={
+          language === 'hi'
             ? 'बीआईएस एआई सहायक एक विनियामक खोज प्रणाली है जो भारतीय मानकों, अनिवार्य QCOs, एमएसएमई परीक्षण दिशानिर्देशों और प्रमाणन योजनाओं को पारदर्शी व स्रोत-संबद्ध बनाती है।'
-            : 'The BIS AI Intelligent Assistant is an AI-powered regulatory exploration system designed to make thousands of pages of Indian Standards, Quality Control Orders (QCOs), MSME testing guidelines, and conformity schemes instantly searchable and provably grounded for Indian manufacturers, startups, students, and citizens.'}
-        </p>
+            : 'The BIS AI Intelligent Assistant is an AI-powered regulatory exploration system designed to make thousands of pages of Indian Standards, Quality Control Orders (QCOs), MSME testing guidelines, and conformity schemes instantly searchable and provably grounded for Indian manufacturers, startups, students, and citizens.'
+        }
+      >
         <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-mono text-gray-500">
           <span className="font-semibold text-ink">Evaluation Status:</span>
           <span className="text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
@@ -39,12 +34,12 @@ export const AboutPage: React.FC = () => {
           <span className="text-gray-400">|</span>
           <span className="text-gray-500">Suite: 20-Case Gold Harness (eval_set.json)</span>
         </div>
-      </div>
+      </PageHeader>
 
       {/* 1. What This Assistant Is and Is Not */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* What It Is */}
-        <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-3">
+        <Card padding="md" className="space-y-3">
           <div className="flex items-center gap-2 text-emerald-800 font-serif font-bold text-base">
             <CheckCircle2 className="w-5 h-5 text-verified-green" />
             <span>What This Assistant IS</span>
@@ -55,10 +50,10 @@ export const AboutPage: React.FC = () => {
             <li>A <strong>bilingual exploration tool</strong> operating natively in English and Hindi for nationwide accessibility.</li>
             <li>An <strong>offline-resilient platform</strong> capable of running locally on government air-gapped infrastructure without third-party API dependencies.</li>
           </ul>
-        </div>
+        </Card>
 
         {/* What It Is Not */}
-        <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-3">
+        <Card padding="md" className="space-y-3">
           <div className="flex items-center gap-2 text-amber-900 font-serif font-bold text-base">
             <AlertTriangle className="w-5 h-5 text-amber-600" />
             <span>What This Assistant IS NOT</span>
@@ -69,11 +64,11 @@ export const AboutPage: React.FC = () => {
             <li><strong>Not connected to live production databases:</strong> Verification tools (CM/L, HUID) operate in simulation demo mode.</li>
             <li><strong>Not an exhaustive index of all 20,000+ IS standards:</strong> The current pilot indexes an intentional 7-document core regulatory subset.</li>
           </ul>
-        </div>
+        </Card>
       </div>
 
       {/* 2. Pilot Corpus Scope: The 7 Indexed Documents */}
-      <div className="bg-white border border-line rounded-lg p-6 sm:p-8 shadow-paper-sm space-y-4">
+      <Card padding="lg" className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <h3 className="text-lg font-serif font-bold text-ink flex items-center gap-2">
@@ -127,10 +122,10 @@ export const AboutPage: React.FC = () => {
             <div className="text-gray-500 text-[11px] mt-1">Section 16 enforcement across cement, steel, electronics, and medical devices.</div>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* 3. Technical RAG Architecture & Embeddings */}
-      <div className="bg-white border border-line rounded-lg p-6 sm:p-8 shadow-paper-sm space-y-4">
+      <Card padding="lg" className="space-y-4">
         <h3 className="text-lg font-serif font-bold text-ink flex items-center gap-2">
           <Cpu className="w-5 h-5 text-indigo-deep" />
           <span>Technical Architecture & Retrieval Approach</span>
@@ -167,7 +162,7 @@ export const AboutPage: React.FC = () => {
             </p>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* 4. Known Limitations */}
       <div className="bg-paper border border-line rounded-lg p-6 space-y-3 text-xs text-gray-700">

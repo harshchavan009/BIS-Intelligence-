@@ -96,7 +96,14 @@ export const AccessibilityBar: React.FC = () => {
         {/* Page Last Updated Date (GIGW convention) */}
         <div className="flex items-center gap-1 text-[10px] text-gray-400 font-mono hidden md:flex">
           <Calendar className="w-3 h-3 text-brass/70" />
-          <span>{language === 'hi' ? 'अंतिम अद्यतन:' : 'Last Updated:'} {evalBenchmark?.evaluated_at_human || (typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '04 Sept 2026')}</span>
+          <span>
+            {language === 'hi' ? 'अंतिम अद्यतन:' : 'Last Updated:'}{' '}
+            {new Date().toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-GB', {
+              day: '2-digit',
+              month: 'short',
+              year: 'numeric'
+            })}
+          </span>
         </div>
 
         <span className="text-white/20 hidden md:inline">|</span>

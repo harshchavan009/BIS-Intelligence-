@@ -17,7 +17,7 @@ export const Breadcrumbs: React.FC = () => {
           </span>
           <span className="text-stone-400">/</span>
           <span className="text-stone-500 font-normal">
-            {t('nav.bis_title')} (SIH 2026 Prototype)
+            {t('nav.bis_title')}
           </span>
         </div>
       </div>
@@ -36,6 +36,9 @@ export const Breadcrumbs: React.FC = () => {
       case 'glossary': return t('breadcrumbs.glossary');
       case 'faq': return t('breadcrumbs.faq');
       case 'contact': return t('breadcrumbs.contact');
+      case 'policies': return t('breadcrumbs.policies');
+      case 'help': return t('breadcrumbs.help');
+      case 'sitemap': return t('breadcrumbs.sitemap');
       case 'analytics': return t('breadcrumbs.analytics');
       case 'about': return t('breadcrumbs.about');
       default: return tab;

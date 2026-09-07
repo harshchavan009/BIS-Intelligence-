@@ -37,10 +37,19 @@ class OfflineDemoProvider(BaseLLMProvider):
     1. Checks semantic similarity against pre-seeded demo cache.
     2. Dynamically synthesizes grounded response directly from retrieved chunks with inline citations.
     """
-    def __init__(self):
+    def __init__(self, embedding_model=None):
         self.cache_data = []
+        self.cache_embeddings = None
         self._load_cache()
-        self.model = SentenceTransformer(settings.EMBEDDING_MODEL)
+        if embedding_model is not None:
+            self.model = embedding_model
+        else:
+            try:
+                from backend.app.rag.retriever import retriever
+                self.model = retriever.model
+            except Exception:
+                self.model = SentenceTransformer(settings.EMBEDDING_MODEL)
+        self._precompute_cache_embeddings()
 
     def _load_cache(self):
         cache_file = os.path.join(settings.STRUCTURED_DIR, "demo_cache.json")
@@ -50,6 +59,16 @@ class OfflineDemoProvider(BaseLLMProvider):
                     self.cache_data = json.load(f)
             except Exception:
                 self.cache_data = []
+
+    def _precompute_cache_embeddings(self):
+        if not self.cache_data:
+            return
+        try:
+            texts = [item.get("query", "") for item in self.cache_data]
+            self.cache_embeddings = self.model.encode(texts, normalize_embeddings=True)
+        except Exception as e:
+            print(f"Failed to precompute cache embeddings: {e}")
+            self.cache_embeddings = None
 
     def _find_cache_match(self, query: str, language: str = "en") -> Optional[Dict[str, Any]]:
         if not self.cache_data:
@@ -63,23 +82,16 @@ class OfflineDemoProvider(BaseLLMProvider):
             if q_lower in cached_q or cached_q in q_lower or (cached_hi and q_lower in cached_hi):
                 return item
 
-        # Semantic embedding match
-        try:
-            q_emb = self.model.encode(query)
-            best_score = -1.0
-            best_item = None
-            for item in self.cache_data:
-                compare_text = item["query"] if language == "en" else (item.get("query_hi") or item["query"])
-                c_emb = self.model.encode(compare_text)
-                sim = float(np.dot(q_emb, c_emb) / (np.linalg.norm(q_emb) * np.linalg.norm(c_emb)))
-                if sim > best_score:
-                    best_score = sim
-                    best_item = item
-
-            if best_score > 0.65:
-                return best_item
-        except Exception:
-            pass
+        # Vectorized cosine matching in <2ms
+        if self.cache_embeddings is not None and len(self.cache_embeddings) > 0:
+            try:
+                q_emb = self.model.encode(query, normalize_embeddings=True)
+                sims = np.dot(self.cache_embeddings, q_emb)
+                best_idx = int(np.argmax(sims))
+                if sims[best_idx] > 0.72:
+                    return self.cache_data[best_idx]
+            except Exception:
+                pass
 
         return None
 
@@ -141,6 +153,10 @@ class OfflineDemoProvider(BaseLLMProvider):
         return self._synthesize_from_chunks(prompt, retrieved_chunks, language=language)
 
 
+    def get_matched_cache(self, prompt: str, language: str = "en") -> Optional[Dict[str, Any]]:
+        return self._find_cache_match(prompt, language=language)
+
+
 class GeminiProvider(BaseLLMProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
@@ -198,13 +214,18 @@ class GeminiProvider(BaseLLMProvider):
         return "".join(tokens)
 
 
+_offline_provider_instance: Optional[OfflineDemoProvider] = None
+
 def get_llm_provider() -> BaseLLMProvider:
+    global _offline_provider_instance
     provider_name = settings.LLM_PROVIDER.lower()
     if provider_name == "gemini" and settings.GEMINI_API_KEY and not settings.GEMINI_API_KEY.startswith("dummy"):
         return GeminiProvider(settings.GEMINI_API_KEY)
     
     # Default: Robust Offline Grounded Engine (100% reliable for hackathon demo)
-    return OfflineDemoProvider()
+    if _offline_provider_instance is None:
+        _offline_provider_instance = OfflineDemoProvider()
+    return _offline_provider_instance
 
 # Helper type
 Tuple_Answer = str

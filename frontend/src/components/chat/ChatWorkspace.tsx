@@ -22,6 +22,7 @@ export const ChatWorkspace: React.FC = () => {
   const [feedbackGiven, setFeedbackGiven] = useState<{ [msgId: string]: number }>({});
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const handlePrintAnswer = (text: string, title?: string) => {
     const printWin = window.open('', '_blank');
@@ -53,7 +54,7 @@ export const ChatWorkspace: React.FC = () => {
               <div class="brand">BUREAU OF INDIAN STANDARDS</div>
               <div class="sub">AI-Powered Intelligent Assistant for Indian Standards & Conformity Services</div>
             </div>
-            <div class="badge">SIH 2026 PROTOTYPE RECORD</div>
+            <div class="badge">REGULATORY CONSULTATION RECORD</div>
           </div>
           <div class="meta">Printed on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} | Status: Sourced from Public BIS Regulatory Corpus</div>
           <div class="content">${cleanText}</div>
@@ -159,6 +160,10 @@ export const ChatWorkspace: React.FC = () => {
     if (queryPrefill) {
       setInput(queryPrefill);
       setQueryPrefill('');
+      setTimeout(() => {
+        inputRef.current?.focus();
+        inputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
     }
   }, [queryPrefill]);
 
@@ -207,6 +212,10 @@ export const ChatWorkspace: React.FC = () => {
         })
       });
 
+      if (!response.ok) {
+        throw new Error(`Server returned HTTP ${response.status}`);
+      }
+
       if (!response.body) throw new Error('No response stream');
 
       const reader = response.body.getReader();
@@ -215,18 +224,26 @@ export const ChatWorkspace: React.FC = () => {
       let sources: SourceCitation[] = [];
       let groundedOverall = true;
       let groundedPct = 100.0;
+      let buffer = '';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
-        const rawChunk = decoder.decode(value, { stream: true });
-        const lines = rawChunk.split('\n');
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split(/\r?\n/);
+        // Retain the last potentially incomplete chunk in the buffer
+        buffer = lines.pop() || '';
 
         for (const line of lines) {
-          if (line.startsWith('data: ')) {
+          const trimmed = line.trim();
+          // Skip SSE comments (such as : bis-sse-init) or empty lines
+          if (!trimmed || trimmed.startsWith(':')) continue;
+
+          if (trimmed.startsWith('data:')) {
+            const dataStr = trimmed.replace(/^data:\s*/, '');
             try {
-              const eventData = JSON.parse(line.slice(6));
+              const eventData = JSON.parse(dataStr);
               if (eventData.type === 'token') {
                 streamedText += eventData.data;
                 setMessages((prev) =>
@@ -240,12 +257,38 @@ export const ChatWorkspace: React.FC = () => {
                 sources = eventData.data.sources || [];
                 groundedOverall = eventData.data.grounded_overall ?? true;
                 groundedPct = eventData.data.grounded_percentage ?? 100.0;
+              } else if (eventData.type === 'error') {
+                throw new Error(eventData.data || 'Regulatory service error');
               }
             } catch (e) {
               // Ignore partial JSON
             }
           }
         }
+      }
+
+      // Flush trailing buffer line if present
+      if (buffer.trim().startsWith('data:')) {
+        try {
+          const dataStr = buffer.trim().replace(/^data:\s*/, '');
+          const eventData = JSON.parse(dataStr);
+          if (eventData.type === 'token') {
+            streamedText += eventData.data;
+          } else if (eventData.type === 'metadata') {
+            sources = eventData.data.sources || [];
+            groundedOverall = eventData.data.grounded_overall ?? true;
+            groundedPct = eventData.data.grounded_percentage ?? 100.0;
+          }
+        } catch (e) {
+          // Ignore
+        }
+      }
+
+      // Fallback safeguard to ensure assistant bubble is never left empty
+      if (!streamedText.trim()) {
+        streamedText = language === 'hi'
+          ? 'माफ़ कीजिए, इस प्रश्न के लिए विनियामक उत्तर उत्पन्न नहीं हो सका। कृपया पुनः प्रयास करें या नीचे दिए गए सुझावों में से चुनें।'
+          : 'Could not generate a response from the regulatory index. Please retry your query or select one of the suggested topics below.';
       }
 
       setMessages((prev) =>
@@ -263,6 +306,7 @@ export const ChatWorkspace: React.FC = () => {
         )
       );
     } catch (err) {
+      console.error('Chat stream error:', err);
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantMessageId
@@ -301,6 +345,7 @@ export const ChatWorkspace: React.FC = () => {
   // Render inline citation buttons [1], [2]
   const renderMessageContent = (msg: Message) => {
     const text = msg.text;
+    if (!text && !msg.isStreaming) return null;
     const parts = text.split(/(\[\d+\])/g);
 
     return (
@@ -308,7 +353,11 @@ export const ChatWorkspace: React.FC = () => {
         {parts.map((part, idx) => {
           const match = part.match(/\[(\d+)\]/);
           if (match && msg.sources && msg.sources.length > 0) {
-            const sourceIndex = parseInt(match[1], 10) - 1;
+            const requestedIndex = parseInt(match[1], 10) - 1;
+            // Gracefully clamp to valid source index so the chip is ALWAYS functional
+            const sourceIndex = (requestedIndex >= 0 && requestedIndex < msg.sources.length)
+              ? requestedIndex
+              : 0;
             const source = msg.sources[sourceIndex];
             if (source) {
               return (
@@ -317,15 +366,18 @@ export const ChatWorkspace: React.FC = () => {
                   onClick={() => openSource(source)}
                   title={`Click to inspect source PDF page: ${source.document_title} (${source.clause_ref})`}
                   className="citation-chip inline-block select-none focus-visible:ring-2 focus-visible:ring-brass"
-                  aria-label={`View citation ${sourceIndex + 1}: ${source.clause_ref}`}
+                  aria-label={`View citation ${requestedIndex + 1}: ${source.clause_ref}`}
                 >
-                  [{sourceIndex + 1}]
+                  [{match[1]}]
                 </button>
               );
             }
           }
           return <span key={idx}>{part}</span>;
         })}
+        {msg.isStreaming && (
+          <span className="inline-block w-1.5 h-3.5 ml-1 bg-brass animate-pulse align-middle" />
+        )}
       </div>
     );
   };
@@ -383,7 +435,22 @@ export const ChatWorkspace: React.FC = () => {
                     : 'bg-white text-ink border border-line rounded-tl-none'
                 }`}
               >
-                {renderMessageContent(msg)}
+                {!isUser && msg.isStreaming && !msg.text ? (
+                  <div className="flex items-center gap-2.5 py-1 text-stone-600 text-xs font-medium">
+                    <div className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-brass animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-2 h-2 rounded-full bg-brass animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-2 h-2 rounded-full bg-brass animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                    <span className="font-mono text-[11px] text-stone-500">
+                      {language === 'hi'
+                        ? 'आधिकारिक बीआईएस विनियामक दस्तावेज खोजे जा रहे हैं...'
+                        : 'Consulting official BIS regulatory standards & QCO clauses...'}
+                    </span>
+                  </div>
+                ) : (
+                  renderMessageContent(msg)
+                )}
 
                 {/* Sourced Citations Bar */}
                 {!isUser && msg.sources && msg.sources.length > 0 && (
@@ -561,6 +628,7 @@ export const ChatWorkspace: React.FC = () => {
       {/* Input Composer Box */}
       <div className="bg-white border border-line rounded-b-lg p-3 shadow-paper flex items-center gap-2">
         <textarea
+          ref={inputRef}
           rows={1}
           value={input}
           onChange={(e) => setInput(e.target.value)}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { Layers, CheckCircle2, Clock, FileText, ChevronRight, ArrowRight, ShieldCheck, BookOpen } from 'lucide-react';
-import { SealMotif } from '../common/SealMotif';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 
 interface Step {
   step_number: number;
@@ -436,35 +437,29 @@ export const SchemeExplorer: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-8">
       {/* Header */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm">
-        <div className="flex items-center gap-2 mb-1">
-          <SealMotif size={20} />
-          <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
-            Conformity Assessment Framework
-          </span>
-        </div>
-        <h1 className="text-2xl font-serif text-ink">
-          {language === 'hi' ? 'बीआईएस प्रमाणन योजनाएं एवं चरण-दर-चरण प्रक्रिया' : 'BIS Certification Schemes & Process Timeline'}
-        </h1>
-        <p className="text-xs text-ink-muted mt-1 max-w-3xl">
-          {language === 'hi'
+      <PageHeader
+        eyebrow="Conformity Assessment Framework"
+        title={language === 'hi' ? 'बीआईएस प्रमाणन योजनाएं एवं चरण-दर-चरण प्रक्रिया' : 'BIS Certification Schemes & Process Timeline'}
+        description={
+          language === 'hi'
             ? 'अपनी विनिर्माण श्रेणी के लिए उपयुक्त योजना चुनें। पात्रता, परीक्षण आवश्यकताएं और आधिकारिक विनियामक अनुक्रम देखें।'
-            : 'Compare the governing conformity assessment frameworks under Schedule II of the BIS Regulations 2018. Inspect real procedural timelines derived directly from official guidelines.'}
-        </p>
-      </div>
+            : 'Compare the governing conformity assessment frameworks under Schedule II of the BIS Regulations 2018. Inspect real procedural timelines derived directly from official guidelines.'
+        }
+      />
 
       {/* Scheme Comparison Matrix Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {schemesOverview.map((scheme) => {
           const isSelected = selectedScheme === scheme.id;
           return (
-            <div
+            <Card
               key={scheme.id}
               onClick={() => setSelectedScheme(scheme.id)}
-              className={`p-5 rounded-lg border cursor-pointer transition-all flex flex-col justify-between space-y-4 ${
+              padding="md"
+              className={`cursor-pointer transition-all flex flex-col justify-between space-y-4 ${
                 isSelected
-                  ? 'bg-white border-brass ring-2 ring-brass/20 shadow-paper'
-                  : 'bg-white border-line hover:border-brass/40 shadow-paper-sm'
+                  ? 'border-brass ring-2 ring-brass/20 shadow-paper'
+                  : 'hover:border-brass/40 shadow-paper-sm'
               }`}
             >
               <div className="space-y-2">
@@ -505,13 +500,13 @@ export const SchemeExplorer: React.FC = () => {
                 <span>{isSelected ? 'Viewing Timeline' : 'Explore Timeline'}</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
-            </div>
+            </Card>
           );
         })}
       </div>
 
       {/* Step-by-Step Interactive Timeline */}
-      <div className="bg-white border border-line rounded-lg p-6 sm:p-8 shadow-paper">
+      <Card padding="lg" className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-line gap-4">
           <div className="space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-wider text-brass font-semibold">
@@ -589,7 +584,7 @@ export const SchemeExplorer: React.FC = () => {
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

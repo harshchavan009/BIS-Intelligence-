@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { useTranslation } from '../../i18n/useTranslation';
 import { Building2, Phone, Mail, MapPin, Clock, ShieldCheck, ExternalLink, HelpCircle } from 'lucide-react';
+import { PageHeader } from '../common/PageHeader';
+import { Card } from '../common/Card';
 
 interface BranchInfo {
   region: string;
@@ -90,21 +92,15 @@ export const BranchContact: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Header */}
-      <div className="bg-indigo-deep text-white rounded-lg p-6 sm:p-8 border border-brass/30 shadow-md">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-brass/20 text-brass border border-brass/40 text-xs font-mono mb-3">
-          <Building2 className="w-3.5 h-3.5" />
-          <span>{language === 'hi' ? 'मानव सहायता एवं शाखा संपर्क' : 'Human Escalation & Branch Directory'}</span>
-        </div>
-        <h1 className="text-2xl sm:text-3xl font-serif-standard font-bold tracking-tight mb-2">
-          {language === 'hi' ? 'बीआईएस शाखा कार्यालय एवं नागरिक सहायता केंद्र' : 'BIS Branch Offices & Citizen Helpdesk'}
-        </h1>
-        <p className="text-stone-300 text-sm sm:text-base leading-relaxed max-w-3xl">
-          {language === 'hi'
-            ? 'क्या आपको एआई सहायक से उत्तर नहीं मिला? व्यक्तिगत मार्गदर्शन, लाइसेंस आवेदन या शिकायत हेतु अपने निकटतम बीआईएस क्षेत्रीय कार्यालय से संपर्क करें।'
-            : 'Can\'t find your answer through the AI Assistant? Connect directly with your nearest Bureau of Indian Standards Regional or Branch Office for physical verification, licensing assistance, or officer guidance.'}
-        </p>
-      </div>
+      {/* Unified Shared Header */}
+      <PageHeader
+        eyebrow={language === 'hi' ? 'मानव सहायता एवं शाखा संपर्क' : 'Human Escalation & Branch Directory'}
+        title={language === 'hi' ? 'बीआईएस शाखा कार्यालय एवं नागरिक सहायता केंद्र' : 'BIS Branch Offices & Citizen Helpdesk'}
+        description={language === 'hi'
+          ? 'क्या आपको एआई सहायक से उत्तर नहीं मिला? व्यक्तिगत मार्गदर्शन, लाइसेंस आवेदन या शिकायत हेतु अपने निकटतम बीआईएस क्षेत्रीय कार्यालय से संपर्क करें।'
+          : 'Can\'t find your answer through the AI Assistant? Connect directly with your nearest Bureau of Indian Standards Regional or Branch Office for physical verification, licensing assistance, or officer guidance.'}
+        icon={<Building2 className="w-5 h-5 text-brass" />}
+      />
 
       {/* Emergency & National Toll-Free Callout */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

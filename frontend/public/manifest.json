@@ -1,0 +1,19 @@
+{
+  "short_name": "BIS Assistant",
+  "name": "BIS AI Assistant — Regulatory Intelligence Platform",
+  "description": "Bureau of Indian Standards (BIS) AI-Powered Compliance, Scheme Guidance & Standards Discovery Platform",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#F8F6F0",
+  "theme_color": "#1B2A4A",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["government", "productivity", "utilities"]
+}

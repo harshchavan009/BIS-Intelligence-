@@ -6,6 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bureau of Indian Standards — Intelligent Assistant</title>
     <meta name="description" content="Official AI-Powered Intelligent Assistant for Indian Standards, BIS Certification Schemes, CBTF MSME Facilities, and Consumer Rights." />
+    <meta name="keywords" content="Bureau of Indian Standards, BIS, Indian Standards, ISI Mark, Hallmarking, HUID, CBTF, QCO, Conformity Assessment, MSME" />
+    <meta name="author" content="Bureau of Indian Standards" />
+    <meta name="theme-color" content="#0B122C" />
+    
+    <!-- Dublin Core Metadata (GIGW 3.0 Compliance) -->
+    <meta name="DC.title" content="Bureau of Indian Standards Intelligent Consultation Assistant" />
+    <meta name="DC.creator" content="Bureau of Indian Standards, Government of India" />
+    <meta name="DC.language" content="en, hi" />
+    <meta name="DC.rights" content="Government of India Open Data" />
+
+    <!-- Open Graph & Social Cards -->
+    <meta property="og:title" content="Bureau of Indian Standards — Intelligent Assistant" />
+    <meta property="og:description" content="Verified AI consultation on Indian Standards, Schemes, CBTF Testing Facilities, and Gold Hallmarking." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bis-ai.gov.in" />
+
+    <!-- Schema.org JSON-LD Structured Data for Government Organization and Portal -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "GovernmentOrganization",
+          "@id": "https://bis-ai.gov.in/#organization",
+          "name": "Bureau of Indian Standards",
+          "alternateName": "BIS",
+          "url": "https://www.bis.gov.in",
+          "parentOrganization": {
+            "@type": "GovernmentOrganization",
+            "name": "Ministry of Consumer Affairs, Food & Public Distribution, Government of India"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Manak Bhavan, 9 Bahadur Shah Zafar Marg",
+            "addressLocality": "New Delhi",
+            "postalCode": "110002",
+            "addressCountry": "IN"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-11-23230131",
+            "contactType": "customer service",
+            "areaServed": "IN",
+            "availableLanguage": ["English", "Hindi"]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://bis-ai.gov.in/#website",
+          "url": "https://bis-ai.gov.in",
+          "name": "BIS Intelligent Assistant & Standards Portal",
+          "publisher": { "@id": "https://bis-ai.gov.in/#organization" },
+          "inLanguage": ["en", "hi"],
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://bis-ai.gov.in/#finder?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="manifest" href="/manifest.json" />
     <!-- Google Fonts: Source Serif 4 (Headlines) & Inter (UI/Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,5 +78,14 @@
   <body class="bg-paper text-ink antialiased selection:bg-brass/20 selection:text-ink">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch((err) => {
+            console.warn('[PWA] Service Worker registration failed:', err);
+          });
+        });
+      }
+    </script>
   </body>
 </html>

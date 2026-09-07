@@ -118,22 +118,41 @@ export const LandingHero: React.FC = () => {
   return (
     <div className="space-y-12 pb-16">
       {/* What's New / Gazette Updates Ticker */}
-      <div className="bg-paper-light border-b border-line py-2 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex items-center gap-3 overflow-hidden text-xs">
-          <div className="flex items-center gap-1.5 px-2.5 py-0.5 bg-red-800 text-white rounded text-[10.5px] font-bold font-mono uppercase tracking-wider flex-shrink-0 animate-pulse">
+      <div className="bg-paper-light border-b border-line py-2 px-3 sm:px-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-red-800 text-white rounded text-[10.5px] font-bold font-mono uppercase tracking-wider flex-shrink-0 animate-pulse select-none z-10 shadow-sm">
             <Bell className="w-3 h-3" />
-            <span>{language === 'hi' ? 'नवीनतम विनियामक अपडेट' : "What's New"}</span>
+            <span className="hidden xs:inline sm:inline">{language === 'hi' ? 'नवीनतम विनियामक अपडेट' : "What's New"}</span>
+            <span className="xs:hidden sm:hidden">Updates</span>
           </div>
-          <div className="flex items-center gap-6 overflow-x-auto scrollbar-none text-ink text-[12px] font-medium py-0.5">
-            {whatsNewItems.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-2 whitespace-nowrap">
-                <span className="font-mono text-[11px] text-brass font-semibold">[{item.date}]</span>
-                <span className="text-gray-800">{language === 'hi' ? item.titleHi : item.title}</span>
-                <span className="text-[10px] text-gray-500 font-mono bg-paper px-1.5 py-0.5 rounded border border-line">{item.ref}</span>
-                {idx < whatsNewItems.length - 1 && <span className="text-gray-300 ml-2">•</span>}
-              </div>
-            ))}
+
+          {/* Continuous Auto-Scrolling Marquee Track */}
+          <div className="flex-1 overflow-hidden relative mask-linear-gradient">
+            <div className="ticker-track flex items-center gap-8 py-0.5 select-none">
+              {[...whatsNewItems, ...whatsNewItems].map((item, idx) => (
+                <div 
+                  key={idx} 
+                  className="flex items-center gap-2 text-ink text-[12px] font-medium cursor-pointer hover:text-brass transition-colors shrink-0"
+                  onClick={() => setActiveTab('registry')}
+                  title={`${item.title} (${item.ref}) - Click to view in Document Registry`}
+                >
+                  <span className="font-mono text-[11px] text-brass font-semibold">[{item.date}]</span>
+                  <span className="text-gray-800 hover:text-brass">{language === 'hi' ? item.titleHi : item.title}</span>
+                  <span className="text-[10px] text-gray-600 font-mono bg-white px-1.5 py-0.5 rounded border border-line shadow-2xs">{item.ref}</span>
+                  <span className="text-gray-300 ml-4">•</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* View All Updates Link */}
+          <button
+            onClick={() => setActiveTab('registry')}
+            className="flex-shrink-0 text-[11px] font-semibold text-indigo-deep hover:text-brass transition-colors flex items-center gap-1 px-2.5 py-1 rounded hover:bg-paper-dark border border-line/60 bg-white/60 shadow-2xs ml-1"
+            title="View all 7 indexed official gazette documents and guidelines"
+          >
+            <span>{language === 'hi' ? 'सभी देखें →' : 'View All →'}</span>
+          </button>
         </div>
       </div>
 
@@ -147,7 +166,7 @@ export const LandingHero: React.FC = () => {
               <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-white border border-line shadow-paper-sm">
                 <SealMotif size={18} />
                 <span className="text-[11px] font-semibold tracking-wider text-ink uppercase font-mono">
-                  SIH Problem Statement PS-1724
+                  Bureau of Indian Standards • AI Intelligence
                 </span>
               </div>
 
@@ -395,7 +414,7 @@ export const LandingHero: React.FC = () => {
       <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-line text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-2">
           <SealMotif size={20} />
-          <span>Bureau of Indian Standards AI Assistant • SIH Prototype</span>
+          <span>Bureau of Indian Standards AI Assistant • Regulatory Intelligence</span>
         </div>
         <div className="flex items-center gap-4 font-mono text-[11px]">
           <span>FastAPI + LangGraph</span>

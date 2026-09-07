@@ -92,3 +92,25 @@ This document outlines the institutional roadmap for transitioning the **BIS AI 
   - Active-passive geo-redundancy across two Indian data centers (e.g., Delhi NIC and Hyderabad Cloud Zone) with automated failover under 60 seconds.
 - **Comprehensive Prometheus / Grafana Observability:**
   - Live dashboards tracking retrieval latency, cache hit ratios, token consumption, feedback sentiment, and query volume by standard category.
+
+---
+
+### 7. Content Governance, Public Changelog & Citizen Grievance SLA
+*Institutional accountability mechanisms required for sovereign government portal readiness.*
+
+- **Content Ingestion & Sign-Off Workflow:**
+  1. **Source Verification**: Technical Officer (CMD-I / Central Documentation Cell) confirms publication on *egazette.gov.in* or official BIS gazette desk.
+  2. **Automated Hashing**: File is hashed (SHA-256) and verified against digital signatures.
+  3. **Staging Review**: Document is ingested into an isolated staging index; the 65+ benchmark evaluation harness runs automatically to verify zero regressions.
+  4. **Joint Sign-Off**: Joint Director (IT) and Section Officer (Standards) sign off cryptographically before promotion to the live production index.
+  5. **Emergency Rollback / Correction**: An immediate `revert` pipeline allows retiring or annotating any gazette order with a public supersession notice within 15 minutes.
+- **Public Version & Changelog Visibility:**
+  - Public `/registry` route transparently tracks every publication's official reference, gazette notification number, indexed date, chunk count, and cryptographic hash.
+  - Periodic update notes summarize regulatory additions (e.g., newly notified QCOs, revised test fees, or updated cluster facilities).
+- **Citizen Grievance Redressal SLA:**
+  - Inquiries and grievances submitted via the portal or BIS Care are acknowledged immediately with a unique tracking token.
+  - **SLA Commitment**: Formal initial redressal or written clarification delivered within **5 working days**.
+  - Escalation available directly to the Central Public Information Officer (CPIO) and First Appellate Authority in accordance with the Right to Information Act, 2005 (30-day statutory resolution period).
+- **100% Data Localization & MeghRaj Hosting:**
+  - All application code, vector databases (ChromaDB), query telemetry, and user feedback reside exclusively on sovereign Indian infrastructure (NIC MeghRaj Cloud).
+  - No citizen queries, IP addresses, or feedback telemetry are ever exported or transmitted outside sovereign Indian territory.

@@ -48,47 +48,69 @@ body {
   top: 0;
 }
 
-/* High Contrast Mode for Low Vision Accessibility (GIGW & WCAG AAA) */
+/* High Contrast Mode for Low Vision Accessibility (GIGW 3.0 & WCAG AAA Compliant)
+   Enforces maximum contrast on crisp light parchment without inverting page backgrounds to black. */
 html.high-contrast {
-  --ink: #FFFFFF;
-  --indigo-deep: #000000;
-  --brass: #FFD700;
-  --paper: #050505;
-  --line: #FFFFFF;
-  --verified-green: #00FF66;
-  filter: contrast(110%);
+  --ink: #000000;
+  --indigo-deep: #0B122C;
+  --brass: #8A5800;
+  --paper: #F7F5EF;
+  --line: #000000;
+  --verified-green: #005A2B;
 }
+
 html.high-contrast body {
-  background-color: #000000 !important;
-  color: #FFFFFF !important;
+  color: #000000 !important;
 }
-html.high-contrast .paper-surface,
-html.high-contrast .bg-white,
-html.high-contrast .bg-paper,
-html.high-contrast .bg-paper-light {
-  background-color: #0d0d0d !important;
-  border-color: #FFFFFF !important;
-  color: #FFFFFF !important;
-}
-html.high-contrast a,
-html.high-contrast button {
-  color: #FFD700 !important;
-}
-html.high-contrast .text-ink {
-  color: #FFFFFF !important;
-}
+
+html.high-contrast .text-ink,
 html.high-contrast .text-ink-muted,
 html.high-contrast .text-stone-500,
 html.high-contrast .text-stone-600,
 html.high-contrast .text-gray-500,
-html.high-contrast .text-gray-600 {
-  color: #E2E8F0 !important;
+html.high-contrast .text-gray-600,
+html.high-contrast .text-gray-700,
+html.high-contrast .text-gray-800 {
+  color: #000000 !important;
+  font-weight: 500 !important;
 }
+
 html.high-contrast .border-line,
 html.high-contrast .hairline-all,
 html.high-contrast .hairline-b,
-html.high-contrast .hairline-t {
-  border-color: #666666 !important;
+html.high-contrast .hairline-t,
+html.high-contrast .border {
+  border-color: #000000 !important;
+}
+
+html.high-contrast a,
+html.high-contrast button {
+  text-decoration-thickness: 1.5px;
+}
+
+html.high-contrast :focus-visible {
+  outline: 3px solid #000000 !important;
+  outline-offset: 2px !important;
+}
+
+/* Continuous Marquee Ticker */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 40s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
 }
 
 h1, h2, h3, .font-serif-standard {

@@ -35,6 +35,8 @@ wheels/
 .pytest_cache/
 .coverage
 htmlcov/
+test-results/
+playwright-report/
 
 # Databases and Stores
 *.db

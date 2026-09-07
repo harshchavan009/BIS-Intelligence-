@@ -21,16 +21,40 @@ import { GlossaryPage } from './components/features/GlossaryPage';
 import { FAQPage } from './components/features/FAQPage';
 import { BranchContact } from './components/features/BranchContact';
 import { WebsitePolicies } from './components/features/WebsitePolicies';
+import { HelpPage } from './components/features/HelpPage';
+import { SitemapPage } from './components/features/SitemapPage';
+import { CookieConsent } from './components/common/CookieConsent';
 
 export const App: React.FC = () => {
-  const { activeTab, fetchEvalBenchmark } = useAppStore();
+  const { activeTab, fetchEvalBenchmark, fontSize, highContrast, language } = useAppStore();
 
   React.useEffect(() => {
     fetchEvalBenchmark();
   }, [fetchEvalBenchmark]);
 
+  // Synchronize persistent GIGW accessibility preferences to document root
+  React.useEffect(() => {
+    try {
+      const root = document.documentElement;
+      if (fontSize === 'small') root.style.setProperty('--base-font-size', '14px');
+      else if (fontSize === 'large') root.style.setProperty('--base-font-size', '18px');
+      else root.style.setProperty('--base-font-size', '16px');
+
+      if (highContrast) {
+        root.classList.add('high-contrast');
+      } else {
+        root.classList.remove('high-contrast');
+      }
+    } catch (e) {}
+  }, [fontSize, highContrast]);
+
   return (
     <div className="min-h-screen bg-paper flex flex-col font-sans selection:bg-brass selection:text-white">
+      {/* Authentic GIGW 3.0 Skip to main content link - Guaranteed #1 Focusable Element in DOM */}
+      <a href="#main-content" className="skip-link">
+        {language === 'hi' ? 'मुख्य सामग्री पर जाएं' : 'Skip to main content'}
+      </a>
+
       {/* GIGW Accessible Header & Navigation */}
       <Navbar />
 
@@ -50,6 +74,8 @@ export const App: React.FC = () => {
         {activeTab === 'faq' && <FAQPage />}
         {activeTab === 'contact' && <BranchContact />}
         {activeTab === 'policies' && <WebsitePolicies />}
+        {activeTab === 'help' && <HelpPage />}
+        {activeTab === 'sitemap' && <SitemapPage />}
         {activeTab === 'analytics' && <AnalyticsView />}
         {activeTab === 'about' && <AboutPage />}
         {activeTab === 'registry' && <DocumentRegistry />}
@@ -69,6 +95,9 @@ export const App: React.FC = () => {
 
       {/* Dismissible First-Visit Interactive Walkthrough Tour */}
       <TourGuide />
+
+      {/* GIGW 3.0 Mandatory Cookie & Local Storage Consent Banner */}
+      <CookieConsent />
     </div>
   );
 };
