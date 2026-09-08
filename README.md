@@ -82,55 +82,66 @@ The **Bureau of Indian Standards (BIS)** is the National Standards Body of India
 
 ```mermaid
 flowchart TD
-    User([Citizen / MSME / Officer]) -->|HTTPS / SSE| Frontend[Vite + React 18 + TS SPA\nTailwind CSS • GIGW 3.0 Accessible]
+    User(["Citizen / MSME / Officer"]) -->|HTTPS / SSE| Frontend["Vite + React 18 + TS SPA<br/>Tailwind CSS • GIGW 3.0 Accessible"]
     
-    subgraph Security_Perimeter [Security & Governance Gateway]
-        Frontend -->|Reverse Proxy / Direct| SecMiddleware[SecurityHeadersMiddleware\nHSTS • CSP • nosniff • X-Frame-Options: DENY]
-        SecMiddleware --> RateLimit[InMemoryRateLimiter\n25 req/min • Burst Anomaly Detection]
-        RateLimit --> Sanitizer[Input Sanitizer & XSS Filter]
-        Sanitizer --> DPDP[DPDP Act 2023 IP Masking & Audit Logger]
+    subgraph Security_Perimeter ["Security & Governance Gateway"]
+        Frontend -->|Reverse Proxy / Direct| SecMiddleware["SecurityHeadersMiddleware<br/>HSTS • CSP • nosniff • X-Frame-Options: DENY"]
+        SecMiddleware --> RateLimit["InMemoryRateLimiter<br/>25 req/min • Burst Anomaly Detection"]
+        RateLimit --> Sanitizer["Input Sanitizer & XSS Filter"]
+        Sanitizer --> DPDP["DPDP Act 2023 IP Masking & Audit Logger"]
     end
 
-    subgraph LangGraph_Core [LangGraph Orchestration Pipeline]
-        DPDP --> GraphEntry[StateGraph Entry: retrieve_context]
+    subgraph LangGraph_Core ["LangGraph Orchestration Pipeline"]
+        DPDP --> GraphEntry["StateGraph Entry: retrieve_context"]
         
-        GraphEntry --> HybridRetrieval[(Hybrid Retrieval Engine)]
+        GraphEntry --> HybridRetrieval[("Hybrid Retrieval Engine")]
         
-        subgraph Retrieval_Tiers [Multi-Tier Retrieval Strategy]
-            HybridRetrieval --> Tier1[1. Structured IS Table\nO(1) Exact & Fuzzy Mapping]
-            HybridRetrieval --> Tier2[2. BM25Okapi Search\nSparse Keyword Inverted Index]
-            HybridRetrieval --> Tier3[3. ChromaDB Vector Store\nDense Multilingual MiniLM Embeddings]
+        subgraph Retrieval_Tiers ["Multi-Tier Retrieval Strategy"]
+            Tier1["1. Structured IS Table<br/>O(1) Exact & Fuzzy Mapping"]
+            Tier2["2. BM25Okapi Search<br/>Sparse Keyword Inverted Index"]
+            Tier3["3. ChromaDB Vector Store<br/>Dense Multilingual MiniLM Embeddings"]
+            HybridRetrieval --> Tier1
+            HybridRetrieval --> Tier2
+            HybridRetrieval --> Tier3
         end
         
-        Retrieval_Tiers --> RRF[Reciprocal Rank Fusion RRF\nScore Floor & Category Boost]
-        RRF --> RouteIntent{Conditional Intent Router\nroute_intent}
+        Tier1 --> RRF["Reciprocal Rank Fusion RRF<br/>Score Floor & Category Boost"]
+        Tier2 --> RRF
+        Tier3 --> RRF
+        RRF --> RouteIntent{"Conditional Intent Router<br/>route_intent"}
         
-        RouteIntent -->|Product / IS Query| StandardsNode[Standards Node]
-        RouteIntent -->|Licensing / Process| SchemeNode[Scheme Node]
-        RouteIntent -->|Cluster Testing| LabNode[MSME CBTF Node]
-        RouteIntent -->|Fake ISI / Complaint| ConsumerNode[Consumer Node]
-        RouteIntent -->|HUID / Fineness| HallmarkNode[Hallmarking Node]
-        RouteIntent -->|General Inquiry| GeneralNode[General QA Node]
+        RouteIntent -->|Product / IS Query| StandardsNode["Standards Node"]
+        RouteIntent -->|Licensing / Process| SchemeNode["Scheme Node"]
+        RouteIntent -->|Cluster Testing| LabNode["MSME CBTF Node"]
+        RouteIntent -->|Fake ISI / Complaint| ConsumerNode["Consumer Node"]
+        RouteIntent -->|HUID / Fineness| HallmarkNode["Hallmarking Node"]
+        RouteIntent -->|General Inquiry| GeneralNode["General QA Node"]
     end
 
-    subgraph LLM_Provider_Layer [Dual-Engine Generation Layer]
-        StandardsNode & SchemeNode & LabNode & ConsumerNode & HallmarkNode & GeneralNode --> LLMFactory{LLM Provider Factory}
-        LLMFactory -->|Online Mode| Gemini[Gemini 2.0 Flash\nDelimited XML Context Sandboxing]
-        LLMFactory -->|Offline / Fallback| OfflineEngine[Deterministic Local Synthesis\nSemantic Token Overlap + Grounded Chunks]
+    subgraph LLM_Provider_Layer ["Dual-Engine Generation Layer"]
+        StandardsNode --> LLMFactory{"LLM Provider Factory"}
+        SchemeNode --> LLMFactory
+        LabNode --> LLMFactory
+        ConsumerNode --> LLMFactory
+        HallmarkNode --> LLMFactory
+        GeneralNode --> LLMFactory
+        LLMFactory -->|Online Mode| Gemini["Gemini 2.0 Flash<br/>Delimited XML Context Sandboxing"]
+        LLMFactory -->|Offline / Fallback| OfflineEngine["Deterministic Local Synthesis<br/>Semantic Token Overlap + Grounded Chunks"]
     end
 
-    subgraph Groundedness_Inspection [Verification & Integrity Engine]
-        Gemini & OfflineEngine --> Checker[GroundednessChecker\nCitation Tracking • N-gram Overlap • Entity Match]
-        Checker -->|Score >= 70%| VerifiedBadge[Verified Grounded Badge\nInline Citations [1], [2]]
-        Checker -->|Score < 70% / Out of Scope| Abstain[Honest Out-of-Corpus Abstention]
+    subgraph Groundedness_Inspection ["Verification & Integrity Engine"]
+        Gemini --> Checker["GroundednessChecker<br/>Citation Tracking • N-gram Overlap • Entity Match"]
+        OfflineEngine --> Checker
+        Checker -->|"Score >= 70%"| VerifiedBadge["Verified Grounded Badge<br/>Inline Citations [1], [2]"]
+        Checker -->|"Score < 70% / Out of Scope"| Abstain["Honest Out-of-Corpus Abstention"]
     end
 
-    subgraph Visual_Verification [Document Inspection Engine]
-        VerifiedBadge --> PyMuPDF[PyMuPDF Page Image Generator\n/api/documents/{file}/page-image]
-        PyMuPDF --> VisualHighlight[Rendered High-Res PNG\nHighlighted Regulatory Yellow Clauses]
+    subgraph Visual_Verification ["Document Inspection Engine"]
+        VerifiedBadge --> PyMuPDF["PyMuPDF Page Image Generator<br/>/api/documents/:file/page-image"]
+        PyMuPDF --> VisualHighlight["Rendered High-Res PNG<br/>Highlighted Regulatory Yellow Clauses"]
     end
 
-    VisualHighlight --> ResponseStream([Server-Sent Events Stream / JSON Response])
+    VisualHighlight --> ResponseStream(["Server-Sent Events Stream / JSON Response"])
 ```
 
 ### LangGraph State Machine Graph
@@ -165,9 +176,9 @@ stateDiagram-v2
 
     state Verification {
         [*] --> GenerateResponse: Call Active LLM Provider
-        GenerateResponse --> CitationCheck: Extract [1], [2] Markers
+        GenerateResponse --> CitationCheck: Extract Citation Markers
         CitationCheck --> OverlapScore: Compute N-Gram Lexical Overlap
-        OverlapScore --> GroundedDecision: Threshold >= 70% ?
+        OverlapScore --> GroundedDecision: Threshold Check
     }
 
     Verification --> [*]: Yield Grounded SSE Payload + Sources
