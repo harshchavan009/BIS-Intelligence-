@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
+import { useDebounce } from '../../hooks/useDebounce';
 import { useTranslation } from '../../i18n/useTranslation';
 import { BookOpen, Search, HelpCircle, ArrowRight, ShieldCheck, Tag, FileText, CheckCircle2 } from 'lucide-react';
 import { PageHeader } from '../common/PageHeader';
@@ -229,15 +230,17 @@ export const GlossaryPage: React.FC = () => {
   const { setActiveTab, setQueryPrefill } = useAppStore();
   const { language } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearch = useDebounce(searchTerm, 150);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const filteredTerms = GLOSSARY_TERMS.filter(item => {
-    const matchesSearch = 
-      item.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.fullNameHi.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.summaryEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.practicalMeaningEn.toLowerCase().includes(searchTerm.toLowerCase());
+    const qLower = debouncedSearch.toLowerCase().trim();
+    const matchesSearch = !qLower ||
+      item.term.toLowerCase().includes(qLower) ||
+      item.fullName.toLowerCase().includes(qLower) ||
+      item.fullNameHi.toLowerCase().includes(qLower) ||
+      item.summaryEn.toLowerCase().includes(qLower) ||
+      item.practicalMeaningEn.toLowerCase().includes(qLower);
 
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
 

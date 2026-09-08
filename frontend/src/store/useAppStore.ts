@@ -24,6 +24,7 @@ export type ActiveTab =
   | 'contact'
   | 'policies'
   | 'analytics' 
+  | 'evaluator-login'
   | 'about'
   | 'help'
   | 'sitemap';

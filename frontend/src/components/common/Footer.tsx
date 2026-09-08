@@ -140,37 +140,107 @@ export const Footer: React.FC = () => {
                 onClick={() => setActiveTab('analytics')}
                 className="hover:text-brass transition-colors flex items-center gap-1 focus-visible:ring-1 focus-visible:ring-brass rounded"
               >
-                <span>{t('nav.analytics')} (Evaluator Auth-Gated)</span>
+                <span>{t('nav.analytics')} (Evaluator Console)</span>
               </button>
-            </li>
-            <li>
-              <a 
-                href="https://www.bis.gov.in" 
-                target="_blank" 
-                rel="noreferrer"
-                className="hover:text-brass transition-colors flex items-center gap-1 focus-visible:ring-1 focus-visible:ring-brass rounded"
-              >
-                <span>Official BIS Portal (bis.gov.in)</span>
-                <ExternalLink className="w-3 h-3 text-gray-500" />
-              </a>
             </li>
           </ul>
         </div>
 
-        {/* Col 3: GIGW Technical & Browser Environment Requirements */}
+        {/* Col 3: Official Government Portals & External Registry Links */}
         <div className="md:col-span-4 space-y-3">
           <div className="text-xs font-semibold text-white uppercase tracking-wider font-mono flex items-center gap-1.5">
-            <Monitor className="w-3.5 h-3.5 text-brass" />
-            <span>{language === 'hi' ? 'तकनीकी विनिर्देश एवं ब्राउज़र संगतता' : 'GIGW Environment Specifications'}</span>
+            <ExternalLink className="w-3.5 h-3.5 text-brass" />
+            <span>{language === 'hi' ? 'आधिकारिक सरकारी पोर्टल एवं बाहरी लिंक' : 'Official Government Portals'}</span>
           </div>
-          
+
           <div className="p-3 bg-white/5 rounded border border-white/10 space-y-2 text-[11px] text-gray-300">
-            <p className="leading-relaxed">
-              {t('footer.best_viewed')}
+            <p className="text-[10.5px] text-amber-300/80 leading-snug">
+              {language === 'hi'
+                ? 'बाहरी लिंक सूचना: आप बीआईएस इंटेलिजेंस पोर्टल छोड़ रहे हैं और एक आधिकारिक भारत सरकार की वेबसाइट पर पुनर्निर्देशित किए जा रहे हैं।'
+                : 'External link notice: You are leaving the BIS Intelligence Portal and being redirected to an official Government of India portal.'}
             </p>
-            <div className="pt-1 border-t border-white/10 flex items-center gap-2 text-emerald-400 font-mono text-[10.5px]">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>{language === 'hi' ? 'GIGW 3.0 एवं WCAG 2.1 AA दिशानिर्देशों के अनुरूप निर्मित' : 'Built to GIGW 3.0 & WCAG 2.1 AA Guidelines'}</span>
+            <ul className="space-y-1.5 pt-1 text-xs">
+              <li>
+                <a 
+                  href="https://www.bis.gov.in" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-brass transition-colors inline-flex items-center gap-1.5 text-gray-200"
+                >
+                  <span>Bureau of Indian Standards (bis.gov.in)</span>
+                  <ExternalLink className="w-3 h-3 text-brass/70 shrink-0" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.manakonline.in" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-brass transition-colors inline-flex items-center gap-1.5 text-gray-200"
+                >
+                  <span>Manakonline e-Governance (manakonline.in)</span>
+                  <ExternalLink className="w-3 h-3 text-brass/70 shrink-0" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.bis.gov.in/the-bureau/bis-care-app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-brass transition-colors inline-flex items-center gap-1.5 text-gray-200"
+                >
+                  <span>BIS-CARE Consumer Verification App</span>
+                  <ExternalLink className="w-3 h-3 text-brass/70 shrink-0" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://standardsbis.bsbedge.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-brass transition-colors inline-flex items-center gap-1.5 text-gray-200"
+                >
+                  <span>National Standards Portal (standardsbis.bsbedge.com)</span>
+                  <ExternalLink className="w-3 h-3 text-brass/70 shrink-0" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://consumeraffairs.gov.in" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-brass transition-colors inline-flex items-center gap-1.5 text-gray-200"
+                >
+                  <span>Department of Consumer Affairs (consumeraffairs.gov.in)</span>
+                  <ExternalLink className="w-3 h-3 text-brass/70 shrink-0" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://dpiit.gov.in" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-brass transition-colors inline-flex items-center gap-1.5 text-gray-200"
+                >
+                  <span>DPIIT Quality Control Orders (dpiit.gov.in)</span>
+                  <ExternalLink className="w-3 h-3 text-brass/70 shrink-0" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.india.gov.in" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-brass transition-colors inline-flex items-center gap-1.5 text-gray-200"
+                >
+                  <span>National Portal of India (india.gov.in)</span>
+                  <ExternalLink className="w-3 h-3 text-brass/70 shrink-0" />
+                </a>
+              </li>
+            </ul>
+            <div className="pt-2 border-t border-white/10 flex items-center gap-2 text-emerald-400 font-mono text-[10.5px]">
+              <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+              <span>{language === 'hi' ? 'GIGW 3.0 एवं WCAG 2.1 AA दिशानिर्देशों के अनुरूप' : 'Built to GIGW 3.0 & WCAG 2.1 AA Guidelines'}</span>
             </div>
           </div>
         </div>

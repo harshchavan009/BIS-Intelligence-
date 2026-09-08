@@ -7,13 +7,15 @@ from sqlalchemy import func
 from backend.app.core.config import settings
 from backend.app.models.database import get_db, QueryLog, Feedback
 from backend.app.models.schemas import AnalyticsResponse
+from backend.app.api.auth import get_current_evaluator
 import chromadb
 
 router = APIRouter()
 
 @router.get("/analytics", response_model=AnalyticsResponse)
 async def get_analytics(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    evaluator: str = Depends(get_current_evaluator)
 ):
     """
     Publicly inspectable live telemetry & groundedness evaluation:
@@ -94,7 +96,9 @@ async def get_analytics(
     )
 
 @router.get("/analytics/eval-details")
-async def get_eval_details() -> Dict[str, Any]:
+async def get_eval_details(
+    evaluator: str = Depends(get_current_evaluator)
+) -> Dict[str, Any]:
     """
     Returns the comprehensive 65-case evaluation report with category breakdowns and individual test case details.
     """

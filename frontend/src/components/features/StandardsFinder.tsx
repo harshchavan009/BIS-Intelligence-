@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
+import { useDebounce } from '../../hooks/useDebounce';
 import { Search, ShieldAlert, CheckCircle, ExternalLink, ArrowRight, Filter, BookOpen, X } from 'lucide-react';
 import { PageHeader } from '../common/PageHeader';
 import { Card } from '../common/Card';
@@ -19,6 +20,7 @@ interface StandardItem {
 export const StandardsFinder: React.FC = () => {
   const { queryPrefill, setQueryPrefill, setActiveTab, openSource, language } = useAppStore();
   const [query, setQuery] = useState('cement');
+  const debouncedQuery = useDebounce(query, 300);
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [results, setResults] = useState<StandardItem[]>([]);
   const [loading, setLoading] = useState(false);
@@ -50,7 +52,9 @@ export const StandardsFinder: React.FC = () => {
       setResults(data.results || []);
       setSources(data.sources || []);
     } catch (err) {
-      console.error(err);
+      if (import.meta.env.DEV) {
+        console.error('Standards search error:', err);
+      }
     } finally {
       setLoading(false);
     }
@@ -63,6 +67,13 @@ export const StandardsFinder: React.FC = () => {
     handleSearch(initialQ, false);
     if (queryPrefill) setQueryPrefill('');
   }, [queryPrefill]);
+
+  // Live debounced search as user types
+  useEffect(() => {
+    if (debouncedQuery.trim() && debouncedQuery.trim().length >= 2) {
+      handleSearch(debouncedQuery.trim(), true);
+    }
+  }, [debouncedQuery]);
 
   const filteredResults = categoryFilter === 'All'
     ? results

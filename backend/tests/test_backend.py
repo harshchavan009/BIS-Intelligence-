@@ -89,14 +89,12 @@ class TestBISBackend(unittest.TestCase):
         print("✓ Labs CBTF suggest passed:", len(data["eligible_msme_provisions"]), "provisions")
 
     def test_06_analytics_auth_gated(self):
-        # 1. Verify public analytics is accessible without auth (Round 2 requirement)
-        public_resp = self.client.get("/api/analytics")
-        self.assertEqual(public_resp.status_code, 200)
-        data = public_resp.json()
-        self.assertGreaterEqual(data["documents_indexed"], 7)
-        self.assertGreaterEqual(data["chunks_stored"], 300)
+        # 1. Verify protected analytics endpoint enforces 401 when unauthenticated
+        unauth_analytics = self.client.get("/api/analytics")
+        self.assertEqual(unauth_analytics.status_code, 401)
+        self.assertIn("Authentication required", unauth_analytics.json()["detail"])
 
-        # 2. Verify protected endpoint enforces 401 when unauthenticated
+        # 2. Verify protected auth verify enforces 401 when unauthenticated
         unauth_resp = self.client.get("/api/auth/verify")
         self.assertEqual(unauth_resp.status_code, 401)
         self.assertIn("Authentication required", unauth_resp.json()["detail"])
@@ -111,7 +109,30 @@ class TestBISBackend(unittest.TestCase):
         auth_resp = self.client.get("/api/auth/verify", headers={"Authorization": f"Bearer {token}"})
         self.assertEqual(auth_resp.status_code, 200)
         self.assertEqual(auth_resp.json()["authenticated"], True)
-        print("✓ Public analytics and auth-gated endpoints both passed")
+
+        # 5. Access analytics with Bearer token
+        analytics_resp = self.client.get("/api/analytics", headers={"Authorization": f"Bearer {token}"})
+        self.assertEqual(analytics_resp.status_code, 200)
+        data = analytics_resp.json()
+        self.assertGreaterEqual(data["documents_indexed"], 7)
+        self.assertGreaterEqual(data["chunks_stored"], 300)
+        print("✓ Server-side auth gating on analytics and verify endpoints verified")
+
+    def test_06c_login_rate_limiting_and_validation(self):
+        # Test wrong credentials record attempt
+        bad_login = self.client.post("/api/auth/login", json={"username": "evaluator", "password": "wrong_password"})
+        self.assertEqual(bad_login.status_code, 401)
+
+        # Test demo credentials
+        demo_login = self.client.post("/api/auth/login", json={"username": "demo", "password": "demo"})
+        self.assertEqual(demo_login.status_code, 200)
+        demo_token = demo_login.json()["token"]
+
+        # Test logout invalidation
+        logout_resp = self.client.post("/api/auth/logout", cookies={"bis_evaluator_session": demo_token})
+        self.assertEqual(logout_resp.status_code, 200)
+        self.assertEqual(logout_resp.json()["status"], "logged_out")
+        print("✓ Login credential validation and logout session cleanup verified")
 
     def test_06b_security_headers(self):
         resp = self.client.get("/api/health")
@@ -133,11 +154,30 @@ class TestBISBackend(unittest.TestCase):
         self.assertTrue(data_valid["simulated"])
         self.assertEqual(data_valid["data"]["standard"], "IS 269: 2015 (Ordinary Portland Cement)")
 
-        # Invalid seed
+        # Invalid seed (valid format, but unknown number)
         resp_invalid = self.client.post("/api/verify/cml", json={"cml_number": "CM/L-9999999"})
         self.assertEqual(resp_invalid.status_code, 200)
         data_invalid = resp_invalid.json()
         self.assertFalse(data_invalid["found"])
+
+        # Malformed input -> 422 Unprocessable Entity
+        resp_malformed = self.client.post("/api/verify/cml", json={"cml_number": "invalid-cml-format"})
+        self.assertEqual(resp_malformed.status_code, 422)
+        print("✓ CM/L verification and format regex enforcement verified")
+
+    def test_08_verify_huid(self):
+        # Valid seed
+        resp_valid = self.client.post("/api/verify/huid", json={"huid": "AB7842"})
+        self.assertEqual(resp_valid.status_code, 200)
+        data = resp_valid.json()
+        self.assertTrue(data["found"])
+        self.assertEqual(data["data"]["purity"], "22K916 (91.6% Pure Gold)")
+
+        # Malformed HUID -> 422
+        resp_malformed = self.client.post("/api/verify/huid", json={"huid": "TOOLONG123"})
+        self.assertEqual(resp_malformed.status_code, 422)
+        print("✓ HUID verification and 6-character regex enforcement verified")
+
         self.assertTrue(data_invalid["simulated"])
         self.assertIn("not found in demo dataset", data_invalid["message"].lower())
         print("✓ CM/L simulated verification passed (valid seed + honest rejection)")

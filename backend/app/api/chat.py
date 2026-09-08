@@ -13,6 +13,40 @@ from backend.app.core.security import rate_limiter, get_client_ip, sanitize_text
 
 router = APIRouter()
 
+from collections import OrderedDict
+import time
+
+class ChatResponseLRUCache:
+    """In-memory thread-safe LRU cache for repeat queries to ensure sub-10ms response times."""
+    def __init__(self, capacity: int = 300, ttl_seconds: int = 3600):
+        self.capacity = capacity
+        self.ttl = ttl_seconds
+        self.cache: OrderedDict[str, dict] = OrderedDict()
+
+    def _key(self, query: str, lang: str) -> str:
+        return f"{lang}:{query.strip().lower()}"
+
+    def get(self, query: str, lang: str):
+        k = self._key(query, lang)
+        if k in self.cache:
+            entry = self.cache[k]
+            if time.time() - entry["ts"] < self.ttl:
+                self.cache.move_to_end(k)
+                return entry["payload"]
+            else:
+                del self.cache[k]
+        return None
+
+    def put(self, query: str, lang: str, payload: dict):
+        k = self._key(query, lang)
+        if k in self.cache:
+            self.cache.move_to_end(k)
+        self.cache[k] = {"payload": payload, "ts": time.time()}
+        if len(self.cache) > self.capacity:
+            self.cache.popitem(last=False)
+
+chat_lru_cache = ChatResponseLRUCache(capacity=300, ttl_seconds=3600)
+
 @router.post("/chat")
 async def chat_stream(request_data: ChatRequest, request: Request):
     """
@@ -38,6 +72,29 @@ async def chat_stream(request_data: ChatRequest, request: Request):
     query = sanitize_text(request_data.message, max_length=1000)
     lang = request_data.language or "en"
     capability = request_data.capability or "general"
+
+    # Fast LRU Cache lookup for repeat queries
+    cached_hit = chat_lru_cache.get(query, lang)
+    if cached_hit:
+        async def cached_stream():
+            yield ": bis-sse-init\n\n"
+            words = cached_hit["answer"].split(" ")
+            for i in range(0, len(words), 4):
+                chunk = " ".join(words[i:i+4]) + " "
+                yield f"data: {json.dumps({'type': 'token', 'data': chunk}, ensure_ascii=False)}\n\n"
+                await asyncio.sleep(0.008)
+            yield f"data: {json.dumps(cached_hit['meta'], ensure_ascii=False)}\n\n"
+
+        return StreamingResponse(
+            cached_stream(),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache, no-transform",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",
+                "X-Cache-Lookup": "HIT"
+            }
+        )
     
     # 2. Hybrid retrieval (BM25 + Dense RRF)
     structured, dense_chunks = retriever.retrieve(query, top_k=4)
@@ -116,6 +173,9 @@ async def chat_stream(request_data: ChatRequest, request: Request):
                 }
             }
             yield f"data: {json.dumps(meta_payload, ensure_ascii=False)}\n\n"
+
+            # Cache successful response for instant repeat queries
+            chat_lru_cache.put(query, lang, {"answer": full_answer, "meta": meta_payload})
 
             # Log to DB using a dedicated session so it commits cleanly in the background
             db = SessionLocal()

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
+import { useDebounce } from '../../hooks/useDebounce';
 import { 
   BarChart3, FileText, Database, ShieldCheck, ThumbsUp, Layers, 
   RefreshCw, CheckCircle2, Search, Filter, AlertCircle, ChevronDown, 
-  ChevronUp, Upload, Check, Lock, LogOut, KeyRound, ExternalLink
+  ChevronUp, Upload, Check, Lock, LogOut, KeyRound, ExternalLink,
+  ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { SealMotif } from '../common/SealMotif';
+import { EvaluatorLogin } from '../auth/EvaluatorLogin';
 
 export const AnalyticsView: React.FC = () => {
   const { language, setActiveTab, adminToken, setAdminToken } = useAppStore();
@@ -13,9 +16,12 @@ export const AnalyticsView: React.FC = () => {
   const [evalDetails, setEvalDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   
-  // Interactive test table filters
+  // Interactive test table filters & pagination
   const [searchQuery, setSearchQuery] = useState('');
+  const debouncedSearch = useDebounce(searchQuery, 200);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 15;
   
   // Admin ingestion panel
   const [showAdminPanel, setShowAdminPanel] = useState(false);
@@ -27,37 +33,44 @@ export const AnalyticsView: React.FC = () => {
   const [reingestLoading, setReingestLoading] = useState(false);
   const [reingestSuccess, setReingestSuccess] = useState('');
 
-  // Evaluator Console Access Gate
-  const [isEvaluatorUnlocked, setIsEvaluatorUnlocked] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('evaluator_access_unlocked') === 'true' || Boolean(adminToken);
-    }
-    return false;
-  });
-  const [evaluatorPin, setEvaluatorPin] = useState('');
-  const [pinError, setPinError] = useState('');
+  // Server-Side Evaluator Authentication State
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [evaluatorUser, setEvaluatorUser] = useState<string>('BIS Domain Evaluator');
 
-  const handleUnlockEvaluator = (e: React.FormEvent) => {
-    e.preventDefault();
-    const trimmed = evaluatorPin.trim();
-    if (
-      trimmed === '1391' ||
-      trimmed.toLowerCase() === 'bis-evaluator-2026' ||
-      trimmed.toLowerCase() === 'evaluator' ||
-      trimmed.toLowerCase() === 'demo'
-    ) {
-      setIsEvaluatorUnlocked(true);
-      sessionStorage.setItem('evaluator_access_unlocked', 'true');
-      setPinError('');
-    } else {
-      setPinError('Invalid Evaluator PIN. Please enter 1391 or bis-evaluator-2026.');
+  const checkServerAuth = async () => {
+    try {
+      const headers: Record<string, string> = {};
+      if (adminToken) {
+        headers['Authorization'] = `Bearer ${adminToken}`;
+      }
+      const res = await fetch('/api/auth/verify', {
+        credentials: 'include',
+        headers
+      });
+      if (res.ok) {
+        const json = await res.json();
+        setIsAuthenticated(true);
+        if (json.user) setEvaluatorUser(json.user);
+        fetchAnalytics();
+      } else {
+        setIsAuthenticated(false);
+      }
+    } catch (e) {
+      setIsAuthenticated(false);
     }
   };
 
-  const handleLockEvaluator = () => {
-    setIsEvaluatorUnlocked(false);
-    sessionStorage.removeItem('evaluator_access_unlocked');
+  const handleLogoutEvaluator = async () => {
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+    } catch (e) {}
+    setAdminToken(null);
+    setIsAuthenticated(false);
   };
+
 
   const fetchAnalytics = async () => {
     setLoading(true);
@@ -164,16 +177,20 @@ export const AnalyticsView: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchAnalytics();
+    checkServerAuth();
     fetchAdminStatus();
-  }, []);
+  }, [adminToken]);
 
-  // Filter test cases
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedSearch, selectedCategory]);
+
+  // Filter test cases using debounced search
   const allCases = evalDetails?.results || [];
   const filteredCases = allCases.filter((c: any) => {
     const matchesCategory = selectedCategory === 'All' || c.category === selectedCategory || (selectedCategory === 'Abstention' && c.is_abstention);
-    const qLower = searchQuery.toLowerCase();
-    const matchesSearch = !searchQuery || 
+    const qLower = debouncedSearch.toLowerCase().trim();
+    const matchesSearch = !qLower || 
       c.id.toLowerCase().includes(qLower) ||
       c.query.toLowerCase().includes(qLower) ||
       (c.expected_is_number && c.expected_is_number.toLowerCase().includes(qLower)) ||
@@ -181,75 +198,29 @@ export const AnalyticsView: React.FC = () => {
     return matchesCategory && matchesSearch;
   });
 
+  const totalPages = Math.ceil(filteredCases.length / pageSize) || 1;
+  const paginatedCases = filteredCases.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
   const uniqueCategories = ['All', 'Cement & Building Materials', 'Steel & Metallurgy', 'Electronics & IT Goods', 'Electrical & Lighting', 'Household Appliances', 'MSME Cluster Concessions', 'Scheme-IV CoC', 'Surveillance & Enforcement', 'Statutory Orders', 'Hallmarking', 'Out of Corpus'];
 
-  if (!isEvaluatorUnlocked) {
+  if (isAuthenticated === null) {
     return (
-      <div className="max-w-xl mx-auto px-4 py-16 font-sans">
-        <div className="bg-white border border-line rounded-xl p-8 shadow-paper space-y-6">
-          <div className="text-center space-y-3">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-slate-100 border border-slate-300 text-indigo-deep mx-auto shadow-sm">
-              <Lock className="w-7 h-7 text-indigo-deep" />
-            </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-300 text-[11px] font-mono text-slate-700 font-semibold">
-              <ShieldCheck className="w-3.5 h-3.5 text-verified-green" />
-              <span>GIGW 3.0 Protected Evaluation Console</span>
-            </div>
-            <h1 className="text-2xl font-serif font-bold text-ink">
-              {language === 'hi' ? 'मूल्यांकनकर्ता पहुंच आवश्यक' : 'Evaluator Access Required'}
-            </h1>
-            <p className="text-xs text-stone-600 leading-relaxed max-w-md mx-auto">
-              {language === 'hi'
-                ? 'यह कंसोल बीआईएस विनियमन हार्नेस, 65-परीक्षण बेंचमार्क और सिस्टम टेलीमेट्री के आंतरिक मूल्यांकन हेतु सुरक्षित है।'
-                : 'This console is an internal audit harness for benchmark scoring (65/65 test suite), SQLite telemetry, and regulatory vector controls.'}
-            </p>
-          </div>
+      <div className="max-w-md mx-auto px-4 py-24 text-center space-y-4 font-sans">
+        <div className="w-9 h-9 border-3 border-brass border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-xs font-mono text-stone-600">Verifying BIS Evaluator Session Authorization...</p>
+      </div>
+    );
+  }
 
-          <form onSubmit={handleUnlockEvaluator} className="space-y-4 pt-2">
-            <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-stone-700 block">
-                {language === 'hi' ? 'मूल्यांकनकर्ता पिन / पासकोड दर्ज करें:' : 'Evaluator Passcode / PIN:'}
-              </label>
-              <div className="relative">
-                <KeyRound className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
-                <input
-                  type="password"
-                  value={evaluatorPin}
-                  onChange={(e) => setEvaluatorPin(e.target.value)}
-                  placeholder="Enter PIN (e.g. 1391 or bis-evaluator-2026)"
-                  className="w-full pl-10 pr-4 py-2.5 text-xs border border-line rounded-md bg-paper-light focus:outline-none focus:border-brass text-ink font-mono"
-                  autoFocus
-                />
-              </div>
-              <div className="flex items-center justify-between text-[11px] text-stone-500 pt-1">
-                <span>Evaluation Passcode: <code className="font-mono font-bold text-indigo-deep bg-slate-100 px-1.5 py-0.5 rounded">1391</code> or <code className="font-mono font-bold text-indigo-deep bg-slate-100 px-1.5 py-0.5 rounded">bis-evaluator-2026</code></span>
-              </div>
-              {pinError && (
-                <div className="text-xs text-rose-600 font-semibold flex items-center gap-1 pt-1">
-                  <AlertCircle className="w-3.5 h-3.5" />
-                  <span>{pinError}</span>
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
-              <button
-                type="submit"
-                className="w-full sm:flex-1 py-2.5 px-4 bg-indigo-deep hover:bg-indigo-900 text-white text-xs font-semibold rounded-md shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <ShieldCheck className="w-4 h-4" />
-                <span>{language === 'hi' ? 'कंसोल अनलॉक करें' : 'Verify & Unlock Console'}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('landing')}
-                className="w-full sm:w-auto py-2.5 px-4 bg-white hover:bg-paper-dark border border-line text-stone-700 text-xs font-semibold rounded-md transition-colors cursor-pointer"
-              >
-                {language === 'hi' ? 'वापस मुख्य पृष्ठ' : 'Return to Portal'}
-              </button>
-            </div>
-          </form>
-        </div>
+  if (!isAuthenticated) {
+    return (
+      <div className="py-6">
+        <EvaluatorLogin
+          onSuccess={() => {
+            setIsAuthenticated(true);
+            fetchAnalytics();
+          }}
+        />
       </div>
     );
   }
@@ -265,8 +236,9 @@ export const AnalyticsView: React.FC = () => {
               <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
                 Evaluator Console & QA Telemetry
               </span>
-              <span className="text-[10px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-300 px-2 py-0.5 rounded font-semibold">
-                Session Active
+              <span className="text-[10px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-300 px-2 py-0.5 rounded font-semibold flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                <span>Active ({evaluatorUser})</span>
               </span>
             </div>
             <h1 className="text-2xl font-serif text-ink">
@@ -280,12 +252,13 @@ export const AnalyticsView: React.FC = () => {
           </div>
           <div className="flex items-center gap-2 self-start sm:self-auto">
             <button
-              onClick={handleLockEvaluator}
-              className="px-3 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded text-xs font-medium text-slate-700 flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
-              title="Lock Evaluator Console"
+              onClick={handleLogoutEvaluator}
+              className="px-3 py-2 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-800 rounded text-xs font-medium flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
+              title="Log out and clear evaluator session"
+              aria-label="Log out evaluator session"
             >
-              <Lock className="w-3.5 h-3.5 text-slate-600" />
-              <span className="hidden sm:inline">Lock Console</span>
+              <LogOut className="w-3.5 h-3.5 text-rose-700" />
+              <span>Log Out</span>
             </button>
             <button
               onClick={() => fetchAnalytics()}
@@ -337,14 +310,14 @@ export const AnalyticsView: React.FC = () => {
               <form onSubmit={handleAdminLogin} className="flex flex-wrap gap-2 items-center" autoComplete="off">
                 <input
                   type="text"
-                  placeholder="ID: demo"
+                  placeholder="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="px-3 py-1.5 text-xs border border-amber-300 rounded bg-white text-ink font-mono w-28 focus:outline-none focus:border-amber-600"
                 />
                 <input
                   type="password"
-                  placeholder="Pass: demo"
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="px-3 py-1.5 text-xs border border-amber-300 rounded bg-white text-ink font-mono w-28 focus:outline-none focus:border-amber-600"
@@ -560,7 +533,7 @@ export const AnalyticsView: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-line/40">
-              {filteredCases.map((c: any) => (
+              {paginatedCases.map((c: any) => (
                 <tr key={c.id} className="odd:bg-[#FAF9F5] even:bg-white hover:bg-amber-50/40 transition-colors">
                   <td className="py-3.5 px-3.5 font-mono font-bold text-stone-800">{c.id}</td>
                   <td className="py-3.5 px-3.5">
@@ -590,6 +563,34 @@ export const AnalyticsView: React.FC = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 text-xs text-stone-600 font-mono">
+          <div>
+            Showing <span className="font-bold text-ink">{filteredCases.length === 0 ? 0 : (currentPage - 1) * pageSize + 1}</span> to <span className="font-bold text-ink">{Math.min(currentPage * pageSize, filteredCases.length)}</span> of <span className="font-bold text-ink">{filteredCases.length}</span> benchmark test cases
+          </div>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage <= 1}
+              className="px-2.5 py-1 rounded bg-white border border-line hover:bg-paper-dark disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-stone-700 flex items-center gap-1"
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+              <span>Previous</span>
+            </button>
+            <span className="px-2 text-stone-700">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage >= totalPages}
+              className="px-2.5 py-1 rounded bg-white border border-line hover:bg-paper-dark disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-stone-700 flex items-center gap-1"
+            >
+              <span>Next</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
 

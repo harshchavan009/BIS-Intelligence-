@@ -154,6 +154,59 @@ def verify_captcha_token(token: Optional[str], client_ip: str) -> bool:
 
     return False
 
+import bcrypt
+
+def hash_password(password: str) -> str:
+    """Hashes password using bcrypt with salt rounds."""
+    salt = bcrypt.gensalt(rounds=12)
+    return bcrypt.hashpw(password.encode("utf-8"), salt).decode("utf-8")
+
+def verify_password(password: str, hashed: str) -> bool:
+    """Verifies a plaintext password against a bcrypt hashed password."""
+    try:
+        return bcrypt.checkpw(password.encode("utf-8"), hashed.encode("utf-8"))
+    except Exception:
+        return False
+
+class LoginRateLimiter:
+    """
+    Brute-force protection rate limiter for authentication endpoints.
+    Enforces maximum attempts (default: 5) per IP over a sliding window (default: 15 minutes = 900 seconds).
+    """
+    def __init__(self, max_attempts: int = 5, window_seconds: int = 900):
+        self.max_attempts = max_attempts
+        self.window_seconds = window_seconds
+        self.attempts: Dict[str, List[float]] = defaultdict(list)
+
+    def check_rate_limit(self, client_ip: str) -> None:
+        now = time.time()
+        window_start = now - self.window_seconds
+        self.attempts[client_ip] = [
+            ts for ts in self.attempts[client_ip] if ts > window_start
+        ]
+        if len(self.attempts[client_ip]) >= self.max_attempts:
+            retry_after = int(self.window_seconds - (now - self.attempts[client_ip][0]))
+            log_audit_event(
+                action="LOGIN_LOCKED_OUT",
+                client_ip=client_ip,
+                status="BLOCKED",
+                details=f"Exceeded {self.max_attempts} attempts in {self.window_seconds // 60}m"
+            )
+            raise HTTPException(
+                status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+                detail=f"Too many failed login attempts. Evaluator console locked for {max(1, (retry_after + 59) // 60)} minutes to prevent brute-force attacks.",
+                headers={"Retry-After": str(max(1, retry_after))}
+            )
+
+    def record_attempt(self, client_ip: str) -> None:
+        self.attempts[client_ip].append(time.time())
+
+    def reset_attempts(self, client_ip: str) -> None:
+        if client_ip in self.attempts:
+            del self.attempts[client_ip]
+
+login_rate_limiter = LoginRateLimiter(max_attempts=5, window_seconds=900)
+
 def verify_csrf_token(request: Request) -> bool:
     """
     Verifies CSRF token header for state-changing POST/PUT/DELETE requests.
@@ -163,3 +216,4 @@ def verify_csrf_token(request: Request) -> bool:
     if not csrf_token or len(csrf_token) < 8:
         return False
     return True
+

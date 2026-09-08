@@ -116,6 +116,14 @@ async def verify_cml(request_data: CMLVerifyRequest, request: Request):
     if not clean_cml.startswith("CM/L-") and clean_cml.isdigit():
         clean_cml = f"CM/L-{clean_cml}"
 
+    # Strict regex validation: CM/L- followed by 7 digits
+    import re
+    if not re.match(r"^CM/L-\d{7}$", clean_cml):
+        raise HTTPException(
+            status_code=422,
+            detail="Invalid CM/L license format. Must be formatted as CM/L-XXXXXXX (7 digits), e.g. CM/L-8400123."
+        )
+
     found = clean_cml in CML_SEED_REGISTRY
 
     # Audit logging with masked IP (DPDP Act 2023 compliance)
@@ -159,6 +167,15 @@ async def verify_huid(request_data: HUIDVerifyRequest, request: Request):
             raise HTTPException(status_code=403, detail="Invalid anti-abuse CAPTCHA verification token.")
 
     clean_huid = sanitize_text(request_data.huid, max_length=10).upper().strip()
+
+    # Strict regex validation: Exactly 6 alphanumeric characters
+    import re
+    if not re.match(r"^[A-Z0-9]{6}$", clean_huid):
+        raise HTTPException(
+            status_code=422,
+            detail="Invalid HUID format. HUID must be exactly 6 alphanumeric characters (e.g. AB7842)."
+        )
+
     found = clean_huid in HUID_SEED_REGISTRY
 
     # Audit logging with masked IP (DPDP Act 2023 compliance)
@@ -184,3 +201,4 @@ async def verify_huid(request_data: HUIDVerifyRequest, request: Request):
             "disclaimer": SIMULATED_NOTE,
             "message": f"HUID '{clean_huid}' not found in demo dataset. Connect the live BIS-CARE registry to verify real hallmarks."
         }
+
