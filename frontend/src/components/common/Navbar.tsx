@@ -185,6 +185,16 @@ export const Navbar: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
             {t('nav.prototype_badge')}
           </span>
+          <span className="text-gray-600 select-none">|</span>
+          <button
+            onClick={() => navigateTo('analytics')}
+            className="flex items-center gap-1 text-[11px] font-mono text-gray-300 hover:text-brass transition-colors focus:outline-none focus:ring-1 focus:ring-brass rounded px-1.5 py-0.5"
+            title="Evaluator & Internal Analytics Authenticator"
+            aria-label="Evaluator Console Login"
+          >
+            <Lock className="w-3 h-3 text-brass" />
+            <span>{language === 'hi' ? 'मूल्यांकनकर्ता लॉगिन' : 'Evaluator Login'}</span>
+          </button>
         </div>
       </div>
 
@@ -434,6 +444,19 @@ export const Navbar: React.FC = () => {
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>{t('nav.about')}</span>
           </button>
+
+          {/* Evaluator Console */}
+          <button
+            onClick={() => navigateTo('analytics')}
+            className={`px-3 py-2 rounded-md font-medium transition-all flex items-center gap-1.5 ${
+              activeTab === 'analytics' || activeTab === 'evaluator-login'
+                ? 'bg-brass text-white shadow-sm font-semibold'
+                : 'text-gray-300 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            <Lock className="w-3.5 h-3.5 text-brass" />
+            <span>{language === 'hi' ? 'मूल्यांकनकर्ता कंसोल' : 'Evaluator Console'}</span>
+          </button>
         </div>
       </nav>
 
@@ -552,6 +575,15 @@ export const Navbar: React.FC = () => {
                 >
                   <ShieldCheck className="w-4 h-4 text-brass" />
                   <span>{t('nav.about')}</span>
+                </button>
+                <button
+                  onClick={() => navigateTo('analytics')}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded text-xs min-h-[44px] ${
+                    activeTab === 'analytics' || activeTab === 'evaluator-login' ? 'bg-brass text-white font-bold' : 'text-gray-200 hover:bg-white/10'
+                  }`}
+                >
+                  <Lock className="w-4 h-4 text-brass" />
+                  <span>{language === 'hi' ? 'मूल्यांकनकर्ता लॉगिन एवं कंसोल' : 'Evaluator Login & Console'}</span>
                 </button>
               </div>
             </div>
