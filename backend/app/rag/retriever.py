@@ -469,26 +469,26 @@ class HybridRetriever:
         """
         q = query.lower()
 
-        # Explicit in-scope keywords for Hallmarking & Laboratories Reference Corpus
-        hallmarking_in_scope = [
-            "hallmark", "hallmarked", "hallmarking", "huid", "jeweller", "jewellery", "gold", "silver",
-            "fineness", "ppt", "40 ppt", "5 ppt", "2 ppt", "counter sample", "surveillance",
-            "laboratory", "laboratories", "lab", "labs", "osl", "barc", "iit", "icar", "drdo", "iocl",
-            "central assistance", "a&h", "ahc", "is 1417", "is 2112"
-        ]
-        if any(k in q for k in hallmarking_in_scope):
-            return False, ""
-
         # Explicit out-of-scope triggers (aerospace FAA, FDA medical/cosmetic drugs, US FCC, nuclear ASME, ISO 9001 generic enterprise)
         out_of_scope_keywords = [
             "aerospace", "jet engine", "turbine blade", "faa compliance",
-            "us fda", "fda approved", "cosmetics labeling fda",
+            "us fda", "fda approved", "fda approval", "cosmetics labeling fda",
             "fcc part 15", "fcc compliance", "nuclear reactor coolant",
             "asme section iii", "iso 9001 quality management general",
             "european union ce mark declaration"
         ]
         if any(k in q for k in out_of_scope_keywords):
             return True, "The requested query is not covered within the indexed BIS regulatory publications."
+
+        # Explicit in-scope keywords for Hallmarking & Laboratories Reference Corpus
+        hallmarking_in_scope = [
+            "hallmark", "hallmarked", "hallmarking", "huid", "jeweller", "jewellery", "gold", "silver",
+            "fineness", "ppt", "40 ppt", "5 ppt", "2 ppt", "counter sample", "surveillance",
+            "laboratory", "laboratories", "osl", "barc", "iit", "icar", "drdo", "iocl",
+            "central assistance", "a&h", "ahc", "is 1417", "is 2112"
+        ]
+        if any(k in q for k in hallmarking_in_scope) or re.search(r'\b(lab|labs)\b', q):
+            return False, ""
 
         # If there is a strong structured match, it is in-corpus
         if structured and structured[0].get("relevance_score", 0) >= 0.7:

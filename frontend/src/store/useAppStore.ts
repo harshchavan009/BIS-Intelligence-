@@ -40,6 +40,17 @@ export type LegalModalType =
   | 'grievance' 
   | null;
 
+export type PolicySection = 
+  | 'terms' 
+  | 'privacy' 
+  | 'security' 
+  | 'archival' 
+  | 'cookies' 
+  | 'accessibility' 
+  | 'hyperlinking' 
+  | 'copyright' 
+  | 'rti';
+
 export type FontSizeOption = 'small' | 'normal' | 'large';
 
 export interface EvalBenchmark {

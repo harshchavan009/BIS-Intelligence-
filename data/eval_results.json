@@ -4,8 +4,8 @@
   "failed": 0,
   "grounded_percentage": 100.0,
   "accuracy_percentage": 100.0,
-  "evaluated_at": "2026-09-07T09:38:50Z",
-  "evaluated_at_human": "07 September 2026",
+  "evaluated_at": "2026-09-08T17:41:41Z",
+  "evaluated_at_human": "08 September 2026",
   "category_summary": {
     "Cement & Building Materials": {
       "total": 5,
@@ -814,7 +814,7 @@
       "expected_is_number": null,
       "expected_clause": "CMD-I/2:12:7",
       "is_abstention": false,
-      "retrieved_top_doc": "N/A",
+      "retrieved_top_doc": "scheme1-ISI-mark.pdf",
       "passed": true
     },
     {
@@ -912,7 +912,7 @@
       "expected_is_number": "IS 1417",
       "expected_clause": "HUID",
       "is_abstention": false,
-      "retrieved_top_doc": "cbtf-msme-guidelines.pdf",
+      "retrieved_top_doc": "hallmarking-jeweller-guidelines-2024.pdf",
       "passed": true
     },
     {
@@ -926,7 +926,7 @@
       "expected_is_number": "IS 1417",
       "expected_clause": "HUID",
       "is_abstention": false,
-      "retrieved_top_doc": "scheme1-ISI-mark.pdf",
+      "retrieved_top_doc": "hallmarking-jeweller-guidelines-2024.pdf",
       "passed": true
     },
     {
