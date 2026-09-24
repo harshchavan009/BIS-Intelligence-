@@ -10,6 +10,8 @@ import { TourGuide } from './components/common/TourGuide';
 import { LandingHero } from './components/landing/LandingHero';
 import { ChatWorkspace } from './components/chat/ChatWorkspace';
 import { CookieConsent } from './components/common/CookieConsent';
+import { DisclaimerBanner } from './components/common/DisclaimerBanner';
+import { UtilitySidebar } from './components/common/UtilitySidebar';
 
 // Code-split heavy secondary views so landing & chat load instantly with minimal initial bundle
 const StandardsFinder = React.lazy(() => import('./components/features/StandardsFinder').then(m => ({ default: m.StandardsFinder })));
@@ -73,6 +75,15 @@ export const App: React.FC = () => {
     const root = document.documentElement;
     root.setAttribute('data-contrast', highContrast ? 'high' : 'normal');
     root.setAttribute('data-fontsize', fontSize);
+    if (fontSize === 'small') root.style.setProperty('--base-font-size', '14px');
+    else if (fontSize === 'large') root.style.setProperty('--base-font-size', '18px');
+    else root.style.setProperty('--base-font-size', '16px');
+
+    if (highContrast) {
+      root.classList.add('high-contrast');
+    } else {
+      root.classList.remove('high-contrast');
+    }
   }, [highContrast, fontSize]);
 
   return (
@@ -82,8 +93,14 @@ export const App: React.FC = () => {
         {language === 'hi' ? 'मुख्य सामग्री पर जाएं' : 'Skip to main content'}
       </a>
 
-      {/* Authentic High-Contrast Switch & GIGW Direct Header */}
+      {/* Section 0 Mandatory Non-Affiliation Disclaimer Banner (Dismissible per session) */}
+      <DisclaimerBanner />
+
+      {/* Primary Sticky Mega-Navigation Header */}
       <Navbar />
+
+      {/* Section 7 Floating Right-Edge Utility Sidebar */}
+      <UtilitySidebar />
 
       {/* Orientation Breadcrumbs on every page */}
       <Breadcrumbs />

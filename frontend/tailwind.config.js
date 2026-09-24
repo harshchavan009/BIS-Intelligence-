@@ -35,7 +35,15 @@ export default {
           DEFAULT: '#2F6B4F',
           light: '#EAF3ED',
           border: '#458E6C'
-        }
+        },
+        'bis-navy': '#35569E',
+        'bis-navy-800': '#263F73',
+        'bis-red': '#A42115',
+        'bis-ink': '#0B122C',
+        'card-pink': '#F2D7F9',
+        'card-peach': '#F4D4C9',
+        'card-lavender': '#D6DAF5',
+        'card-mint': '#D5F9D4'
       },
       fontFamily: {
         serif: ['"Source Serif 4"', 'Georgia', 'serif'],

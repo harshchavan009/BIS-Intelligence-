@@ -1,11 +1,11 @@
 {
   "nav": {
-    "gov_india": "GOVERNMENT OF INDIA",
-    "ministry": "Ministry of Consumer Affairs, Food & Public Distribution",
-    "prototype_badge": "Verified Regulatory Intelligence (Local Offline / Online)",
-    "bis_title": "BUREAU OF INDIAN STANDARDS",
-    "motto": "मानक: पथप्रदर्शक:",
-    "subtitle": "AI Assistant for Indian Standards & Conformity Assessment",
+    "gov_india": "INDEPENDENT AI ASSISTANT",
+    "ministry": "Independent Regulatory Knowledge Assistant (Non-Affiliated)",
+    "prototype_badge": "Independent Regulatory Intelligence (Offline & Online)",
+    "bis_title": "BIS INTELLIGENCE",
+    "motto": "INDEPENDENT AI",
+    "subtitle": "Independent AI Assistant for Indian Standards",
     "home": "Home",
     "assistant": "AI Assistant",
     "services": "Services",
@@ -58,11 +58,11 @@
     "about": "About BIS AI Assistant"
   },
   "footer": {
-    "managed_by": "Website Content Managed by: Bureau of Indian Standards",
-    "last_reviewed": "Last Reviewed On: 07 Sept 2026",
-    "prototype_disclaimer": "Informational Regulatory Notice: This AI consultation portal provides assistive regulatory navigation and synthesis backed by official Bureau of Indian Standards gazettes and publications.",
+    "managed_by": "Website Content Maintained by: BIS Intelligence Team (Independent Initiative)",
+    "last_reviewed": "Last Reviewed On: 24 Sept 2026",
+    "prototype_disclaimer": "This is an independent, unofficial project and is not affiliated with, endorsed by, or operated by the Bureau of Indian Standards or the Government of India. Information is provided for reference only — always verify against bis.gov.in.",
     "best_viewed": "Best Viewed In: Google Chrome 110+, Mozilla Firefox 110+, Safari 16+, Microsoft Edge. Recommended screen resolution: 1280 × 800 or higher.",
-    "copyright": "© 2026 Bureau of Indian Standards AI Consultation Platform. Content sourced from public BIS documents.",
+    "copyright": "© 2026 BIS Intelligence Team. Content synthesized from public BIS documents. Independent educational & research initiative.",
     "terms": "Terms of Use",
     "privacy": "Privacy Policy",
     "accessibility_stmt": "Accessibility Statement",

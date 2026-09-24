@@ -1,19 +1,19 @@
 {
-  "short_name": "BIS Assistant",
-  "name": "BIS AI Assistant — Regulatory Intelligence Platform",
-  "description": "Bureau of Indian Standards (BIS) AI-Powered Compliance, Scheme Guidance & Standards Discovery Platform",
+  "short_name": "BIS Intelligence",
+  "name": "BIS Intelligence — BIS AI Assistant for Indian Standards",
+  "description": "An independent AI assistant that explains BIS standards, ISI Mark, CRS, CoC and Hallmarking rules using publicly available BIS documents. Not affiliated with, endorsed by, or operated by the Bureau of Indian Standards.",
   "icons": [
     {
-      "src": "/vite.svg",
+      "src": "/bis-intelligence-logo.svg",
       "type": "image/svg+xml",
       "sizes": "192x192 512x512",
       "purpose": "any maskable"
     }
   ],
   "start_url": "/",
-  "background_color": "#F8F6F0",
-  "theme_color": "#1B2A4A",
+  "background_color": "#F7F5EF",
+  "theme_color": "#35569E",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "categories": ["government", "productivity", "utilities"]
+  "categories": ["utilities", "productivity", "education"]
 }

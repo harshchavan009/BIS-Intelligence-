@@ -2,88 +2,69 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Authentic BIS Roundel Favicon Stack (16x16, 32x32, 180x180, SVG, ICO) -->
-    <link rel="icon" type="image/svg+xml" href="/bis-roundel.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <!-- BIS Intelligence Distinct Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/bis-intelligence-logo.svg" />
+    <link rel="apple-touch-icon" href="/bis-intelligence-logo.svg" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bureau of Indian Standards — AI Assistant for Standards & Conformity Assessment</title>
-    <meta name="description" content="Official AI-powered regulatory assistant providing source-grounded, citation-backed regulatory intelligence on Indian Standards, ISI Mark, Compulsory Registration Scheme, CoC, and Gold Hallmarking." />
-    <meta name="keywords" content="Bureau of Indian Standards, BIS, Indian Standards, ISI Mark, Hallmarking, HUID, CBTF, QCO, Conformity Assessment, MSME" />
-    <meta name="author" content="Bureau of Indian Standards" />
-    <meta name="theme-color" content="#0B122C" />
+    <title>BIS Intelligence — Independent AI Assistant for Indian Standards</title>
+    <meta name="description" content="An independent AI assistant that explains BIS standards, ISI Mark, CRS, CoC and Hallmarking rules using publicly available BIS documents. Not affiliated with, endorsed by, or operated by the Bureau of Indian Standards." />
+    <meta name="keywords" content="BIS Intelligence, Indian Standards, ISI Mark, Hallmarking, HUID, CBTF, QCO, Conformity Assessment, MSME, AI Assistant" />
+    <meta name="author" content="BIS Intelligence Team" />
+    <meta name="theme-color" content="#35569E" />
     
-    <!-- Dublin Core Metadata (GIGW 3.0 Compliance) -->
-    <meta name="DC.title" content="Bureau of Indian Standards — AI Assistant for Standards & Conformity Assessment" />
-    <meta name="DC.creator" content="Bureau of Indian Standards, Government of India" />
+    <!-- Dublin Core Metadata (Independent Project Attribution) -->
+    <meta name="DC.title" content="BIS Intelligence — Independent AI Assistant for Indian Standards" />
+    <meta name="DC.creator" content="BIS Intelligence Team" />
     <meta name="DC.language" content="en, hi" />
-    <meta name="DC.rights" content="Government of India Open Data" />
+    <meta name="DC.rights" content="Independent Research &amp; Public Documentation Synthesis" />
 
-    <!-- Open Graph & Social Cards (4.2) -->
+    <!-- Open Graph & Social Cards -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://bis-intelligence.vercel.app" />
-    <meta property="og:title" content="Bureau of Indian Standards — AI Assistant for Standards & Conformity Assessment" />
-    <meta property="og:description" content="Official AI-powered regulatory assistant providing source-grounded, citation-backed regulatory intelligence on Indian Standards, ISI Mark, Compulsory Registration Scheme, CoC, and Gold Hallmarking." />
+    <meta property="og:title" content="BIS Intelligence — Independent AI Assistant for Indian Standards" />
+    <meta property="og:description" content="An independent AI assistant that explains BIS standards, ISI Mark, CRS, CoC and Hallmarking rules using publicly available BIS documents. Not affiliated with, endorsed by, or operated by the Bureau of Indian Standards." />
     <meta property="og:image" content="https://bis-intelligence.vercel.app/og-preview.png" />
 
-    <!-- Twitter Card (4.2) -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://bis-intelligence.vercel.app" />
-    <meta name="twitter:title" content="Bureau of Indian Standards — AI Assistant for Standards & Conformity Assessment" />
-    <meta name="twitter:description" content="Official AI-powered regulatory assistant providing source-grounded, citation-backed regulatory intelligence on Indian Standards, ISI Mark, Compulsory Registration Scheme, CoC, and Gold Hallmarking." />
+    <meta name="twitter:title" content="BIS Intelligence — Independent AI Assistant for Indian Standards" />
+    <meta name="twitter:description" content="An independent AI assistant that explains BIS standards, ISI Mark, CRS, CoC and Hallmarking rules using publicly available BIS documents. Not affiliated with, endorsed by, or operated by the Bureau of Indian Standards." />
     <meta name="twitter:image" content="https://bis-intelligence.vercel.app/og-preview.png" />
 
-    <!-- Canonical URL & Custom Domain Configuration (4.3):
-         TODO: When an official custom domain (e.g. https://bis-ai.gov.in) is provisioned,
-         update canonical href and NEXT_PUBLIC_SITE_URL accordingly. Current deployment: https://bis-intelligence.vercel.app
-    -->
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://bis-intelligence.vercel.app" />
 
-    <!-- Schema.org JSON-LD Structured Data for Government Organization and Portal -->
+    <!-- Schema.org JSON-LD Structured Data for Independent Software Application -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "GovernmentOrganization",
-          "@id": "https://bis-ai.gov.in/#organization",
-          "name": "Bureau of Indian Standards",
-          "alternateName": "BIS",
-          "url": "https://www.bis.gov.in",
-          "parentOrganization": {
-            "@type": "GovernmentOrganization",
-            "name": "Ministry of Consumer Affairs, Food & Public Distribution, Government of India"
-          },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Manak Bhavan, 9 Bahadur Shah Zafar Marg",
-            "addressLocality": "New Delhi",
-            "postalCode": "110002",
-            "addressCountry": "IN"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+91-11-23230131",
-            "contactType": "customer service",
-            "areaServed": "IN",
-            "availableLanguage": ["English", "Hindi"]
+          "@type": "WebApplication",
+          "@id": "https://bis-intelligence.vercel.app/#app",
+          "name": "BIS Intelligence",
+          "alternateName": "BIS Intelligence AI Assistant",
+          "url": "https://bis-intelligence.vercel.app",
+          "description": "An independent AI assistant that explains BIS standards, ISI Mark, CRS, CoC and Hallmarking rules using publicly available BIS documents. Not affiliated with, endorsed by, or operated by the Bureau of Indian Standards.",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "All",
+          "creator": {
+            "@type": "Organization",
+            "name": "BIS Intelligence Team"
           }
         },
         {
           "@type": "WebSite",
-          "@id": "https://bis-ai.gov.in/#website",
-          "url": "https://bis-ai.gov.in",
-          "name": "BIS Intelligent Assistant & Standards Portal",
-          "publisher": { "@id": "https://bis-ai.gov.in/#organization" },
-          "inLanguage": ["en", "hi"],
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://bis-ai.gov.in/#finder?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
+          "@id": "https://bis-intelligence.vercel.app/#website",
+          "url": "https://bis-intelligence.vercel.app",
+          "name": "BIS Intelligence — Independent AI Assistant for Indian Standards",
+          "publisher": {
+            "@type": "Organization",
+            "name": "BIS Intelligence Team"
+          },
+          "inLanguage": ["en", "hi"]
         }
       ]
     }

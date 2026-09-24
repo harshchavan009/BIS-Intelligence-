@@ -1,6 +1,6 @@
-# robots.txt for Bureau of Indian Standards AI Portal (GIGW 3.0 Compliant)
+# robots.txt for BIS Intelligence (Independent AI Assistant)
 User-agent: *
 Allow: /
 
 # Crawlable XML Sitemap
-Sitemap: https://bis-ai.gov.in/sitemap.xml
+Sitemap: https://bis-intelligence.vercel.app/sitemap.xml

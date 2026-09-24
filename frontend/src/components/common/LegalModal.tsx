@@ -24,12 +24,12 @@ export const LegalModal: React.FC = () => {
         return (
           <div className="space-y-4 text-xs text-gray-700 leading-relaxed font-sans">
             <div className="p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-900 font-medium">
-              <span className="font-bold">Consultation System Notice: </span>
-              This application is an intelligent regulatory consultation system developed for the Bureau of Indian Standards (PS-1724). It provides assistive search and AI summarization of public Bureau of Indian Standards documents.
+              <span className="font-bold">Statutory Non-Affiliation Disclaimer: </span>
+              This is an independent, unofficial project and is not affiliated with, endorsed by, or operated by the Bureau of Indian Standards or the Government of India. Information is provided for reference only — always verify against bis.gov.in.
             </div>
             <p>
               <strong>1. Not an Official Legal Determination: </strong>
-              The information, clause references, and synthesis produced by this AI assistant are generated for research, exploration, and pilot evaluation purposes only. No output from this assistant constitutes an official grant of license, statutory certification, or legal ruling by the Bureau of Indian Standards (BIS) or the Government of India.
+              The information, clause references, and synthesis produced by this independent AI assistant are generated for research, exploration, and informational guidance only. No output from this assistant constitutes an official grant of license, statutory certification, or legal ruling by the Bureau of Indian Standards (BIS) or the Government of India.
             </p>
             <p>
               <strong>2. Statutory Precedence: </strong>

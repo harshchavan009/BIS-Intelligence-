@@ -33,8 +33,8 @@ export const AnalyticsView: React.FC = () => {
   const [reingestLoading, setReingestLoading] = useState(false);
   const [reingestSuccess, setReingestSuccess] = useState('');
 
-  // Server-Side Evaluator Authentication State
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  // Server-Side Evaluator Authentication State (Public Telemetry loads directly per R2-1)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(true);
   const [evaluatorUser, setEvaluatorUser] = useState<string>('BIS Domain Evaluator');
 
   const checkServerAuth = async () => {
@@ -51,12 +51,9 @@ export const AnalyticsView: React.FC = () => {
         const json = await res.json();
         setIsAuthenticated(true);
         if (json.user) setEvaluatorUser(json.user);
-        fetchAnalytics();
-      } else {
-        setIsAuthenticated(false);
       }
     } catch (e) {
-      setIsAuthenticated(false);
+      // Keep public viewing active
     }
   };
 
@@ -177,6 +174,7 @@ export const AnalyticsView: React.FC = () => {
   };
 
   useEffect(() => {
+    fetchAnalytics();
     checkServerAuth();
     fetchAdminStatus();
   }, [adminToken]);
@@ -202,28 +200,6 @@ export const AnalyticsView: React.FC = () => {
   const paginatedCases = filteredCases.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   const uniqueCategories = ['All', 'Cement & Building Materials', 'Steel & Metallurgy', 'Electronics & IT Goods', 'Electrical & Lighting', 'Household Appliances', 'MSME Cluster Concessions', 'Scheme-IV CoC', 'Surveillance & Enforcement', 'Statutory Orders', 'Hallmarking', 'Out of Corpus'];
-
-  if (isAuthenticated === null) {
-    return (
-      <div className="max-w-md mx-auto px-4 py-24 text-center space-y-4 font-sans">
-        <div className="w-9 h-9 border-3 border-brass border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="text-xs font-mono text-stone-600">Verifying BIS Evaluator Session Authorization...</p>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <div className="py-6">
-        <EvaluatorLogin
-          onSuccess={() => {
-            setIsAuthenticated(true);
-            fetchAnalytics();
-          }}
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6 font-sans">

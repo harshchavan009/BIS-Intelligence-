@@ -20,23 +20,19 @@ export const AccessibilityBar: React.FC = () => {
     <div className="bg-[#0b1120] text-gray-300 text-[11px] border-b border-white/10 px-4 sm:px-8 py-1.5 flex flex-wrap items-center justify-between gap-2">
       {/* Left controls: Screen Reader & Typography scaling */}
       <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
-        {/* Screen Reader Access Functional Link */}
-        <a
-          href="#screen-reader-tools"
-          onClick={(e) => {
-            e.preventDefault();
-            setScreenReaderModalOpen(true);
-          }}
+        {/* Screen Reader Access Functional Button */}
+        <button
+          type="button"
+          onClick={() => setScreenReaderModalOpen(true)}
           className="flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors underline-offset-2 hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-brass rounded px-1"
           title={t('a11y.screen_reader_access')}
-          role="button"
           aria-haspopup="dialog"
           aria-label={t('a11y.screen_reader_access')}
         >
           <Headphones className="w-3 h-3 text-brass shrink-0" />
           <span className="hidden xs:inline sm:inline">{t('a11y.screen_reader_access')}</span>
           <span className="sm:hidden text-[10px]">Reader</span>
-        </a>
+        </button>
 
         <span className="text-white/20 hidden sm:inline">|</span>
 
