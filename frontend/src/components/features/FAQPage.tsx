@@ -221,14 +221,14 @@ export const FAQPage: React.FC = () => {
               </button>
 
               {isOpen && (
-                <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-stone-700 space-y-3.5 border-t border-line/60 bg-[#FAF9F5]">
+                <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-text-primary space-y-3.5 border-t border-border bg-surface-alt">
                   <p className="leading-relaxed">
                     {language === 'hi' ? faq.aHi : faq.aEn}
                   </p>
 
                   {faq.highlight && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-amber-100/70 border border-amber-300 text-amber-900 font-mono text-xs font-semibold">
-                      <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-amber-100/70 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/50 text-amber-900 dark:text-amber-300 font-mono text-xs font-semibold">
+                      <ShieldCheck className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
                       <span>{faq.highlight}</span>
                     </div>
                   )}

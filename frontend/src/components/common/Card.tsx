@@ -47,32 +47,32 @@ export const Card: React.FC<CardProps> = ({
 
   // Variant base styles: Solid crisp backgrounds with 1px hairline borders
   const variantClasses = {
-    default: 'bg-white border border-gray-300 shadow-xs',
-    elevated: 'bg-white border border-gray-300 shadow-sm',
-    trust: 'bg-white border border-emerald-300 shadow-xs',
-    flat: 'bg-white border border-gray-200 shadow-none'
+    default: 'bg-surface border border-border shadow-xs',
+    elevated: 'bg-surface border border-border shadow-sm',
+    trust: 'bg-surface border border-status-success/50 shadow-xs',
+    flat: 'bg-surface border border-border-light shadow-none'
   }[variant];
 
   // Left-border accent stripe (Government dossier card style)
   const accentClasses = {
     none: '',
-    navy: 'border-l-4 border-l-gov-navy',
-    maroon: 'border-l-4 border-l-gov-maroon',
-    green: 'border-l-4 border-l-emerald-700',
-    amber: 'border-l-4 border-l-amber-700'
+    navy: 'border-l-4 border-l-brand-primary',
+    maroon: 'border-l-4 border-l-brand-accent',
+    green: 'border-l-4 border-l-status-success',
+    amber: 'border-l-4 border-l-status-warning'
   }[accent];
 
   // Interactive states: Pure color/border highlight, strictly NO scale or translate
   const interactiveClasses = isInteractive
-    ? 'hover:border-gov-navy hover:bg-slate-50/70 transition-colors duration-150 cursor-pointer'
+    ? 'hover:border-brand-primary hover:bg-surface-alt transition-colors duration-150 cursor-pointer'
     : 'transition-colors';
 
-  // Category chip styling: Rectangular chip, no puffy pills
+  // Category chip styling: Rectangular chip, using semantic pill tokens
   const categoryPillClasses = {
-    verified: 'bg-emerald-50 text-emerald-800 border-emerald-300',
-    warning: 'bg-amber-50 text-amber-800 border-amber-300',
-    brand: 'bg-indigo-50 text-gov-navy border-slate-300',
-    neutral: 'bg-gray-100 text-gray-800 border-gray-300'
+    verified: 'pill-badge-verified',
+    warning: 'pill-badge-warning',
+    brand: 'pill-badge-brand',
+    neutral: 'pill-badge-neutral'
   }[categoryVariant];
 
   return (

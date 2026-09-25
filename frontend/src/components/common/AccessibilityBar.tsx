@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import { useTranslation } from '../../i18n/useTranslation';
-import { Headphones, Eye, Sun, Calendar, Globe } from 'lucide-react';
+import { Headphones, Eye, Sun, Moon, Calendar, Globe } from 'lucide-react';
 
 export const AccessibilityBar: React.FC = () => {
   const { 
@@ -9,6 +9,8 @@ export const AccessibilityBar: React.FC = () => {
     setFontSize, 
     highContrast, 
     setHighContrast, 
+    theme,
+    toggleTheme,
     setScreenReaderModalOpen,
     language,
     setLanguage,
@@ -86,6 +88,32 @@ export const AccessibilityBar: React.FC = () => {
           <Eye className="w-3 h-3" />
           <span className="hidden sm:inline">{highContrast ? t('a11y.standard_contrast') : t('a11y.high_contrast')}</span>
           <span className="sm:hidden text-[10px]">{highContrast ? 'STD' : 'HC'}</span>
+        </button>
+
+        <span className="text-white/20 hidden sm:inline">|</span>
+
+        {/* Theme Mode Toggle (Light / Dark) */}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="flex items-center gap-1 px-2 py-0.5 rounded border border-white/15 bg-white/5 text-gray-300 hover:text-white hover:border-white/30 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-brass"
+          title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Toggle dark mode'}
+          aria-pressed={theme === 'dark'}
+        >
+          {theme === 'dark' ? (
+            <>
+              <Sun className="w-3 h-3 text-amber-300 shrink-0" aria-hidden="true" />
+              <span className="hidden sm:inline">{t('a11y.light_mode')}</span>
+              <span className="sm:hidden text-[10px]">Light</span>
+            </>
+          ) : (
+            <>
+              <Moon className="w-3 h-3 text-gray-300 shrink-0" aria-hidden="true" />
+              <span className="hidden sm:inline">{t('a11y.dark_mode')}</span>
+              <span className="sm:hidden text-[10px]">Dark</span>
+            </>
+          )}
         </button>
       </div>
 

@@ -53,6 +53,7 @@ export type PolicySection =
   | 'rti';
 
 export type FontSizeOption = 'small' | 'normal' | 'large';
+export type ThemeMode = 'light' | 'dark';
 
 export interface EvalBenchmark {
   total_tests: number;
@@ -84,6 +85,11 @@ interface AppState {
   setEvalBenchmark: (benchmark: EvalBenchmark) => void;
   fetchEvalBenchmark: () => Promise<void>;
 
+  // Theme Management (Light / Dark)
+  theme: ThemeMode;
+  setTheme: (theme: ThemeMode) => void;
+  toggleTheme: () => void;
+
   // GIGW Accessibility States
   fontSize: FontSizeOption;
   setFontSize: (size: FontSizeOption) => void;
@@ -104,6 +110,17 @@ interface AppState {
   cookieConsentDismissed: boolean;
   setCookieConsentDismissed: (dismissed: boolean) => void;
 }
+
+const getStoredTheme = (): ThemeMode => {
+  try {
+    const saved = localStorage.getItem('bis-theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+  } catch (e) {}
+  return 'light';
+};
 
 const getStoredCookieConsent = (): boolean => {
   try {
@@ -141,7 +158,7 @@ const getStoredToken = (): string | null => {
   return null;
 };
 
-export const useAppStore = create<AppState>((set) => ({
+export const useAppStore = create<AppState>((set, get) => ({
   language: 'en',
   setLanguage: (language) => set({ language }),
   activeTab: 'landing',
@@ -175,6 +192,27 @@ export const useAppStore = create<AppState>((set) => ({
     } catch (e) {
       console.error('Error fetching eval benchmark:', e);
     }
+  },
+
+  theme: getStoredTheme(),
+  setTheme: (theme) => {
+    try {
+      localStorage.setItem('bis-theme', theme);
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+    } catch (e) {}
+    set({ theme });
+  },
+  toggleTheme: () => {
+    const current = get().theme;
+    const next = current === 'dark' ? 'light' : 'dark';
+    get().setTheme(next);
   },
 
   fontSize: getStoredFontSize(),

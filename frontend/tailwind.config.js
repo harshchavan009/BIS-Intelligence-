@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ['class', '[data-theme="dark"]'],
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -19,82 +20,102 @@ export default {
     },
     extend: {
       colors: {
-        // GIGW Authentic Government Portal Palette
+        // Theme-aware semantic surface & background tokens
+        background: 'var(--background)',
+        surface: {
+          DEFAULT: 'var(--surface)',
+          alt: 'var(--surface-alt)',
+        },
+        border: {
+          DEFAULT: 'var(--border)',
+          light: 'var(--border-light)',
+        },
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
+
+        // GIGW Government Portal Palette (Dynamic via CSS variables)
         gov: {
-          navy: '#1A3C6E',       // Primary official navy (bis.gov.in / india.gov.in)
-          'navy-dark': '#11294D', // Deep header / masthead navy
-          'navy-light': '#244E8C',
-          maroon: '#8B1D1D',     // Official deep red / maroon for notices and CTAs
-          'maroon-dark': '#6D1414',
-          gray: '#F4F6F9',       // Clean neutral gray for section banding
-          border: '#D1D5DB',     // Hairline 1px borders
-          'border-light': '#E5E7EB',
-          text: '#111827',       // Near-black text
-          muted: '#4B5563'       // Muted secondary text
+          navy: 'var(--gov-navy)',
+          'navy-dark': 'var(--gov-navy-dark)',
+          'navy-light': 'var(--gov-navy-light)',
+          maroon: 'var(--gov-maroon)',
+          'maroon-dark': 'var(--gov-maroon-dark)',
+          gray: 'var(--gov-gray)',
+          border: 'var(--gov-border)',
+          'border-light': 'var(--gov-border-light)',
+          text: 'var(--gov-text)',
+          muted: 'var(--gov-text-muted)'
         },
-        // Semantic Brand System (Mapped to GIGW palette)
+        // Semantic Brand System
         brand: {
-          navy: '#1A3C6E',
-          'navy-dark': '#11294D',
-          blue: '#1A3C6E',
-          'blue-hover': '#11294D',
-          'blue-light': '#EEF3F9',
-          red: '#8B1D1D',
-          'red-hover': '#6D1414',
-          ink: '#111827'
+          primary: 'var(--brand-primary)',
+          accent: 'var(--brand-accent)',
+          navy: 'var(--gov-navy)',
+          'navy-dark': 'var(--gov-navy-dark)',
+          blue: 'var(--brand-blue)',
+          'blue-hover': 'var(--brand-blue-hover)',
+          'blue-light': 'var(--brand-blue-light)',
+          red: 'var(--brand-red)',
+          'red-hover': 'var(--brand-red-hover)',
+          ink: 'var(--brand-ink)'
         },
-        // Functional Status Colors (Strict semantic meaning only)
+        // Functional Status Colors (Strict semantic meaning)
+        status: {
+          success: 'var(--status-success)',
+          warning: 'var(--status-warning)',
+          danger: 'var(--status-danger)'
+        },
         verified: {
-          DEFAULT: '#166534', // Emerald-800 for high-contrast WCAG AAA
-          light: '#F0FDF4',   // Emerald-50
-          border: '#BBF7D0',  // Emerald-200
-          dark: '#14532D'     // Emerald-900
+          DEFAULT: 'var(--status-success)',
+          light: 'var(--verified-light)',
+          border: 'var(--verified-border)',
+          dark: '#14532D'
         },
         warning: {
-          DEFAULT: '#92400E', // Amber-800 for high-contrast WCAG AAA
-          light: '#FEF3C7',   // Amber-50
-          border: '#FDE68A',  // Amber-200
-          dark: '#78350F'     // Amber-900
+          DEFAULT: 'var(--status-warning)',
+          light: 'var(--warning-light)',
+          border: 'var(--warning-border)',
+          dark: '#78350F'
         },
-        // Backward-compatible core tokens (re-skinned to formal palette)
+        // Backward-compatible core tokens (mapped dynamically to active theme)
         ink: {
-          DEFAULT: '#111827',
-          light: '#1F2937',
-          muted: '#4B5563'
+          DEFAULT: 'var(--ink)',
+          light: 'var(--text-secondary)',
+          muted: 'var(--text-muted)'
         },
         'indigo-deep': {
-          DEFAULT: '#1A3C6E',
-          dark: '#11294D',
-          light: '#244E8C'
+          DEFAULT: 'var(--gov-navy)',
+          dark: 'var(--gov-navy-dark)',
+          light: 'var(--gov-navy-light)'
         },
         brass: {
-          DEFAULT: '#8B1D1D', // Harmonized to institutional maroon
-          dark: '#6D1414',
-          light: '#B91C1C'
+          DEFAULT: 'var(--gov-maroon)',
+          dark: 'var(--gov-maroon-dark)',
+          light: 'var(--gov-maroon)'
         },
         paper: {
-          DEFAULT: '#F4F6F9', // Clean government banding gray
-          card: '#FFFFFF',
-          dark: '#E5E7EB'
+          DEFAULT: 'var(--paper)',
+          card: 'var(--paper-card)',
+          dark: 'var(--border-light)'
         },
         line: {
-          DEFAULT: '#D1D5DB',
-          dark: '#9CA3AF'
+          DEFAULT: 'var(--line)',
+          dark: 'var(--border)'
         },
         'verified-green': {
-          DEFAULT: '#166534',
-          light: '#F0FDF4',
-          border: '#BBF7D0'
+          DEFAULT: 'var(--verified-green)',
+          light: 'var(--verified-light)',
+          border: 'var(--verified-border)'
         },
-        'bis-navy': '#1A3C6E',
-        'bis-navy-800': '#11294D',
-        'bis-red': '#8B1D1D',
-        'bis-ink': '#111827',
-        // Neutralize pastel card floods to pure crisp white with hairline borders
-        'card-pink': '#FFFFFF',
-        'card-peach': '#FFFFFF',
-        'card-lavender': '#FFFFFF',
-        'card-mint': '#FFFFFF'
+        'bis-navy': 'var(--bis-navy)',
+        'bis-navy-800': 'var(--gov-navy-dark)',
+        'bis-red': 'var(--bis-red)',
+        'bis-ink': 'var(--bis-ink)',
+        'card-pink': 'var(--surface)',
+        'card-peach': 'var(--surface)',
+        'card-lavender': 'var(--surface)',
+        'card-mint': 'var(--surface)'
       },
       fontSize: {
         // Sober, Authoritative Institutional Typographic Hierarchy

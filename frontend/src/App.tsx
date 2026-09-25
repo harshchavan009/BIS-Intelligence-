@@ -39,7 +39,7 @@ const ViewLoader: React.FC = () => (
 );
 
 export const App: React.FC = () => {
-  const { activeTab, setActiveTab, fetchEvalBenchmark, fontSize, highContrast, language } = useAppStore();
+  const { activeTab, setActiveTab, fetchEvalBenchmark, fontSize, highContrast, theme, language } = useAppStore();
 
   React.useEffect(() => {
     fetchEvalBenchmark();
@@ -71,9 +71,16 @@ export const App: React.FC = () => {
     };
   }, [setActiveTab]);
 
-  // Synchronize persistent GIGW accessibility preferences to document root
+  // Synchronize persistent GIGW accessibility and theme preferences to document root
   React.useEffect(() => {
     const root = document.documentElement;
+    root.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+
     root.setAttribute('data-contrast', highContrast ? 'high' : 'normal');
     root.setAttribute('data-fontsize', fontSize);
     if (fontSize === 'small') root.style.setProperty('--base-font-size', '14px');
@@ -85,7 +92,7 @@ export const App: React.FC = () => {
     } else {
       root.classList.remove('high-contrast');
     }
-  }, [highContrast, fontSize]);
+  }, [theme, highContrast, fontSize]);
 
   return (
     <div className={`min-h-screen flex flex-col bg-paper text-ink transition-colors duration-150`}>

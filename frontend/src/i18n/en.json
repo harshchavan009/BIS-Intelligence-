@@ -37,7 +37,10 @@
     "last_updated": "Last Updated: 07 Sept 2026",
     "screen_reader_title": "Screen Reader Compatibility & Accessibility",
     "screen_reader_desc": "This portal adheres to the Guidelines for Indian Government Websites (GIGW 3.0) and WCAG 2.1 Level AA standards.",
-    "screen_reader_close": "Close"
+    "screen_reader_close": "Close",
+    "dark_mode": "Dark",
+    "light_mode": "Light",
+    "toggle_theme": "Toggle dark/light theme"
   },
   "breadcrumbs": {
     "home": "Home",

@@ -37,7 +37,10 @@
     "last_updated": "अंतिम अद्यतन: 07 सितम्बर 2026",
     "screen_reader_title": "स्क्रीन रीडर संगतता एवं सुलभता",
     "screen_reader_desc": "यह पोर्टल भारतीय सरकारी वेबसाइटों हेतु दिशानिर्देश (GIGW 3.0) और WCAG 2.1 लेवल AA मानकों का पूर्णतः पालन करता है।",
-    "screen_reader_close": "बंद करें"
+    "screen_reader_close": "बंद करें",
+    "dark_mode": "डार्क",
+    "light_mode": "लाइट",
+    "toggle_theme": "डार्क/लाइट थीम बदलें"
   },
   "breadcrumbs": {
     "home": "होम",

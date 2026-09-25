@@ -496,9 +496,9 @@ export const AnalyticsView: React.FC = () => {
         </div>
 
         {/* Cases Table */}
-        <div className="overflow-x-auto border border-line rounded-xl shadow-sm overflow-hidden max-h-[520px]">
+        <div className="overflow-x-auto border border-border rounded-xl shadow-sm overflow-hidden max-h-[520px]">
           <table className="w-full text-xs text-left">
-            <thead className="sticky top-0 bg-[#F2EFE9] border-b border-line text-stone-700 uppercase font-mono text-[10px] tracking-wider z-10 shadow-xs">
+            <thead className="sticky top-0 bg-surface-alt border-b border-border text-text-secondary uppercase font-mono text-[10px] tracking-wider z-10 shadow-xs">
               <tr>
                 <th className="py-3 px-3.5 w-16">ID</th>
                 <th className="py-3 px-3.5 w-40">Category & Scheme</th>
@@ -508,30 +508,30 @@ export const AnalyticsView: React.FC = () => {
                 <th className="py-3 px-3.5 w-20 text-right">Result</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-line/40">
+            <tbody className="divide-y divide-border/40">
               {paginatedCases.map((c: any) => (
-                <tr key={c.id} className="odd:bg-[#FAF9F5] even:bg-white hover:bg-amber-50/40 transition-colors">
-                  <td className="py-3.5 px-3.5 font-mono font-bold text-stone-800">{c.id}</td>
+                <tr key={c.id} className="odd:bg-surface-alt/40 even:bg-surface hover:bg-surface-alt/80 transition-colors">
+                  <td className="py-3.5 px-3.5 font-mono font-bold text-stone-800 dark:text-text-primary">{c.id}</td>
                   <td className="py-3.5 px-3.5">
                     <span className="block font-semibold text-ink text-[11px]">{c.category}</span>
-                    <span className="text-[10px] font-mono text-indigo-deep">{c.scheme} ({c.language.toUpperCase()})</span>
+                    <span className="text-[10px] font-mono text-indigo-deep dark:text-brand-primary">{c.scheme} ({c.language.toUpperCase()})</span>
                   </td>
-                  <td className="py-3.5 px-3.5 text-stone-700 leading-snug max-w-xs">{c.query}</td>
+                  <td className="py-3.5 px-3.5 text-stone-700 dark:text-text-primary leading-snug max-w-xs">{c.query}</td>
                   <td className="py-3.5 px-3.5 font-mono text-[11px] text-ink">
                     {c.is_abstention ? (
-                      <span className="text-amber-800 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200 font-semibold">
+                      <span className="text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded border border-amber-200 dark:border-amber-700/50 font-semibold">
                         Score Floor Abstention
                       </span>
                     ) : (
                       c.expected_is_number || c.expected_clause || c.expected_document
                     )}
                   </td>
-                  <td className="py-3.5 px-3.5 font-mono text-[10.5px] text-stone-600 truncate max-w-[180px]" title={c.retrieved_top_doc}>
+                  <td className="py-3.5 px-3.5 font-mono text-[10.5px] text-stone-600 dark:text-text-secondary truncate max-w-[180px]" title={c.retrieved_top_doc}>
                     {c.retrieved_top_doc}
                   </td>
                   <td className="py-3.5 px-3.5 text-right">
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                      <Check className="w-3 h-3 text-emerald-600" />
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-700/50">
+                      <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                       PASSED
                     </span>
                   </td>

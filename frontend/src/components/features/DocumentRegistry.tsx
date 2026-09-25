@@ -159,10 +159,10 @@ export const DocumentRegistry: React.FC = () => {
       </div>
 
       {/* Registry Table */}
-      <div className="rounded-xl overflow-hidden border border-line shadow-sm bg-white">
+      <div className="rounded-xl overflow-hidden border border-border shadow-sm bg-surface">
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
-            <thead className="sticky top-0 bg-[#F2EFE9] border-b border-line font-mono text-[10px] uppercase text-stone-700 tracking-wider z-10 shadow-xs">
+            <thead className="sticky top-0 bg-surface-alt border-b border-border font-mono text-[10px] uppercase text-text-secondary tracking-wider z-10 shadow-xs">
               <tr>
                 <th className="py-3 px-4">Document ID</th>
                 <th className="py-3 px-4">Official Publication Title</th>
@@ -172,9 +172,9 @@ export const DocumentRegistry: React.FC = () => {
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-line/40">
+            <tbody className="divide-y divide-border/40">
               {filteredDocs.map((doc) => (
-                <tr key={doc.id} className="odd:bg-[#FAF9F5] even:bg-white hover:bg-amber-50/40 transition-colors">
+                <tr key={doc.id} className="odd:bg-surface-alt/40 even:bg-surface hover:bg-surface-alt/80 transition-colors">
                   <td className="py-3.5 px-4 font-mono font-bold text-brass">
                     {doc.id}
                   </td>
@@ -190,24 +190,24 @@ export const DocumentRegistry: React.FC = () => {
                     </div>
                   </td>
                   <td className="py-3.5 px-4">
-                    <span className="font-semibold text-indigo-deep block">
+                    <span className="font-semibold text-indigo-deep dark:text-brand-primary block">
                       {doc.scheme}
                     </span>
-                    <span className="text-[10.5px] font-mono text-gray-500">
+                    <span className="text-[10.5px] font-mono text-gray-500 dark:text-text-muted">
                       {doc.refNumber}
                     </span>
                   </td>
-                  <td className="py-3.5 px-4 text-gray-600 text-[11px]">
+                  <td className="py-3.5 px-4 text-gray-600 dark:text-text-secondary text-[11px]">
                     {doc.authority}
                   </td>
                   <td className="py-3.5 px-4 text-center font-mono">
                     <div className="font-bold text-ink">{doc.totalPages} Pages</div>
-                    <div className="text-[10.5px] text-emerald-700 font-medium">({doc.chunkCount} chunks)</div>
+                    <div className="text-[10.5px] text-emerald-700 dark:text-status-success font-medium">({doc.chunkCount} chunks)</div>
                   </td>
                   <td className="py-3.5 px-4 text-right space-y-1">
                     <button
                       onClick={() => handleInspect(doc)}
-                      className="px-2.5 py-1 bg-paper hover:bg-paper-dark border border-line rounded text-[11px] font-medium text-ink flex items-center gap-1 ml-auto transition-colors"
+                      className="px-2.5 py-1 bg-paper hover:bg-paper-dark dark:bg-surface-alt dark:hover:bg-border border border-line dark:border-border rounded text-[11px] font-medium text-ink flex items-center gap-1 ml-auto transition-colors"
                       title="Inspect Page 1 with visual annotations"
                     >
                       <BookOpen className="w-3 h-3 text-brass" />
@@ -218,7 +218,7 @@ export const DocumentRegistry: React.FC = () => {
                         setQueryPrefill(`Explain the core requirements and application rules in ${doc.title} (${doc.refNumber}).`);
                         setActiveTab('chat');
                       }}
-                      className="text-[11px] text-indigo-deep hover:text-brass hover:underline block ml-auto font-medium"
+                      className="text-[11px] text-indigo-deep dark:text-brand-primary hover:text-brass hover:underline block ml-auto font-medium"
                     >
                       Query in Chat →
                     </button>
@@ -231,7 +231,7 @@ export const DocumentRegistry: React.FC = () => {
       </div>
 
       {/* Required Bottom Callout (Section 2.3) */}
-      <div className="p-4 bg-[#F4EFE6] border border-[#E3DAC9] rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink-muted">
+      <div className="p-4 bg-[#F4EFE6] dark:bg-surface-alt border border-[#E3DAC9] dark:border-border rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink-muted dark:text-text-secondary">
         <div className="flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-verified-green flex-shrink-0" />
           <span className="font-sans">
