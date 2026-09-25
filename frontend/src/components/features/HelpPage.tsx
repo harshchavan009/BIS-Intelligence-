@@ -53,11 +53,11 @@ export const HelpPage: React.FC = () => {
               onClick={() => setActiveCategory(cat.id as any)}
               className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-semibold transition-all ${
                 isCur
-                  ? 'bg-indigo-deep text-white shadow-sm ring-1 ring-brass'
-                  : 'bg-paper-light text-stone-700 hover:bg-white border border-line'
+                  ? 'bg-brand-primary text-white shadow-sm ring-1 ring-brand-accent'
+                  : 'bg-surface-alt text-text-secondary hover:bg-surface border border-border'
               }`}
             >
-              <Icon className={`w-3.5 h-3.5 ${isCur ? 'text-brass' : 'text-stone-500'}`} />
+              <Icon className={`w-3.5 h-3.5 ${isCur ? 'text-brand-accent' : 'text-text-secondary'}`} />
               <span>{language === 'hi' ? cat.labelHi : cat.labelEn}</span>
             </button>
           );
@@ -210,13 +210,13 @@ export const HelpPage: React.FC = () => {
             <div className="pt-2 flex items-center justify-end gap-2">
               <button
                 onClick={() => setActiveTab('labs')}
-                className="px-4 py-2 bg-white hover:bg-paper border border-line text-ink rounded text-xs font-semibold transition-colors"
+                className="px-4 py-2 bg-surface hover:bg-surface-alt border border-border text-text-primary rounded text-xs font-semibold transition-colors"
               >
                 <span>{language === 'hi' ? 'CBTF लैब खोजक' : 'Explore CBTF Labs'}</span>
               </button>
               <button
                 onClick={() => setActiveTab('schemes')}
-                className="px-4 py-2 bg-indigo-deep hover:bg-indigo-deep-dark text-white rounded text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+                className="px-4 py-2 bg-brand-primary hover:bg-brand-primary/90 text-white rounded text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
               >
                 <span>{language === 'hi' ? 'योजनाएं तुलना देखें' : 'Compare Schemes'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -229,30 +229,30 @@ export const HelpPage: React.FC = () => {
       {activeCategory === 'consumer' && (
         <div className="space-y-6">
           <Card padding="md" className="space-y-4">
-            <h2 className="text-base font-serif font-bold text-ink border-b border-line pb-2 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-brass" />
+            <h2 className="text-base font-serif font-bold text-text-primary border-b border-border pb-2 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-brand-accent" />
               <span>{language === 'hi' ? 'असली ISI मार्क और सोने की हॉलमार्किंग की जांच' : 'Verifying Genuine ISI Marks & Gold Jewellery'}</span>
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-              <div className="p-3.5 bg-paper rounded border border-line space-y-2">
-                <div className="font-bold text-ink flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-indigo-deep" />
+              <div className="p-3.5 bg-surface-alt rounded border border-border space-y-2">
+                <div className="font-bold text-text-primary flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-brand-primary" />
                   <span>{language === 'hi' ? 'ISI मार्क की 3 अनिवार्य विशेषताएं' : '3 Features of Genuine ISI Mark'}</span>
                 </div>
-                <ol className="list-decimal pl-5 space-y-1 text-stone-600">
+                <ol className="list-decimal pl-5 space-y-1 text-text-secondary">
                   <li><strong>Standard Number (IS:XXXX):</strong> Must be printed above the ISI monogram.</li>
                   <li><strong>Monogram Geometry:</strong> High-definition proportional letters 'IS'.</li>
                   <li><strong>CM/L License Number:</strong> 7-digit unique alphanumeric identifier at the bottom.</li>
                 </ol>
               </div>
 
-              <div className="p-3.5 bg-paper rounded border border-line space-y-2">
-                <div className="font-bold text-ink flex items-center gap-2">
-                  <Gem className="w-4 h-4 text-brass" />
+              <div className="p-3.5 bg-surface-alt rounded border border-border space-y-2">
+                <div className="font-bold text-text-primary flex items-center gap-2">
+                  <Gem className="w-4 h-4 text-brand-accent" />
                   <span>{language === 'hi' ? 'सोने की हॉलमार्किंग (HUID)' : 'Gold Hallmarking (6-Digit HUID)'}</span>
                 </div>
-                <ol className="list-decimal pl-5 space-y-1 text-stone-600">
+                <ol className="list-decimal pl-5 space-y-1 text-text-secondary">
                   <li><strong>BIS Triangular Logo:</strong> Official mark of the Bureau of Indian Standards.</li>
                   <li><strong>Purity & Fineness:</strong> E.g., 22K916 (91.6% pure gold) or 18K750.</li>
                   <li><strong>6-Digit HUID Code:</strong> Unique laser-engraved alphanumeric identifier.</li>
@@ -263,13 +263,13 @@ export const HelpPage: React.FC = () => {
             <div className="pt-2 flex items-center justify-end gap-2">
               <button
                 onClick={() => setActiveTab('hallmarking')}
-                className="px-4 py-2 bg-white hover:bg-paper border border-line text-ink rounded text-xs font-semibold transition-colors"
+                className="px-4 py-2 bg-surface hover:bg-surface-alt border border-border text-text-primary rounded text-xs font-semibold transition-colors"
               >
                 <span>{language === 'hi' ? 'हॉलमार्किंग गाइड' : 'Hallmarking Guide'}</span>
               </button>
               <button
                 onClick={() => setActiveTab('consumer')}
-                className="px-4 py-2 bg-indigo-deep hover:bg-indigo-deep-dark text-white rounded text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+                className="px-4 py-2 bg-brand-primary hover:bg-brand-primary/90 text-white rounded text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
               >
                 <span>{language === 'hi' ? 'उपभोक्ता सत्यापन उपकरण' : 'Consumer Verification Tool'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -282,23 +282,23 @@ export const HelpPage: React.FC = () => {
       {activeCategory === 'a11y' && (
         <div className="space-y-6">
           <Card padding="md" className="space-y-4">
-            <h2 className="text-base font-serif font-bold text-ink border-b border-line pb-2 flex items-center gap-2">
-              <Headphones className="w-4 h-4 text-brass" />
+            <h2 className="text-base font-serif font-bold text-text-primary border-b border-border pb-2 flex items-center gap-2">
+              <Headphones className="w-4 h-4 text-brand-primary" />
               <span>{language === 'hi' ? 'सुलभता नियंत्रण एवं कीबोर्ड नेविगेशन' : 'Accessibility Features & Keyboard Shortcuts'}</span>
             </h2>
 
-            <div className="space-y-3 text-xs text-stone-700 leading-relaxed">
+            <div className="space-y-3 text-xs text-text-primary leading-relaxed">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-3 bg-paper rounded border border-line space-y-1">
-                  <div className="font-bold text-ink">Skip to Content (Tab)</div>
-                  <p className="text-stone-600">
-                    Press <kbd className="px-1 py-0.5 bg-white border border-line rounded font-mono text-[10px]">Tab</kbd> as soon as any page loads to immediately focus the skip link and jump straight over the header into the main content.
+                <div className="p-3 bg-surface-alt rounded border border-border space-y-1">
+                  <div className="font-bold text-text-primary">Skip to Content (Tab)</div>
+                  <p className="text-text-secondary">
+                    Press <kbd className="px-1 py-0.5 bg-surface border border-border rounded font-mono text-[10px] text-text-primary">Tab</kbd> as soon as any page loads to immediately focus the skip link and jump straight over the header into the main content.
                   </p>
                 </div>
 
-                <div className="p-3 bg-paper rounded border border-line space-y-1">
-                  <div className="font-bold text-ink">Text Resizing (A- / A / A+)</div>
-                  <p className="text-stone-600">
+                <div className="p-3 bg-surface-alt rounded border border-border space-y-1">
+                  <div className="font-bold text-text-primary">Text Resizing (A- / A / A+)</div>
+                  <p className="text-text-secondary">
                     Use the controls in the top bar to set base typography to 14px, 16px, or 18px. Settings persist across page reloads via local storage.
                   </p>
                 </div>

@@ -23,77 +23,77 @@ export const AboutPage: React.FC = () => {
             : 'The BIS AI Intelligent Assistant is an AI-powered regulatory exploration system designed to make thousands of pages of Indian Standards, Quality Control Orders (QCOs), MSME testing guidelines, and conformity schemes instantly searchable and provably grounded for Indian manufacturers, startups, students, and citizens.'
         }
       >
-        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-mono text-gray-500">
-          <span className="font-semibold text-ink">Evaluation Status:</span>
-          <span className="text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-mono text-text-secondary">
+          <span className="font-semibold text-text-primary">Evaluation Status:</span>
+          <span className="text-status-success font-bold bg-status-success/15 border border-status-success/30 px-2 py-0.5 rounded">
             65/65 (100%) Grounded
           </span>
-          <span className="text-gray-400">|</span>
-          <span className="text-gray-500">Last Evaluated:</span>
-          <span className="bg-paper px-2 py-0.5 rounded border border-line">{evalBenchmark.evaluated_at_human}</span>
-          <span className="text-gray-400">|</span>
-          <span className="text-gray-500">Suite: 65-Case Gold Harness</span>
+          <span className="text-text-secondary/40">|</span>
+          <span className="text-text-secondary">Last Evaluated:</span>
+          <span className="bg-surface px-2 py-0.5 rounded border border-border">{evalBenchmark.evaluated_at_human}</span>
+          <span className="text-text-secondary/40">|</span>
+          <span className="text-text-secondary">Suite: 65-Case Gold Harness</span>
         </div>
       </PageHeader>
 
       {/* Trust & Transparency Summary Card (Public Non-Technical Overview) */}
-      <div className="bg-white border border-line rounded-xl p-6 shadow-sm space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-line/60">
+      <div className="bg-surface border border-border rounded-xl p-6 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-border/60">
           <div className="space-y-0.5">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-verified-green" />
-              <h3 className="text-base font-serif font-bold text-ink">
+              <ShieldCheck className="w-4 h-4 text-status-success" />
+              <h3 className="text-base font-serif font-bold text-text-primary">
                 {language === 'hi' ? 'विश्वसनीयता एवं पारदर्शिता सारांश' : 'Trust & Transparency Summary'}
               </h3>
             </div>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-text-secondary">
               {language === 'hi'
                 ? 'आधिकारिक विनियामक संदर्भों और स्वतंत्र सत्यापन द्वारा प्रमाणित मुख्य मेट्रिक्स।'
                 : 'Core provenance benchmarks independently verified across official statutory publications.'}
             </p>
           </div>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold font-mono self-start sm:self-auto">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-status-success/15 border border-status-success/30 text-status-success text-xs font-semibold font-mono self-start sm:self-auto">
+            <CheckCircle2 className="w-3.5 h-3.5 text-status-success" />
             <span>100% Citation Grounded</span>
           </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
           {/* Metric 1: Groundedness Score */}
-          <div className="p-4 bg-paper rounded-lg border border-line space-y-1">
-            <span className="text-[11px] font-semibold uppercase font-mono text-stone-500 block">
+          <div className="p-4 bg-surface-alt rounded-lg border border-border space-y-1">
+            <span className="text-[11px] font-semibold uppercase font-mono text-text-secondary block">
               Groundedness Score
             </span>
-            <div className="text-2xl font-serif font-bold text-emerald-800">
+            <div className="text-2xl font-serif font-bold text-status-success">
               65 / 65 (100%)
             </div>
-            <p className="text-[11px] text-stone-600 leading-snug">
+            <p className="text-[11px] text-text-secondary leading-snug">
               Every regulatory claim verified against physical gazetted clauses without hallucination.
             </p>
           </div>
 
           {/* Metric 2: Total Consultations */}
-          <div className="p-4 bg-paper rounded-lg border border-line space-y-1">
-            <span className="text-[11px] font-semibold uppercase font-mono text-stone-500 block">
+          <div className="p-4 bg-surface-alt rounded-lg border border-border space-y-1">
+            <span className="text-[11px] font-semibold uppercase font-mono text-text-secondary block">
               Total Consultations
             </span>
-            <div className="text-2xl font-serif font-bold text-indigo-deep">
+            <div className="text-2xl font-serif font-bold text-brand-primary">
               1,240+ Inquiries
             </div>
-            <p className="text-[11px] text-stone-600 leading-snug">
+            <p className="text-[11px] text-text-secondary leading-snug">
               Assisting manufacturers, MSMEs, testing labs, and consumers across India.
             </p>
           </div>
 
           {/* Metric 3: Vector Repository Size */}
-          <div className="p-4 bg-paper rounded-lg border border-line space-y-1">
-            <span className="text-[11px] font-semibold uppercase font-mono text-stone-500 block">
+          <div className="p-4 bg-surface-alt rounded-lg border border-border space-y-1">
+            <span className="text-[11px] font-semibold uppercase font-mono text-text-secondary block">
               Vector Repository Size
             </span>
-            <div className="text-2xl font-serif font-bold text-ink">
+            <div className="text-2xl font-serif font-bold text-text-primary">
               1,343 Chunks
             </div>
-            <p className="text-[11px] text-stone-600 leading-snug">
+            <p className="text-[11px] text-text-secondary leading-snug">
               Across 11 official publications, product schemes, laboratory registries, and hallmarking guidelines.
             </p>
           </div>
@@ -147,7 +147,7 @@ export const AboutPage: React.FC = () => {
           </div>
           <button
             onClick={() => setActiveTab('registry')}
-            className="text-xs text-indigo-deep hover:text-brass font-medium flex items-center gap-1"
+            className="text-xs text-brand-primary hover:text-brand-accent font-medium flex items-center gap-1"
           >
             <span>View Full Registry</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -155,73 +155,73 @@ export const AboutPage: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
-          <div className="p-3 bg-paper rounded border border-line">
-            <span className="font-mono text-[10px] text-brass uppercase block font-bold">Scheme-I (ISI Mark)</span>
-            <div className="font-semibold text-ink mt-1">Product Certification Guidelines & Specific Grant Rules</div>
-            <div className="text-gray-500 text-[11px] mt-1">423 total pages across two guidelines covering factory inspection and SIT.</div>
+          <div className="p-3 bg-surface-alt rounded border border-border">
+            <span className="font-mono text-[10px] text-brand-primary uppercase block font-bold">Scheme-I (ISI Mark)</span>
+            <div className="font-semibold text-text-primary mt-1">Product Certification Guidelines & Specific Grant Rules</div>
+            <div className="text-text-secondary text-[11px] mt-1">423 total pages across two guidelines covering factory inspection and SIT.</div>
           </div>
-          <div className="p-3 bg-paper rounded border border-line">
-            <span className="font-mono text-[10px] text-brass uppercase block font-bold">Scheme-II (CRO)</span>
-            <div className="font-semibold text-ink mt-1">Compulsory Registration Scheme for Electronics & IT Goods</div>
-            <div className="text-gray-500 text-[11px] mt-1">MeitY and DPIIT mandate covering self-declaration based on recognized lab test reports.</div>
+          <div className="p-3 bg-surface-alt rounded border border-border">
+            <span className="font-mono text-[10px] text-brand-primary uppercase block font-bold">Scheme-II (CRO)</span>
+            <div className="font-semibold text-text-primary mt-1">Compulsory Registration Scheme for Electronics & IT Goods</div>
+            <div className="text-text-secondary text-[11px] mt-1">MeitY and DPIIT mandate covering self-declaration based on recognized lab test reports.</div>
           </div>
-          <div className="p-3 bg-paper rounded border border-line">
-            <span className="font-mono text-[10px] text-brass uppercase block font-bold">Scheme-IV (CoC)</span>
-            <div className="font-semibold text-ink mt-1">Certificate of Conformity Guidelines (CMD-I/2:16:1)</div>
-            <div className="text-gray-500 text-[11px] mt-1">Batch and consignment-wise conformity with 180-day test report validity.</div>
+          <div className="p-3 bg-surface-alt rounded border border-border">
+            <span className="font-mono text-[10px] text-brand-primary uppercase block font-bold">Scheme-IV (CoC)</span>
+            <div className="font-semibold text-text-primary mt-1">Certificate of Conformity Guidelines (CMD-I/2:16:1)</div>
+            <div className="text-text-secondary text-[11px] mt-1">Batch and consignment-wise conformity with 180-day test report validity.</div>
           </div>
-          <div className="p-3 bg-paper rounded border border-line">
-            <span className="font-mono text-[10px] text-brass uppercase block font-bold">MSME Testing (CBTF)</span>
-            <div className="font-semibold text-ink mt-1">Cluster Based Test Facility Guidelines (CMD-I/2:12:8)</div>
-            <div className="text-gray-500 text-[11px] mt-1">Framework enabling MSMEs to share costly test equipment and retain minimal in-house checks.</div>
+          <div className="p-3 bg-surface-alt rounded border border-border">
+            <span className="font-mono text-[10px] text-brand-primary uppercase block font-bold">MSME Testing (CBTF)</span>
+            <div className="font-semibold text-text-primary mt-1">Cluster Based Test Facility Guidelines (CMD-I/2:12:8)</div>
+            <div className="text-text-secondary text-[11px] mt-1">Framework enabling MSMEs to share costly test equipment and retain minimal in-house checks.</div>
           </div>
-          <div className="p-3 bg-paper rounded border border-line">
-            <span className="font-mono text-[10px] text-brass uppercase block font-bold">Market Surveillance</span>
-            <div className="font-semibold text-ink mt-1">Post-Market Surveillance & Feedback Guidelines</div>
-            <div className="text-gray-500 text-[11px] mt-1">Enforcement protocols and standardized Annexure-I complaint reporting format.</div>
+          <div className="p-3 bg-surface-alt rounded border border-border">
+            <span className="font-mono text-[10px] text-brand-primary uppercase block font-bold">Market Surveillance</span>
+            <div className="font-semibold text-text-primary mt-1">Post-Market Surveillance & Feedback Guidelines</div>
+            <div className="text-text-secondary text-[11px] mt-1">Enforcement protocols and standardized Annexure-I complaint reporting format.</div>
           </div>
-          <div className="p-3 bg-paper rounded border border-line">
-            <span className="font-mono text-[10px] text-brass uppercase block font-bold">Quality Control Orders</span>
-            <div className="font-semibold text-ink mt-1">Mandatory QCO Statutory Guidance</div>
-            <div className="text-gray-500 text-[11px] mt-1">Section 16 enforcement across cement, steel, electronics, and medical devices.</div>
+          <div className="p-3 bg-surface-alt rounded border border-border">
+            <span className="font-mono text-[10px] text-brand-primary uppercase block font-bold">Quality Control Orders</span>
+            <div className="font-semibold text-text-primary mt-1">Mandatory QCO Statutory Guidance</div>
+            <div className="text-text-secondary text-[11px] mt-1">Section 16 enforcement across cement, steel, electronics, and medical devices.</div>
           </div>
         </div>
       </Card>
 
       {/* 3. Technical RAG Architecture & Embeddings */}
       <Card padding="lg" className="space-y-4">
-        <h3 className="text-lg font-serif font-bold text-ink flex items-center gap-2">
-          <Cpu className="w-5 h-5 text-indigo-deep" />
+        <h3 className="text-lg font-serif font-bold text-text-primary flex items-center gap-2">
+          <Cpu className="w-5 h-5 text-brand-primary" />
           <span>Technical Architecture & Retrieval Approach</span>
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div className="p-4 bg-paper rounded border border-line space-y-2">
-            <div className="font-bold text-ink flex items-center gap-1.5 font-mono text-[11px]">
-              <Database className="w-3.5 h-3.5 text-brass" />
+          <div className="p-4 bg-surface-alt rounded border border-border space-y-2">
+            <div className="font-bold text-text-primary flex items-center gap-1.5 font-mono text-[11px]">
+              <Database className="w-3.5 h-3.5 text-brand-primary" />
               <span>1. Dual-Track Hybrid Retrieval</span>
             </div>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-text-secondary leading-relaxed">
               Combines an ultra-fast deterministic lookup table for 40+ standardized products (<code className="text-[10.5px]">is_product_map.json</code>) with dense semantic vector search in ChromaDB across 325 clause chunks.
             </p>
           </div>
 
-          <div className="p-4 bg-paper rounded border border-line space-y-2">
-            <div className="font-bold text-ink flex items-center gap-1.5 font-mono text-[11px]">
-              <Globe className="w-3.5 h-3.5 text-indigo-deep" />
+          <div className="p-4 bg-surface-alt rounded border border-border space-y-2">
+            <div className="font-bold text-text-primary flex items-center gap-1.5 font-mono text-[11px]">
+              <Globe className="w-3.5 h-3.5 text-brand-primary" />
               <span>2. Multilingual Dense Embeddings</span>
             </div>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-text-secondary leading-relaxed">
               Uses <code className="text-[10.5px]">paraphrase-multilingual-MiniLM-L12-v2</code> (384-dimensional dense vectors). Hindi queries match English regulatory chunks natively without translation bottleneck.
             </p>
           </div>
 
-          <div className="p-4 bg-paper rounded border border-line space-y-2">
-            <div className="font-bold text-ink flex items-center gap-1.5 font-mono text-[11px]">
-              <ShieldCheck className="w-3.5 h-3.5 text-verified-green" />
+          <div className="p-4 bg-surface-alt rounded border border-border space-y-2">
+            <div className="font-bold text-text-primary flex items-center gap-1.5 font-mono text-[11px]">
+              <ShieldCheck className="w-3.5 h-3.5 text-status-success" />
               <span>3. Groundedness Verifier & Offline Engine</span>
             </div>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-text-secondary leading-relaxed">
               Every synthesized claim is verified against retrieved chunks. If external LLM APIs fail or lose connectivity, the system seamlessly uses an offline deterministic grounded synthesis engine.
             </p>
           </div>
@@ -229,22 +229,22 @@ export const AboutPage: React.FC = () => {
       </Card>
 
       {/* 4. Known Limitations */}
-      <div className="bg-paper border border-line rounded-lg p-6 space-y-3 text-xs text-gray-700">
-        <h4 className="font-serif font-bold text-ink text-sm flex items-center gap-2">
-          <Info className="w-4 h-4 text-brass" />
+      <div className="bg-surface border border-border rounded-lg p-6 space-y-3 text-xs text-text-secondary">
+        <h4 className="font-serif font-bold text-text-primary text-sm flex items-center gap-2">
+          <Info className="w-4 h-4 text-brand-primary" />
           <span>Known Limitations & Boundary Conditions</span>
         </h4>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-          <div className="p-3 bg-white rounded border border-line space-y-1">
-            <strong className="text-ink block">Language Parity:</strong>
+          <div className="p-3 bg-surface-alt rounded border border-border space-y-1">
+            <strong className="text-text-primary block">Language Parity:</strong>
             <span>Currently supports English and Hindi. Regional official languages (Tamil, Telugu, Bengali, Marathi) are prioritized for Phase 2 via Bhashini API.</span>
           </div>
-          <div className="p-3 bg-white rounded border border-line space-y-1">
-            <strong className="text-ink block">Static Document Snapshot:</strong>
+          <div className="p-3 bg-surface-alt rounded border border-border space-y-1">
+            <strong className="text-text-primary block">Static Document Snapshot:</strong>
             <span>Based on official guidelines effective as of September 2026. Continuous ingestion pipeline for weekly gazette notifications is documented in ROADMAP.md.</span>
           </div>
-          <div className="p-3 bg-white rounded border border-line space-y-1">
-            <strong className="text-ink block">Simulated Registries:</strong>
+          <div className="p-3 bg-surface-alt rounded border border-border space-y-1">
+            <strong className="text-text-primary block">Simulated Registries:</strong>
             <span>CM/L and HUID verifiers use verified demo seed sets for illustration. Real live verification requires institutional access to Manakonline / BIS-CARE APIs.</span>
           </div>
         </div>

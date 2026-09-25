@@ -29,21 +29,21 @@ export const Badge: React.FC<BadgeProps> = ({
 
   // Official GIGW status badge styles: Rectangular, high contrast, 1px solid border
   const variantClasses = {
-    verified: 'bg-emerald-50 text-emerald-900 border-emerald-300',
-    warning: 'bg-amber-50 text-amber-900 border-amber-300',
-    brand: 'bg-indigo-50 text-gov-navy border-slate-300',
-    neutral: 'bg-gray-100 text-gray-800 border-gray-300',
-    outline: 'bg-transparent text-gray-800 border-gray-300',
-    ghost: 'bg-white/10 text-white border-white/30'
+    verified: 'bg-status-success/15 text-status-success border-status-success/30',
+    warning: 'bg-status-warning/15 text-status-warning border-status-warning/30',
+    brand: 'bg-brand-primary/15 text-brand-primary border-brand-primary/30',
+    neutral: 'bg-surface-alt text-text-secondary border-border',
+    outline: 'bg-transparent text-text-primary border-border',
+    ghost: 'bg-surface-alt/50 text-text-primary border-border'
   }[variant];
 
   const dotClasses = {
-    verified: 'bg-emerald-700',
-    warning: 'bg-amber-700',
-    brand: 'bg-gov-navy',
-    neutral: 'bg-gray-600',
-    outline: 'bg-gray-600',
-    ghost: 'bg-emerald-400'
+    verified: 'bg-status-success',
+    warning: 'bg-status-warning',
+    brand: 'bg-brand-primary',
+    neutral: 'bg-text-secondary',
+    outline: 'bg-text-secondary',
+    ghost: 'bg-status-success'
   }[variant];
 
   return (

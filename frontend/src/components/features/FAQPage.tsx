@@ -183,8 +183,8 @@ export const FAQPage: React.FC = () => {
             onClick={() => setActiveCategory(cat)}
             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
               activeCategory === cat
-                ? 'bg-brass text-white shadow-sm'
-                : 'bg-white border border-line text-stone-600 hover:border-brass/50'
+                ? 'bg-brand-primary text-white shadow-sm'
+                : 'bg-surface border border-border text-text-secondary hover:border-brand-primary/50'
             }`}
           >
             {cat === 'all' ? (language === 'hi' ? 'सभी प्रश्न' : 'All Topics') : cat}
@@ -200,23 +200,23 @@ export const FAQPage: React.FC = () => {
             <Card 
               key={faq.id}
               padding="none"
-              className="overflow-hidden shadow-sm"
+              className="overflow-hidden shadow-sm bg-surface border-border"
             >
               <button
                 onClick={() => setOpenId(isOpen ? null : faq.id)}
-                className="w-full text-left px-6 py-4.5 flex items-center justify-between gap-4 hover:bg-paper-light transition-colors cursor-pointer"
+                className="w-full text-left px-6 py-4.5 flex items-center justify-between gap-4 hover:bg-surface-alt transition-colors cursor-pointer"
                 aria-expanded={isOpen}
               >
-                <span className="font-semibold text-sm sm:text-base text-ink flex items-center gap-3">
-                  <span className="w-6 h-6 rounded-full bg-amber-50 text-brass border border-brass/30 flex items-center justify-center text-xs shrink-0 font-mono">
+                <span className="font-semibold text-sm sm:text-base text-text-primary flex items-center gap-3">
+                  <span className="w-6 h-6 rounded-full bg-surface-alt text-brand-primary border border-border flex items-center justify-center text-xs shrink-0 font-mono">
                     ?
                   </span>
                   <span>{language === 'hi' ? faq.qHi : faq.qEn}</span>
                 </span>
                 {isOpen ? (
-                  <ChevronUp className="w-4 h-4 text-brass shrink-0" />
+                  <ChevronUp className="w-4 h-4 text-brand-primary shrink-0" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-stone-400 shrink-0" />
+                  <ChevronDown className="w-4 h-4 text-text-secondary shrink-0" />
                 )}
               </button>
 
@@ -253,9 +253,9 @@ export const FAQPage: React.FC = () => {
       </div>
 
       {/* Human Escalation Notice */}
-      <div className="p-4 bg-paper-light border border-line rounded-lg flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div className="text-xs text-stone-600">
-          <span className="font-semibold text-ink block">
+      <div className="p-4 bg-surface-alt border border-border rounded-lg flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="text-xs text-text-secondary">
+          <span className="font-semibold text-text-primary block">
             {language === 'hi' ? 'क्या आपका प्रश्न यहाँ नहीं मिला?' : 'Still have unanswered questions?'}
           </span>
           <span>
@@ -266,7 +266,7 @@ export const FAQPage: React.FC = () => {
         </div>
         <button
           onClick={() => setActiveTab('contact')}
-          className="px-4 py-2 bg-indigo-deep text-white text-xs font-medium rounded hover:bg-ink transition-colors whitespace-nowrap"
+          className="px-4 py-2 bg-brand-primary text-white text-xs font-medium rounded hover:bg-brand-primary/90 transition-colors whitespace-nowrap"
         >
           {language === 'hi' ? 'शाखा संपर्क देखें' : 'Contact Branch Office'}
         </button>

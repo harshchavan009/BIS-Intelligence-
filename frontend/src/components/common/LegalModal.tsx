@@ -105,17 +105,17 @@ export const LegalModal: React.FC = () => {
 
       case 'sitemap':
         return (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-gray-700 font-sans">
-            <div className="space-y-1.5 p-3 bg-paper rounded border border-line">
-              <strong className="text-ink block font-serif">Core Modules:</strong>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-text-primary font-sans">
+            <div className="space-y-1.5 p-3 bg-surface-alt rounded border border-border">
+              <strong className="text-text-primary block font-serif">Core Modules:</strong>
               <div>• Home / Live RAG Hero (Landing)</div>
               <div>• Assistant Workspace (Streaming Chat)</div>
               <div>• Standards Finder (Product-to-Standard)</div>
               <div>• Certification Schemes (I, II, IV Timeline)</div>
               <div>• Lab Finder (MSME CBTF Provisions)</div>
             </div>
-            <div className="space-y-1.5 p-3 bg-paper rounded border border-line">
-              <strong className="text-ink block font-serif">Transparency & Verification:</strong>
+            <div className="space-y-1.5 p-3 bg-surface-alt rounded border border-border">
+              <strong className="text-text-primary block font-serif">Transparency & Verification:</strong>
               <div>• Consumer Rights & ISI Verification</div>
               <div>• Gold Hallmarking & HUID Guide</div>
               <div>• Live Analytics & Eval Dashboard</div>
@@ -127,12 +127,12 @@ export const LegalModal: React.FC = () => {
 
       case 'feedback':
         return (
-          <div className="space-y-4 text-xs text-gray-700 leading-relaxed font-sans">
+          <div className="space-y-4 text-xs text-text-primary leading-relaxed font-sans">
             <p>
               <strong>Continuous Quality Improvement: </strong>
               Technical judges and domain evaluators can provide feedback directly on each assistant answer using the thumbs-up / thumbs-down buttons in the chat workspace.
             </p>
-            <div className="p-3 bg-paper rounded border border-line space-y-1 font-mono text-[11px]">
+            <div className="p-3 bg-surface-alt rounded border border-border space-y-1 font-mono text-[11px]">
               <div>• Repository: github.com/harshchavan009/AI-Chatbot</div>
               <div>• Evaluation Set: backend/tests/eval_set.json (20 Cases)</div>
               <div>• Regression Test: python3 scripts/run_eval.py</div>
@@ -190,20 +190,20 @@ export const LegalModal: React.FC = () => {
       aria-labelledby="legal-modal-title"
     >
       <div 
-        className="bg-white rounded-lg border border-line max-w-xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+        className="bg-surface text-text-primary rounded-lg border border-border max-w-xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="bg-indigo-deep text-white px-6 py-4 flex items-center justify-between border-b border-white/10">
+        <div className="bg-brand-primary text-white px-6 py-4 flex items-center justify-between border-b border-border">
           <div className="flex items-center gap-2.5">
-            <Scale className="w-5 h-5 text-brass flex-shrink-0" />
+            <Scale className="w-5 h-5 text-brand-accent flex-shrink-0" />
             <h3 id="legal-modal-title" className="text-sm font-semibold tracking-wide font-serif">
               {getTitle()}
             </h3>
           </div>
           <button
             onClick={closeModal}
-            className="text-gray-300 hover:text-white p-1 rounded hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-brass"
+            className="text-gray-300 hover:text-white p-1 rounded hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-brand-accent"
             aria-label="Close dialog"
           >
             <X className="w-5 h-5" />
@@ -211,16 +211,16 @@ export const LegalModal: React.FC = () => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 max-h-[70vh] overflow-y-auto">
+        <div className="p-6 max-h-[70vh] overflow-y-auto text-text-primary">
           {renderContent()}
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-paper border-t border-line px-6 py-3 flex justify-between items-center text-xs">
-          <span className="text-gray-500 text-[11px] font-mono">Institutional Trust & Compliance Layer</span>
+        <div className="bg-surface-alt border-t border-border px-6 py-3 flex justify-between items-center text-xs">
+          <span className="text-text-secondary text-[11px] font-mono">Institutional Trust & Compliance Layer</span>
           <button
             onClick={closeModal}
-            className="px-4 py-1.5 bg-indigo-deep hover:bg-indigo-deep-dark text-white rounded text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brass"
+            className="px-4 py-1.5 bg-brand-primary hover:brightness-110 text-white rounded text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brand-accent"
           >
             Acknowledge & Close
           </button>

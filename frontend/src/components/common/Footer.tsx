@@ -20,9 +20,9 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-bis-ink text-gray-300 border-t-2 border-bis-navy text-xs font-sans mt-auto">
+    <footer className="bg-[#0B1523] dark:bg-surface border-t-2 border-brand-primary dark:border-border text-gray-300 text-xs font-sans mt-auto">
       {/* 1. Full Non-Affiliation Disclaimer Banner (Mandatory Section 0 & 8) */}
-      <div className="bg-[#131b35] border-b border-white/10 px-4 sm:px-8 py-4 text-gray-200">
+      <div className="bg-[#080F1A] dark:bg-surface-alt border-b border-border px-4 sm:px-8 py-4 text-gray-200">
         <div className="max-w-7xl mx-auto flex items-start sm:items-center gap-3">
           <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5 sm:mt-0" />
           <p className="text-xs sm:text-[13px] font-medium leading-relaxed text-amber-100">
@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* 2. Main Multi-Column Footer Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-border/40">
         
         {/* Col 1: About the Project & Identity */}
         <div className="md:col-span-4 space-y-4">
@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
             An independent AI assistant that explains BIS standards, ISI Mark, CRS, CoC and Hallmarking rules using publicly available BIS documents. Built for MSMEs, industry professionals, and consumers.
           </p>
 
-          <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 space-y-2 text-[11.5px]">
+          <div className="bg-white/5 border border-border/40 rounded-xl p-3.5 space-y-2 text-[11.5px]">
             <div className="font-semibold text-white flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
               <span>BIS Intelligence Project Team</span>
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
             <div className="text-gray-400 font-mono text-[11px]">
               Data Sources: Gazette S.O. 191(E), BIS Act 2016 · Last Sync: 24 Sept 2026
             </div>
-            <div className="pt-1.5 border-t border-white/10 flex items-center gap-2 text-emerald-400 font-mono text-[10.5px]">
+            <div className="pt-1.5 border-t border-border/40 flex items-center gap-2 text-emerald-400 font-mono text-[10.5px]">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
               <span>GIGW 3.0 &amp; WCAG 2.1 Level AA Compliant</span>
             </div>
@@ -197,7 +197,7 @@ export const Footer: React.FC = () => {
             <span>Official Government Portals</span>
           </div>
 
-          <div className="p-3 bg-white/5 rounded-xl border border-white/10 space-y-2 text-[11px] text-gray-300">
+          <div className="p-3 bg-white/5 rounded-xl border border-border/40 space-y-2 text-[11px] text-gray-300">
             <p className="text-[10.5px] text-amber-200/90 leading-snug">
               External link notice: You are navigating to official government web properties:
             </p>

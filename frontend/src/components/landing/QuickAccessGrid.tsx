@@ -204,14 +204,14 @@ export const QuickAccessGrid: React.FC = () => {
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14"
     >
       <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2">
-        <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-bis-red bg-red-50 border border-red-200 px-3 py-1 rounded-full">
+        <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent bg-surface-alt border border-brand-accent/30 px-3 py-1 rounded-full">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Instant Assistance &amp; Tools</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-bis-ink tracking-tight font-sans">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight font-sans">
           Quick-Access Regulatory Navigator
         </h2>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-text-secondary">
           Select a domain below for direct guidance, standards lookup, or conversational AI assistance.
         </p>
       </div>
@@ -223,30 +223,30 @@ export const QuickAccessGrid: React.FC = () => {
           return (
             <div
               key={card.id}
-              className={`${card.bgToken} rounded-2xl p-5 sm:p-6 flex flex-col justify-between border border-black/5 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 group`}
+              className="bg-surface rounded-xl p-5 sm:p-6 flex flex-col justify-between border border-border shadow-xs hover:border-brand-primary/50 transition-colors group"
             >
               <div className="space-y-3">
-                {/* Top Circular Icon */}
-                <div className={`w-12 h-12 rounded-full ${card.iconBg} ${card.iconColor} flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform`}>
+                {/* Top Icon */}
+                <div className="w-12 h-12 rounded-xl bg-surface-alt text-brand-primary border border-border flex items-center justify-center transition-colors">
                   <IconComp className="w-6 h-6" />
                 </div>
 
                 {/* Bold Title */}
-                <h3 className="font-bold text-base sm:text-lg text-bis-ink font-sans tracking-tight leading-snug">
+                <h3 className="font-bold text-base sm:text-lg text-text-primary font-sans tracking-tight leading-snug">
                   {card.title}
                 </h3>
 
                 {/* Concise Description */}
-                <p className="text-xs text-bis-ink/80 leading-relaxed">
+                <p className="text-xs text-text-secondary leading-relaxed">
                   {card.desc}
                 </p>
               </div>
 
-              {/* Dark Pill Action Buttons */}
+              {/* Action Buttons */}
               <div className="pt-5 flex items-center gap-2 flex-wrap">
                 <button
                   onClick={card.primaryAction.action}
-                  className="bg-bis-ink hover:bg-bis-navy text-white text-xs font-bold px-3.5 py-1.5 rounded-full transition-colors shadow-xs flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bis-red"
+                  className="bg-brand-primary hover:brightness-110 text-white text-xs font-bold px-3.5 py-1.5 rounded-md transition-colors shadow-xs flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
                 >
                   <span>{card.primaryAction.label}</span>
                   <ArrowRight className="w-3 h-3" />
@@ -255,7 +255,7 @@ export const QuickAccessGrid: React.FC = () => {
                 {card.secondaryAction && (
                   <button
                     onClick={card.secondaryAction.action}
-                    className="bg-white/80 hover:bg-white text-bis-ink text-xs font-semibold px-3 py-1.5 rounded-full transition-colors border border-black/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bis-red"
+                    className="bg-surface-alt hover:bg-border/40 text-text-primary text-xs font-semibold px-3 py-1.5 rounded-md transition-colors border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
                   >
                     <span>{card.secondaryAction.label}</span>
                   </button>

@@ -26,12 +26,12 @@ export const AccessibilityBar: React.FC = () => {
         <button
           type="button"
           onClick={() => setScreenReaderModalOpen(true)}
-          className="flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors underline-offset-2 hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-brass rounded px-1"
+          className="flex items-center gap-1.5 text-gray-300 hover:text-white transition-colors underline-offset-2 hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-accent rounded px-1"
           title={t('a11y.screen_reader_access')}
           aria-haspopup="dialog"
           aria-label={t('a11y.screen_reader_access')}
         >
-          <Headphones className="w-3 h-3 text-brass shrink-0" />
+          <Headphones className="w-3 h-3 text-brand-accent shrink-0" />
           <span className="hidden xs:inline sm:inline">{t('a11y.screen_reader_access')}</span>
           <span className="sm:hidden text-[10px]">Reader</span>
         </button>
@@ -43,7 +43,7 @@ export const AccessibilityBar: React.FC = () => {
           <button
             onClick={() => setFontSize('small')}
             className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition-colors ${
-              fontSize === 'small' ? 'bg-brass text-white' : 'text-gray-400 hover:text-white'
+              fontSize === 'small' ? 'bg-brand-accent text-white' : 'text-gray-400 hover:text-white'
             }`}
             title="Decrease Font Size (14px)"
             aria-pressed={fontSize === 'small'}
@@ -53,7 +53,7 @@ export const AccessibilityBar: React.FC = () => {
           <button
             onClick={() => setFontSize('normal')}
             className={`px-1.5 py-0.5 rounded text-[11px] font-bold transition-colors ${
-              fontSize === 'normal' ? 'bg-brass text-white' : 'text-gray-400 hover:text-white'
+              fontSize === 'normal' ? 'bg-brand-accent text-white' : 'text-gray-400 hover:text-white'
             }`}
             title="Standard Font Size (16px)"
             aria-pressed={fontSize === 'normal'}
@@ -63,7 +63,7 @@ export const AccessibilityBar: React.FC = () => {
           <button
             onClick={() => setFontSize('large')}
             className={`px-1.5 py-0.5 rounded text-[12px] font-bold transition-colors ${
-              fontSize === 'large' ? 'bg-brass text-white' : 'text-gray-400 hover:text-white'
+              fontSize === 'large' ? 'bg-brand-accent text-white' : 'text-gray-400 hover:text-white'
             }`}
             title="Increase Font Size (18px)"
             aria-pressed={fontSize === 'large'}
@@ -96,7 +96,7 @@ export const AccessibilityBar: React.FC = () => {
         <button
           type="button"
           onClick={toggleTheme}
-          className="flex items-center gap-1 px-2 py-0.5 rounded border border-white/15 bg-white/5 text-gray-300 hover:text-white hover:border-white/30 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-brass"
+          className="flex items-center gap-1 px-2 py-0.5 rounded border border-white/15 bg-white/5 text-gray-300 hover:text-white hover:border-white/30 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-accent"
           title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           aria-label={theme === 'dark' ? 'Switch to light mode' : 'Toggle dark mode'}
           aria-pressed={theme === 'dark'}
@@ -121,7 +121,7 @@ export const AccessibilityBar: React.FC = () => {
       <div className="flex items-center gap-3 sm:gap-4 ml-auto">
         {/* Page Last Updated Date (GIGW convention) */}
         <div className="flex items-center gap-1 text-[10px] text-gray-400 font-mono hidden md:flex">
-          <Calendar className="w-3 h-3 text-brass/70" />
+          <Calendar className="w-3 h-3 text-brand-accent/70" />
           <span>
             {language === 'hi' ? 'अंतिम अद्यतन:' : 'Last Updated:'}{' '}
             {new Date().toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-GB', {
@@ -139,7 +139,7 @@ export const AccessibilityBar: React.FC = () => {
           <button
             onClick={() => setLanguage('en')}
             className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-colors flex items-center gap-1 ${
-              language === 'en' ? 'bg-brass text-white shadow-sm' : 'text-gray-300 hover:text-white'
+              language === 'en' ? 'bg-brand-accent text-white shadow-sm' : 'text-gray-300 hover:text-white'
             }`}
             aria-pressed={language === 'en'}
           >
@@ -149,7 +149,7 @@ export const AccessibilityBar: React.FC = () => {
           <button
             onClick={() => setLanguage('hi')}
             className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-colors ${
-              language === 'hi' ? 'bg-brass text-white shadow-sm' : 'text-gray-300 hover:text-white'
+              language === 'hi' ? 'bg-brand-accent text-white shadow-sm' : 'text-gray-300 hover:text-white'
             }`}
             aria-pressed={language === 'hi'}
           >

@@ -121,29 +121,29 @@ export const LandingHero: React.FC = () => {
       <TrustAccuracyStrip />
 
       {/* Direct Search Bar Strip */}
-      <div className="bg-paper-dark border-b border-gray-200 py-6 px-4 sm:px-6 lg:px-8">
+      <div className="bg-surface-alt border-b border-border py-6 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleDirectSearch} className="flex flex-col sm:flex-row items-center gap-3">
             <div className="relative flex-1 w-full">
-              <Search className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+              <Search className="w-5 h-5 text-text-muted absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={quickInput}
                 onChange={(e) => setQuickInput(e.target.value)}
                 placeholder="Search standard by product name or IS code (e.g. Cement, Steel TMT, IS 269, Recycled Plastic)..."
-                className="w-full pl-11 pr-4 py-3 bg-white rounded-xl border border-gray-300 text-sm text-bis-ink placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-bis-red shadow-xs font-sans"
+                className="w-full pl-11 pr-4 py-3 bg-surface rounded-xl border border-border text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-brand-accent shadow-xs font-sans"
               />
             </div>
             <button
               type="submit"
-              className="w-full sm:w-auto bg-bis-navy hover:bg-bis-navy-800 text-white font-bold text-sm px-6 py-3 rounded-xl transition-colors shadow-xs flex items-center justify-center gap-2 whitespace-nowrap"
+              className="w-full sm:w-auto bg-brand-primary hover:brightness-110 text-white font-bold text-sm px-6 py-3 rounded-xl transition-colors shadow-xs flex items-center justify-center gap-2 whitespace-nowrap"
             >
               <span>Search Standards</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
-          <div className="flex items-center gap-2 mt-2.5 text-xs text-gray-500 overflow-x-auto pb-1">
-            <span className="font-semibold text-gray-700 shrink-0">Popular:</span>
+          <div className="flex items-center gap-2 mt-2.5 text-xs text-text-secondary overflow-x-auto pb-1">
+            <span className="font-semibold text-text-primary shrink-0">Popular:</span>
             {['IS 269 Cement', 'IS 1786 Steel TMT', 'IS 13252 Electronics', 'Gold Hallmarking HUID', 'Toys QCO'].map(item => (
               <button
                 key={item}
@@ -152,7 +152,7 @@ export const LandingHero: React.FC = () => {
                   setQueryPrefill(`Explain testing specifications and mandatory requirements for ${item}`);
                   setActiveTab('chat');
                 }}
-                className="bg-white hover:bg-gray-100 text-bis-ink px-2.5 py-0.5 rounded-full border border-gray-200 shrink-0 transition-colors text-[11px]"
+                className="bg-surface hover:bg-surface-alt text-text-primary px-2.5 py-0.5 rounded-full border border-border shrink-0 transition-colors text-[11px]"
               >
                 {item}
               </button>
@@ -168,24 +168,24 @@ export const LandingHero: React.FC = () => {
       <MediaGallery />
 
       {/* Interactive Live Query Simulation Demonstration */}
-      <section className="bg-paper py-10 px-4 sm:px-6 lg:px-8 border-y border-gray-200">
+      <section className="bg-background py-10 px-4 sm:px-6 lg:px-8 border-y border-border">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-6 space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-status-success bg-surface-alt border border-status-success/30 px-3 py-1 rounded-full">
+              <CheckCircle2 className="w-3.5 h-3.5 text-status-success" />
               <span>Verifiable Grounding &amp; Citation Architecture</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-extrabold text-bis-ink">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-text-primary">
               Watch How the Assistant Answers Real Regulatory Inquiries
             </h2>
-            <p className="text-xs text-gray-600 max-w-xl mx-auto">
+            <p className="text-xs text-text-secondary max-w-xl mx-auto">
               Every response is synthesized with exact clause citations from gazette notifications and official standards documents.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-gray-300 shadow-md overflow-hidden">
+          <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
             {/* Header bar */}
-            <div className="bg-bis-navy px-5 py-3 text-white flex items-center justify-between">
+            <div className="bg-brand-primary dark:bg-surface-alt px-5 py-3 text-white flex items-center justify-between border-b border-border">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
                 <span className="font-bold text-xs">Simulated Query Execution</span>
@@ -197,30 +197,30 @@ export const LandingHero: React.FC = () => {
 
             <div className="p-5 sm:p-6 space-y-4">
               {/* Question */}
-              <div className="bg-gray-50 p-3.5 rounded-xl border border-gray-200">
-                <div className="text-[11px] font-mono uppercase text-gray-500 font-bold mb-1">
+              <div className="bg-surface-alt p-3.5 rounded-lg border border-border">
+                <div className="text-[11px] font-mono uppercase text-text-muted font-bold mb-1">
                   User Inquiry
                 </div>
-                <div className="font-bold text-sm text-bis-ink">
+                <div className="font-bold text-sm text-text-primary">
                   "{sampleDemoAnswer.query}"
                 </div>
               </div>
 
               {/* Answer */}
-              <div className="p-4 bg-amber-50/50 rounded-xl border border-amber-200/80">
-                <div className="text-[11px] font-mono uppercase text-bis-navy font-bold mb-2 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-bis-red" />
+              <div className="p-4 bg-surface-alt rounded-lg border border-border">
+                <div className="text-[11px] font-mono uppercase text-brand-primary font-bold mb-2 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-brand-accent" />
                   <span>Synthesized Assistant Response</span>
                 </div>
                 {renderTypedContent(typedText)}
                 {!typingDone && (
-                  <span className="inline-block w-2 h-4 bg-bis-red animate-pulse ml-1 align-middle" />
+                  <span className="inline-block w-2 h-4 bg-brand-accent animate-pulse ml-1 align-middle" />
                 )}
               </div>
 
               {/* Citations Preview */}
               <div className="space-y-2">
-                <div className="text-xs font-bold text-bis-navy uppercase tracking-wider font-mono">
+                <div className="text-xs font-bold text-brand-primary uppercase tracking-wider font-mono">
                   Grounding Citations Extracted from Knowledge Base
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -228,16 +228,16 @@ export const LandingHero: React.FC = () => {
                     <div
                       key={idx}
                       onClick={() => openSource(src)}
-                      className="p-3 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 cursor-pointer transition-colors space-y-1"
+                      className="p-3 bg-surface-alt hover:bg-surface rounded-lg border border-border cursor-pointer transition-colors space-y-1"
                       role="button"
                       tabIndex={0}
                     >
-                      <div className="flex items-center justify-between text-[11px] font-mono text-gray-600">
-                        <span className="font-bold text-bis-navy">Source [{idx + 1}]</span>
-                        <span className="bg-white px-1.5 py-0.5 rounded border border-gray-200 text-bis-red font-semibold">{src.clause_ref}</span>
+                      <div className="flex items-center justify-between text-[11px] font-mono text-text-secondary">
+                        <span className="font-bold text-brand-primary">Source [{idx + 1}]</span>
+                        <span className="bg-surface px-1.5 py-0.5 rounded border border-border text-brand-accent font-semibold">{src.clause_ref}</span>
                       </div>
-                      <div className="text-xs font-semibold text-bis-ink truncate">{src.document_title}</div>
-                      <p className="text-[11px] text-gray-600 italic line-clamp-2">
+                      <div className="text-xs font-semibold text-text-primary truncate">{src.document_title}</div>
+                      <p className="text-[11px] text-text-secondary italic line-clamp-2">
                         "{src.excerpt}"
                       </p>
                     </div>
@@ -251,7 +251,7 @@ export const LandingHero: React.FC = () => {
                     setQueryPrefill(sampleDemoAnswer.query);
                     setActiveTab('chat');
                   }}
-                  className="bg-bis-red hover:bg-red-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors flex items-center gap-1.5 shadow-sm"
+                  className="bg-brand-accent hover:brightness-110 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 shadow-sm"
                 >
                   <span>Ask this query in Chat Workspace</span>
                   <ArrowRight className="w-3.5 h-3.5" />

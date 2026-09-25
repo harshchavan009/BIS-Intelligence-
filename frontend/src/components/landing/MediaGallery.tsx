@@ -260,34 +260,34 @@ export const MediaGallery: React.FC = () => {
   return (
     <section 
       aria-label="Media & Resources Dashboard Gallery"
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 border-t border-gray-200"
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 border-t border-border"
     >
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-bis-navy bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-bis-red" />
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary bg-surface-alt border border-brand-primary/30 px-3 py-1 rounded-full mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-brand-accent" />
             <span>Educational Media &amp; Product Walkthroughs</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-bis-ink tracking-tight font-sans">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight font-sans">
             Media &amp; Resources Gallery
           </h2>
-          <p className="text-sm text-gray-600 mt-1 max-w-2xl">
+          <p className="text-sm text-text-secondary mt-1 max-w-2xl">
             Explore photo documentation of laboratory apparatus, video guides on compliance, and interactive step-by-step explainers showing the assistant solving real regulatory queries.
           </p>
         </div>
 
         {/* Tab Switcher & Add Media Button */}
         <div className="flex items-center gap-2 flex-wrap">
-          <div className="inline-flex p-1 rounded-xl bg-gray-100 border border-gray-200" role="tablist">
+          <div className="inline-flex p-1 rounded-xl bg-surface-alt border border-border" role="tablist">
             <button
               role="tab"
               aria-selected={activeTab === 'explainers'}
               onClick={() => setActiveTabState('explainers')}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                 activeTab === 'explainers'
-                  ? 'bg-bis-red text-white shadow-xs'
-                  : 'text-gray-600 hover:text-bis-ink'
+                  ? 'bg-brand-accent text-white shadow-xs'
+                  : 'text-text-secondary hover:text-text-primary'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -300,8 +300,8 @@ export const MediaGallery: React.FC = () => {
               onClick={() => setActiveTabState('photos')}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                 activeTab === 'photos'
-                  ? 'bg-bis-navy text-white shadow-xs'
-                  : 'text-gray-600 hover:text-bis-ink'
+                  ? 'bg-brand-primary text-white shadow-xs'
+                  : 'text-text-secondary hover:text-text-primary'
               }`}
             >
               <Camera className="w-3.5 h-3.5" />
@@ -314,8 +314,8 @@ export const MediaGallery: React.FC = () => {
               onClick={() => setActiveTabState('videos')}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                 activeTab === 'videos'
-                  ? 'bg-bis-navy text-white shadow-xs'
-                  : 'text-gray-600 hover:text-bis-ink'
+                  ? 'bg-brand-primary text-white shadow-xs'
+                  : 'text-text-secondary hover:text-text-primary'
               }`}
             >
               <Video className="w-3.5 h-3.5" />
@@ -325,10 +325,10 @@ export const MediaGallery: React.FC = () => {
 
           <button
             onClick={() => setIsAddMediaOpen(true)}
-            className="p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-bis-navy transition-colors text-xs font-semibold flex items-center gap-1"
+            className="p-2 rounded-lg border border-border text-text-primary hover:bg-surface-alt hover:text-brand-primary transition-colors text-xs font-semibold flex items-center gap-1"
             title="Add Media Item (JSON / CMS Pattern)"
           >
-            <Plus className="w-4 h-4 text-bis-red" />
+            <Plus className="w-4 h-4 text-brand-accent" />
             <span className="hidden sm:inline">Add Media</span>
           </button>
         </div>
@@ -340,7 +340,7 @@ export const MediaGallery: React.FC = () => {
           {filteredItems.map(item => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+              className="bg-surface rounded-xl border border-border overflow-hidden shadow-xs hover:border-brand-primary/50 transition-colors flex flex-col justify-between"
             >
               {/* Playable Screen-Capture Video Header */}
               {item.src && (
@@ -378,47 +378,47 @@ export const MediaGallery: React.FC = () => {
               )}
 
               <div className="p-6 space-y-4">
-                <div className="flex items-center justify-between gap-2 border-b border-gray-100 pb-3">
+                <div className="flex items-center justify-between gap-2 border-b border-border pb-3">
                   <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    <span className="w-2.5 h-2.5 rounded-full bg-status-success animate-pulse" />
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-status-success bg-surface-alt px-2 py-0.5 rounded border border-status-success/30">
                       Interactive Live Query
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-gray-500">
+                  <span className="text-[11px] font-mono text-text-muted">
                     Source Verified
                   </span>
                 </div>
 
                 {/* Query Header */}
-                <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                  <div className="text-[11px] font-mono uppercase text-gray-500 font-bold mb-1">
+                <div className="bg-surface-alt p-3 rounded-lg border border-border">
+                  <div className="text-[11px] font-mono uppercase text-text-muted font-bold mb-1">
                     User Regulatory Query
                   </div>
-                  <p className="text-sm font-bold text-bis-ink">
+                  <p className="text-sm font-bold text-text-primary">
                     "{item.explainerData?.query}"
                   </p>
                 </div>
 
                 {/* Grounded Assistant Answer */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-mono uppercase text-bis-navy font-bold flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-bis-red" />
+                  <div className="text-[11px] font-mono uppercase text-brand-primary font-bold flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-brand-accent" />
                     <span>Assistant Grounded Answer</span>
                   </div>
-                  <p className="text-xs leading-relaxed text-gray-700 bg-amber-50/40 p-3 rounded-xl border border-amber-200/60">
+                  <p className="text-xs leading-relaxed text-text-primary bg-surface-alt p-3 rounded-lg border border-border">
                     {item.explainerData?.answer}
                   </p>
                 </div>
 
                 {/* Source Citation Excerpt Card */}
                 {item.explainerData && (
-                  <div className="p-3 bg-white rounded-xl border border-gray-200 text-xs space-y-1.5 shadow-2xs">
-                    <div className="flex items-center justify-between text-[11px] text-gray-500 font-mono">
-                      <span className="font-semibold text-bis-navy">{item.explainerData.sourceFile}</span>
-                      <span className="bg-gray-100 px-1.5 py-0.5 rounded">{item.explainerData.clause}</span>
+                  <div className="p-3 bg-surface rounded-lg border border-border text-xs space-y-1.5 shadow-2xs">
+                    <div className="flex items-center justify-between text-[11px] text-text-secondary font-mono">
+                      <span className="font-semibold text-brand-primary">{item.explainerData.sourceFile}</span>
+                      <span className="bg-surface-alt px-1.5 py-0.5 rounded border border-border">{item.explainerData.clause}</span>
                     </div>
-                    <p className="text-[11px] text-gray-600 italic border-l-2 border-bis-red pl-2">
+                    <p className="text-[11px] text-text-secondary italic border-l-2 border-brand-accent pl-2">
                       "{item.explainerData.excerpt}"
                     </p>
                   </div>
@@ -426,12 +426,12 @@ export const MediaGallery: React.FC = () => {
               </div>
 
               {/* Card Footer Actions */}
-              <div className="bg-gray-50 px-6 py-3 border-t border-gray-100 flex items-center justify-between">
+              <div className="bg-surface-alt px-6 py-3 border-t border-border flex items-center justify-between">
                 <button
                   onClick={() => setActiveVideoEmbed(item)}
-                  className="text-bis-navy hover:text-bis-red text-xs font-bold transition-colors flex items-center gap-1.5"
+                  className="text-brand-primary hover:text-brand-accent text-xs font-bold transition-colors flex items-center gap-1.5"
                 >
-                  <Play className="w-3.5 h-3.5 fill-current text-bis-red" />
+                  <Play className="w-3.5 h-3.5 fill-current text-brand-accent" />
                   <span>Watch Clip ({item.duration || '0:38'})</span>
                 </button>
                 <button
@@ -441,7 +441,7 @@ export const MediaGallery: React.FC = () => {
                       setActiveTab('chat');
                     }
                   }}
-                  className="bg-bis-navy hover:bg-bis-navy-800 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
+                  className="bg-brand-primary hover:brightness-110 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
                 >
                   <span>Test in Assistant</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -459,12 +459,12 @@ export const MediaGallery: React.FC = () => {
             <div
               key={item.id}
               onClick={() => setLightboxItem(item)}
-              className="group cursor-pointer rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-xs hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
+              className="group cursor-pointer rounded-xl overflow-hidden bg-surface border border-border shadow-xs hover:border-brand-primary/50 transition-colors"
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === 'Enter' && setLightboxItem(item)}
             >
-              <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 relative">
+              <div className="aspect-[4/3] w-full overflow-hidden bg-surface-alt relative">
                 <img
                   src={item.thumbnail}
                   alt={item.title}
@@ -472,20 +472,20 @@ export const MediaGallery: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                  <span className="text-white text-xs font-bold bg-bis-red/90 px-2.5 py-1 rounded-md">
+                  <span className="text-white text-xs font-bold bg-brand-accent px-2.5 py-1 rounded-md">
                     Click to Enlarge
                   </span>
                 </div>
               </div>
               <div className="p-4 space-y-1.5">
-                <h3 className="font-bold text-sm text-bis-ink group-hover:text-bis-navy transition-colors">
+                <h3 className="font-bold text-sm text-text-primary group-hover:text-brand-primary transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-xs text-gray-500 line-clamp-2">
+                <p className="text-xs text-text-secondary line-clamp-2">
                   {item.caption}
                 </p>
                 {item.credit && (
-                  <div className="text-[10px] text-gray-400 font-mono pt-1">
+                  <div className="text-[10px] text-text-muted font-mono pt-1">
                     {item.credit}
                   </div>
                 )}
@@ -501,7 +501,7 @@ export const MediaGallery: React.FC = () => {
           {filteredItems.map(item => (
             <div
               key={item.id}
-              className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
+              className="rounded-xl overflow-hidden bg-surface border border-border shadow-xs hover:border-brand-primary/50 transition-colors flex flex-col justify-between"
             >
               <div>
                 <div 
@@ -520,7 +520,7 @@ export const MediaGallery: React.FC = () => {
                   />
                   {/* Play Button Overlay */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-bis-red text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-full bg-brand-accent text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                       <Play className="w-5 h-5 ml-0.5 fill-current" />
                     </div>
                   </div>
@@ -533,10 +533,10 @@ export const MediaGallery: React.FC = () => {
                 </div>
 
                 <div className="p-4 space-y-1.5">
-                  <h3 className="font-bold text-sm text-bis-ink leading-snug">
+                  <h3 className="font-bold text-sm text-text-primary leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-gray-500 line-clamp-2">
+                  <p className="text-xs text-text-secondary line-clamp-2">
                     {item.caption}
                   </p>
                 </div>
@@ -545,7 +545,7 @@ export const MediaGallery: React.FC = () => {
               <div className="p-4 pt-0">
                 <button
                   onClick={() => setActiveVideoEmbed(item)}
-                  className="w-full bg-gray-100 hover:bg-bis-navy hover:text-white text-bis-ink text-xs font-bold py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5"
+                  className="w-full bg-surface-alt hover:bg-brand-primary hover:text-white text-text-primary text-xs font-bold py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5 border border-border"
                 >
                   <Play className="w-3.5 h-3.5 fill-current" />
                   <span>Watch Explainer</span>
@@ -565,7 +565,7 @@ export const MediaGallery: React.FC = () => {
           aria-modal="true"
         >
           <div 
-            className="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl relative"
+            className="bg-surface rounded-xl max-w-3xl w-full overflow-hidden shadow-2xl relative border border-border"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -583,10 +583,10 @@ export const MediaGallery: React.FC = () => {
               />
             </div>
             <div className="p-6 space-y-2">
-              <h3 className="text-lg font-bold text-bis-ink">{lightboxItem.title}</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">{lightboxItem.caption}</p>
+              <h3 className="text-lg font-bold text-text-primary">{lightboxItem.title}</h3>
+              <p className="text-sm text-text-secondary leading-relaxed">{lightboxItem.caption}</p>
               {lightboxItem.credit && (
-                <div className="text-xs text-gray-400 font-mono pt-2 border-t border-gray-100">
+                <div className="text-xs text-text-muted font-mono pt-2 border-t border-border">
                   {lightboxItem.credit}
                 </div>
               )}
@@ -604,10 +604,10 @@ export const MediaGallery: React.FC = () => {
           aria-modal="true"
         >
           <div 
-            className="bg-white rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl relative"
+            className="bg-surface rounded-xl max-w-4xl w-full overflow-hidden shadow-2xl relative border border-border"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-4 bg-bis-navy text-white flex items-center justify-between">
+            <div className="p-4 bg-brand-primary text-white flex items-center justify-between border-b border-border">
               <div className="flex items-center gap-2">
                 <Video className="w-4 h-4 text-amber-300" />
                 <h3 className="font-bold text-sm">{activeVideoEmbed.title}</h3>
@@ -641,7 +641,7 @@ export const MediaGallery: React.FC = () => {
                 />
               )}
             </div>
-            <div className="p-4 bg-gray-50 text-xs text-gray-600">
+            <div className="p-4 bg-surface-alt text-xs text-text-secondary border-t border-border">
               <p>{activeVideoEmbed.caption}</p>
             </div>
           </div>
@@ -655,36 +655,36 @@ export const MediaGallery: React.FC = () => {
           onClick={() => setIsAddMediaOpen(false)}
         >
           <div 
-            className="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl"
+            className="bg-surface rounded-xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-border"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-              <h3 className="font-bold text-base text-bis-ink">Add Media Resource (CMS Pattern)</h3>
-              <button onClick={() => setIsAddMediaOpen(false)} className="text-gray-400 hover:text-gray-600">
+            <div className="flex items-center justify-between border-b border-border pb-3">
+              <h3 className="font-bold text-base text-text-primary">Add Media Resource (CMS Pattern)</h3>
+              <button onClick={() => setIsAddMediaOpen(false)} className="text-text-muted hover:text-text-primary">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <form onSubmit={handleAddMediaSubmit} className="space-y-3 text-xs">
               <div>
-                <label className="block font-bold text-gray-700 mb-1">Title *</label>
+                <label className="block font-bold text-text-primary mb-1">Title *</label>
                 <input
                   type="text"
                   required
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
                   placeholder="e.g. Chemical Testing Spectrometer Calibration"
-                  className="w-full p-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full p-2 bg-surface-alt border border-border text-text-primary rounded-lg text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-brand-accent"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-gray-700 mb-1">Media Type</label>
+                  <label className="block font-bold text-text-primary mb-1">Media Type</label>
                   <select
                     value={newType}
                     onChange={(e) => setNewType(e.target.value as MediaType)}
-                    className="w-full p-2 border border-gray-300 rounded-lg text-sm"
+                    className="w-full p-2 bg-surface-alt border border-border text-text-primary rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-brand-accent"
                   >
                     <option value="photos">Photos</option>
                     <option value="videos">Videos</option>
@@ -692,58 +692,58 @@ export const MediaGallery: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-bold text-gray-700 mb-1">Duration (if video)</label>
+                  <label className="block font-bold text-text-primary mb-1">Duration (if video)</label>
                   <input
                     type="text"
                     value={newDuration}
                     onChange={(e) => setNewDuration(e.target.value)}
                     placeholder="e.g. 4:30"
-                    className="w-full p-2 border border-gray-300 rounded-lg text-sm"
+                    className="w-full p-2 bg-surface-alt border border-border text-text-primary rounded-lg text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-brand-accent"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-bold text-gray-700 mb-1">Thumbnail / Image URL</label>
+                <label className="block font-bold text-text-primary mb-1">Thumbnail / Image URL</label>
                 <input
                   type="url"
                   value={newThumb}
                   onChange={(e) => setNewThumb(e.target.value)}
                   placeholder="https://images.unsplash.com/..."
-                  className="w-full p-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full p-2 bg-surface-alt border border-border text-text-primary rounded-lg text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-brand-accent"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-gray-700 mb-1">Source URL / Embed ID</label>
+                <label className="block font-bold text-text-primary mb-1">Source URL / Embed ID</label>
                 <input
                   type="text"
                   value={newSrc}
                   onChange={(e) => setNewSrc(e.target.value)}
                   placeholder="YouTube ID (e.g. dQw4w9WgXcQ) or Image URL"
-                  className="w-full p-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full p-2 bg-surface-alt border border-border text-text-primary rounded-lg text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-brand-accent"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-gray-700 mb-1">Caption</label>
+                <label className="block font-bold text-text-primary mb-1">Caption</label>
                 <textarea
                   rows={2}
                   value={newCaption}
                   onChange={(e) => setNewCaption(e.target.value)}
                   placeholder="Short educational description..."
-                  className="w-full p-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full p-2 bg-surface-alt border border-border text-text-primary rounded-lg text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-brand-accent"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-gray-700 mb-1">Attribution / Credit</label>
+                <label className="block font-bold text-text-primary mb-1">Attribution / Credit</label>
                 <input
                   type="text"
                   value={newCredit}
                   onChange={(e) => setNewCredit(e.target.value)}
                   placeholder="e.g. Contributor / Unsplash Licensed"
-                  className="w-full p-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full p-2 bg-surface-alt border border-border text-text-primary rounded-lg text-sm placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-brand-accent"
                 />
               </div>
 
@@ -751,13 +751,13 @@ export const MediaGallery: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsAddMediaOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 font-semibold"
+                  className="px-4 py-2 rounded-lg border border-border bg-surface-alt hover:bg-border/30 text-text-primary font-semibold transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg bg-bis-red hover:bg-red-700 text-white font-bold"
+                  className="px-4 py-2 rounded-lg bg-brand-accent hover:brightness-110 text-white font-bold transition-all shadow-sm"
                 >
                   Add to Gallery
                 </button>

@@ -95,7 +95,7 @@ export const App: React.FC = () => {
   }, [theme, highContrast, fontSize]);
 
   return (
-    <div className={`min-h-screen flex flex-col bg-paper text-ink transition-colors duration-150`}>
+    <div className={`min-h-screen flex flex-col bg-background text-text-primary transition-colors duration-150`}>
       {/* Authentic GIGW 3.0 Skip to main content link - Guaranteed #1 Focusable Element in DOM */}
       <a href="#main-content" className="skip-link">
         {language === 'hi' ? 'मुख्य सामग्री पर जाएं' : 'Skip to main content'}

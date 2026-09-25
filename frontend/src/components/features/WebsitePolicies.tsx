@@ -75,11 +75,11 @@ export const WebsitePolicies: React.FC = () => {
                 onClick={() => setActiveSection(sec.id)}
                 className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-md text-xs font-medium transition-all text-left ${
                   isCur
-                    ? 'bg-indigo-deep text-white font-semibold shadow-sm'
-                    : 'text-gray-700 hover:bg-paper hover:text-ink'
+                    ? 'bg-brand-primary text-white font-semibold shadow-sm'
+                    : 'text-text-secondary hover:bg-surface-alt hover:text-text-primary'
                 }`}
               >
-                <Icon className={`w-4 h-4 flex-shrink-0 ${isCur ? 'text-brass' : 'text-gray-400'}`} />
+                <Icon className={`w-4 h-4 flex-shrink-0 ${isCur ? 'text-white' : 'text-text-secondary'}`} />
                 <span>{language === 'hi' ? sec.labelHi : sec.labelEn}</span>
               </button>
             );
@@ -87,12 +87,12 @@ export const WebsitePolicies: React.FC = () => {
         </Card>
 
         {/* Content Panel */}
-        <Card padding="lg" className="lg:col-span-8 bg-white border border-line shadow-paper-sm">
+        <Card padding="lg" className="lg:col-span-8 bg-surface border-border shadow-sm">
           {/* TERMS OF USE */}
           {activeSection === 'terms' && (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-3 border-b border-line">
-                <Scale className="w-5 h-5 text-brass" />
+              <div className="flex items-center gap-2 pb-3 border-b border-border">
+                <Scale className="w-5 h-5 text-brand-primary" />
                 <h2 className="text-lg font-serif font-bold text-ink">
                   {language === 'hi' ? 'उपयोग की शर्तें एवं विनियामक प्रकटीकरण' : 'Terms of Use & Statutory Precedence'}
                 </h2>
@@ -214,44 +214,44 @@ export const WebsitePolicies: React.FC = () => {
                   {language === 'hi' ? 'कुकी एवं स्थानीय क्लाइंट भंडारण प्रकटीकरण' : 'Cookie & Client Local Storage Policy'}
                 </h2>
               </div>
-              <div className="text-xs text-gray-600 leading-relaxed space-y-3">
+              <div className="text-xs text-text-primary leading-relaxed space-y-3">
                 <p>
                   This portal complies with the GIGW 3.0 mandate on transparent cookie disclosure. We do not use third-party tracking, advertising, or cross-site behavioral cookies.
                 </p>
-                <h3 className="font-bold text-ink text-xs">Inventory of Client Storage Keys:</h3>
+                <h3 className="font-bold text-text-primary text-xs">Inventory of Client Storage Keys:</h3>
                 <div className="overflow-x-auto">
-                  <table className="w-full border border-line text-left font-sans text-xs">
-                    <thead className="bg-paper-light border-b border-line font-mono text-[11px]">
+                  <table className="w-full border border-border text-left font-sans text-xs">
+                    <thead className="bg-surface-alt border-b border-border font-mono text-[11px] text-text-primary">
                       <tr>
-                        <th className="p-2 border-r border-line">Storage Key</th>
-                        <th className="p-2 border-r border-line">Purpose</th>
-                        <th className="p-2 border-r border-line">Type</th>
+                        <th className="p-2 border-r border-border">Storage Key</th>
+                        <th className="p-2 border-r border-border">Purpose</th>
+                        <th className="p-2 border-r border-border">Type</th>
                         <th className="p-2">Duration</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-line text-[11.5px]">
+                    <tbody className="divide-y divide-border text-[11.5px]">
                       <tr>
-                        <td className="p-2 font-mono font-bold text-indigo-deep border-r border-line">bis_font_size</td>
-                        <td className="p-2 border-r border-line">Persists typographic scaling (A-, A, A+) for accessibility across page reloads</td>
-                        <td className="p-2 border-r border-line">Local Storage</td>
+                        <td className="p-2 font-mono font-bold text-brand-primary border-r border-border">bis_font_size</td>
+                        <td className="p-2 border-r border-border">Persists typographic scaling (A-, A, A+) for accessibility across page reloads</td>
+                        <td className="p-2 border-r border-border">Local Storage</td>
                         <td className="p-2">Persistent</td>
                       </tr>
                       <tr>
-                        <td className="p-2 font-mono font-bold text-indigo-deep border-r border-line">bis_high_contrast</td>
-                        <td className="p-2 border-r border-line">Persists high-contrast visual accessibility theme</td>
-                        <td className="p-2 border-r border-line">Local Storage</td>
+                        <td className="p-2 font-mono font-bold text-brand-primary border-r border-border">bis_high_contrast</td>
+                        <td className="p-2 border-r border-border">Persists high-contrast visual accessibility theme</td>
+                        <td className="p-2 border-r border-border">Local Storage</td>
                         <td className="p-2">Persistent</td>
                       </tr>
                       <tr>
-                        <td className="p-2 font-mono font-bold text-indigo-deep border-r border-line">bis_cookie_consent</td>
-                        <td className="p-2 border-r border-line">Records citizen acknowledgment of this client storage disclosure</td>
-                        <td className="p-2 border-r border-line">Local Storage</td>
+                        <td className="p-2 font-mono font-bold text-brand-primary border-r border-border">bis_cookie_consent</td>
+                        <td className="p-2 border-r border-border">Records citizen acknowledgment of this client storage disclosure</td>
+                        <td className="p-2 border-r border-border">Local Storage</td>
                         <td className="p-2">Persistent</td>
                       </tr>
                       <tr>
-                        <td className="p-2 font-mono font-bold text-indigo-deep border-r border-line">bis_tour_dismissed</td>
-                        <td className="p-2 border-r border-line">Suppresses the first-visit interactive onboarding tour once dismissed</td>
-                        <td className="p-2 border-r border-line">Local Storage</td>
+                        <td className="p-2 font-mono font-bold text-brand-primary border-r border-border">bis_tour_dismissed</td>
+                        <td className="p-2 border-r border-border">Suppresses the first-visit interactive onboarding tour once dismissed</td>
+                        <td className="p-2 border-r border-border">Local Storage</td>
                         <td className="p-2">Persistent</td>
                       </tr>
                     </tbody>
@@ -264,19 +264,19 @@ export const WebsitePolicies: React.FC = () => {
           {/* ACCESSIBILITY STATEMENT */}
           {activeSection === 'accessibility' && (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-3 border-b border-line">
-                <Eye className="w-5 h-5 text-brass" />
-                <h2 className="text-lg font-serif font-bold text-ink">
+              <div className="flex items-center gap-2 pb-3 border-b border-border">
+                <Eye className="w-5 h-5 text-brand-primary" />
+                <h2 className="text-lg font-serif font-bold text-text-primary">
                   {language === 'hi' ? 'सुगमता विवरण (GIGW 3.0 एवं WCAG 2.1 AA)' : 'Accessibility Statement (GIGW 3.0 & WCAG 2.1 AA)'}
                 </h2>
               </div>
-              <div className="text-xs text-gray-600 leading-relaxed space-y-3">
+              <div className="text-xs text-text-primary leading-relaxed space-y-3">
                 <p>
                   The Bureau of Indian Standards is committed to ensuring that its digital intelligence portals are universally accessible to all citizens, including persons with disabilities, in compliance with the Rights of Persons with Disabilities Act, 2016 and the Guidelines for Indian Government Websites (GIGW 3.0).
                 </p>
-                <div className="p-3 bg-paper rounded border border-line space-y-1 font-mono text-[11px]">
+                <div className="p-3 bg-surface-alt rounded border border-border space-y-1 font-mono text-[11px] text-text-primary">
                   <div>• Conformance Level: Full WCAG 2.1 Level AA & GIGW 3.0</div>
-                  <div>• Contrast Ratio: Strict 7:1 (AAA) in High Contrast Mode; 4.5:1 in standard parchment theme</div>
+                  <div>• Contrast Ratio: Strict 7:1 (AAA) in High Contrast Mode; 4.5:1 in standard theme</div>
                   <div>• Keyboard Accessibility: 100% accessible via Tab, Shift+Tab, and Enter</div>
                   <div>• Skip Link: Native #main-content bypass element as the first focusable link on every page</div>
                 </div>
@@ -287,13 +287,13 @@ export const WebsitePolicies: React.FC = () => {
           {/* HYPERLINKING POLICY */}
           {activeSection === 'hyperlinking' && (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-3 border-b border-line">
-                <ExternalLink className="w-5 h-5 text-brass" />
-                <h2 className="text-lg font-serif font-bold text-ink">
+              <div className="flex items-center gap-2 pb-3 border-b border-border">
+                <ExternalLink className="w-5 h-5 text-brand-primary" />
+                <h2 className="text-lg font-serif font-bold text-text-primary">
                   {language === 'hi' ? 'हाइपरलिंकिंग नीति' : 'Hyperlinking Policy'}
                 </h2>
               </div>
-              <div className="text-xs text-gray-600 leading-relaxed space-y-3">
+              <div className="text-xs text-text-primary leading-relaxed space-y-3">
                 <p>
                   <strong>1. Links to External Websites/Portals: </strong>
                   At various places in this portal, you may find links to other government portals (e.g. bis.gov.in, manakonline.in, rti.gov.in). These external links are placed for user convenience. The Bureau of Indian Standards is not responsible for the availability or contents of external destinations. All external links open in a new browser tab with explicit security attributes (<span className="font-mono">rel="noopener noreferrer"</span>).
@@ -309,13 +309,13 @@ export const WebsitePolicies: React.FC = () => {
           {/* COPYRIGHT POLICY */}
           {activeSection === 'copyright' && (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-3 border-b border-line">
-                <FileText className="w-5 h-5 text-brass" />
-                <h2 className="text-lg font-serif font-bold text-ink">
+              <div className="flex items-center gap-2 pb-3 border-b border-border">
+                <FileText className="w-5 h-5 text-brand-primary" />
+                <h2 className="text-lg font-serif font-bold text-text-primary">
                   {language === 'hi' ? 'कॉपीराइट एवं खुला सरकारी डेटा प्रकटीकरण' : 'Copyright Policy & Open Government Data'}
                 </h2>
               </div>
-              <div className="text-xs text-gray-600 leading-relaxed space-y-3">
+              <div className="text-xs text-text-primary leading-relaxed space-y-3">
                 <p>
                   <strong>1. Regulatory & Gazette Materials: </strong>
                   The Indian Standards numbers, Quality Control Order titles, scheme regulations, and CBTF guidelines indexed in this knowledge base are public statutory notifications published in The Gazette of India by the Ministry of Consumer Affairs, Food & Public Distribution under the Government Open Data License (GODL-India).
@@ -335,37 +335,37 @@ export const WebsitePolicies: React.FC = () => {
           {/* RIGHT TO INFORMATION (RTI) */}
           {activeSection === 'rti' && (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-3 border-b border-line">
-                <BookOpen className="w-5 h-5 text-brass" />
-                <h2 className="text-lg font-serif font-bold text-ink">
+              <div className="flex items-center gap-2 pb-3 border-b border-border">
+                <BookOpen className="w-5 h-5 text-brand-primary" />
+                <h2 className="text-lg font-serif font-bold text-text-primary">
                   {language === 'hi' ? 'सूचना का अधिकार (RTI) प्रकटीकरण एवं आवेदन प्रक्रिया' : 'Right to Information (RTI) Disclosures & Service Request Workflow'}
                 </h2>
               </div>
-              <div className="p-3 bg-paper border border-line rounded space-y-2 text-xs text-gray-700">
-                <div className="font-semibold text-ink">
+              <div className="p-3 bg-surface-alt border border-border rounded space-y-2 text-xs text-text-primary">
+                <div className="font-semibold text-text-primary">
                   {language === 'hi' ? 'आरटीआई अधिनियम, 2005 के अंतर्गत प्रकटीकरण' : 'Statutory RTI Disclosure under Section 4(1)(b)'}
                 </div>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-text-secondary">
                   The Bureau of Indian Standards is a statutory body established under the Bureau of Indian Standards Act, 2016 and is a Public Authority as defined under Section 2(h) of the Right to Information Act, 2005. Citizens of India can file online RTI applications to seek information regarding BIS activities, certification status, testing standards, and the algorithmic operation of this AI assistant.
                 </p>
               </div>
 
-              <div className="text-xs text-gray-600 leading-relaxed space-y-3">
-                <h3 className="font-bold text-ink text-xs">Designated Officers for AI & Information Technology Services:</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-paper-light border border-line rounded">
+              <div className="text-xs text-text-primary leading-relaxed space-y-3">
+                <h3 className="font-bold text-text-primary text-xs">Designated Officers for AI & Information Technology Services:</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-surface-alt border border-border rounded">
                   <div className="space-y-1">
-                    <span className="font-bold text-ink block text-[11.5px]">Central Public Information Officer (CPIO):</span>
-                    <span className="text-stone-700 block">Head (Information Technology Department)</span>
-                    <span className="text-stone-500 block">Bureau of Indian Standards, Manak Bhavan</span>
-                    <span className="text-stone-500 block">9 Bahadur Shah Zafar Marg, New Delhi 110002</span>
-                    <span className="font-mono text-indigo-deep text-[11px] block">Email: cpio-it@bis.gov.in</span>
+                    <span className="font-bold text-text-primary block text-[11.5px]">Central Public Information Officer (CPIO):</span>
+                    <span className="text-text-primary block">Head (Information Technology Department)</span>
+                    <span className="text-text-secondary block">Bureau of Indian Standards, Manak Bhavan</span>
+                    <span className="text-text-secondary block">9 Bahadur Shah Zafar Marg, New Delhi 110002</span>
+                    <span className="font-mono text-brand-primary text-[11px] block">Email: cpio-it@bis.gov.in</span>
                   </div>
                   <div className="space-y-1">
-                    <span className="font-bold text-ink block text-[11.5px]">First Appellate Authority (FAA):</span>
-                    <span className="text-stone-700 block">Scientist-G & Deputy Director General (IT & Systems)</span>
-                    <span className="text-stone-500 block">Bureau of Indian Standards Headquarters</span>
-                    <span className="text-stone-500 block">New Delhi 110002</span>
-                    <span className="font-mono text-indigo-deep text-[11px] block">Email: faa-it@bis.gov.in</span>
+                    <span className="font-bold text-text-primary block text-[11.5px]">First Appellate Authority (FAA):</span>
+                    <span className="text-text-primary block">Scientist-G & Deputy Director General (IT & Systems)</span>
+                    <span className="text-text-secondary block">Bureau of Indian Standards Headquarters</span>
+                    <span className="text-text-secondary block">New Delhi 110002</span>
+                    <span className="font-mono text-brand-primary text-[11px] block">Email: faa-it@bis.gov.in</span>
                   </div>
                 </div>
 
@@ -392,7 +392,7 @@ export const WebsitePolicies: React.FC = () => {
                     href="https://www.bis.gov.in/rti/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white hover:bg-paper border border-line text-ink rounded text-xs font-semibold transition-colors"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-surface-alt hover:bg-surface border border-border text-text-primary rounded text-xs font-semibold transition-colors"
                   >
                     <span>BIS National RTI Directory</span>
                     <ExternalLink className="w-3.5 h-3.5 text-gray-400" />

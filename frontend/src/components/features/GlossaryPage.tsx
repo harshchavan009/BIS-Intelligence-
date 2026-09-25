@@ -263,13 +263,13 @@ export const GlossaryPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
         {/* Search */}
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-text-secondary absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={language === 'hi' ? 'शब्दावली में खोजें (उदा. QCO, CBTF)...' : 'Search terms (e.g. QCO, CBTF, HUID)...'}
-            className="w-full pl-9 pr-3 py-2 text-sm border border-line rounded bg-white focus:outline-none focus:border-brass text-ink"
+            className="w-full pl-9 pr-3 py-2 text-sm border border-border rounded bg-surface focus:outline-none focus:border-brand-primary text-text-primary"
           />
         </div>
 
@@ -281,8 +281,8 @@ export const GlossaryPage: React.FC = () => {
               onClick={() => setSelectedCategory(cat)}
               className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
                 selectedCategory === cat
-                  ? 'bg-brass text-white shadow-sm'
-                  : 'bg-white border border-line text-stone-600 hover:border-brass/50'
+                  ? 'bg-brand-primary text-white shadow-sm'
+                  : 'bg-surface border border-border text-text-secondary hover:border-brand-primary/50'
               }`}
             >
               {cat === 'all' ? (language === 'hi' ? 'सभी श्रेणियां' : 'All Categories') : cat}
@@ -303,26 +303,26 @@ export const GlossaryPage: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <span className="text-xl font-bold font-sans text-ink flex items-center gap-2 tracking-tight">
+                  <span className="text-xl font-bold font-sans text-text-primary flex items-center gap-2 tracking-tight">
                     {item.term}
-                    <span className="text-xs px-2 py-0.5 rounded bg-amber-50 text-brass border border-brass/30 font-sans font-semibold">
+                    <span className="text-xs px-2 py-0.5 rounded bg-surface-alt text-brand-primary border border-border font-sans font-semibold">
                       {item.category}
                     </span>
                   </span>
-                  <div className="text-xs font-medium text-stone-500 pt-0.5">
+                  <div className="text-xs font-medium text-text-secondary pt-0.5">
                     {language === 'hi' ? item.fullNameHi : item.fullName}
                   </div>
                 </div>
               </div>
 
               {/* Summary */}
-              <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+              <p className="text-xs sm:text-sm text-text-primary leading-relaxed">
                 {language === 'hi' ? item.summaryHi : item.summaryEn}
               </p>
 
               {/* Practical Meaning Box for MSMEs */}
-              <div className="p-3 bg-paper-light border-l-2 border-brass rounded-r text-xs text-stone-600 space-y-1">
-                <span className="font-semibold text-ink uppercase tracking-wider text-[10px] block">
+              <div className="p-3 bg-surface-alt border-l-2 border-brand-primary rounded-r text-xs text-text-secondary space-y-1">
+                <span className="font-semibold text-text-primary uppercase tracking-wider text-[10px] block">
                   {language === 'hi' ? 'व्यावहारिक अर्थ (आपके व्यवसाय के लिए):' : 'What this means in practice for your business:'}
                 </span>
                 <p className="leading-normal">
@@ -332,8 +332,8 @@ export const GlossaryPage: React.FC = () => {
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-3 border-t border-line/60 flex items-center justify-between text-xs">
-              <span className="text-stone-500 font-mono text-[11px]">
+            <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs">
+              <span className="text-text-secondary font-mono text-[11px]">
                 {item.relatedScheme}
               </span>
               <button
@@ -352,8 +352,8 @@ export const GlossaryPage: React.FC = () => {
       </div>
 
       {filteredTerms.length === 0 && (
-        <div className="p-12 text-center bg-white border border-line rounded-lg text-stone-500">
-          <HelpCircle className="w-8 h-8 mx-auto text-stone-400 mb-2" />
+        <div className="p-12 text-center bg-surface border border-border rounded-lg text-text-secondary">
+          <HelpCircle className="w-8 h-8 mx-auto text-text-secondary/60 mb-2" />
           <p>{language === 'hi' ? 'कोई संबंधित शब्दावली नहीं मिली।' : 'No glossary terms match your search filter.'}</p>
         </div>
       )}

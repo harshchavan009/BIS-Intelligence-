@@ -30,13 +30,13 @@ export const SourcePanel: React.FC = () => {
       aria-labelledby="source-drawer-title"
     >
       <div 
-        className="w-full max-w-2xl bg-paper h-full shadow-2xl border-l border-line flex flex-col transform transition-transform duration-200 ease-in-out"
+        className="w-full max-w-2xl bg-surface text-text-primary h-full shadow-2xl border-l border-border flex flex-col transform transition-transform duration-200 ease-in-out"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-indigo-deep text-white px-6 py-4 flex items-center justify-between border-b border-white/10 flex-shrink-0">
+        <div className="bg-brand-primary text-white px-6 py-4 flex items-center justify-between border-b border-border flex-shrink-0">
           <div className="flex items-center gap-2.5">
-            <Bookmark className="w-5 h-5 text-brass flex-shrink-0" />
+            <Bookmark className="w-5 h-5 text-brand-accent flex-shrink-0" />
             <div>
               <h3 id="source-drawer-title" className="text-sm font-semibold tracking-wide">
                 {language === 'hi' ? 'सत्यापित विनियामक संदर्भ स्रोत' : 'Verified Regulatory Source Record'}
@@ -48,7 +48,7 @@ export const SourcePanel: React.FC = () => {
           </div>
           <button
             onClick={() => setIsSourceDrawerOpen(false)}
-            className="text-gray-300 hover:text-white p-1.5 rounded hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-brass"
+            className="text-gray-300 hover:text-white p-1.5 rounded hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-brand-accent"
             aria-label="Close source inspection drawer"
           >
             <X className="w-5 h-5" />
@@ -56,23 +56,23 @@ export const SourcePanel: React.FC = () => {
         </div>
 
         {/* Top Provenance & View Switcher Bar */}
-        <div className="bg-white border-b border-line px-6 py-3 flex items-center justify-between gap-4 flex-shrink-0">
+        <div className="bg-surface border-b border-border px-6 py-3 flex items-center justify-between gap-4 flex-shrink-0">
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono font-bold text-brass bg-brass/10 px-2.5 py-1 rounded border border-brass/20">
+            <span className="text-[11px] font-mono font-bold text-brand-accent bg-brand-accent/10 px-2.5 py-1 rounded border border-brand-accent/20">
               {selectedSource.clause_ref}
             </span>
-            <span className="text-xs text-gray-500 font-mono">
+            <span className="text-xs text-text-secondary font-mono">
               Page {selectedSource.page_number}
             </span>
           </div>
 
-          <div className="flex items-center bg-paper-dark/70 rounded-md p-0.5 border border-line text-xs font-medium">
+          <div className="flex items-center bg-surface-alt rounded-md p-0.5 border border-border text-xs font-medium">
             <button
               onClick={() => setActiveView('image')}
               className={`px-3 py-1 rounded flex items-center gap-1.5 transition-colors ${
                 activeView === 'image'
-                  ? 'bg-indigo-deep text-white shadow-sm'
-                  : 'text-gray-600 hover:text-ink'
+                  ? 'bg-brand-primary text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary'
               }`}
             >
               <ImageIcon className="w-3.5 h-3.5" />
@@ -82,8 +82,8 @@ export const SourcePanel: React.FC = () => {
               onClick={() => setActiveView('text')}
               className={`px-3 py-1 rounded flex items-center gap-1.5 transition-colors ${
                 activeView === 'text'
-                  ? 'bg-indigo-deep text-white shadow-sm'
-                  : 'text-gray-600 hover:text-ink'
+                  ? 'bg-brand-primary text-white shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary'
               }`}
             >
               <BookOpen className="w-3.5 h-3.5" />
@@ -95,21 +95,21 @@ export const SourcePanel: React.FC = () => {
         {/* Content Container */}
         <div className="flex-1 overflow-y-auto p-6 space-y-5">
           {/* Metadata Card */}
-          <div className="bg-white border border-line rounded-lg p-4 shadow-sm space-y-2 text-xs">
+          <div className="bg-surface-alt border border-border rounded-lg p-4 shadow-sm space-y-2 text-xs">
             <div className="flex items-start justify-between gap-2">
               <div className="space-y-0.5">
-                <span className="text-[10px] uppercase font-mono text-gray-400">Official Publication</span>
-                <h4 className="font-serif font-bold text-ink text-sm">
+                <span className="text-[10px] uppercase font-mono text-text-secondary/70">Official Publication</span>
+                <h4 className="font-serif font-bold text-text-primary text-sm">
                   {selectedSource.document_title}
                 </h4>
               </div>
-              <span className="inline-flex items-center gap-1 text-[10px] text-verified-green bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 flex-shrink-0">
+              <span className="inline-flex items-center gap-1 text-[10px] text-status-success bg-status-success/15 px-2 py-0.5 rounded border border-status-success/30 flex-shrink-0">
                 <ShieldCheck className="w-3 h-3" />
                 Grounded Clause
               </span>
             </div>
 
-            <div className="pt-2 border-t border-line/60 flex items-center justify-between text-gray-500 font-mono text-[11px]">
+            <div className="pt-2 border-t border-border/60 flex items-center justify-between text-text-secondary font-mono text-[11px]">
               <span className="truncate max-w-[280px]">File: {selectedSource.source_file}</span>
               <span>Physical Page: {selectedSource.page_number}</span>
             </div>
@@ -118,26 +118,26 @@ export const SourcePanel: React.FC = () => {
           {/* VIEW 1: OFFICIAL PDF PAGE IMAGE WITH YELLOW HIGHLIGHT */}
           {activeView === 'image' && (
             <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs text-gray-600">
-                <div className="flex items-center gap-1.5 font-medium text-amber-900 bg-amber-50 px-2.5 py-1 rounded border border-amber-200">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              <div className="flex items-center justify-between text-xs text-text-secondary">
+                <div className="flex items-center gap-1.5 font-medium text-status-warning bg-status-warning/15 px-2.5 py-1 rounded border border-status-warning/30">
+                  <span className="w-2 h-2 rounded-full bg-status-warning animate-pulse"></span>
                   <span>Target Clause Highlighted in Regulatory Yellow</span>
                 </div>
                 
                 {/* Zoom Controls */}
-                <div className="flex items-center gap-1 bg-white border border-line rounded p-0.5">
+                <div className="flex items-center gap-1 bg-surface border border-border rounded p-0.5">
                   <button
                     onClick={() => setZoomLevel(Math.max(0.8, zoomLevel - 0.2))}
-                    className="p-1 text-gray-500 hover:text-ink rounded hover:bg-gray-100"
+                    className="p-1 text-text-secondary hover:text-text-primary rounded hover:bg-surface-alt"
                     title="Zoom Out"
                     aria-label="Zoom out PDF page"
                   >
                     <ZoomOut className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-[10px] font-mono px-1 text-gray-600">{Math.round(zoomLevel * 100)}%</span>
+                  <span className="text-[10px] font-mono px-1 text-text-secondary">{Math.round(zoomLevel * 100)}%</span>
                   <button
                     onClick={() => setZoomLevel(Math.min(2.0, zoomLevel + 0.2))}
-                    className="p-1 text-gray-500 hover:text-ink rounded hover:bg-gray-100"
+                    className="p-1 text-text-secondary hover:text-text-primary rounded hover:bg-surface-alt"
                     title="Zoom In"
                     aria-label="Zoom in PDF page"
                   >
@@ -147,7 +147,7 @@ export const SourcePanel: React.FC = () => {
                     href={pageImageUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-1 text-gray-500 hover:text-indigo-deep rounded hover:bg-gray-100 ml-1 border-l border-line"
+                    className="p-1 text-text-secondary hover:text-brand-primary rounded hover:bg-surface-alt ml-1 border-l border-border"
                     title="Open Full Page Image in New Tab"
                     aria-label="Open full page image in new window"
                   >
@@ -157,17 +157,17 @@ export const SourcePanel: React.FC = () => {
               </div>
 
               {/* Image Frame with Zoom Support */}
-              <div className="relative bg-white border border-line rounded-lg overflow-hidden shadow-paper-sm min-h-[420px] max-h-[580px] overflow-auto flex justify-center items-start p-2">
+              <div className="relative bg-surface border border-border rounded-lg overflow-hidden shadow-paper-sm min-h-[420px] max-h-[580px] overflow-auto flex justify-center items-start p-2">
                 {imageLoading && (
-                  <div className="absolute inset-0 bg-white/80 flex flex-col items-center justify-center gap-2 z-10">
-                    <span className="w-6 h-6 border-2 border-brass border-t-transparent rounded-full animate-spin"></span>
-                    <span className="text-xs text-gray-500">Rendering official PDF page with annotations...</span>
+                  <div className="absolute inset-0 bg-surface/80 flex flex-col items-center justify-center gap-2 z-10">
+                    <span className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin"></span>
+                    <span className="text-xs text-text-secondary">Rendering official PDF page with annotations...</span>
                   </div>
                 )}
 
                 {imageError ? (
-                  <div className="p-8 text-center text-xs text-gray-500 space-y-2">
-                    <FileText className="w-8 h-8 text-gray-400 mx-auto" />
+                  <div className="p-8 text-center text-xs text-text-secondary space-y-2">
+                    <FileText className="w-8 h-8 text-text-secondary/50 mx-auto" />
                     <p>Image preview unavailable. Switch to the Verbatim OCR tab to inspect extracted text.</p>
                   </div>
                 ) : (
@@ -175,7 +175,7 @@ export const SourcePanel: React.FC = () => {
                     src={pageImageUrl}
                     alt={`Official PDF Document Page ${selectedSource.page_number} with highlighted clause ${selectedSource.clause_ref}`}
                     style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'top center' }}
-                    className="max-w-full h-auto transition-transform duration-150 border border-gray-100 shadow-sm"
+                    className="max-w-full h-auto transition-transform duration-150 border border-border shadow-sm"
                     onLoad={() => setImageLoading(false)}
                     onError={() => {
                       setImageLoading(false);
@@ -191,19 +191,19 @@ export const SourcePanel: React.FC = () => {
           {activeView === 'text' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h5 className="text-xs font-semibold uppercase tracking-wider text-gray-700 flex items-center gap-1.5">
-                  <BookOpen className="w-3.5 h-3.5 text-brass" />
+                <h5 className="text-xs font-semibold uppercase tracking-wider text-text-primary flex items-center gap-1.5">
+                  <BookOpen className="w-3.5 h-3.5 text-brand-primary" />
                   <span>Verbatim Regulatory Passage</span>
                 </h5>
-                <span className="text-[11px] text-gray-400 font-mono">Authentic Text Layer</span>
+                <span className="text-[11px] text-text-secondary font-mono">Authentic Text Layer</span>
               </div>
               
-              <div className="p-4 rounded-md bg-white border border-line font-serif text-sm leading-relaxed text-ink/90 border-l-4 border-l-brass shadow-sm">
+              <div className="p-4 rounded-md bg-surface border border-border font-serif text-sm leading-relaxed text-text-primary border-l-4 border-l-brand-accent shadow-sm">
                 "{selectedSource.excerpt}"
               </div>
 
-              <div className="p-3.5 bg-paper rounded border border-line text-xs space-y-1 text-gray-600 font-mono">
-                <div className="font-bold text-ink">Grounding Verification Checklist:</div>
+              <div className="p-3.5 bg-surface-alt rounded border border-border text-xs space-y-1 text-text-secondary font-mono">
+                <div className="font-bold text-text-primary">Grounding Verification Checklist:</div>
                 <div>• Matched Document: {selectedSource.source_file}</div>
                 <div>• Validated Clause: {selectedSource.clause_ref}</div>
                 <div>• Citation Groundedness: 100% Provenance Confirmed</div>
@@ -212,18 +212,18 @@ export const SourcePanel: React.FC = () => {
           )}
 
           {/* Institutional Provenance Footnote */}
-          <div className="p-3 rounded bg-[#F4EFE6] border border-[#E3DAC9] text-[11px] text-ink-muted leading-relaxed">
-            <strong className="text-ink font-semibold">Institutional Provenance: </strong>
+          <div className="p-3 rounded bg-surface-alt border border-border text-[11px] text-text-secondary leading-relaxed">
+            <strong className="text-text-primary font-semibold">Institutional Provenance: </strong>
             This clause is extracted directly from official notifications published by the Central Marks Departments (CMD-I / CMD-II) under the Bureau of Indian Standards Act, 2016.
           </div>
         </div>
 
         {/* Footer */}
-        <div className="bg-white border-t border-line px-6 py-3 flex justify-between items-center text-xs flex-shrink-0">
-          <span className="text-gray-400 text-[11px] font-mono">BIS Gazette Verification Engine</span>
+        <div className="bg-surface border-t border-border px-6 py-3 flex justify-between items-center text-xs flex-shrink-0">
+          <span className="text-text-secondary text-[11px] font-mono">BIS Gazette Verification Engine</span>
           <button
             onClick={() => setIsSourceDrawerOpen(false)}
-            className="px-4 py-1.5 bg-indigo-deep text-white rounded text-xs font-medium hover:bg-indigo-deep-dark transition-colors focus-visible:ring-2 focus-visible:ring-brass"
+            className="px-4 py-1.5 bg-brand-primary hover:brightness-110 text-white rounded text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brand-accent"
           >
             Close Panel
           </button>

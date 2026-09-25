@@ -9,10 +9,10 @@ export const Breadcrumbs: React.FC = () => {
 
   if (activeTab === 'landing') {
     return (
-      <nav aria-label="Breadcrumb" className="bg-paper-light border-b border-line px-4 sm:px-8 py-2 text-xs">
-        <div className="max-w-7xl mx-auto flex items-center gap-1.5 font-medium text-stone-600">
-          <span className="flex items-center gap-1 text-ink font-semibold" aria-current="page">
-            <Home className="w-3.5 h-3.5 text-brass" />
+      <nav aria-label="Breadcrumb" className="bg-surface-alt border-b border-border px-4 sm:px-8 py-2 text-xs">
+        <div className="max-w-7xl mx-auto flex items-center gap-1.5 font-medium text-text-secondary">
+          <span className="flex items-center gap-1 text-text-primary font-semibold" aria-current="page">
+            <Home className="w-3.5 h-3.5 text-brand-primary" />
             <span>{t('breadcrumbs.home')}</span>
           </span>
         </div>
@@ -42,19 +42,19 @@ export const Breadcrumbs: React.FC = () => {
   };
 
   return (
-    <nav aria-label="Breadcrumb" className="bg-paper-light border-b border-line px-4 sm:px-8 py-2 text-xs">
-      <div className="max-w-7xl mx-auto flex items-center gap-1.5 flex-wrap text-stone-600">
+    <nav aria-label="Breadcrumb" className="bg-surface-alt border-b border-border px-4 sm:px-8 py-2 text-xs">
+      <div className="max-w-7xl mx-auto flex items-center gap-1.5 flex-wrap text-text-secondary">
         <button
           onClick={() => setActiveTab('landing')}
-          className="flex items-center gap-1 hover:text-brass transition-colors font-medium hover:underline"
+          className="flex items-center gap-1 hover:text-brand-primary transition-colors font-medium hover:underline"
         >
-          <Home className="w-3.5 h-3.5 text-stone-500" />
+          <Home className="w-3.5 h-3.5 text-text-secondary" />
           <span>{t('breadcrumbs.home')}</span>
         </button>
 
-        <ChevronRight className="w-3 h-3 text-stone-400" />
+        <ChevronRight className="w-3 h-3 text-text-secondary/60" />
 
-        <span className="text-ink font-semibold" aria-current="page">
+        <span className="text-text-primary font-semibold" aria-current="page">
           {getPageTitle(activeTab)}
         </span>
       </div>

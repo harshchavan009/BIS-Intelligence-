@@ -21,19 +21,19 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   className = ''
 }) => {
   return (
-    <div className={`bg-white border border-line rounded-lg p-6 sm:p-7 shadow-paper-sm relative space-y-4 font-sans ${className}`}>
+    <div className={`bg-surface border border-border rounded-lg p-6 sm:p-7 shadow-paper-sm relative space-y-4 font-sans ${className}`}>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1.5 max-w-3xl">
           <div className="flex items-center gap-2">
             {icon !== undefined ? icon : <SealMotif size={20} />}
-            <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
+            <span className="text-xs font-semibold tracking-wider text-brand-accent uppercase font-mono">
               {eyebrow}
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-serif text-ink tracking-tight font-normal leading-snug">
+          <h1 className="text-2xl sm:text-3xl font-serif text-text-primary tracking-tight font-normal leading-snug">
             {title}
           </h1>
-          <p className="text-xs sm:text-[13px] text-ink-muted leading-relaxed">
+          <p className="text-xs sm:text-[13px] text-text-secondary leading-relaxed">
             {description}
           </p>
         </div>

@@ -204,23 +204,23 @@ export const AnalyticsView: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6 font-sans">
       {/* Header */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm">
+      <div className="bg-surface border border-border rounded-lg p-6 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <SealMotif size={20} />
-              <span className="text-xs font-semibold tracking-wider text-brass uppercase font-mono">
+              <span className="text-xs font-semibold tracking-wider text-brand-accent uppercase font-mono">
                 Evaluator Console & QA Telemetry
               </span>
-              <span className="text-[10px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-300 px-2 py-0.5 rounded font-semibold flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+              <span className="text-[10px] font-mono text-status-success bg-surface-alt border border-status-success/40 px-2 py-0.5 rounded font-semibold flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3 text-status-success" />
                 <span>Active ({evaluatorUser})</span>
               </span>
             </div>
-            <h1 className="text-2xl font-serif text-ink">
+            <h1 className="text-2xl font-serif text-text-primary">
               {language === 'hi' ? 'मूल्यांकनकर्ता कंसोल एवं लाइव टेलीमेट्री' : 'Evaluator Console & Internal Telemetry Dashboard'}
             </h1>
-            <p className="text-xs text-ink-muted">
+            <p className="text-xs text-text-secondary">
               {language === 'hi'
                 ? '65-परीक्षण मामलों की गोल्ड मूल्यांकन हार्नेस (eval_set.json) और सक्रिय SQLite तालिकाओं से संकलित लाइव मेट्रिक्स।'
                 : 'Live verification telemetry extracted from active SQLite tables and the automated 65-case gold evaluation harness.'}
@@ -229,16 +229,16 @@ export const AnalyticsView: React.FC = () => {
           <div className="flex items-center gap-2 self-start sm:self-auto">
             <button
               onClick={handleLogoutEvaluator}
-              className="px-3 py-2 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-800 rounded text-xs font-medium flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
+              className="px-3 py-2 bg-surface-alt hover:bg-surface border border-status-danger/30 text-status-danger rounded text-xs font-medium flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer"
               title="Log out and clear evaluator session"
               aria-label="Log out evaluator session"
             >
-              <LogOut className="w-3.5 h-3.5 text-rose-700" />
+              <LogOut className="w-3.5 h-3.5 text-status-danger" />
               <span>Log Out</span>
             </button>
             <button
               onClick={() => fetchAnalytics()}
-              className="p-2 bg-paper hover:bg-paper-dark border border-line rounded text-ink transition-colors flex items-center gap-1.5 text-xs font-medium focus-visible:ring-2 focus-visible:ring-brass shadow-sm cursor-pointer"
+              className="p-2 bg-surface-alt hover:bg-surface border border-border rounded text-text-primary transition-colors flex items-center gap-1.5 text-xs font-medium focus-visible:ring-2 focus-visible:ring-brand-primary shadow-xs cursor-pointer"
               title="Refresh metrics"
               aria-label="Refresh live analytics data"
             >
@@ -247,9 +247,9 @@ export const AnalyticsView: React.FC = () => {
             </button>
             <button
               onClick={() => setShowAdminPanel(!showAdminPanel)}
-              className="px-3 py-2 bg-paper hover:bg-paper-dark border border-line rounded text-xs font-medium flex items-center gap-1.5 text-stone-700 transition-colors shadow-sm cursor-pointer"
+              className="px-3 py-2 bg-surface-alt hover:bg-surface border border-border rounded text-xs font-medium flex items-center gap-1.5 text-text-secondary hover:text-text-primary transition-colors shadow-xs cursor-pointer"
             >
-              <Lock className="w-3.5 h-3.5 text-brass" />
+              <Lock className="w-3.5 h-3.5 text-brand-accent" />
               <span>{showAdminPanel ? 'Hide Admin Ops' : 'Admin Controls'}</span>
               {showAdminPanel ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
             </button>
@@ -259,18 +259,18 @@ export const AnalyticsView: React.FC = () => {
 
       {/* Admin Operations Panel (Collapsible) */}
       {showAdminPanel && (
-        <div className="bg-amber-50/70 border border-amber-300 rounded-lg p-5 shadow-paper-sm space-y-4 animate-in fade-in duration-150">
+        <div className="bg-surface-alt border border-status-warning/40 rounded-lg p-5 shadow-xs space-y-4 animate-in fade-in duration-150">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Lock className="w-4 h-4 text-amber-900" />
-              <h3 className="text-sm font-bold text-amber-950 font-serif">
+              <Lock className="w-4 h-4 text-status-warning" />
+              <h3 className="text-sm font-bold text-text-primary font-serif">
                 Admin Regulatory Pipeline Controls
               </h3>
             </div>
             {adminToken && (
               <button
                 onClick={() => setAdminToken(null)}
-                className="text-[11px] text-rose-700 hover:text-rose-900 flex items-center gap-1 font-semibold"
+                className="text-[11px] text-status-danger hover:underline flex items-center gap-1 font-semibold"
               >
                 <LogOut className="w-3 h-3" />
                 <span>Log Out Admin</span>
@@ -280,7 +280,7 @@ export const AnalyticsView: React.FC = () => {
 
           {!adminToken ? (
             <div className="space-y-3">
-              <p className="text-xs text-amber-900">
+              <p className="text-xs text-text-secondary">
                 Authorized administrators and domain evaluators can re-ingest PDFs or upload new publications. Use demo credentials below.
               </p>
               <form onSubmit={handleAdminLogin} className="flex flex-wrap gap-2 items-center" autoComplete="off">
@@ -289,38 +289,38 @@ export const AnalyticsView: React.FC = () => {
                   placeholder="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="px-3 py-1.5 text-xs border border-amber-300 rounded bg-white text-ink font-mono w-28 focus:outline-none focus:border-amber-600"
+                  className="px-3 py-1.5 text-xs border border-border rounded bg-surface text-text-primary font-mono w-28 focus:outline-none focus:border-brand-primary"
                 />
                 <input
                   type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="px-3 py-1.5 text-xs border border-amber-300 rounded bg-white text-ink font-mono w-28 focus:outline-none focus:border-amber-600"
+                  className="px-3 py-1.5 text-xs border border-border rounded bg-surface text-text-primary font-mono w-28 focus:outline-none focus:border-brand-primary"
                 />
                 <button
                   type="submit"
                   disabled={isLoggingIn}
-                  className="px-3 py-1.5 bg-amber-900 text-white rounded text-xs font-semibold hover:bg-black transition-colors"
+                  className="px-3 py-1.5 bg-brand-primary text-white rounded text-xs font-semibold hover:brightness-110 transition-all"
                 >
                   {isLoggingIn ? 'Verifying...' : 'Authenticate'}
                 </button>
                 <button
                   type="button"
                   onClick={() => { setUsername('demo'); setPassword('demo'); }}
-                  className="px-2.5 py-1.5 bg-amber-200 hover:bg-amber-300 text-amber-950 rounded text-[11px] font-medium border border-amber-400"
+                  className="px-2.5 py-1.5 bg-surface hover:bg-surface-alt text-text-primary rounded text-[11px] font-medium border border-border"
                 >
                   Auto-Fill Demo
                 </button>
-                {loginError && <span className="text-xs text-rose-700 font-semibold">{loginError}</span>}
+                {loginError && <span className="text-xs text-status-danger font-semibold">{loginError}</span>}
               </form>
             </div>
           ) : (
             <div className="space-y-3 text-xs">
-              <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded border border-amber-200">
+              <div className="flex flex-wrap items-center justify-between gap-3 bg-surface p-3 rounded border border-border">
                 <div>
-                  <span className="font-semibold text-ink block">Knowledge Base Corpus:</span>
-                  <span className="text-stone-600 font-mono text-[11px]">
+                  <span className="font-semibold text-text-primary block">Knowledge Base Corpus:</span>
+                  <span className="text-text-secondary font-mono text-[11px]">
                     {adminStatus?.total_publications || 7} Verified Publications | {data?.chunks_stored || 379} Chunks
                   </span>
                 </div>
@@ -328,7 +328,7 @@ export const AnalyticsView: React.FC = () => {
                   <button
                     onClick={handleTriggerReingest}
                     disabled={reingestLoading}
-                    className="px-3 py-1.5 bg-indigo-deep hover:bg-ink text-white rounded font-medium flex items-center gap-1.5 transition-colors disabled:opacity-50"
+                    className="px-3 py-1.5 bg-brand-primary hover:brightness-110 text-white rounded font-medium flex items-center gap-1.5 transition-all disabled:opacity-50"
                   >
                     <RefreshCw className={`w-3.5 h-3.5 ${reingestLoading ? 'animate-spin' : ''}`} />
                     <span>{reingestLoading ? 'Re-Indexing Chunks...' : 'Trigger Pipeline Re-Ingest'}</span>
@@ -336,8 +336,8 @@ export const AnalyticsView: React.FC = () => {
                 </div>
               </div>
               {reingestSuccess && (
-                <div className="p-2 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded font-semibold text-xs flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                <div className="p-2 bg-surface-alt text-status-success border border-status-success/40 rounded font-semibold text-xs flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-status-success" />
                   <span>{reingestSuccess}</span>
                 </div>
               )}
@@ -349,96 +349,96 @@ export const AnalyticsView: React.FC = () => {
       {/* 4 Key Metric Tiles */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Metric 1: Groundedness Score */}
-        <div className="bg-white border-2 border-emerald-500/30 rounded-lg p-5 shadow-paper-sm space-y-2 relative overflow-hidden">
-          <div className="flex items-center justify-between text-gray-500">
-            <span className="text-[11px] font-bold uppercase font-mono text-emerald-700 tracking-wider">
+        <div className="bg-surface border border-border border-l-4 border-l-status-success rounded-lg p-5 shadow-xs space-y-2 relative overflow-hidden">
+          <div className="flex items-center justify-between text-text-secondary">
+            <span className="text-[11px] font-bold uppercase font-mono text-status-success tracking-wider">
               Groundedness Score
             </span>
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <ShieldCheck className="w-4 h-4 text-status-success" />
           </div>
-          <div className="text-2xl font-serif font-bold text-emerald-700">
+          <div className="text-2xl font-serif font-bold text-status-success">
             {evalDetails?.passed || data?.eval_passed || 65}/{evalDetails?.total_tests || data?.eval_total_tests || 65} (100.0%)
           </div>
-          <div className="text-[10.5px] text-gray-600 font-medium">
+          <div className="text-[10.5px] text-text-secondary font-medium">
             65/65 Gold-Standard Benchmark Tests Passed
           </div>
-          <div className="pt-2 border-t border-emerald-100 text-[10px] text-gray-500 font-mono flex items-center justify-between">
+          <div className="pt-2 border-t border-border text-[10px] text-text-secondary font-mono flex items-center justify-between">
             <span>Harness: eval_set.json</span>
             <span>Last Run: {evalDetails?.evaluated_at_human || data?.eval_last_run || '07 September 2026'}</span>
           </div>
         </div>
 
         {/* Metric 2: Total Consultations */}
-        <div className="bg-white border border-line rounded-lg p-5 shadow-paper-sm space-y-2">
-          <div className="flex items-center justify-between text-gray-400">
-            <span className="text-[11px] font-semibold uppercase font-mono text-gray-500">
+        <div className="bg-surface border border-border rounded-lg p-5 shadow-xs space-y-2">
+          <div className="flex items-center justify-between text-text-secondary">
+            <span className="text-[11px] font-semibold uppercase font-mono text-text-secondary">
               Total Consultations
             </span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" title="Live Session Active"></span>
+            <span className="w-2 h-2 rounded-full bg-status-success animate-pulse" title="Live Session Active"></span>
           </div>
-          <div className="text-3xl font-serif font-bold text-ink">
+          <div className="text-3xl font-serif font-bold text-text-primary">
             {data?.total_queries || 15}
           </div>
-          <div className="text-[10.5px] text-gray-500 font-medium">
+          <div className="text-[10.5px] text-text-secondary font-medium">
             Live Query Turns (query_logs)
           </div>
-          <div className="pt-2 border-t border-gray-100 text-[10px] text-emerald-700 font-mono">
+          <div className="pt-2 border-t border-border text-[10px] text-status-success font-mono">
             Increments live per chat turn
           </div>
         </div>
 
         {/* Metric 3: User Feedback */}
-        <div className="bg-white border border-line rounded-lg p-5 shadow-paper-sm space-y-2">
-          <div className="flex items-center justify-between text-gray-400">
-            <span className="text-[11px] font-semibold uppercase font-mono text-gray-500">
+        <div className="bg-surface border border-border rounded-lg p-5 shadow-xs space-y-2">
+          <div className="flex items-center justify-between text-text-secondary">
+            <span className="text-[11px] font-semibold uppercase font-mono text-text-secondary">
               Citizen Feedback
             </span>
-            <ThumbsUp className="w-4 h-4 text-brass" />
+            <ThumbsUp className="w-4 h-4 text-brand-accent" />
           </div>
-          <div className="text-3xl font-serif font-bold text-ink">
+          <div className="text-3xl font-serif font-bold text-text-primary">
             {data?.positive_feedback || 12}
           </div>
-          <div className="text-[10.5px] text-gray-500 font-medium">
+          <div className="text-[10.5px] text-text-secondary font-medium">
             Positive Rating Votes
           </div>
-          <div className="pt-2 border-t border-gray-100 text-[10px] text-emerald-700 font-mono flex items-center gap-1">
-            <ThumbsUp className="w-3 h-3 text-emerald-600 inline" />
+          <div className="pt-2 border-t border-border text-[10px] text-status-success font-mono flex items-center gap-1">
+            <ThumbsUp className="w-3 h-3 text-status-success inline" />
             <span>Increments on citizen rating click</span>
           </div>
         </div>
 
         {/* Metric 4: Regulatory Vector Store */}
-        <div className="bg-white border border-line rounded-lg p-5 shadow-paper-sm space-y-2">
-          <div className="flex items-center justify-between text-gray-400">
-            <span className="text-[11px] font-semibold uppercase font-mono text-gray-500">
+        <div className="bg-surface border border-border rounded-lg p-5 shadow-xs space-y-2">
+          <div className="flex items-center justify-between text-text-secondary">
+            <span className="text-[11px] font-semibold uppercase font-mono text-text-secondary">
               Vector Repository
             </span>
-            <Database className="w-4 h-4 text-indigo-deep" />
+            <Database className="w-4 h-4 text-brand-primary" />
           </div>
-          <div className="text-3xl font-serif font-bold text-indigo-deep">
+          <div className="text-3xl font-serif font-bold text-brand-primary">
             {data?.chunks_stored || 379}
           </div>
-          <div className="text-[10.5px] text-gray-500 font-medium">
+          <div className="text-[10.5px] text-text-secondary font-medium">
             Chunks across {data?.documents_indexed || 7} Official Publications
           </div>
-          <div className="pt-2 border-t border-gray-100 text-[10px] text-gray-400 font-mono">
+          <div className="pt-2 border-t border-border text-[10px] text-text-secondary font-mono">
             Hybrid ChromaDB + BM25 active
           </div>
         </div>
       </div>
 
       {/* Benchmark Quality Callout Banner */}
-      <div className="p-4 bg-emerald-50/90 border border-emerald-300 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-emerald-950">
+      <div className="p-4 bg-surface-alt border border-status-success/40 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-text-primary">
         <div className="flex items-center gap-2.5">
-          <CheckCircle2 className="w-5 h-5 text-emerald-700 flex-shrink-0" />
+          <CheckCircle2 className="w-5 h-5 text-status-success flex-shrink-0" />
           <div>
             <strong>Automated Evaluation Harness: </strong>
-            <span>All 65 test cases passed with 100% citation grounding and 5 deliberate out-of-corpus abstentions. Verified via <code className="bg-white px-1.5 py-0.5 rounded font-mono text-[11px] border border-emerald-200">python3 scripts/run_eval.py</code>.</span>
+            <span>All 65 test cases passed with 100% citation grounding and 5 deliberate out-of-corpus abstentions. Verified via <code className="bg-surface px-1.5 py-0.5 rounded font-mono text-[11px] border border-border text-text-primary">python3 scripts/run_eval.py</code>.</span>
           </div>
         </div>
         <button
           onClick={() => setActiveTab('chat')}
-          className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded text-xs font-semibold flex items-center gap-1 transition-colors flex-shrink-0 cursor-pointer"
+          className="px-3 py-1.5 bg-brand-primary hover:brightness-110 text-white rounded text-xs font-semibold flex items-center gap-1 transition-all flex-shrink-0 cursor-pointer"
         >
           <span>Test Live in Chat</span>
           <ExternalLink className="w-3 h-3" />
@@ -446,19 +446,19 @@ export const AnalyticsView: React.FC = () => {
       </div>
 
       {/* Full 65-Case Live Evaluation Table */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-4">
+      <div className="bg-surface border border-border rounded-lg p-6 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-base font-bold text-ink font-serif flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-brass" />
+            <h3 className="text-base font-bold text-text-primary font-serif flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-brand-accent" />
               <span>Gold-Standard Evaluation Suite (65 Verified Test Cases)</span>
             </h3>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-text-secondary">
               Interactive inspection of all queries, expected standards, and retrieved regulatory citations.
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-300 font-semibold">
+            <span className="text-[11px] font-mono text-status-success bg-surface-alt px-2.5 py-1 rounded border border-status-success/40 font-semibold">
               Showing {filteredCases.length} of {allCases.length} Cases
             </span>
           </div>
@@ -467,26 +467,26 @@ export const AnalyticsView: React.FC = () => {
         {/* Search and Category Filter Bar */}
         <div className="space-y-3 pt-2">
           <div className="relative">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-stone-400" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-text-secondary" />
             <input
               type="text"
               placeholder="Search test queries, IS numbers (e.g. 'IS 269', 'TMT', 'CBTF', 'Abstention')..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs border border-line rounded bg-paper-light text-ink focus:outline-none focus:border-brass font-mono"
+              className="w-full pl-9 pr-3 py-2 text-xs border border-border rounded bg-surface-alt text-text-primary focus:outline-none focus:border-brand-primary font-mono"
             />
           </div>
 
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px]">
-            <Filter className="w-3 h-3 text-stone-400 shrink-0 mr-1" />
+            <Filter className="w-3 h-3 text-text-secondary shrink-0 mr-1" />
             {uniqueCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-2.5 py-1 rounded-full whitespace-nowrap transition-colors font-medium cursor-pointer ${
                   selectedCategory === cat
-                    ? 'bg-indigo-deep text-white shadow-xs'
-                    : 'bg-paper text-stone-600 hover:bg-paper-dark border border-line'
+                    ? 'bg-brand-primary text-white shadow-xs'
+                    : 'bg-surface-alt text-text-secondary hover:text-text-primary hover:bg-surface border border-border'
                 }`}
               >
                 {cat}
@@ -496,7 +496,7 @@ export const AnalyticsView: React.FC = () => {
         </div>
 
         {/* Cases Table */}
-        <div className="overflow-x-auto border border-border rounded-xl shadow-sm overflow-hidden max-h-[520px]">
+        <div className="overflow-x-auto border border-border rounded-xl shadow-xs overflow-hidden max-h-[520px]">
           <table className="w-full text-xs text-left">
             <thead className="sticky top-0 bg-surface-alt border-b border-border text-text-secondary uppercase font-mono text-[10px] tracking-wider z-10 shadow-xs">
               <tr>
@@ -511,13 +511,13 @@ export const AnalyticsView: React.FC = () => {
             <tbody className="divide-y divide-border/40">
               {paginatedCases.map((c: any) => (
                 <tr key={c.id} className="odd:bg-surface-alt/40 even:bg-surface hover:bg-surface-alt/80 transition-colors">
-                  <td className="py-3.5 px-3.5 font-mono font-bold text-stone-800 dark:text-text-primary">{c.id}</td>
+                  <td className="py-3.5 px-3.5 font-mono font-bold text-text-primary">{c.id}</td>
                   <td className="py-3.5 px-3.5">
-                    <span className="block font-semibold text-ink text-[11px]">{c.category}</span>
-                    <span className="text-[10px] font-mono text-indigo-deep dark:text-brand-primary">{c.scheme} ({c.language.toUpperCase()})</span>
+                    <span className="block font-semibold text-text-primary text-[11px]">{c.category}</span>
+                    <span className="text-[10px] font-mono text-brand-primary">{c.scheme} ({c.language.toUpperCase()})</span>
                   </td>
-                  <td className="py-3.5 px-3.5 text-stone-700 dark:text-text-primary leading-snug max-w-xs">{c.query}</td>
-                  <td className="py-3.5 px-3.5 font-mono text-[11px] text-ink">
+                  <td className="py-3.5 px-3.5 text-text-primary leading-snug max-w-xs">{c.query}</td>
+                  <td className="py-3.5 px-3.5 font-mono text-[11px] text-text-primary">
                     {c.is_abstention ? (
                       <span className="text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded border border-amber-200 dark:border-amber-700/50 font-semibold">
                         Score Floor Abstention
@@ -542,26 +542,26 @@ export const AnalyticsView: React.FC = () => {
         </div>
 
         {/* Pagination Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 text-xs text-stone-600 font-mono">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 text-xs text-text-secondary font-mono">
           <div>
-            Showing <span className="font-bold text-ink">{filteredCases.length === 0 ? 0 : (currentPage - 1) * pageSize + 1}</span> to <span className="font-bold text-ink">{Math.min(currentPage * pageSize, filteredCases.length)}</span> of <span className="font-bold text-ink">{filteredCases.length}</span> benchmark test cases
+            Showing <span className="font-bold text-text-primary">{filteredCases.length === 0 ? 0 : (currentPage - 1) * pageSize + 1}</span> to <span className="font-bold text-text-primary">{Math.min(currentPage * pageSize, filteredCases.length)}</span> of <span className="font-bold text-text-primary">{filteredCases.length}</span> benchmark test cases
           </div>
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage <= 1}
-              className="px-2.5 py-1 rounded bg-white border border-line hover:bg-paper-dark disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-stone-700 flex items-center gap-1"
+              className="px-2.5 py-1 rounded bg-surface border border-border hover:bg-surface-alt disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-text-secondary hover:text-text-primary flex items-center gap-1"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
               <span>Previous</span>
             </button>
-            <span className="px-2 text-stone-700">
+            <span className="px-2 text-text-secondary">
               Page {currentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage >= totalPages}
-              className="px-2.5 py-1 rounded bg-white border border-line hover:bg-paper-dark disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-stone-700 flex items-center gap-1"
+              className="px-2.5 py-1 rounded bg-surface border border-border hover:bg-surface-alt disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-text-secondary hover:text-text-primary flex items-center gap-1"
             >
               <span>Next</span>
               <ChevronRight className="w-3.5 h-3.5" />
@@ -571,20 +571,20 @@ export const AnalyticsView: React.FC = () => {
       </div>
 
       {/* Category Summary Matrix */}
-      <div className="bg-white border border-line rounded-lg p-6 shadow-paper-sm space-y-4">
+      <div className="bg-surface border border-border rounded-lg p-6 shadow-xs space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-bold text-ink font-serif flex items-center gap-2">
-            <Layers className="w-4 h-4 text-brass" />
+          <h3 className="text-sm font-bold text-text-primary font-serif flex items-center gap-2">
+            <Layers className="w-4 h-4 text-brand-accent" />
             <span>Consultation Distribution Matrix by Regulatory Domain</span>
           </h3>
-          <span className="text-[10px] font-mono text-gray-500 bg-paper px-2 py-0.5 rounded border border-line">
+          <span className="text-[10px] font-mono text-text-secondary bg-surface-alt px-2 py-0.5 rounded border border-border">
             Active SQLite logs
           </span>
         </div>
 
-        <div className="overflow-x-auto border border-line rounded-xl shadow-sm overflow-hidden">
+        <div className="overflow-x-auto border border-border rounded-xl shadow-xs overflow-hidden">
           <table className="w-full text-xs text-left">
-            <thead className="sticky top-0 bg-[#F2EFE9] border-b border-line text-stone-700 uppercase font-mono text-[10px] tracking-wider z-10 shadow-xs">
+            <thead className="sticky top-0 bg-surface-alt border-b border-border text-text-secondary uppercase font-mono text-[10px] tracking-wider z-10 shadow-xs">
               <tr>
                 <th className="py-3 px-4">Standard Domain</th>
                 <th className="py-3 px-4">Governing Publication</th>
@@ -592,15 +592,15 @@ export const AnalyticsView: React.FC = () => {
                 <th className="py-3 px-4 text-right">Grounding Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-line/40">
+            <tbody className="divide-y divide-border">
               {data?.top_categories?.map((cat: any, idx: number) => (
-                <tr key={idx} className="odd:bg-[#FAF9F5] even:bg-white hover:bg-amber-50/40 transition-colors">
-                  <td className="py-3.5 px-4 font-semibold text-ink">{cat.category}</td>
-                  <td className="py-3.5 px-4 text-indigo-deep font-medium">{cat.scheme}</td>
-                  <td className="py-3.5 px-4 text-right font-mono font-bold text-ink">{cat.queries}</td>
+                <tr key={idx} className="odd:bg-surface-alt/40 even:bg-surface hover:bg-surface-alt/80 transition-colors">
+                  <td className="py-3.5 px-4 font-semibold text-text-primary">{cat.category}</td>
+                  <td className="py-3.5 px-4 text-brand-primary font-medium">{cat.scheme}</td>
+                  <td className="py-3.5 px-4 text-right font-mono font-bold text-text-primary">{cat.queries}</td>
                   <td className="py-3.5 px-4 text-right">
-                    <span className="inline-flex items-center gap-1 text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    <span className="inline-flex items-center gap-1 text-[10px] text-status-success bg-surface-alt px-2 py-0.5 rounded border border-status-success/40 font-semibold">
+                      <CheckCircle2 className="w-3 h-3 text-status-success" />
                       100% Grounded
                     </span>
                   </td>
@@ -612,22 +612,22 @@ export const AnalyticsView: React.FC = () => {
       </div>
 
       {/* Provenance & Reproducibility Architecture Card */}
-      <div className="p-5 bg-paper rounded-lg border border-line text-xs text-gray-600 space-y-2">
-        <h4 className="font-bold text-ink font-serif text-sm">
+      <div className="p-5 bg-surface-alt rounded-lg border border-border text-xs text-text-secondary space-y-2">
+        <h4 className="font-bold text-text-primary font-serif text-sm">
           Hackathon Evaluator Provenance & Audit Protocol:
         </h4>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-[11px] font-mono">
-          <div className="p-3 bg-white rounded border border-line space-y-1">
-            <strong className="text-ink block">Deterministic Audit:</strong>
-            Run <code className="text-[10px] bg-stone-100 px-1 py-0.5 rounded">python3 scripts/run_eval.py</code> in the terminal to execute the live 65-case regression suite.
+          <div className="p-3 bg-surface rounded border border-border space-y-1">
+            <strong className="text-text-primary block">Deterministic Audit:</strong>
+            Run <code className="text-[10px] bg-surface-alt border border-border px-1 py-0.5 rounded text-text-primary">python3 scripts/run_eval.py</code> in the terminal to execute the live 65-case regression suite.
           </div>
-          <div className="p-3 bg-white rounded border border-line space-y-1">
-            <strong className="text-ink block">Cryptographic Checksums:</strong>
-            All 7 source PDFs have verified SHA-256 signatures stored in <code className="text-[10px] bg-stone-100 px-1 py-0.5 rounded">doc_registry.json</code>.
+          <div className="p-3 bg-surface rounded border border-border space-y-1">
+            <strong className="text-text-primary block">Cryptographic Checksums:</strong>
+            All 7 source PDFs have verified SHA-256 signatures stored in <code className="text-[10px] bg-surface-alt border border-border px-1 py-0.5 rounded text-text-primary">doc_registry.json</code>.
           </div>
-          <div className="p-3 bg-white rounded border border-line space-y-1">
-            <strong className="text-ink block">PWA Offline Mode:</strong>
-            Core standards lookup and guidance operate offline via service worker <code className="text-[10px] bg-stone-100 px-1 py-0.5 rounded">sw.js</code>.
+          <div className="p-3 bg-surface rounded border border-border space-y-1">
+            <strong className="text-text-primary block">PWA Offline Mode:</strong>
+            Core standards lookup and guidance operate offline via service worker <code className="text-[10px] bg-surface-alt border border-border px-1 py-0.5 rounded text-text-primary">sw.js</code>.
           </div>
         </div>
       </div>

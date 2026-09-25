@@ -236,20 +236,20 @@ export const SitemapPage: React.FC = () => {
                   >
                     <div className="space-y-1">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 font-serif font-bold text-xs text-ink group-hover:text-indigo-deep">
-                          <Icon className="w-4 h-4 text-brass group-hover:scale-105 transition-transform" />
+                        <div className="flex items-center gap-2 font-serif font-bold text-xs text-text-primary group-hover:text-brand-primary">
+                          <Icon className="w-4 h-4 text-brand-primary group-hover:scale-105 transition-transform" />
                           <span>{language === 'hi' ? item.titleHi : item.titleEn}</span>
                         </div>
-                        <span className="font-mono text-[10px] text-gray-400 bg-white px-1.5 py-0.5 rounded border border-line">
+                        <span className="font-mono text-[10px] text-text-secondary bg-surface px-1.5 py-0.5 rounded border border-border">
                           {item.path}
                         </span>
                       </div>
-                      <p className="text-[11.5px] text-stone-600 leading-relaxed pl-6">
+                      <p className="text-[11.5px] text-text-secondary leading-relaxed pl-6">
                         {language === 'hi' ? item.descHi : item.descEn}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-end text-[11px] font-semibold text-brass group-hover:text-indigo-deep pt-1">
+                    <div className="flex items-center justify-end text-[11px] font-semibold text-brand-primary group-hover:text-brand-accent pt-1">
                       <span className="group-hover:underline">{language === 'hi' ? 'पेज खोलें' : 'Open Page'}</span>
                       <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     </div>

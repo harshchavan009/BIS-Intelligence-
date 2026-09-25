@@ -104,56 +104,56 @@ export const BranchContact: React.FC = () => {
 
       {/* Emergency & National Toll-Free Callout */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 bg-white border border-line rounded-lg shadow-sm flex items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0">
+        <div className="p-4 bg-surface border border-border rounded-lg shadow-sm flex items-center gap-4">
+          <div className="w-10 h-10 rounded-full bg-status-success/15 text-status-success border border-status-success/30 flex items-center justify-center shrink-0">
             <Phone className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[11px] uppercase font-semibold tracking-wider text-stone-500">
+            <div className="text-[11px] uppercase font-semibold tracking-wider text-text-secondary">
               {language === 'hi' ? 'राष्ट्रीय टोल-फ्री हेल्पलाइन' : 'National Toll-Free Helpline'}
             </div>
-            <div className="text-base font-bold text-ink font-mono">
+            <div className="text-base font-bold text-text-primary font-mono">
               1800-11-0420
             </div>
-            <div className="text-[10.5px] text-stone-500">
+            <div className="text-[10.5px] text-text-secondary">
               Mon–Fri, 9:00 AM – 5:30 PM
             </div>
           </div>
         </div>
 
-        <div className="p-4 bg-white border border-line rounded-lg shadow-sm flex items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-amber-50 text-brass border border-brass/30 flex items-center justify-center shrink-0">
+        <div className="p-4 bg-surface border border-border rounded-lg shadow-sm flex items-center gap-4">
+          <div className="w-10 h-10 rounded-full bg-status-warning/15 text-status-warning border border-status-warning/30 flex items-center justify-center shrink-0">
             <Mail className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[11px] uppercase font-semibold tracking-wider text-stone-500">
+            <div className="text-[11px] uppercase font-semibold tracking-wider text-text-secondary">
               {language === 'hi' ? 'आधिकारिक सहायता ईमेल' : 'Central Helpdesk Email'}
             </div>
-            <div className="text-sm font-bold text-ink font-mono">
+            <div className="text-sm font-bold text-text-primary font-mono">
               helpdesk@bis.gov.in
             </div>
-            <div className="text-[10.5px] text-stone-500">
+            <div className="text-[10.5px] text-text-secondary">
               Response within 2 business days
             </div>
           </div>
         </div>
 
-        <div className="p-4 bg-white border border-line rounded-lg shadow-sm flex items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0">
+        <div className="p-4 bg-surface border border-border rounded-lg shadow-sm flex items-center gap-4">
+          <div className="w-10 h-10 rounded-full bg-brand-primary/15 text-brand-primary border border-brand-primary/30 flex items-center justify-center shrink-0">
             <Clock className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[11px] uppercase font-semibold tracking-wider text-stone-500">
+            <div className="text-[11px] uppercase font-semibold tracking-wider text-text-secondary">
               {language === 'hi' ? 'नागरिक शिकायत निवारण' : 'Citizen Grievance Redressal'}
             </div>
             <button
               onClick={() => setActiveLegalModal('grievance')}
-              className="text-xs font-bold text-brass hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
             >
               <span>{language === 'hi' ? 'शिकायत अधिकारी से संपर्क करें' : 'Contact Grievance Cell'}</span>
               <ExternalLink className="w-3 h-3" />
             </button>
-            <div className="text-[10.5px] text-stone-500">
+            <div className="text-[10.5px] text-text-secondary">
               Under Section 34 of BIS Act
             </div>
           </div>
@@ -163,7 +163,7 @@ export const BranchContact: React.FC = () => {
       {/* Regional Branch Directory */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold font-serif-standard text-ink">
+          <h2 className="text-lg font-bold font-serif-standard text-text-primary">
             {language === 'hi' ? 'क्षेत्रीय एवं शाखा कार्यालय निर्देशिका' : 'Regional & Branch Office Directory'}
           </h2>
           <input
@@ -171,7 +171,7 @@ export const BranchContact: React.FC = () => {
             value={filterQuery}
             onChange={(e) => setFilterQuery(e.target.value)}
             placeholder={language === 'hi' ? 'राज्य या शहर से खोजें...' : 'Filter by state or city...'}
-            className="px-3 py-1.5 text-xs border border-line rounded bg-white w-64 focus:outline-none focus:border-brass"
+            className="px-3 py-1.5 text-xs border border-border rounded bg-surface text-text-primary w-64 focus:outline-none focus:border-brand-primary"
           />
         </div>
 
@@ -179,36 +179,36 @@ export const BranchContact: React.FC = () => {
           {filteredBranches.map((branch) => (
             <div 
               key={branch.location}
-              className="bg-white border border-line rounded-lg p-5 shadow-sm space-y-3 hover:border-brass/40 transition-colors"
+              className="bg-surface border border-border rounded-lg p-5 shadow-sm space-y-3 hover:border-brand-primary/40 transition-colors"
             >
-              <div className="border-b border-line/60 pb-2.5">
-                <span className="text-xs font-semibold text-brass font-mono uppercase tracking-wider block">
+              <div className="border-b border-border/60 pb-2.5">
+                <span className="text-xs font-semibold text-brand-primary font-mono uppercase tracking-wider block">
                   {branch.location}
                 </span>
-                <h3 className="text-base font-bold font-serif-standard text-ink">
+                <h3 className="text-base font-bold font-serif-standard text-text-primary">
                   {language === 'hi' ? branch.regionHi : branch.region}
                 </h3>
               </div>
 
-              <div className="space-y-2 text-xs text-stone-700">
+              <div className="space-y-2 text-xs text-text-primary">
                 <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-stone-400 shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-text-secondary shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{branch.address}</span>
                 </div>
 
                 <div className="flex items-center gap-2.5">
-                  <Phone className="w-4 h-4 text-stone-400 shrink-0" />
-                  <span className="font-mono text-ink">{branch.phone}</span>
+                  <Phone className="w-4 h-4 text-text-secondary shrink-0" />
+                  <span className="font-mono text-text-primary">{branch.phone}</span>
                 </div>
 
                 <div className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-stone-400 shrink-0" />
-                  <span className="font-mono text-brass">{branch.email}</span>
+                  <Mail className="w-4 h-4 text-text-secondary shrink-0" />
+                  <span className="font-mono text-brand-primary">{branch.email}</span>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-line/50 text-[11px] text-stone-500">
-                <span className="font-semibold text-stone-600 block mb-0.5">
+              <div className="pt-2 border-t border-border/50 text-[11px] text-text-secondary">
+                <span className="font-semibold text-text-primary block mb-0.5">
                   {language === 'hi' ? 'अधिकार क्षेत्र:' : 'Territorial Jurisdiction:'}
                 </span>
                 <span>{language === 'hi' ? branch.jurisdictionHi : branch.jurisdiction}</span>

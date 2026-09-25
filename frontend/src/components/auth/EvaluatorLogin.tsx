@@ -87,34 +87,34 @@ export const EvaluatorLogin: React.FC<EvaluatorLoginProps> = ({ onSuccess, redir
 
   return (
     <div className="max-w-md mx-auto px-4 py-12 space-y-6">
-      <Card padding="lg" className="border-t-4 border-t-brass shadow-paper-lg space-y-6">
+      <Card padding="lg" className="border-t-4 border-t-brand-primary shadow-sm space-y-6">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto text-brass">
-            <Lock className="w-6 h-6 text-amber-700" />
+          <div className="w-12 h-12 rounded-full bg-surface-alt border border-border flex items-center justify-center mx-auto text-brand-primary">
+            <Lock className="w-6 h-6 text-brand-primary" />
           </div>
-          <h2 className="text-lg font-bold text-ink font-serif tracking-tight">
+          <h2 className="text-lg font-bold text-text-primary font-serif tracking-tight">
             BIS Evaluator Console Authentication
           </h2>
-          <p className="text-xs text-stone-600 leading-relaxed">
+          <p className="text-xs text-text-secondary leading-relaxed">
             Restricted access portal for Bureau of Indian Standards regulatory evaluators, technical auditors, and benchmark inspectors.
           </p>
         </div>
 
         {/* Server-Side Security Callout */}
-        <div className="p-3 bg-stone-50 border border-stone-200 rounded text-[11px] text-stone-700 space-y-1 font-mono">
-          <div className="flex items-center gap-1.5 font-semibold text-stone-900">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+        <div className="p-3 bg-surface-alt border border-border rounded text-[11px] text-text-primary space-y-1 font-mono">
+          <div className="flex items-center gap-1.5 font-semibold text-text-primary">
+            <ShieldCheck className="w-3.5 h-3.5 text-status-success" />
             <span>Server-Side Authenticator Active</span>
           </div>
-          <p className="text-[10.5px] text-stone-500 font-sans">
+          <p className="text-[10.5px] text-text-secondary font-sans">
             Credentials verified against bcrypt salted hashes. Sessions are guarded with 8-hour HttpOnly cookies and per-IP brute-force rate limiting.
           </p>
         </div>
 
         {/* Error Feedback */}
         {errorMessage && (
-          <div className="p-3 bg-rose-50 border border-rose-200 rounded text-xs text-rose-800 flex items-start gap-2" role="alert">
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+          <div className="p-3 bg-status-danger/10 border border-status-danger/30 rounded text-xs text-status-danger flex items-start gap-2" role="alert">
+            <AlertCircle className="w-4 h-4 text-status-danger shrink-0 mt-0.5" />
             <span className="leading-snug">{errorMessage}</span>
           </div>
         )}
@@ -122,11 +122,11 @@ export const EvaluatorLogin: React.FC<EvaluatorLoginProps> = ({ onSuccess, redir
         {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-stone-700 block">
+            <label className="text-xs font-semibold text-text-primary block">
               Evaluator Username
             </label>
             <div className="relative">
-              <User className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
+              <User className="w-4 h-4 text-text-secondary absolute left-3 top-2.5" />
               <input
                 type="text"
                 value={username}
@@ -134,17 +134,17 @@ export const EvaluatorLogin: React.FC<EvaluatorLoginProps> = ({ onSuccess, redir
                 placeholder="e.g. demo or evaluator"
                 disabled={loading}
                 autoComplete="username"
-                className="w-full pl-9 pr-3 py-2 text-xs border border-line rounded bg-paper-light text-ink focus:outline-none focus:border-brass font-mono"
+                className="w-full pl-9 pr-3 py-2 text-xs border border-border rounded bg-surface text-text-primary focus:outline-none focus:border-brand-primary font-mono"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-stone-700 block">
+            <label className="text-xs font-semibold text-text-primary block">
               Access Password
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
+              <Lock className="w-4 h-4 text-text-secondary absolute left-3 top-2.5" />
               <input
                 type="password"
                 value={password}
@@ -152,7 +152,7 @@ export const EvaluatorLogin: React.FC<EvaluatorLoginProps> = ({ onSuccess, redir
                 placeholder="••••••••"
                 disabled={loading}
                 autoComplete="current-password"
-                className="w-full pl-9 pr-3 py-2 text-xs border border-line rounded bg-paper-light text-ink focus:outline-none focus:border-brass font-mono"
+                className="w-full pl-9 pr-3 py-2 text-xs border border-border rounded bg-surface text-text-primary focus:outline-none focus:border-brand-primary font-mono"
               />
             </div>
           </div>
@@ -160,7 +160,7 @@ export const EvaluatorLogin: React.FC<EvaluatorLoginProps> = ({ onSuccess, redir
           <button
             type="submit"
             disabled={loading || Boolean(lockoutTimer)}
-            className="w-full py-2.5 bg-indigo-deep hover:bg-indigo-deep-dark disabled:opacity-50 text-white rounded text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-sm cursor-pointer"
+            className="w-full py-2.5 bg-brand-primary hover:bg-brand-primary/90 disabled:opacity-50 text-white rounded text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-sm cursor-pointer"
           >
             {loading ? (
               <span>Verifying Credentials...</span>
@@ -174,18 +174,18 @@ export const EvaluatorLogin: React.FC<EvaluatorLoginProps> = ({ onSuccess, redir
         </form>
 
         {/* Demo Fast-Access Helper & Public Telemetry Notice */}
-        <div className="pt-2 border-t border-line text-center space-y-3">
-          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-left space-y-1.5">
-            <div className="text-xs font-bold text-bis-navy flex items-center gap-1.5">
+        <div className="pt-2 border-t border-border text-center space-y-3">
+          <div className="p-3 bg-surface-alt border border-border rounded-lg text-left space-y-1.5">
+            <div className="text-xs font-bold text-brand-primary flex items-center gap-1.5">
               <span>Public Inspection Available</span>
             </div>
-            <p className="text-[11px] text-gray-600 leading-relaxed">
+            <p className="text-[11px] text-text-secondary leading-relaxed">
               Sign-in is only required for administrative re-ingestion. All 65 gold-standard evaluation cases, 100% groundedness metrics, and methodology are viewable publicly.
             </p>
             <button
               type="button"
               onClick={() => setActiveTab('analytics')}
-              className="text-xs font-bold text-bis-red hover:underline flex items-center gap-1 mt-1 cursor-pointer"
+              className="text-xs font-bold text-brand-accent hover:underline flex items-center gap-1 mt-1 cursor-pointer"
             >
               <span>View Public Evaluation Suite (No Sign-In Needed)</span>
               <ArrowRight className="w-3 h-3" />
@@ -193,13 +193,13 @@ export const EvaluatorLogin: React.FC<EvaluatorLoginProps> = ({ onSuccess, redir
           </div>
 
           <div className="space-y-1.5">
-            <p className="text-[11px] text-stone-500">
+            <p className="text-[11px] text-text-secondary">
               For technical jury &amp; evaluation inspection:
             </p>
             <button
               type="button"
               onClick={handleDemoFill}
-              className="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 rounded text-xs font-medium transition-colors cursor-pointer"
+              className="px-3 py-1.5 bg-surface-alt hover:bg-surface text-text-primary border border-border rounded text-xs font-medium transition-colors cursor-pointer"
             >
               Auto-Fill Demo Credentials (demo / demo)
             </button>

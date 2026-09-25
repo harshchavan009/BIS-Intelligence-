@@ -385,20 +385,20 @@ export const ChatWorkspace: React.FC = () => {
   return (
     <div className="flex flex-col max-w-5xl mx-auto w-full px-4 sm:px-6 py-4">
       {/* Workspace Header / Provenance Bar */}
-      <div className="bg-white border border-line rounded-t-lg px-4 py-2.5 flex items-center justify-between shadow-paper-sm">
+      <div className="bg-surface border border-border rounded-t-lg px-4 py-2.5 flex items-center justify-between shadow-xs">
         <div className="flex items-center gap-2">
-          <BookOpen className="w-4 h-4 text-brass" />
-          <span className="text-xs font-semibold text-ink">
+          <BookOpen className="w-4 h-4 text-brand-primary" />
+          <span className="text-xs font-semibold text-text-primary">
             {language === 'hi' ? 'प्रमाणित विनियामक परामर्श कार्यक्षेत्र' : 'Verified Regulatory Consultation Workspace'}
           </span>
-          <span className="text-[10px] text-gray-400">|</span>
-          <span className="text-[11px] text-gray-500 font-mono">
+          <span className="text-[10px] text-text-muted">|</span>
+          <span className="text-[11px] text-text-secondary font-mono">
             7 PDFs Indexed (325 Chunks)
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[11px] text-verified-green font-medium flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-            <ShieldCheck className="w-3 h-3 text-verified-green" />
+          <span className="text-[11px] text-status-success font-medium flex items-center gap-1 bg-surface-alt px-2 py-0.5 rounded border border-status-success/30">
+            <ShieldCheck className="w-3 h-3 text-status-success" />
             Active Source Grounding
           </span>
         </div>
@@ -406,7 +406,7 @@ export const ChatWorkspace: React.FC = () => {
 
       {/* Messages Scroll Area - DYNAMIC HEIGHT (min-height without dead void) */}
       <div 
-        className={`p-4 sm:p-6 bg-paper border-x border-line space-y-4 transition-all duration-200 ${
+        className={`p-4 sm:p-6 bg-background border-x border-border space-y-4 transition-all duration-200 ${
           isInitialEmptyState 
             ? 'min-h-[380px] flex flex-col justify-start' 
             : 'h-[calc(100vh-16rem)] overflow-y-auto'
@@ -419,7 +419,7 @@ export const ChatWorkspace: React.FC = () => {
               key={msg.id}
               className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
             >
-              <div className="flex items-center gap-2 mb-1 px-1 text-[11px] text-gray-500">
+              <div className="flex items-center gap-2 mb-1 px-1 text-[11px] text-text-muted">
                 <span className="font-semibold">{isUser ? 'You' : 'BIS Intelligent Assistant'}</span>
                 <span>•</span>
                 <span>{msg.timestamp}</span>
@@ -429,10 +429,10 @@ export const ChatWorkspace: React.FC = () => {
               </div>
 
               <div
-                className={`max-w-[88%] sm:max-w-[82%] rounded-lg p-4 shadow-paper-sm ${
+                className={`max-w-[88%] sm:max-w-[82%] rounded-lg p-4 shadow-xs ${
                   isUser
-                    ? 'bg-indigo-deep text-white rounded-tr-none'
-                    : 'bg-white text-ink border border-line rounded-tl-none'
+                    ? 'bg-brand-primary text-white rounded-tr-none'
+                    : 'bg-surface text-text-primary border border-border rounded-tl-none'
                 }`}
               >
                 {!isUser && msg.isStreaming && !msg.text ? (
@@ -454,8 +454,8 @@ export const ChatWorkspace: React.FC = () => {
 
                 {/* Sourced Citations Bar */}
                 {!isUser && msg.sources && msg.sources.length > 0 && (
-                  <div className="mt-3.5 pt-3 border-t border-line/60">
-                    <div className="text-[11px] font-semibold text-gray-600 mb-1.5 flex items-center gap-1.5">
+                  <div className="mt-3.5 pt-3 border-t border-border">
+                    <div className="text-[11px] font-semibold text-text-secondary mb-1.5 flex items-center gap-1.5">
                       <span>Source Citations (Click to inspect highlighted official PDF page):</span>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
@@ -463,12 +463,12 @@ export const ChatWorkspace: React.FC = () => {
                         <button
                           key={i}
                           onClick={() => openSource(src)}
-                          className="inline-flex items-center gap-1 text-[11px] bg-[#F7F5EF] hover:bg-brass hover:text-white border border-line px-2 py-1 rounded transition-colors text-ink text-left focus-visible:ring-2 focus-visible:ring-brass"
+                          className="inline-flex items-center gap-1 text-[11px] bg-surface-alt hover:bg-brand-accent hover:text-white border border-border px-2 py-1 rounded transition-colors text-text-primary text-left focus-visible:ring-2 focus-visible:ring-brand-accent group"
                           aria-label={`Inspect source ${i + 1}: ${src.clause_ref}`}
                         >
-                          <span className="font-mono font-bold text-brass group-hover:text-white">[{i + 1}]</span>
+                          <span className="font-mono font-bold text-brand-accent group-hover:text-white">[{i + 1}]</span>
                           <span className="truncate max-w-[200px]">{src.clause_ref}</span>
-                          <span className="text-[10px] text-gray-400 font-mono">P.{src.page_number}</span>
+                          <span className="text-[10px] text-text-secondary group-hover:text-white/80 font-mono">P.{src.page_number}</span>
                         </button>
                       ))}
                     </div>
@@ -477,16 +477,16 @@ export const ChatWorkspace: React.FC = () => {
 
                 {/* Actions & Feedback Controls for Assistant */}
                 {!isUser && !msg.isStreaming && msg.id !== 'welcome-msg' && (
-                  <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-500 pt-2 border-t border-gray-100">
+                  <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-text-secondary pt-2 border-t border-border">
                     <div className="flex items-center gap-2">
                       {/* Print / Save PDF for MSME record */}
                       <button
                         onClick={() => handlePrintAnswer(msg.text, msg.sources?.[0]?.document_title)}
-                        className="flex items-center gap-1 text-[11px] text-stone-600 hover:text-brass transition-colors px-2 py-1 rounded bg-paper-light border border-line hover:border-brass/50 focus-visible:ring-2 focus-visible:ring-brass"
+                        className="flex items-center gap-1 text-[11px] text-text-secondary hover:text-text-primary transition-colors px-2 py-1 rounded bg-surface-alt border border-border hover:border-border focus-visible:ring-2 focus-visible:ring-brand-primary"
                         title="Download as PDF / Print for physical records"
                         aria-label="Print or download answer as PDF"
                       >
-                        <Printer className="w-3.5 h-3.5 text-brass" />
+                        <Printer className="w-3.5 h-3.5 text-brand-accent" />
                         <span>{language === 'hi' ? 'प्रिंट / पीडीएफ' : 'Print / Save PDF'}</span>
                       </button>
 
@@ -497,18 +497,18 @@ export const ChatWorkspace: React.FC = () => {
                           setCopiedId(msg.id);
                           setTimeout(() => setCopiedId(null), 2000);
                         }}
-                        className="flex items-center gap-1 text-[11px] text-stone-600 hover:text-brass transition-colors px-2 py-1 rounded bg-paper-light border border-line hover:border-brass/50 focus-visible:ring-2 focus-visible:ring-brass"
+                        className="flex items-center gap-1 text-[11px] text-text-secondary hover:text-text-primary transition-colors px-2 py-1 rounded bg-surface-alt border border-border hover:border-border focus-visible:ring-2 focus-visible:ring-brand-primary"
                         title="Copy answer to clipboard"
                         aria-label="Copy answer text"
                       >
                         {copiedId === msg.id ? (
                           <>
-                            <Check className="w-3.5 h-3.5 text-emerald-600" />
-                            <span className="text-emerald-700 font-semibold">{language === 'hi' ? 'कॉपी हुआ' : 'Copied!'}</span>
+                            <Check className="w-3.5 h-3.5 text-status-success" />
+                            <span className="text-status-success font-semibold">{language === 'hi' ? 'कॉपी हुआ' : 'Copied!'}</span>
                           </>
                         ) : (
                           <>
-                            <Copy className="w-3.5 h-3.5 text-stone-500" />
+                            <Copy className="w-3.5 h-3.5 text-text-secondary" />
                             <span>{language === 'hi' ? 'कॉपी' : 'Copy'}</span>
                           </>
                         )}
@@ -516,13 +516,13 @@ export const ChatWorkspace: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] text-gray-400 hidden sm:inline">
+                      <span className="text-[10px] text-text-secondary hidden sm:inline">
                         {language === 'hi' ? 'क्या उत्तर उपयोगी था?' : 'Helpful?'}
                       </span>
                       <button
                         onClick={() => handleFeedback(msg.id, 1, '', msg.text)}
-                        className={`p-1 rounded hover:bg-gray-100 transition-colors focus-visible:ring-2 focus-visible:ring-brass ${
-                          feedbackGiven[msg.id] === 1 ? 'text-emerald-600 font-bold' : 'text-gray-400'
+                        className={`p-1 rounded hover:bg-surface-alt transition-colors focus-visible:ring-2 focus-visible:ring-brand-primary ${
+                          feedbackGiven[msg.id] === 1 ? 'text-status-success font-bold' : 'text-text-secondary'
                         }`}
                         title="Helpful"
                         aria-label="Thumbs up - response was helpful"
@@ -531,8 +531,8 @@ export const ChatWorkspace: React.FC = () => {
                       </button>
                       <button
                         onClick={() => handleFeedback(msg.id, -1, '', msg.text)}
-                        className={`p-1 rounded hover:bg-gray-100 transition-colors focus-visible:ring-2 focus-visible:ring-brass ${
-                          feedbackGiven[msg.id] === -1 ? 'text-red-600 font-bold' : 'text-gray-400'
+                        className={`p-1 rounded hover:bg-surface-alt transition-colors focus-visible:ring-2 focus-visible:ring-brand-primary ${
+                          feedbackGiven[msg.id] === -1 ? 'text-brand-accent font-bold' : 'text-text-secondary'
                         }`}
                         title="Needs improvement"
                         aria-label="Thumbs down - response needs improvement"
@@ -549,9 +549,9 @@ export const ChatWorkspace: React.FC = () => {
 
         {/* Visible Human-Escalation Path (Section 4 Requirement) */}
         {messages.length > 1 && (
-          <div className="p-3 bg-white border border-line rounded-lg flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-paper-sm">
-            <div className="flex items-center gap-2.5 text-stone-700">
-              <Building2 className="w-4 h-4 text-brass shrink-0" />
+          <div className="p-3 bg-surface border border-border rounded-lg flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-xs">
+            <div className="flex items-center gap-2.5 text-text-primary">
+              <Building2 className="w-4 h-4 text-brand-accent shrink-0" />
               <span>
                 {language === 'hi'
                   ? 'क्या आपको अपना समाधान नहीं मिला? आधिकारिक सहायता हेतु अपने निकटतम बीआईएस शाखा कार्यालय से संपर्क करें।'
@@ -560,7 +560,7 @@ export const ChatWorkspace: React.FC = () => {
             </div>
             <button
               onClick={() => setActiveTab('contact')}
-              className="px-3 py-1.5 bg-indigo-deep text-white text-[11px] font-semibold rounded hover:bg-ink transition-colors whitespace-nowrap"
+              className="px-3 py-1.5 bg-brand-accent text-white text-[11px] font-semibold rounded hover:brightness-110 transition-all whitespace-nowrap"
             >
               {language === 'hi' ? 'शाखा संपर्क देखें' : 'Contact Nearest Branch'}
             </button>
@@ -570,8 +570,8 @@ export const ChatWorkspace: React.FC = () => {
         {/* POPULATED INITIAL EMPTY STATE: Render suggested query cards inside the space */}
         {isInitialEmptyState && (
           <div className="pt-2 space-y-3">
-            <div className="flex items-center gap-2 text-xs font-semibold text-gray-700 uppercase tracking-wider font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-brass" />
+            <div className="flex items-center gap-2 text-xs font-semibold text-text-primary uppercase tracking-wider font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-brand-accent" />
               <span>{language === 'hi' ? 'सुझाए गए परामर्श प्रश्न (क्लिक करके प्रारंभ करें):' : 'Suggested Consultations (Click to start):'}</span>
             </div>
 
@@ -581,18 +581,18 @@ export const ChatWorkspace: React.FC = () => {
                   key={idx}
                   onClick={() => handleSend(p.query)}
                   disabled={isStreaming}
-                  className="bg-white hover:bg-amber-50/50 border border-line hover:border-brass/70 rounded-lg p-3.5 text-left transition-all shadow-paper-sm hover:shadow-md group flex flex-col justify-between space-y-2 focus-visible:ring-2 focus-visible:ring-brass"
+                  className="bg-surface hover:bg-surface-alt border border-border hover:border-brand-primary rounded-lg p-3.5 text-left transition-all shadow-xs hover:shadow-md group flex flex-col justify-between space-y-2 focus-visible:ring-2 focus-visible:ring-brand-primary"
                   aria-label={`Ask query: ${p.label}`}
                 >
                   <div>
-                    <div className="text-xs font-bold text-ink group-hover:text-indigo-deep font-serif leading-snug">
+                    <div className="text-xs font-bold text-text-primary group-hover:text-brand-primary font-serif leading-snug">
                       {p.label}
                     </div>
-                    <div className="text-[11px] text-gray-500 mt-1 leading-relaxed line-clamp-2">
+                    <div className="text-[11px] text-text-secondary mt-1 leading-relaxed line-clamp-2">
                       {p.desc}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between pt-2 border-t border-gray-100 text-[10px] text-brass font-medium">
+                  <div className="flex items-center justify-between pt-2 border-t border-border text-[10px] text-brand-accent font-medium">
                     <span>Ask assistant</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                   </div>
@@ -607,16 +607,16 @@ export const ChatWorkspace: React.FC = () => {
 
       {/* ACTIVE CONVERSATION SUGGESTION BAR: Only shown once user starts chatting */}
       {!isInitialEmptyState && (
-        <div className="bg-paper-dark/50 border-x border-t border-line px-4 py-2 overflow-x-auto scrollbar-none flex items-center gap-1.5">
-          <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider flex-shrink-0 flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-brass" /> Follow-ups:
+        <div className="bg-surface-alt border-x border-t border-border px-4 py-2 overflow-x-auto scrollbar-none flex items-center gap-1.5">
+          <span className="text-[10px] font-semibold text-text-secondary uppercase tracking-wider flex-shrink-0 flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-brand-accent" /> Follow-ups:
           </span>
           {currentPrompts.map((p, idx) => (
             <button
               key={idx}
               onClick={() => handleSend(p.query)}
               disabled={isStreaming}
-              className="text-[11px] whitespace-nowrap bg-white hover:bg-paper-dark text-ink-muted hover:text-ink px-2.5 py-1 rounded border border-line transition-colors shadow-sm focus-visible:ring-2 focus-visible:ring-brass"
+              className="text-[11px] whitespace-nowrap bg-surface hover:bg-surface-alt text-text-secondary hover:text-text-primary px-2.5 py-1 rounded border border-border transition-colors shadow-xs focus-visible:ring-2 focus-visible:ring-brand-primary"
               aria-label={`Suggested follow-up: ${p.label}`}
             >
               {p.label}
@@ -626,7 +626,7 @@ export const ChatWorkspace: React.FC = () => {
       )}
 
       {/* Input Composer Box */}
-      <div className="bg-white border border-line rounded-b-lg p-3 shadow-paper flex items-center gap-2">
+      <div className="bg-surface border border-border rounded-b-lg p-3 shadow-xs flex items-center gap-2">
         <textarea
           ref={inputRef}
           rows={1}
@@ -643,13 +643,13 @@ export const ChatWorkspace: React.FC = () => {
               ? 'भारतीय मानक, QCO, MSME परीक्षण सुविधा (CBTF), या उपभोक्ता प्रश्न पूछें...'
               : 'Ask regarding Indian Standards, QCOs, MSME CBTF cluster facilities, Scheme I/II/IV, or consumer rights...'
           }
-          className="flex-1 resize-none border-0 focus:ring-0 text-sm placeholder:text-gray-400 focus:outline-none px-2 py-1 max-h-24 font-sans focus-visible:ring-1 focus-visible:ring-brass rounded"
+          className="flex-1 resize-none border-0 focus:ring-0 text-sm placeholder:text-text-secondary/60 focus:outline-none px-2 py-1 max-h-24 font-sans bg-transparent text-text-primary rounded focus-visible:ring-1 focus-visible:ring-brand-primary"
           aria-label="Ask the BIS Intelligent Assistant a regulatory question"
         />
         <button
           onClick={() => handleSend()}
           disabled={!input.trim() || isStreaming}
-          className="px-4 py-2 bg-indigo-deep hover:bg-indigo-deep-dark disabled:opacity-50 text-white rounded text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm flex-shrink-0 focus-visible:ring-2 focus-visible:ring-brass"
+          className="px-4 py-2 bg-brand-accent hover:brightness-110 disabled:opacity-50 text-white rounded text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs flex-shrink-0 focus-visible:ring-2 focus-visible:ring-brand-accent"
           aria-label={isStreaming ? 'Synthesizing response' : 'Send question'}
         >
           {isStreaming ? (
@@ -662,7 +662,7 @@ export const ChatWorkspace: React.FC = () => {
       </div>
 
       {/* Disclaimer footnote */}
-      <p className="text-[10.5px] text-gray-400 text-center mt-1.5 font-light">
+      <p className="text-[10.5px] text-text-secondary text-center mt-1.5 font-light">
         Informational guidance based on official BIS regulatory documents. Not a substitute for an official determination by the Bureau of Indian Standards.
       </p>
     </div>

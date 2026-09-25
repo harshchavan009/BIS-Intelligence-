@@ -131,16 +131,16 @@ export const DocumentRegistry: React.FC = () => {
         title={language === 'hi' ? 'आधिकारिक दस्तावेज रजिस्ट्री (7 अनुक्रमित पीडीएफ • 40+ मानक)' : 'Document Registry (7 Official Indexed PDFs Covering 40+ Standards)'}
         description="Transparent catalog of the 7 foundational regulatory publications covering 40+ Indian Standards indexed into ChromaDB vector storage (325 chunk segments)."
         badge={
-          <div className="p-3 bg-emerald-50 rounded-lg border border-emerald-200 text-right flex-shrink-0">
-            <div className="text-xl font-mono font-bold text-emerald-900">325 Chunks</div>
-            <div className="text-[11px] text-verified-green font-medium">100% Vectorized & Grounded</div>
+          <div className="p-3 bg-emerald-50 dark:bg-status-success/10 rounded-lg border border-emerald-200 dark:border-status-success/30 text-right flex-shrink-0">
+            <div className="text-xl font-mono font-bold text-emerald-900 dark:text-status-success">325 Chunks</div>
+            <div className="text-[11px] text-status-success font-medium">100% Vectorized & Grounded</div>
           </div>
         }
       />
 
       {/* Filter Strip */}
       <div className="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
-        <span className="text-gray-500 font-mono text-[11px] uppercase tracking-wider flex-shrink-0">
+        <span className="text-text-secondary font-mono text-[11px] uppercase tracking-wider flex-shrink-0">
           Filter by Scheme:
         </span>
         {['All', 'Scheme-I', 'Scheme-II', 'Scheme-IV', 'CBTF', 'Mandatory QCOs'].map((s) => (
@@ -149,8 +149,8 @@ export const DocumentRegistry: React.FC = () => {
             onClick={() => setFilterScheme(s)}
             className={`px-3 py-1 rounded-md border text-xs font-medium transition-colors whitespace-nowrap ${
               filterScheme === s
-                ? 'bg-indigo-deep text-white border-indigo-deep shadow-sm'
-                : 'bg-white text-gray-600 border-line hover:text-ink'
+                ? 'bg-brand-primary text-white border-brand-primary shadow-sm'
+                : 'bg-surface text-text-secondary border-border hover:text-text-primary'
             }`}
           >
             {s}
@@ -175,42 +175,42 @@ export const DocumentRegistry: React.FC = () => {
             <tbody className="divide-y divide-border/40">
               {filteredDocs.map((doc) => (
                 <tr key={doc.id} className="odd:bg-surface-alt/40 even:bg-surface hover:bg-surface-alt/80 transition-colors">
-                  <td className="py-3.5 px-4 font-mono font-bold text-brass">
+                  <td className="py-3.5 px-4 font-mono font-bold text-brand-accent">
                     {doc.id}
                   </td>
                   <td className="py-3.5 px-4 max-w-sm">
-                    <div className="font-semibold text-ink text-sm leading-snug">
+                    <div className="font-semibold text-text-primary text-sm leading-snug">
                       {doc.title}
                     </div>
-                    <div className="text-[11px] text-gray-500 font-sans mt-0.5 line-clamp-2">
+                    <div className="text-[11px] text-text-secondary font-sans mt-0.5 line-clamp-2">
                       {doc.summary}
                     </div>
-                    <div className="text-[10px] text-gray-400 font-mono mt-1">
+                    <div className="text-[10px] text-text-secondary/70 font-mono mt-1">
                       File: {doc.filename} • Indexed: {doc.dateIndexed}
                     </div>
                   </td>
                   <td className="py-3.5 px-4">
-                    <span className="font-semibold text-indigo-deep dark:text-brand-primary block">
+                    <span className="font-semibold text-brand-primary block">
                       {doc.scheme}
                     </span>
-                    <span className="text-[10.5px] font-mono text-gray-500 dark:text-text-muted">
+                    <span className="text-[10.5px] font-mono text-text-secondary">
                       {doc.refNumber}
                     </span>
                   </td>
-                  <td className="py-3.5 px-4 text-gray-600 dark:text-text-secondary text-[11px]">
+                  <td className="py-3.5 px-4 text-text-secondary text-[11px]">
                     {doc.authority}
                   </td>
                   <td className="py-3.5 px-4 text-center font-mono">
-                    <div className="font-bold text-ink">{doc.totalPages} Pages</div>
-                    <div className="text-[10.5px] text-emerald-700 dark:text-status-success font-medium">({doc.chunkCount} chunks)</div>
+                    <div className="font-bold text-text-primary">{doc.totalPages} Pages</div>
+                    <div className="text-[10.5px] text-status-success font-medium">({doc.chunkCount} chunks)</div>
                   </td>
                   <td className="py-3.5 px-4 text-right space-y-1">
                     <button
                       onClick={() => handleInspect(doc)}
-                      className="px-2.5 py-1 bg-paper hover:bg-paper-dark dark:bg-surface-alt dark:hover:bg-border border border-line dark:border-border rounded text-[11px] font-medium text-ink flex items-center gap-1 ml-auto transition-colors"
+                      className="px-2.5 py-1 bg-surface-alt hover:bg-surface border border-border rounded text-[11px] font-medium text-text-primary flex items-center gap-1 ml-auto transition-colors"
                       title="Inspect Page 1 with visual annotations"
                     >
-                      <BookOpen className="w-3 h-3 text-brass" />
+                      <BookOpen className="w-3 h-3 text-brand-primary" />
                       <span>Inspect Page 1</span>
                     </button>
                     <button
@@ -218,7 +218,7 @@ export const DocumentRegistry: React.FC = () => {
                         setQueryPrefill(`Explain the core requirements and application rules in ${doc.title} (${doc.refNumber}).`);
                         setActiveTab('chat');
                       }}
-                      className="text-[11px] text-indigo-deep dark:text-brand-primary hover:text-brass hover:underline block ml-auto font-medium"
+                      className="text-[11px] text-brand-primary hover:text-brand-accent hover:underline block ml-auto font-medium"
                     >
                       Query in Chat →
                     </button>
@@ -231,12 +231,12 @@ export const DocumentRegistry: React.FC = () => {
       </div>
 
       {/* Required Bottom Callout (Section 2.3) */}
-      <div className="p-4 bg-[#F4EFE6] dark:bg-surface-alt border border-[#E3DAC9] dark:border-border rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink-muted dark:text-text-secondary">
+      <div className="p-4 bg-surface-alt border border-border rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-text-secondary">
         <div className="flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-verified-green flex-shrink-0" />
+          <CheckCircle2 className="w-4 h-4 text-status-success flex-shrink-0" />
           <span className="font-sans">
-            <strong>Extensible Knowledge Ingestion: </strong>
-            New official BIS guideline documents can be added to this registry without a code change — see <code className="bg-white px-1.5 py-0.5 rounded font-mono text-[11px] border border-line">CONTRIBUTING.md</code>.
+            <strong className="text-text-primary">Extensible Knowledge Ingestion: </strong>
+            New official BIS guideline documents can be added to this registry without a code change — see <code className="bg-surface px-1.5 py-0.5 rounded font-mono text-[11px] border border-border text-text-primary">CONTRIBUTING.md</code>.
           </span>
         </div>
         <button
@@ -244,7 +244,7 @@ export const DocumentRegistry: React.FC = () => {
             setQueryPrefill("How are new BIS guidelines and Quality Control Orders indexed into the vector store?");
             setActiveTab('chat');
           }}
-          className="text-indigo-deep font-semibold hover:underline flex-shrink-0"
+          className="text-brand-primary font-semibold hover:underline flex-shrink-0"
         >
           Ask Ingestion Pipeline →
         </button>

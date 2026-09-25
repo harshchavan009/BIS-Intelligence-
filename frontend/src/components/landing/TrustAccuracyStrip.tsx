@@ -8,7 +8,7 @@ export const TrustAccuracyStrip: React.FC = () => {
   return (
     <section 
       aria-label="Public Trust and Accuracy Telemetry" 
-      className="bg-gradient-to-r from-bis-navy via-bis-navy-800 to-indigo-950 text-white border-b border-white/10 py-4 px-4 sm:px-6 lg:px-8 shadow-sm"
+      className="bg-brand-primary dark:bg-surface-alt text-white border-b border-white/10 dark:border-border py-4 px-4 sm:px-6 lg:px-8 shadow-sm"
     >
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
         

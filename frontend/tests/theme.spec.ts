@@ -97,11 +97,11 @@ test.describe('Theme System & Dark/Light Toggle Suite', () => {
     await expect(html).toHaveAttribute('data-theme', 'dark');
     await expect(html).not.toHaveClass(/high-contrast/);
 
-    // In normal dark mode, background is official navy-charcoal #10161F (rgb(16, 22, 31)), NOT pure black!
+    // In normal dark mode, background is official institutional navy-charcoal #0E141C (rgb(14, 20, 28)), NOT pure black!
     const bgDarkNormal = await page.evaluate(() => {
       return window.getComputedStyle(document.body).backgroundColor;
     });
-    expect(bgDarkNormal).toBe('rgb(16, 22, 31)');
+    expect(bgDarkNormal).toBe('rgb(14, 20, 28)');
   });
 
   test('Theme-5: Font sizing controls (A-, A, A+) work properly in dark mode', async ({ page }) => {
@@ -160,12 +160,12 @@ test.describe('Theme System & Dark/Light Toggle Suite', () => {
     // Wait for CSS color transitions to settle
     await page.waitForTimeout(300);
 
-    // Check Card background is surface (#171F2C = rgb(23, 31, 44))
-    const firstCard = page.locator('[class*="bg-card-"], .card-standard').first();
+    // Check Card background is surface (#161E29 = rgb(22, 30, 41))
+    const firstCard = page.locator('[class*="bg-surface"], [class*="bg-card-"], .card-standard').first();
     if (await firstCard.count() > 0) {
       const cardBg = await firstCard.evaluate((el) => window.getComputedStyle(el).backgroundColor);
-      // Dark card surface rgb(23, 31, 44)
-      expect(cardBg).toBe('rgb(23, 31, 44)');
+      // Dark card surface rgb(22, 30, 41)
+      expect(cardBg).toBe('rgb(22, 30, 41)');
     }
 
     // Navigate to Analytics & verify evaluation table in dark mode
@@ -174,7 +174,7 @@ test.describe('Theme System & Dark/Light Toggle Suite', () => {
     await expect(tableHeader).toBeVisible();
 
     const theadBg = await tableHeader.evaluate((el) => window.getComputedStyle(el).backgroundColor);
-    // Not light beige in dark mode
-    expect(theadBg).not.toBe('rgb(242, 239, 233)');
+    // Dark surface-alt #1C2531 = rgb(28, 37, 49)
+    expect(theadBg).toBe('rgb(28, 37, 49)');
   });
 });

@@ -32,13 +32,13 @@ export const Button: React.FC<ButtonProps> = ({
 
   // Official GIGW button styling: Solid fills, sharp 2-3px radius, crisp 1px borders, zero soft shadow
   const variantClasses = {
-    primary: 'bg-gov-navy hover:bg-gov-navy-dark text-white border border-gov-navy transition-colors',
-    maroon: 'bg-gov-maroon hover:bg-gov-maroon-dark text-white border border-gov-maroon transition-colors',
-    secondary: 'bg-white hover:bg-gov-gray text-gov-navy border border-gov-border transition-colors',
-    ghost: 'bg-transparent hover:bg-slate-100 text-gov-text border border-transparent transition-colors',
-    outline: 'bg-transparent hover:bg-gov-navy/5 text-gov-navy border border-gov-navy transition-colors',
-    danger: 'bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 transition-colors',
-    verified: 'bg-emerald-700 hover:bg-emerald-800 text-white border border-emerald-700 transition-colors'
+    primary: 'bg-brand-primary hover:brightness-110 text-white border border-brand-primary transition-colors',
+    maroon: 'bg-brand-accent hover:brightness-110 text-white border border-brand-accent transition-colors',
+    secondary: 'bg-surface hover:bg-surface-alt text-text-primary border border-border transition-colors',
+    ghost: 'bg-transparent hover:bg-surface-alt text-text-primary border border-transparent transition-colors',
+    outline: 'bg-transparent hover:bg-brand-primary/10 text-brand-primary border border-brand-primary transition-colors',
+    danger: 'bg-status-danger/10 hover:bg-status-danger/20 text-status-danger border border-status-danger/30 transition-colors',
+    verified: 'bg-status-success hover:brightness-110 text-white border border-status-success transition-colors'
   }[variant];
 
   return (

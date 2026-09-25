@@ -190,25 +190,8 @@ export const HeroCarousel: React.FC = () => {
         )}
       </div>
 
-      {/* Dark Gradient Overlay for 40-60% Text Contrast (WCAG AAA) */}
-      <div className="absolute inset-0 bg-gradient-to-r from-bis-ink/90 via-bis-navy-800/80 to-bis-ink/75 z-[1] pointer-events-none" />
-      <div className="absolute inset-0 bg-black/45 z-[1] pointer-events-none" />
-
-      {/* Background Gradient Accent Canvas */}
-      <div className={`w-full min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] bg-gradient-to-r ${slide.accentBg} opacity-25 mix-blend-overlay transition-all duration-700 absolute inset-0 z-[2] pointer-events-none`} />
-
-      {/* Subtle geometric pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-15 pointer-events-none z-[3]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)`,
-          backgroundSize: '32px 32px'
-        }}
-      />
-
-      {/* Ambient Decorative Shapes */}
-      <div className="absolute right-[-10%] top-[-20%] w-[500px] h-[500px] rounded-full bg-white/5 blur-3xl pointer-events-none z-[3]" />
-      <div className="absolute left-[20%] bottom-[-30%] w-[400px] h-[400px] rounded-full bg-bis-red/10 blur-3xl pointer-events-none z-[3]" />
+      {/* High-Contrast Neutral Scrim for Text Legibility (Zero Color Bleed) */}
+      <div className="absolute inset-0 bg-black/65 z-[1] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -261,8 +244,8 @@ export const HeroCarousel: React.FC = () => {
 
             {/* Slide Visual Card / Metric Badge */}
             <div className="hidden lg:flex lg:col-span-4 justify-end">
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 w-80 space-y-4 shadow-2xl">
-                <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center text-white border border-white/20">
+              <div className="bg-[#161E29]/95 border border-white/20 rounded-xl p-6 w-80 space-y-4 shadow-xl">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white border border-white/20">
                   <IconComponent className="w-6 h-6 text-amber-300" />
                 </div>
                 <div>

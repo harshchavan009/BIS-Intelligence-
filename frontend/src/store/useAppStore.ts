@@ -268,3 +268,8 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ cookieConsentDismissed });
   }
 }));
+
+if (typeof window !== 'undefined') {
+  (window as any).__BIS_STORE__ = useAppStore;
+}
+

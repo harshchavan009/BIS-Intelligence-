@@ -21,101 +21,101 @@ export default {
     extend: {
       colors: {
         // Theme-aware semantic surface & background tokens
-        background: 'var(--background)',
+        background: 'rgb(var(--color-background) / <alpha-value>)',
         surface: {
-          DEFAULT: 'var(--surface)',
-          alt: 'var(--surface-alt)',
+          DEFAULT: 'rgb(var(--color-surface) / <alpha-value>)',
+          alt: 'rgb(var(--color-surface-alt) / <alpha-value>)',
         },
         border: {
-          DEFAULT: 'var(--border)',
-          light: 'var(--border-light)',
+          DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
+          light: 'rgb(var(--color-border-light) / <alpha-value>)',
         },
-        'text-primary': 'var(--text-primary)',
-        'text-secondary': 'var(--text-secondary)',
-        'text-muted': 'var(--text-muted)',
+        'text-primary': 'rgb(var(--color-text-primary) / <alpha-value>)',
+        'text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
+        'text-muted': 'rgb(var(--color-text-muted) / <alpha-value>)',
 
         // GIGW Government Portal Palette (Dynamic via CSS variables)
         gov: {
-          navy: 'var(--gov-navy)',
-          'navy-dark': 'var(--gov-navy-dark)',
-          'navy-light': 'var(--gov-navy-light)',
-          maroon: 'var(--gov-maroon)',
-          'maroon-dark': 'var(--gov-maroon-dark)',
-          gray: 'var(--gov-gray)',
-          border: 'var(--gov-border)',
-          'border-light': 'var(--gov-border-light)',
-          text: 'var(--gov-text)',
-          muted: 'var(--gov-text-muted)'
+          navy: 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          'navy-dark': 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          'navy-light': 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          maroon: 'rgb(var(--color-brand-accent) / <alpha-value>)',
+          'maroon-dark': 'rgb(var(--color-brand-accent) / <alpha-value>)',
+          gray: 'rgb(var(--color-surface-alt) / <alpha-value>)',
+          border: 'rgb(var(--color-border) / <alpha-value>)',
+          'border-light': 'rgb(var(--color-border-light) / <alpha-value>)',
+          text: 'rgb(var(--color-text-primary) / <alpha-value>)',
+          muted: 'rgb(var(--color-text-secondary) / <alpha-value>)'
         },
         // Semantic Brand System
         brand: {
-          primary: 'var(--brand-primary)',
-          accent: 'var(--brand-accent)',
-          navy: 'var(--gov-navy)',
-          'navy-dark': 'var(--gov-navy-dark)',
-          blue: 'var(--brand-blue)',
-          'blue-hover': 'var(--brand-blue-hover)',
-          'blue-light': 'var(--brand-blue-light)',
-          red: 'var(--brand-red)',
-          'red-hover': 'var(--brand-red-hover)',
-          ink: 'var(--brand-ink)'
+          primary: 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          accent: 'rgb(var(--color-brand-accent) / <alpha-value>)',
+          navy: 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          'navy-dark': 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          blue: 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          'blue-hover': 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          'blue-light': 'rgb(var(--color-surface-alt) / <alpha-value>)',
+          red: 'rgb(var(--color-brand-accent) / <alpha-value>)',
+          'red-hover': 'rgb(var(--color-brand-accent) / <alpha-value>)',
+          ink: 'rgb(var(--color-text-primary) / <alpha-value>)'
         },
         // Functional Status Colors (Strict semantic meaning)
         status: {
-          success: 'var(--status-success)',
-          warning: 'var(--status-warning)',
-          danger: 'var(--status-danger)'
+          success: 'rgb(var(--color-status-success) / <alpha-value>)',
+          warning: 'rgb(var(--color-status-warning) / <alpha-value>)',
+          danger: 'rgb(var(--color-status-danger) / <alpha-value>)'
         },
         verified: {
-          DEFAULT: 'var(--status-success)',
+          DEFAULT: 'rgb(var(--color-status-success) / <alpha-value>)',
           light: 'var(--verified-light)',
           border: 'var(--verified-border)',
           dark: '#14532D'
         },
         warning: {
-          DEFAULT: 'var(--status-warning)',
+          DEFAULT: 'rgb(var(--color-status-warning) / <alpha-value>)',
           light: 'var(--warning-light)',
           border: 'var(--warning-border)',
           dark: '#78350F'
         },
         // Backward-compatible core tokens (mapped dynamically to active theme)
         ink: {
-          DEFAULT: 'var(--ink)',
-          light: 'var(--text-secondary)',
-          muted: 'var(--text-muted)'
+          DEFAULT: 'rgb(var(--color-text-primary) / <alpha-value>)',
+          light: 'rgb(var(--color-text-secondary) / <alpha-value>)',
+          muted: 'rgb(var(--color-text-muted) / <alpha-value>)'
         },
         'indigo-deep': {
-          DEFAULT: 'var(--gov-navy)',
-          dark: 'var(--gov-navy-dark)',
-          light: 'var(--gov-navy-light)'
+          DEFAULT: 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          dark: 'rgb(var(--color-brand-primary) / <alpha-value>)',
+          light: 'rgb(var(--color-brand-primary) / <alpha-value>)'
         },
         brass: {
-          DEFAULT: 'var(--gov-maroon)',
-          dark: 'var(--gov-maroon-dark)',
-          light: 'var(--gov-maroon)'
+          DEFAULT: 'rgb(var(--color-brand-accent) / <alpha-value>)',
+          dark: 'rgb(var(--color-brand-accent) / <alpha-value>)',
+          light: 'rgb(var(--color-brand-accent) / <alpha-value>)'
         },
         paper: {
-          DEFAULT: 'var(--paper)',
-          card: 'var(--paper-card)',
-          dark: 'var(--border-light)'
+          DEFAULT: 'rgb(var(--color-background) / <alpha-value>)',
+          card: 'rgb(var(--color-surface) / <alpha-value>)',
+          dark: 'rgb(var(--color-surface-alt) / <alpha-value>)'
         },
         line: {
-          DEFAULT: 'var(--line)',
-          dark: 'var(--border)'
+          DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
+          dark: 'rgb(var(--color-border) / <alpha-value>)'
         },
         'verified-green': {
-          DEFAULT: 'var(--verified-green)',
+          DEFAULT: 'rgb(var(--color-status-success) / <alpha-value>)',
           light: 'var(--verified-light)',
           border: 'var(--verified-border)'
         },
-        'bis-navy': 'var(--bis-navy)',
-        'bis-navy-800': 'var(--gov-navy-dark)',
-        'bis-red': 'var(--bis-red)',
-        'bis-ink': 'var(--bis-ink)',
-        'card-pink': 'var(--surface)',
-        'card-peach': 'var(--surface)',
-        'card-lavender': 'var(--surface)',
-        'card-mint': 'var(--surface)'
+        'bis-navy': 'rgb(var(--color-brand-primary) / <alpha-value>)',
+        'bis-navy-800': 'rgb(var(--color-brand-primary) / <alpha-value>)',
+        'bis-red': 'rgb(var(--color-brand-accent) / <alpha-value>)',
+        'bis-ink': 'rgb(var(--color-text-primary) / <alpha-value>)',
+        'card-pink': 'rgb(var(--color-surface) / <alpha-value>)',
+        'card-peach': 'rgb(var(--color-surface) / <alpha-value>)',
+        'card-lavender': 'rgb(var(--color-surface) / <alpha-value>)',
+        'card-mint': 'rgb(var(--color-surface) / <alpha-value>)'
       },
       fontSize: {
         // Sober, Authoritative Institutional Typographic Hierarchy

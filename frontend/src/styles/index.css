@@ -9,50 +9,65 @@
 :root, [data-theme="light"] {
   --base-font-size: 16px;
 
-  /* Official Light Theme (GIGW Portal Standards) */
-  --background: #F4F6F9;        /* Clean neutral gray for section banding */
-  --surface: #FFFFFF;           /* Card & panel background */
-  --surface-alt: #F2EFE9;       /* Secondary panel bg / table headers */
-  --border: #D1D5DB;           /* Hairline 1px border */
-  --border-light: #E5E7EB;
-  --text-primary: #111827;      /* Near-black high-contrast text */
-  --text-secondary: #4B5563;    /* Muted secondary text */
-  --text-muted: #6B7280;        /* Metadata & caption text */
+  /* Official Light Theme (Institutional Restrained Standards) */
+  --background: #FFFFFF;        /* Crisp background */
+  --surface: #FFFFFF;           /* Card & panel background (1px border, no tint) */
+  --surface-alt: #F2F4F7;       /* Secondary panel bg / table headers */
+  --border: #D8DEE5;           /* Hairline 1px border */
+  --border-light: #E9ECEF;
+  --text-primary: #1A1F26;      /* Near-black high-contrast text */
+  --text-secondary: #5B6470;    /* Restrained secondary text */
+  --text-muted: #7D8794;        /* Metadata & caption text */
 
   /* Brand Colors (Official institutional palette) */
-  --brand-primary: #1A3C6E;     /* Deep official navy */
-  --brand-accent: #8B1D1D;      /* Institutional maroon */
-  --brand-blue: #1A3C6E;
-  --brand-blue-hover: #11294D;
-  --brand-blue-light: #EEF3F9;
-  --brand-red: #8B1D1D;
-  --brand-red-hover: #6D1414;
-  --brand-ink: #111827;
+  --brand-primary: #0B3C6F;     /* Deep official navy */
+  --brand-accent: #A61E22;      /* Institutional solid maroon-red */
+  --brand-blue: #0B3C6F;
+  --brand-blue-hover: #082D54;
+  --brand-blue-light: #F2F4F7;
+  --brand-red: #A61E22;
+  --brand-red-hover: #8B1A1D;
+  --brand-ink: #1A1F26;
+
+  /* RGB channels for Tailwind <alpha-value> support */
+  --color-background: 255 255 255;
+  --color-surface: 255 255 255;
+  --color-surface-alt: 242 244 247;
+  --color-border: 216 222 229;
+  --color-border-light: 233 236 239;
+  --color-text-primary: 26 31 38;
+  --color-text-secondary: 91 100 112;
+  --color-text-muted: 125 135 148;
+  --color-brand-primary: 11 60 111;
+  --color-brand-accent: 166 30 34;
 
   /* Government Specific Variables */
-  --gov-navy: #1A3C6E;
-  --gov-navy-dark: #11294D;
-  --gov-navy-light: #244E8C;
-  --gov-maroon: #8B1D1D;
-  --gov-maroon-dark: #6D1414;
-  --gov-gray: #F4F6F9;
-  --gov-border: #D1D5DB;
-  --gov-border-light: #E5E7EB;
-  --gov-text: #111827;
-  --gov-text-muted: #4B5563;
+  --gov-navy: #0B3C6F;
+  --gov-navy-dark: #082D54;
+  --gov-navy-light: #164E87;
+  --gov-maroon: #A61E22;
+  --gov-maroon-dark: #8B1A1D;
+  --gov-gray: #F2F4F7;
+  --gov-border: #D8DEE5;
+  --gov-border-light: #E9ECEF;
+  --gov-text: #1A1F26;
+  --gov-text-muted: #5B6470;
 
   /* Functional Status Colors (Strict semantic meaning) */
-  --status-success: #166534;
-  --status-warning: #92400E;
-  --status-danger: #991B1B;
+  --status-success: #1E7145;
+  --status-warning: #B8860B;
+  --status-danger: #A61E22;
+  --color-status-success: 30 113 69;
+  --color-status-warning: 184 134 11;
+  --color-status-danger: 166 30 34;
   --verified-light: #F0FDF4;
   --verified-border: #BBF7D0;
-  --warning-light: #FEF3C7;
-  --warning-border: #FDE68A;
+  --warning-light: #FEF9C3;
+  --warning-border: #FDE047;
 
   /* Hyperlinks */
-  --link: #1A3C6E;
-  --link-hover: #11294D;
+  --link: #0B3C6F;
+  --link-hover: #082D54;
 
   /* Backward-compatible variables linked to tokens */
   --paper: var(--background);
@@ -72,50 +87,65 @@
 [data-theme="dark"] {
   --base-font-size: 16px;
 
-  /* Official Dark Theme (Night Government Portal Standards) */
-  --background: #10161F;        /* Deep desaturated navy-charcoal, not pure black */
-  --surface: #171F2C;           /* Slightly lighter navy-gray for cards/panels */
-  --surface-alt: #1E2838;       /* Secondary panel bg / table header shading */
-  --border: #2A3444;           /* Visible 1px lighter border for crisp separation */
-  --border-light: #222C3D;
-  --text-primary: #E8EAED;      /* Off-white, reduces harsh glare */
-  --text-secondary: #A0A8B4;    /* Mid gray, WCAG AA 6.2:1 contrast */
-  --text-muted: #6B7480;        /* Muted metadata */
+  /* Official Dark Theme (Institutional Navy-Charcoal Standards) */
+  --background: #0E141C;        /* Deep navy-charcoal, not pure black, not saturated blue */
+  --surface: #161E29;           /* Slightly lighter navy-gray for cards/panels */
+  --surface-alt: #1C2531;       /* Secondary panel bg / table header shading */
+  --border: #2B3542;           /* Visible 1px lighter border for crisp separation */
+  --border-light: #232C37;
+  --text-primary: #E7EAEE;      /* Off-white, not pure white */
+  --text-secondary: #9AA4B1;    /* Mid gray, WCAG AA contrast */
+  --text-muted: #717C8A;        /* Muted metadata */
 
   /* Brand Colors (Lightened for dark surface legibility > 4.5:1) */
-  --brand-primary: #6FA8DC;     /* Legible institutional blue on dark */
-  --brand-accent: #D95F5F;      /* Legible maroon-red for alerts/CTAs */
-  --brand-blue: #6FA8DC;
+  --brand-primary: #6F9BC7;     /* Muted and desaturated steel-blue on dark */
+  --brand-accent: #C24A4E;      /* Legible maroon-red for alerts/CTAs */
+  --brand-blue: #6F9BC7;
   --brand-blue-hover: #8BBBEB;
-  --brand-blue-light: #1A273B;
-  --brand-red: #D95F5F;
-  --brand-red-hover: #E57373;
-  --brand-ink: #E8EAED;
+  --brand-blue-light: #161E29;
+  --brand-red: #C24A4E;
+  --brand-red-hover: #D46064;
+  --brand-ink: #E7EAEE;
+
+  /* RGB channels for Tailwind <alpha-value> support */
+  --color-background: 14 20 28;
+  --color-surface: 22 30 41;
+  --color-surface-alt: 28 37 49;
+  --color-border: 43 53 66;
+  --color-border-light: 35 44 55;
+  --color-text-primary: 231 234 238;
+  --color-text-secondary: 154 164 177;
+  --color-text-muted: 113 124 138;
+  --color-brand-primary: 111 155 199;
+  --color-brand-accent: 194 74 78;
 
   /* Government Specific Variables (Dark) */
-  --gov-navy: #6FA8DC;
-  --gov-navy-dark: #8BBBEB;
-  --gov-navy-light: #A5CDFA;
-  --gov-maroon: #D95F5F;
-  --gov-maroon-dark: #E57373;
-  --gov-gray: #1E2838;
-  --gov-border: #2A3444;
-  --gov-border-light: #222C3D;
-  --gov-text: #E8EAED;
-  --gov-text-muted: #A0A8B4;
+  --gov-navy: #6F9BC7;
+  --gov-navy-dark: #5884B0;
+  --gov-navy-light: #8BBBEB;
+  --gov-maroon: #C24A4E;
+  --gov-maroon-dark: #AC3A3E;
+  --gov-gray: #1C2531;
+  --gov-border: #2B3542;
+  --gov-border-light: #232C37;
+  --gov-text: #E7EAEE;
+  --gov-text-muted: #9AA4B1;
 
-  /* Functional Status Colors (Desaturated, WCAG AA compliant on #171F2C) */
-  --status-success: #4ADE80;    /* 9.6:1 contrast */
-  --status-warning: #FBBF24;    /* 10.8:1 contrast */
-  --status-danger: #F87171;     /* 5.5:1 contrast */
-  --verified-light: rgba(74, 222, 128, 0.12);
-  --verified-border: rgba(74, 222, 128, 0.35);
-  --warning-light: rgba(251, 191, 36, 0.12);
-  --warning-border: rgba(251, 191, 36, 0.35);
+  /* Functional Status Colors (Desaturated, WCAG AA compliant on #161E29) */
+  --status-success: #3FA873;    /* Grounding %, PASSED badges */
+  --status-warning: #D1A233;    /* Notices/alerts */
+  --status-danger: #C24A4E;     /* Errors */
+  --color-status-success: 63 168 115;
+  --color-status-warning: 209 162 51;
+  --color-status-danger: 194 74 78;
+  --verified-light: rgba(63, 168, 115, 0.12);
+  --verified-border: rgba(63, 168, 115, 0.35);
+  --warning-light: rgba(209, 162, 51, 0.12);
+  --warning-border: rgba(209, 162, 51, 0.35);
 
   /* Hyperlinks */
-  --link: #6FA8DC;
-  --link-hover: #93C5FD;
+  --link: #6F9BC7;
+  --link-hover: #8BBBEB;
 
   /* Backward-compatible variables linked to tokens */
   --paper: var(--background);
@@ -215,12 +245,6 @@ body {
 [data-theme="dark"] .text-gray-500,
 [data-theme="dark"] .text-stone-500 {
   color: var(--text-muted) !important;
-}
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
-[data-theme="dark"] .font-serif-standard {
-  color: var(--brand-primary) !important;
 }
 
 /* Authentic GIGW 3.0 & WCAG 2.1 AA Skip to main content link */
@@ -337,10 +361,12 @@ html.high-contrast :focus-visible {
 }
 
 /* Official Headings: Formal Serif */
-h1, h2, h3, .font-serif-standard {
-  font-family: 'Source Serif 4', Merriweather, Georgia, serif;
-  color: var(--brand-primary);
-  letter-spacing: -0.015em;
+@layer base {
+  h1, h2, h3, .font-serif-standard {
+    font-family: 'Source Serif 4', Merriweather, Georgia, serif;
+    color: var(--brand-primary);
+    letter-spacing: -0.015em;
+  }
 }
 
 /* Hairline borders */
