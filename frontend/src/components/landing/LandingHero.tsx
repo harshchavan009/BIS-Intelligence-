@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { HeroCarousel } from './HeroCarousel';
 import { AlertTicker } from './AlertTicker';
+import { TrustAccuracyStrip } from './TrustAccuracyStrip';
 import { QuickAccessGrid } from './QuickAccessGrid';
 import { MediaGallery } from './MediaGallery';
 import { BisIntelligenceLogo } from '../common/BisIntelligenceLogo';
@@ -116,6 +117,9 @@ export const LandingHero: React.FC = () => {
       {/* SECTION 4: Alert / Ticker Strip */}
       <AlertTicker />
 
+      {/* SECTION 3 (PUBLIC TRUST): Trust & Accuracy Telemetry Strip */}
+      <TrustAccuracyStrip />
+
       {/* Direct Search Bar Strip */}
       <div className="bg-paper-dark border-b border-gray-200 py-6 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
@@ -159,6 +163,9 @@ export const LandingHero: React.FC = () => {
 
       {/* SECTION 5: Quick-Access Card Grid (Pastel Tokens) */}
       <QuickAccessGrid />
+
+      {/* SECTION 2 / SECTION 6: Media & Resources Gallery (Placed directly after Quick-Access Cards) */}
+      <MediaGallery />
 
       {/* Interactive Live Query Simulation Demonstration */}
       <section className="bg-paper py-10 px-4 sm:px-6 lg:px-8 border-y border-gray-200">
@@ -254,9 +261,6 @@ export const LandingHero: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* SECTION 6: Media & Resources Gallery */}
-      <MediaGallery />
     </div>
   );
 };

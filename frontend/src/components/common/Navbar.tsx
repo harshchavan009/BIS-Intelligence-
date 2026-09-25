@@ -155,9 +155,14 @@ export const Navbar: React.FC = () => {
                 </span>
               </div>
               <span className="text-[11px] font-medium leading-tight text-gray-600">
-                {language === 'hi' 
-                  ? 'भारतीय मानक ब्यूरो (BIS) नियामक मार्गदर्शन हेतु स्वतंत्र एआई सहायक' 
-                  : 'Independent AI Assistant · Bureau of Indian Standards (BUREAU OF INDIAN STANDARDS)'}
+                {language === 'hi' ? (
+                  <>भारतीय मानक ब्यूरो (BIS) नियामक मार्गदर्शन हेतु स्वतंत्र एआई सहायक</>
+                ) : (
+                  <>
+                    Independent AI Assistant for Indian Standards (BIS) Information
+                    <span className="sr-only"> (BUREAU OF INDIAN STANDARDS)</span>
+                  </>
+                )}
               </span>
             </div>
           </div>

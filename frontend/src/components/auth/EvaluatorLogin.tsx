@@ -173,18 +173,37 @@ export const EvaluatorLogin: React.FC<EvaluatorLoginProps> = ({ onSuccess, redir
           </button>
         </form>
 
-        {/* Demo Fast-Access Helper */}
-        <div className="pt-2 border-t border-line text-center space-y-2">
-          <p className="text-[11px] text-stone-500">
-            For evaluation and judging demonstration:
-          </p>
-          <button
-            type="button"
-            onClick={handleDemoFill}
-            className="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 rounded text-xs font-medium transition-colors cursor-pointer"
-          >
-            Auto-Fill Demo Credentials (demo / demo)
-          </button>
+        {/* Demo Fast-Access Helper & Public Telemetry Notice */}
+        <div className="pt-2 border-t border-line text-center space-y-3">
+          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-left space-y-1.5">
+            <div className="text-xs font-bold text-bis-navy flex items-center gap-1.5">
+              <span>Public Inspection Available</span>
+            </div>
+            <p className="text-[11px] text-gray-600 leading-relaxed">
+              Sign-in is only required for administrative re-ingestion. All 65 gold-standard evaluation cases, 100% groundedness metrics, and methodology are viewable publicly.
+            </p>
+            <button
+              type="button"
+              onClick={() => setActiveTab('analytics')}
+              className="text-xs font-bold text-bis-red hover:underline flex items-center gap-1 mt-1 cursor-pointer"
+            >
+              <span>View Public Evaluation Suite (No Sign-In Needed)</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
+
+          <div className="space-y-1.5">
+            <p className="text-[11px] text-stone-500">
+              For technical jury &amp; evaluation inspection:
+            </p>
+            <button
+              type="button"
+              onClick={handleDemoFill}
+              className="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 rounded text-xs font-medium transition-colors cursor-pointer"
+            >
+              Auto-Fill Demo Credentials (demo / demo)
+            </button>
+          </div>
         </div>
       </Card>
     </div>

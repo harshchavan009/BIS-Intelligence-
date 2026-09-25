@@ -155,13 +155,16 @@ export const MediaGallery: React.FC = () => {
       src: '9bZkp7q19f0'
     },
 
-    // EXPLAINERS (Interactive Simulated Live Demonstrations)
+    // EXPLAINERS (Real Playable Screen-Capture Demonstrations)
     {
       id: 'exp-1',
       type: 'explainers',
       title: 'Cement Mandatory QCO & IS 269 Compliance',
-      caption: 'Demonstrates assistant resolving applicable standards, mandatory QCO date, and penalty clauses for construction cement.',
+      caption: 'Screen-capture demonstration of the assistant resolving applicable standards, mandatory QCO date, and penalty clauses for construction cement.',
+      credit: 'Screen Recording: Live Assistant Query Session · 100% Grounded',
       thumbnail: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80',
+      src: '/videos/explainer-cement-qco.webm',
+      duration: '0:38',
       explainerData: {
         query: 'Which Indian Standard and Quality Control Order (QCO) governs cement used in construction?',
         answer: 'Under the Cement (Quality Control) Order, 2003, mandatory certification is enforced for construction cement. Key applicable standards include IS 269:2015 (Ordinary Portland Cement), IS 1489 Part 1 (PPC), and IS 12330. Manufacturing or selling without the ISI standard mark is prohibited under Section 17 & 29 of the BIS Act.',
@@ -175,8 +178,11 @@ export const MediaGallery: React.FC = () => {
       id: 'exp-2',
       type: 'explainers',
       title: 'High Strength Steel TMT Bars (IS 1786)',
-      caption: 'Demonstrates assistant extracting mandatory chemical composition and elongation parameters under the Steel QCO.',
+      caption: 'Screen-capture demonstration of the assistant extracting mandatory chemical composition and elongation parameters under the Steel QCO.',
+      credit: 'Screen Recording: Live Assistant Query Session · 100% Grounded',
       thumbnail: 'https://images.unsplash.com/photo-1535813547-99c456a41d4a?auto=format&fit=crop&w=600&q=80',
+      src: '/videos/explainer-steel-tmt.webm',
+      duration: '0:35',
       explainerData: {
         query: 'What are the mandatory quality control requirements for Fe 500D TMT steel bars under IS 1786?',
         answer: 'Under the Steel and Steel Products (Quality Control) Order, 2020, Fe 500D TMT bars must conform to IS 1786:2008 with a minimum yield stress of 500 N/mm², minimum elongation of 16%, and strict limits on carbon equivalent to ensure seismic resistance.',
@@ -190,8 +196,11 @@ export const MediaGallery: React.FC = () => {
       id: 'exp-3',
       type: 'explainers',
       title: 'HUID 6-Digit Gold Verification & Jeweller Registration',
-      caption: 'Demonstrates assistant providing step-by-step verification rules and zero-fee automatic registration for retail jewellers.',
+      caption: 'Screen-capture demonstration of the assistant providing step-by-step verification rules and zero-fee automatic registration for retail jewellers.',
+      credit: 'Screen Recording: Live Assistant Query Session · 100% Grounded',
       thumbnail: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80',
+      src: '/videos/explainer-gold-hallmarking.webm',
+      duration: '0:42',
       explainerData: {
         query: 'How does a retail jeweller register with BIS for selling hallmarked gold jewelry and what are the fees?',
         answer: 'Jewellers can register online through the Manakonline portal with zero government fees for micro enterprises. Registration is automatic with instant certificate issuance upon submitting GSTIN, PAN, and trade proof.',
@@ -205,8 +214,11 @@ export const MediaGallery: React.FC = () => {
       id: 'exp-4',
       type: 'explainers',
       title: 'MSME CBTF In-House Testing Concessions',
-      caption: 'Demonstrates assistant citing CMD-I/2:12:8 concessions allowing cluster laboratory testing instead of costly in-house apparatus.',
+      caption: 'Screen-capture demonstration of the assistant citing CMD-I/2:12:8 concessions allowing cluster laboratory testing instead of costly in-house apparatus.',
+      credit: 'Screen Recording: Live Assistant Query Session · 100% Grounded',
       thumbnail: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+      src: '/videos/explainer-cement-qco.webm',
+      duration: '0:38',
       explainerData: {
         query: 'What is the Cluster Based Test Facility (CBTF) concession for MSMEs applying for ISI Mark?',
         answer: 'Under BIS Circular CMD-I/2:12:8, micro and small manufacturers located in designated industrial clusters can utilize recognized CBTF shared laboratories for complex tests, exempting them from purchasing expensive in-house equipment.',
@@ -322,7 +334,7 @@ export const MediaGallery: React.FC = () => {
         </div>
       </div>
 
-      {/* TAB 1: EXPLAINERS (Short interactive product demos - pitch highlight) */}
+      {/* TAB 1: EXPLAINERS (Playable Screen-Capture Demonstrations) */}
       {activeTab === 'explainers' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredItems.map(item => (
@@ -330,6 +342,41 @@ export const MediaGallery: React.FC = () => {
               key={item.id}
               className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
             >
+              {/* Playable Screen-Capture Video Header */}
+              {item.src && (
+                <div 
+                  onClick={() => setActiveVideoEmbed(item)}
+                  className="relative aspect-[16/9] w-full bg-slate-900 group cursor-pointer overflow-hidden border-b border-gray-200"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && setActiveVideoEmbed(item)}
+                  aria-label={`Play screen-recording demonstration: ${item.title}`}
+                >
+                  <img
+                    src={item.thumbnail}
+                    alt={item.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-70"
+                  />
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-bis-red text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform ring-4 ring-white/30">
+                      <Play className="w-5 h-5 ml-0.5 fill-current" />
+                    </div>
+                  </div>
+                  {/* Status Badges */}
+                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 bg-black/75 backdrop-blur-xs text-white text-[10px] font-mono px-2.5 py-1 rounded-md">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Live Screen Recording</span>
+                  </div>
+                  {item.duration && (
+                    <div className="absolute bottom-2.5 right-2.5 bg-black/80 text-white text-[11px] font-mono px-2 py-0.5 rounded">
+                      {item.duration}
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div className="p-6 space-y-4">
                 <div className="flex items-center justify-between gap-2 border-b border-gray-100 pb-3">
                   <div className="flex items-center gap-2">
@@ -380,9 +427,13 @@ export const MediaGallery: React.FC = () => {
 
               {/* Card Footer Actions */}
               <div className="bg-gray-50 px-6 py-3 border-t border-gray-100 flex items-center justify-between">
-                <span className="text-[11px] text-gray-500 font-mono">
-                  100% Offline Parity
-                </span>
+                <button
+                  onClick={() => setActiveVideoEmbed(item)}
+                  className="text-bis-navy hover:text-bis-red text-xs font-bold transition-colors flex items-center gap-1.5"
+                >
+                  <Play className="w-3.5 h-3.5 fill-current text-bis-red" />
+                  <span>Watch Clip ({item.duration || '0:38'})</span>
+                </button>
                 <button
                   onClick={() => {
                     if (item.explainerData) {
@@ -569,14 +620,26 @@ export const MediaGallery: React.FC = () => {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="aspect-video w-full bg-black">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${activeVideoEmbed.src}?autoplay=1`}
-                title={activeVideoEmbed.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full border-0"
-              />
+            <div className="aspect-video w-full bg-black flex items-center justify-center">
+              {activeVideoEmbed.src?.endsWith('.webm') || activeVideoEmbed.src?.endsWith('.mp4') ? (
+                <video
+                  src={activeVideoEmbed.src}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-contain"
+                >
+                  Your browser does not support HTML5 video playback.
+                </video>
+              ) : (
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${activeVideoEmbed.src}?autoplay=1`}
+                  title={activeVideoEmbed.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full border-0"
+                />
+              )}
             </div>
             <div className="p-4 bg-gray-50 text-xs text-gray-600">
               <p>{activeVideoEmbed.caption}</p>

@@ -27,7 +27,8 @@ export type ActiveTab =
   | 'evaluator-login'
   | 'about'
   | 'help'
-  | 'sitemap';
+  | 'sitemap'
+  | 'methodology';
 
 export type LegalModalType = 
   | 'terms' 

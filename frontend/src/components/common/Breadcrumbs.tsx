@@ -9,18 +9,14 @@ export const Breadcrumbs: React.FC = () => {
 
   if (activeTab === 'landing') {
     return (
-      <div className="bg-paper-light border-b border-line px-4 sm:px-8 py-2 text-xs text-stone-600">
-        <div className="max-w-7xl mx-auto flex items-center gap-1.5 font-medium">
-          <span className="flex items-center gap-1 text-ink font-semibold">
+      <nav aria-label="Breadcrumb" className="bg-paper-light border-b border-line px-4 sm:px-8 py-2 text-xs">
+        <div className="max-w-7xl mx-auto flex items-center gap-1.5 font-medium text-stone-600">
+          <span className="flex items-center gap-1 text-ink font-semibold" aria-current="page">
             <Home className="w-3.5 h-3.5 text-brass" />
             <span>{t('breadcrumbs.home')}</span>
           </span>
-          <span className="text-stone-400">/</span>
-          <span className="text-stone-500 font-normal">
-            {t('nav.bis_title')}
-          </span>
         </div>
-      </div>
+      </nav>
     );
   }
 

@@ -106,11 +106,15 @@ export const AlertTicker: React.FC = () => {
   };
 
   return (
-    <div className="bg-bis-ink text-white border-b border-gray-800 text-xs font-sans">
+    <div 
+      role="region"
+      aria-label="Regulatory Updates Ticker"
+      className="bg-bis-ink text-white border-b border-gray-800 text-xs font-sans"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         
         {/* Left: Tab Pills */}
-        <div className="flex items-center gap-1.5 shrink-0 overflow-x-auto max-w-full pb-1 md:pb-0 scrollbar-none">
+        <div className="flex items-center gap-1.5 shrink-0 overflow-x-auto max-w-full pb-1 md:pb-0 scrollbar-none relative z-10 bg-bis-ink pr-3 md:pr-4 md:border-r border-gray-700/60">
           <div className="flex items-center gap-1 mr-1 text-bis-red">
             <Bell className="w-3.5 h-3.5 text-amber-400" />
             <span className="font-bold text-[11px] uppercase tracking-wider hidden sm:inline text-amber-300">
@@ -120,7 +124,7 @@ export const AlertTicker: React.FC = () => {
 
           <button
             onClick={() => setActiveTabState('whats_new')}
-            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors ${
+            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors shrink-0 ${
               activeTab === 'whats_new'
                 ? 'bg-bis-red text-white'
                 : 'bg-white/10 text-gray-300 hover:text-white hover:bg-white/15'
@@ -131,7 +135,7 @@ export const AlertTicker: React.FC = () => {
 
           <button
             onClick={() => setActiveTabState('popular')}
-            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors ${
+            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors shrink-0 ${
               activeTab === 'popular'
                 ? 'bg-bis-red text-white'
                 : 'bg-white/10 text-gray-300 hover:text-white hover:bg-white/15'
@@ -142,7 +146,7 @@ export const AlertTicker: React.FC = () => {
 
           <button
             onClick={() => setActiveTabState('updates')}
-            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors ${
+            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors shrink-0 ${
               activeTab === 'updates'
                 ? 'bg-bis-red text-white'
                 : 'bg-white/10 text-gray-300 hover:text-white hover:bg-white/15'
@@ -153,7 +157,7 @@ export const AlertTicker: React.FC = () => {
 
           <button
             onClick={() => setActiveTabState('events')}
-            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors ${
+            className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-colors shrink-0 ${
               activeTab === 'events'
                 ? 'bg-bis-red text-white'
                 : 'bg-white/10 text-gray-300 hover:text-white hover:bg-white/15'
@@ -164,14 +168,17 @@ export const AlertTicker: React.FC = () => {
         </div>
 
         {/* Center: Single-Line Auto-Scrolling Marquee with Pause on Hover */}
-        <div className="flex-1 overflow-hidden relative group w-full md:mx-4 py-0.5 ticker-track">
-          <div className="flex items-center gap-8 whitespace-nowrap animate-[marquee_25s_linear_infinite] group-hover:[animation-play-state:paused]">
+        <div className="flex-1 overflow-hidden relative group w-full md:mx-3 py-0.5 ticker-track min-w-0">
+          {/* Subtle gradient edges so text doesn't sharply collide */}
+          <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-bis-ink to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-bis-ink to-transparent z-10 pointer-events-none" />
+          <div className="flex items-center gap-8 whitespace-nowrap animate-[marquee_25s_linear_infinite] group-hover:[animation-play-state:paused] pl-4">
             {/* Duplicated for seamless loop */}
             {[...currentItems, ...currentItems].map((item, index) => (
               <button
                 key={`${item.id}-${index}`}
                 onClick={() => handleItemClick(item.query)}
-                className="inline-flex items-center gap-2 text-gray-200 hover:text-amber-300 transition-colors text-xs text-left"
+                className="inline-flex items-center gap-2 text-gray-200 hover:text-amber-300 transition-colors text-xs text-left shrink-0"
                 title="Click to ask assistant about this item"
               >
                 <span className="px-1.5 py-0.2 text-[10px] font-mono font-bold rounded bg-white/15 text-amber-300 border border-white/10">
@@ -184,7 +191,7 @@ export const AlertTicker: React.FC = () => {
         </div>
 
         {/* Right: View All → Link */}
-        <div className="shrink-0 flex items-center gap-1 self-end md:self-auto">
+        <div className="shrink-0 flex items-center gap-1 self-end md:self-auto relative z-10 bg-bis-ink pl-3 md:border-l border-gray-700/60">
           <button
             onClick={() => setActiveTab('registry')}
             className="text-amber-300 hover:text-white font-bold text-[11px] inline-flex items-center gap-0.5 hover:underline"

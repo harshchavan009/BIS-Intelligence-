@@ -11,7 +11,8 @@ import {
   Sliders, 
   Sun, 
   Headphones,
-  Sparkles
+  Sparkles,
+  Scale
 } from 'lucide-react';
 
 export const UtilitySidebar: React.FC = () => {
@@ -46,10 +47,11 @@ export const UtilitySidebar: React.FC = () => {
           onClick={() => setActiveTab('evaluator-login')}
           className="group relative p-2.5 hover:bg-bis-navy-800 transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
           aria-label="Evaluator Console & Benchmark Login"
+          title={language === 'hi' ? 'मूल्यांकनकर्ता कंसोल' : 'Evaluator Console'}
         >
           <Lock className="w-4 h-4 text-amber-300" />
-          <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2.5 py-1 bg-bis-ink text-white text-[11px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-40">
-            {language === 'hi' ? 'मूल्यांकनकर्ता लॉगिन' : 'Evaluator Login'}
+          <span className="absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-bis-ink text-white text-[11px] font-bold rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all pointer-events-none z-40 border border-gray-700/80">
+            {language === 'hi' ? 'मूल्यांकनकर्ता कंसोल' : 'Evaluator Console'}
           </span>
         </button>
 
@@ -58,53 +60,70 @@ export const UtilitySidebar: React.FC = () => {
           onClick={() => setActiveTab('faq')}
           className="group relative p-2.5 hover:bg-bis-navy-800 transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
           aria-label="Frequently Asked Questions"
+          title={language === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न' : 'FAQ & Knowledge Base'}
         >
           <HelpCircle className="w-4 h-4 text-gray-200 group-hover:text-white" />
-          <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2.5 py-1 bg-bis-ink text-white text-[11px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-40">
-            {language === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न' : 'FAQ'}
+          <span className="absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-bis-ink text-white text-[11px] font-bold rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all pointer-events-none z-40 border border-gray-700/80">
+            {language === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न' : 'FAQ & Knowledge Base'}
           </span>
         </button>
 
-        {/* Item 3: Feedback */}
+        {/* Item 3: Chat / Ask Assistant */}
         <button
-          onClick={() => setActiveLegalModal('feedback')}
+          onClick={() => setActiveTab('chat')}
           className="group relative p-2.5 hover:bg-bis-navy-800 transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
-          aria-label="Submit Platform Feedback"
+          aria-label="Ask the AI Assistant"
+          title={language === 'hi' ? 'एआई सहायक से पूछें' : 'Ask AI Assistant'}
         >
           <MessageSquare className="w-4 h-4 text-gray-200 group-hover:text-white" />
-          <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2.5 py-1 bg-bis-ink text-white text-[11px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-40">
-            {language === 'hi' ? 'प्रतिक्रिया' : 'Feedback'}
+          <span className="absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-bis-ink text-white text-[11px] font-bold rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all pointer-events-none z-40 border border-gray-700/80">
+            {language === 'hi' ? 'एआई सहायक से पूछें' : 'Ask AI Assistant'}
           </span>
         </button>
 
-        {/* Item 4: Blog / Updates */}
+        {/* Item 4: Document Registry */}
         <button
           onClick={() => setActiveTab('registry')}
           className="group relative p-2.5 hover:bg-bis-navy-800 transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
-          aria-label="What's New & Updates"
+          aria-label="What's New & Document Registry"
+          title={language === 'hi' ? 'दस्तावेज व राजपत्र' : 'Document Registry & Gazettes'}
         >
           <FileText className="w-4 h-4 text-gray-200 group-hover:text-white" />
-          <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2.5 py-1 bg-bis-ink text-white text-[11px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-40">
-            {language === 'hi' ? 'दस्तावेज व अपडेट्स' : "What's New / Registry"}
+          <span className="absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-bis-ink text-white text-[11px] font-bold rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all pointer-events-none z-40 border border-gray-700/80">
+            {language === 'hi' ? 'दस्तावेज व राजपत्र' : 'Document Registry & Gazettes'}
           </span>
         </button>
 
-        {/* Item 5: Language Toggle (EN / HI) */}
+        {/* Item 5: Policies & Legal */}
+        <button
+          onClick={() => setActiveTab('policies')}
+          className="group relative p-2.5 hover:bg-bis-navy-800 transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
+          aria-label="Website Policies & Disclosures"
+          title={language === 'hi' ? 'वेबसाइट नीतियां' : 'Website Policies & Disclosures'}
+        >
+          <Scale className="w-4 h-4 text-gray-200 group-hover:text-white" />
+          <span className="absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-bis-ink text-white text-[11px] font-bold rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all pointer-events-none z-40 border border-gray-700/80">
+            {language === 'hi' ? 'वेबसाइट नीतियां' : 'Website Policies & Disclosures'}
+          </span>
+        </button>
+
+        {/* Item 6: Language Toggle (EN / HI) */}
         <button
           onClick={toggleLanguage}
           className="group relative p-2.5 hover:bg-bis-navy-800 transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300"
           aria-label={`Switch language to ${language === 'en' ? 'Hindi' : 'English'}`}
+          title={language === 'en' ? 'Switch to Hindi' : 'अंग्रेजी में बदलें'}
         >
           <span className="w-4 h-4 text-[10px] font-bold font-mono text-amber-300 flex items-center justify-center">
             {language === 'en' ? 'हिं' : 'EN'}
           </span>
-          <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-2.5 py-1 bg-bis-ink text-white text-[11px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-40">
+          <span className="absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-bis-ink text-white text-[11px] font-bold rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all pointer-events-none z-40 border border-gray-700/80">
             {language === 'en' ? 'हिन्दी (Hindi)' : 'अंग्रेजी (EN)'}
           </span>
         </button>
 
-        {/* Item 6: Accessibility Controls Popover Trigger */}
-        <div className="relative">
+        {/* Item 7: Accessibility Controls Popover Trigger */}
+        <div className="relative group">
           <button
             onClick={() => setA11yPopoverOpen(!a11yPopoverOpen)}
             className={`p-2.5 transition-colors flex items-center justify-center ${
@@ -112,10 +131,15 @@ export const UtilitySidebar: React.FC = () => {
             }`}
             aria-expanded={a11yPopoverOpen}
             aria-label="Toggle Accessibility Preferences"
-            title="Accessibility Controls"
+            title="Accessibility Controls & Contrast"
           >
             <Eye className="w-4 h-4" />
           </button>
+          {!a11yPopoverOpen && (
+            <span className="absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-bis-ink text-white text-[11px] font-bold rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all pointer-events-none z-40 border border-gray-700/80">
+              {language === 'hi' ? 'सुगमता सेटिंग्स' : 'Accessibility Settings'}
+            </span>
+          )}
 
           {/* Accessibility Popover Panel */}
           {a11yPopoverOpen && (

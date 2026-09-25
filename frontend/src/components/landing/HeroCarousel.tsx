@@ -27,13 +27,34 @@ interface SlideItem {
   icon: React.FC<{ className?: string }>;
   metricLabel: string;
   metricValue: string;
+  videoWebm?: string;
+  videoMp4?: string;
+  fallbackImg: string;
 }
 
 export const HeroCarousel: React.FC = () => {
   const { setActiveTab, setQueryPrefill } = useAppStore();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isSlowConnection, setIsSlowConnection] = useState(false);
   const timerRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setPrefersReducedMotion(mediaQuery.matches);
+      const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+      mediaQuery.addEventListener('change', listener);
+
+      const nav: any = navigator;
+      if (nav.connection?.saveData || nav.connection?.effectiveType === '2g') {
+        setIsSlowConnection(true);
+      }
+
+      return () => mediaQuery.removeEventListener('change', listener);
+    }
+  }, []);
 
   const slides: SlideItem[] = [
     {
@@ -50,7 +71,9 @@ export const HeroCarousel: React.FC = () => {
       accentBg: 'from-bis-navy via-bis-navy-800 to-indigo-950',
       icon: Sparkles,
       metricLabel: 'Evaluation Groundedness',
-      metricValue: '100% Grounded'
+      metricValue: '100% Grounded',
+      videoWebm: '/videos/hero-ai.webm',
+      fallbackImg: '/images/hero/hero-ai-fallback.jpg'
     },
     {
       id: 'qco-lookup',
@@ -66,7 +89,10 @@ export const HeroCarousel: React.FC = () => {
       accentBg: 'from-[#1a2d54] via-bis-navy to-[#18233f]',
       icon: ShieldCheck,
       metricLabel: 'Indexed Gazettes',
-      metricValue: '1,343+ Chunks'
+      metricValue: '1,343+ Chunks',
+      videoWebm: '/videos/hero-manufacturing.webm',
+      videoMp4: '/videos/hero-manufacturing.mp4',
+      fallbackImg: '/images/hero/hero-manufacturing-fallback.jpg'
     },
     {
       id: 'hallmarking-huid',
@@ -81,7 +107,9 @@ export const HeroCarousel: React.FC = () => {
       accentBg: 'from-[#2b1f14] via-[#3d2c1c] to-bis-navy-800',
       icon: Gem,
       metricLabel: 'Mandatory Districts',
-      metricValue: '343+ Districts'
+      metricValue: '343+ Districts',
+      videoWebm: '/videos/hero-gold.webm',
+      fallbackImg: '/images/hero/hero-gold-fallback.jpg'
     },
     {
       id: 'isi-mark-check',
@@ -96,7 +124,10 @@ export const HeroCarousel: React.FC = () => {
       accentBg: 'from-[#173024] via-[#1f4233] to-bis-navy',
       icon: Search,
       metricLabel: 'Standard Directory',
-      metricValue: 'IS Product Map'
+      metricValue: 'IS Product Map',
+      videoWebm: '/videos/hero-lab.webm',
+      videoMp4: '/videos/hero-lab.mp4',
+      fallbackImg: '/images/hero/hero-lab-fallback.jpg'
     }
   ];
 
@@ -133,22 +164,53 @@ export const HeroCarousel: React.FC = () => {
       onFocus={() => setIsPaused(true)}
       onBlur={() => setIsPaused(false)}
     >
-      {/* Background Gradient & Vector Ambient Canvas */}
-      <div className={`w-full min-h-[360px] sm:min-h-[420px] lg:min-h-[460px] bg-gradient-to-r ${slide.accentBg} transition-all duration-700 flex items-center relative`}>
-        {/* Subtle geometric pattern overlay */}
-        <div 
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)`,
-            backgroundSize: '32px 32px'
-          }}
-        />
+      {/* Background Video & Static Fallback Layer */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {prefersReducedMotion || isSlowConnection ? (
+          <img
+            src={slide.fallbackImg}
+            alt=""
+            className="w-full h-full object-cover object-center animate-in fade-in duration-700"
+            loading="eager"
+          />
+        ) : (
+          <video
+            key={slide.id}
+            muted
+            playsInline
+            loop
+            autoPlay
+            poster={slide.fallbackImg}
+            className="w-full h-full object-cover object-center transition-opacity duration-1000"
+          >
+            {slide.videoWebm && <source src={slide.videoWebm} type="video/webm" />}
+            {slide.videoMp4 && <source src={slide.videoMp4} type="video/mp4" />}
+            <img src={slide.fallbackImg} alt="" className="w-full h-full object-cover" />
+          </video>
+        )}
+      </div>
 
-        {/* Ambient Decorative Shapes */}
-        <div className="absolute right-[-10%] top-[-20%] w-[500px] h-[500px] rounded-full bg-white/5 blur-3xl pointer-events-none" />
-        <div className="absolute left-[20%] bottom-[-30%] w-[400px] h-[400px] rounded-full bg-bis-red/10 blur-3xl pointer-events-none" />
+      {/* Dark Gradient Overlay for 40-60% Text Contrast (WCAG AAA) */}
+      <div className="absolute inset-0 bg-gradient-to-r from-bis-ink/90 via-bis-navy-800/80 to-bis-ink/75 z-[1] pointer-events-none" />
+      <div className="absolute inset-0 bg-black/45 z-[1] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full relative z-10">
+      {/* Background Gradient Accent Canvas */}
+      <div className={`w-full min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] bg-gradient-to-r ${slide.accentBg} opacity-25 mix-blend-overlay transition-all duration-700 absolute inset-0 z-[2] pointer-events-none`} />
+
+      {/* Subtle geometric pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-15 pointer-events-none z-[3]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)`,
+          backgroundSize: '32px 32px'
+        }}
+      />
+
+      {/* Ambient Decorative Shapes */}
+      <div className="absolute right-[-10%] top-[-20%] w-[500px] h-[500px] rounded-full bg-white/5 blur-3xl pointer-events-none z-[3]" />
+      <div className="absolute left-[20%] bottom-[-30%] w-[400px] h-[400px] rounded-full bg-bis-red/10 blur-3xl pointer-events-none z-[3]" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Slide Text Content */}
@@ -271,8 +333,6 @@ export const HeroCarousel: React.FC = () => {
             {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
           </button>
         </div>
-
-      </div>
     </section>
   );
 };

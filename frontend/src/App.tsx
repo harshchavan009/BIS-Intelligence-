@@ -29,6 +29,7 @@ const BranchContact = React.lazy(() => import('./components/features/BranchConta
 const WebsitePolicies = React.lazy(() => import('./components/features/WebsitePolicies').then(m => ({ default: m.WebsitePolicies })));
 const HelpPage = React.lazy(() => import('./components/features/HelpPage').then(m => ({ default: m.HelpPage })));
 const SitemapPage = React.lazy(() => import('./components/features/SitemapPage').then(m => ({ default: m.SitemapPage })));
+const MethodologyPage = React.lazy(() => import('./components/features/MethodologyPage').then(m => ({ default: m.MethodologyPage })));
 
 const ViewLoader: React.FC = () => (
   <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-3 font-sans">
@@ -130,6 +131,7 @@ export const App: React.FC = () => {
           {activeTab === 'analytics' && <AnalyticsView />}
           {activeTab === 'about' && <AboutPage />}
           {activeTab === 'registry' && <DocumentRegistry />}
+          {activeTab === 'methodology' && <MethodologyPage />}
         </React.Suspense>
       </main>
 
