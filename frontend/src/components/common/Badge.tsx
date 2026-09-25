@@ -9,7 +9,6 @@ export interface BadgeProps {
   size?: BadgeSize;
   icon?: React.ReactNode;
   dot?: boolean;
-  pulse?: boolean;
   className?: string;
   onClick?: () => void;
 }
@@ -20,41 +19,41 @@ export const Badge: React.FC<BadgeProps> = ({
   size = 'md',
   icon,
   dot = false,
-  pulse = false,
   className = '',
   onClick
 }) => {
   const sizeClasses = {
-    sm: 'text-[10px] px-2 py-0.5 gap-1',
-    md: 'text-[11px] px-2.5 py-1 gap-1.5'
+    sm: 'text-[10px] px-1.5 py-0.5 gap-1',
+    md: 'text-[11px] px-2 py-0.5 gap-1.5'
   }[size];
 
+  // Official GIGW status badge styles: Rectangular, high contrast, 1px solid border
   const variantClasses = {
-    verified: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-    warning: 'bg-amber-50 text-amber-800 border-amber-200',
-    brand: 'bg-indigo-50 text-indigo-900 border-indigo-200',
-    neutral: 'bg-slate-100 text-slate-700 border-slate-200',
-    outline: 'bg-transparent text-slate-700 border-slate-300',
-    ghost: 'bg-white/10 text-white border-white/20'
+    verified: 'bg-emerald-50 text-emerald-900 border-emerald-300',
+    warning: 'bg-amber-50 text-amber-900 border-amber-300',
+    brand: 'bg-indigo-50 text-gov-navy border-slate-300',
+    neutral: 'bg-gray-100 text-gray-800 border-gray-300',
+    outline: 'bg-transparent text-gray-800 border-gray-300',
+    ghost: 'bg-white/10 text-white border-white/30'
   }[variant];
 
   const dotClasses = {
-    verified: 'bg-emerald-500',
-    warning: 'bg-amber-500',
-    brand: 'bg-indigo-600',
-    neutral: 'bg-slate-400',
-    outline: 'bg-slate-500',
+    verified: 'bg-emerald-700',
+    warning: 'bg-amber-700',
+    brand: 'bg-gov-navy',
+    neutral: 'bg-gray-600',
+    outline: 'bg-gray-600',
     ghost: 'bg-emerald-400'
   }[variant];
 
   return (
     <span
       onClick={onClick}
-      className={`inline-flex items-center font-semibold uppercase tracking-wider rounded-full border font-mono select-none ${sizeClasses} ${variantClasses} ${onClick ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''} ${className}`}
+      className={`inline-flex items-center font-bold uppercase tracking-wider rounded-[2px] border font-mono select-none ${sizeClasses} ${variantClasses} ${onClick ? 'cursor-pointer hover:bg-opacity-80 transition-colors' : ''} ${className}`}
     >
       {dot && (
         <span
-          className={`w-1.5 h-1.5 rounded-full ${dotClasses} ${pulse ? 'animate-pulse' : ''}`}
+          className={`w-1.5 h-1.5 rounded-full ${dotClasses}`}
           aria-hidden="true"
         />
       )}

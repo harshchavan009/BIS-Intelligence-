@@ -5,93 +5,123 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    // Government GIGW 3.0 Standard: Crisp, small rectangular radii (2-6px)
+    borderRadius: {
+      'none': '0px',
+      'sm': '2px',
+      DEFAULT: '3px',
+      'md': '4px',
+      'lg': '4px',
+      'xl': '6px',
+      '2xl': '6px',
+      '3xl': '8px',
+      'full': '9999px',
+    },
     extend: {
       colors: {
-        // Semantic Brand System
-        brand: {
-          navy: '#1E2A5E',
-          'navy-dark': '#141C40',
-          blue: '#35569E',
-          'blue-hover': '#263F73',
-          'blue-light': '#F0F4FF',
-          red: '#A42115',
-          'red-hover': '#88190F',
-          ink: '#0B122C'
+        // GIGW Authentic Government Portal Palette
+        gov: {
+          navy: '#1A3C6E',       // Primary official navy (bis.gov.in / india.gov.in)
+          'navy-dark': '#11294D', // Deep header / masthead navy
+          'navy-light': '#244E8C',
+          maroon: '#8B1D1D',     // Official deep red / maroon for notices and CTAs
+          'maroon-dark': '#6D1414',
+          gray: '#F4F6F9',       // Clean neutral gray for section banding
+          border: '#D1D5DB',     // Hairline 1px borders
+          'border-light': '#E5E7EB',
+          text: '#111827',       // Near-black text
+          muted: '#4B5563'       // Muted secondary text
         },
-        // Semantic Status Tokens
+        // Semantic Brand System (Mapped to GIGW palette)
+        brand: {
+          navy: '#1A3C6E',
+          'navy-dark': '#11294D',
+          blue: '#1A3C6E',
+          'blue-hover': '#11294D',
+          'blue-light': '#EEF3F9',
+          red: '#8B1D1D',
+          'red-hover': '#6D1414',
+          ink: '#111827'
+        },
+        // Functional Status Colors (Strict semantic meaning only)
         verified: {
-          DEFAULT: '#15803D', // Emerald-700 for high contrast WCAG AA
+          DEFAULT: '#166534', // Emerald-800 for high-contrast WCAG AAA
           light: '#F0FDF4',   // Emerald-50
           border: '#BBF7D0',  // Emerald-200
           dark: '#14532D'     // Emerald-900
         },
         warning: {
-          DEFAULT: '#B45309', // Amber-700 for high contrast WCAG AA
-          light: '#FFFBEB',   // Amber-50
+          DEFAULT: '#92400E', // Amber-800 for high-contrast WCAG AAA
+          light: '#FEF3C7',   // Amber-50
           border: '#FDE68A',  // Amber-200
           dark: '#78350F'     // Amber-900
         },
-        // Backward-compatible core tokens
+        // Backward-compatible core tokens (re-skinned to formal palette)
         ink: {
-          DEFAULT: '#10182B',
-          light: '#222E48',
-          muted: '#4A5568'
+          DEFAULT: '#111827',
+          light: '#1F2937',
+          muted: '#4B5563'
         },
         'indigo-deep': {
-          DEFAULT: '#1E2A5E',
-          dark: '#141C40',
-          light: '#2D3D82'
+          DEFAULT: '#1A3C6E',
+          dark: '#11294D',
+          light: '#244E8C'
         },
         brass: {
-          DEFAULT: '#B9862F',
-          dark: '#966A1F',
-          light: '#DCAB55'
+          DEFAULT: '#8B1D1D', // Harmonized to institutional maroon
+          dark: '#6D1414',
+          light: '#B91C1C'
         },
         paper: {
-          DEFAULT: '#F7F5EF',
+          DEFAULT: '#F4F6F9', // Clean government banding gray
           card: '#FFFFFF',
-          dark: '#EFECE2'
+          dark: '#E5E7EB'
         },
         line: {
-          DEFAULT: '#DCD6C6',
-          dark: '#BDB6A2'
+          DEFAULT: '#D1D5DB',
+          dark: '#9CA3AF'
         },
         'verified-green': {
-          DEFAULT: '#15803D',
+          DEFAULT: '#166534',
           light: '#F0FDF4',
           border: '#BBF7D0'
         },
-        'bis-navy': '#35569E',
-        'bis-navy-800': '#263F73',
-        'bis-red': '#A42115',
-        'bis-ink': '#0B122C',
-        'card-pink': '#F2D7F9',
-        'card-peach': '#F4D4C9',
-        'card-lavender': '#D6DAF5',
-        'card-mint': '#D5F9D4'
+        'bis-navy': '#1A3C6E',
+        'bis-navy-800': '#11294D',
+        'bis-red': '#8B1D1D',
+        'bis-ink': '#111827',
+        // Neutralize pastel card floods to pure crisp white with hairline borders
+        'card-pink': '#FFFFFF',
+        'card-peach': '#FFFFFF',
+        'card-lavender': '#FFFFFF',
+        'card-mint': '#FFFFFF'
       },
       fontSize: {
-        // Semantic Typographic Scale Hierarchy
-        'hero-display': ['2.75rem', { lineHeight: '1.15', letterSpacing: '-0.025em', fontWeight: '800' }],
-        'section-heading': ['1.75rem', { lineHeight: '1.25', letterSpacing: '-0.02em', fontWeight: '700' }],
-        'card-headline': ['1.125rem', { lineHeight: '1.35', letterSpacing: '-0.01em', fontWeight: '600' }],
-        'body-base': ['0.9375rem', { lineHeight: '1.55', letterSpacing: '0', fontWeight: '400' }],
+        // Sober, Authoritative Institutional Typographic Hierarchy
+        'hero-display': ['2rem', { lineHeight: '1.25', letterSpacing: '-0.015em', fontWeight: '700' }],
+        'section-heading': ['1.375rem', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'card-headline': ['1rem', { lineHeight: '1.4', letterSpacing: '-0.005em', fontWeight: '600' }],
+        'body-base': ['0.875rem', { lineHeight: '1.5', letterSpacing: '0', fontWeight: '400' }],
         'body-tight': ['0.8125rem', { lineHeight: '1.45', letterSpacing: '0', fontWeight: '400' }],
-        'caption-badge': ['0.6875rem', { lineHeight: '1.35', letterSpacing: '0.025em', fontWeight: '600' }]
+        'caption-badge': ['0.6875rem', { lineHeight: '1.3', letterSpacing: '0.04em', fontWeight: '700' }]
       },
       fontFamily: {
-        serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+        serif: ['"Source Serif 4"', 'Merriweather', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'monospace']
       },
       boxShadow: {
-        'card': '0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03)',
-        'card-hover': '0 10px 25px -4px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04)',
-        'card-elevated': '0 4px 14px 0 rgba(15, 23, 42, 0.07)',
-        'glow-verified': '0 0 16px -2px rgba(21, 128, 61, 0.25)',
-        'glow-brand': '0 0 16px -2px rgba(53, 86, 158, 0.25)',
-        'paper-sm': '0 1px 3px rgba(16, 24, 43, 0.05)',
-        'paper': '0 4px 12px rgba(16, 24, 43, 0.08)',
-        'paper-lg': '0 8px 24px rgba(16, 24, 43, 0.12)',
+        // Crisp Hairline Elevations (No blurred drop shadows)
+        'none': 'none',
+        'xs': '0 1px 1px 0 rgba(0, 0, 0, 0.04)',
+        'card': '0 1px 2px 0 rgba(0, 0, 0, 0.04)',
+        'card-hover': '0 1px 3px 0 rgba(0, 0, 0, 0.08)',
+        'card-elevated': '0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+        'paper-sm': '0 1px 2px rgba(0, 0, 0, 0.04)',
+        'paper': '0 1px 3px rgba(0, 0, 0, 0.05)',
+        'paper-lg': '0 2px 6px rgba(0, 0, 0, 0.08)',
+        'glow-verified': 'none',
+        'glow-brand': 'none'
       }
     },
   },

@@ -11,8 +11,9 @@ export interface CardProps {
   role?: string;
   tabIndex?: number;
   onKeyDown?: (e: React.KeyboardEvent) => void;
-  // Standardized Design System Props
+  // Official GIGW Design System Props
   variant?: 'default' | 'elevated' | 'trust' | 'flat';
+  accent?: 'none' | 'navy' | 'maroon' | 'green' | 'amber';
   category?: string;
   categoryIcon?: React.ReactNode;
   categoryVariant?: 'verified' | 'warning' | 'brand' | 'neutral';
@@ -30,38 +31,48 @@ export const Card: React.FC<CardProps> = ({
   tabIndex,
   onKeyDown,
   variant = 'default',
+  accent = 'none',
   category,
   categoryIcon,
   categoryVariant = 'neutral'
 }) => {
   const paddingClasses = {
     none: '',
-    sm: 'p-4',
-    md: 'p-5 sm:p-6',
-    lg: 'p-6 sm:p-8'
+    sm: 'p-3',
+    md: 'p-4 sm:p-5',
+    lg: 'p-5 sm:p-6'
   }[padding];
 
   const isInteractive = Boolean(hover || onClick);
 
-  // Variant base styles
+  // Variant base styles: Solid crisp backgrounds with 1px hairline borders
   const variantClasses = {
-    default: 'bg-white border border-slate-200/90 shadow-card',
-    elevated: 'bg-white border border-slate-200/90 shadow-card-elevated',
-    trust: 'bg-gradient-to-b from-white to-emerald-50/40 border border-emerald-200/80 shadow-card hover:shadow-glow-verified',
-    flat: 'bg-white border border-slate-200 shadow-none'
+    default: 'bg-white border border-gray-300 shadow-xs',
+    elevated: 'bg-white border border-gray-300 shadow-sm',
+    trust: 'bg-white border border-emerald-300 shadow-xs',
+    flat: 'bg-white border border-gray-200 shadow-none'
   }[variant];
 
-  // Interactive elevation classes
+  // Left-border accent stripe (Government dossier card style)
+  const accentClasses = {
+    none: '',
+    navy: 'border-l-4 border-l-gov-navy',
+    maroon: 'border-l-4 border-l-gov-maroon',
+    green: 'border-l-4 border-l-emerald-700',
+    amber: 'border-l-4 border-l-amber-700'
+  }[accent];
+
+  // Interactive states: Pure color/border highlight, strictly NO scale or translate
   const interactiveClasses = isInteractive
-    ? 'hover:-translate-y-0.5 hover:shadow-card-hover hover:border-slate-300 transition-all duration-200 ease-out cursor-pointer'
+    ? 'hover:border-gov-navy hover:bg-slate-50/70 transition-colors duration-150 cursor-pointer'
     : 'transition-colors';
 
-  // Category chip styling
+  // Category chip styling: Rectangular chip, no puffy pills
   const categoryPillClasses = {
-    verified: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-    warning: 'bg-amber-50 text-amber-800 border-amber-200',
-    brand: 'bg-indigo-50 text-indigo-900 border-indigo-200',
-    neutral: 'bg-slate-100 text-slate-700 border-slate-200'
+    verified: 'bg-emerald-50 text-emerald-800 border-emerald-300',
+    warning: 'bg-amber-50 text-amber-800 border-amber-300',
+    brand: 'bg-indigo-50 text-gov-navy border-slate-300',
+    neutral: 'bg-gray-100 text-gray-800 border-gray-300'
   }[categoryVariant];
 
   return (
@@ -71,11 +82,11 @@ export const Card: React.FC<CardProps> = ({
       tabIndex={tabIndex ?? (onClick ? 0 : undefined)}
       onKeyDown={onKeyDown}
       onClick={onClick}
-      className={`rounded-xl overflow-hidden font-sans ${variantClasses} ${paddingClasses} ${interactiveClasses} ${className}`}
+      className={`rounded-[3px] font-sans ${variantClasses} ${accentClasses} ${paddingClasses} ${interactiveClasses} ${className}`}
     >
       {(category || categoryIcon) && (
-        <div className="flex items-center gap-1.5 mb-3">
-          <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wider uppercase border font-mono ${categoryPillClasses}`}>
+        <div className="flex items-center gap-1.5 mb-2.5">
+          <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] text-[10.5px] font-bold tracking-wider uppercase border font-mono ${categoryPillClasses}`}>
             {categoryIcon}
             {category && <span>{category}</span>}
           </span>
