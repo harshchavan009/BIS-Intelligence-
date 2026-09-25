@@ -1,176 +1,131 @@
 # 🇮🇳 BIS Intelligence — Manak Mitra
 
 <p align="center">
-  <img src="https://img.shields.io/badge/AI-Generative%20AI-2563EB?style=for-the-badge" alt="Generative AI">
-  <img src="https://img.shields.io/badge/RAG-Retrieval%20Augmented%20Generation-7C3AED?style=for-the-badge" alt="RAG">
-  <img src="https://img.shields.io/badge/NLP-Multilingual-059669?style=for-the-badge" alt="NLP">
+  <img src="https://img.shields.io/badge/Generative%20AI-Enabled-2563EB?style=for-the-badge" alt="Generative AI">
+  <img src="https://img.shields.io/badge/RAG-Enabled-7C3AED?style=for-the-badge" alt="RAG">
+  <img src="https://img.shields.io/badge/Multilingual-AI-059669?style=for-the-badge" alt="Multilingual AI">
   <img src="https://img.shields.io/badge/LangGraph-Orchestration-F59E0B?style=for-the-badge" alt="LangGraph">
-  <img src="https://img.shields.io/badge/ChromaDB-Vector%20Search-EAB308?style=for-the-badge" alt="ChromaDB">
+  <img src="https://img.shields.io/badge/ChromaDB-Semantic%20Search-EAB308?style=for-the-badge" alt="ChromaDB">
   <img src="https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge" alt="FastAPI">
   <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge" alt="React">
-  <img src="https://img.shields.io/badge/TypeScript-Frontend-3178C6?style=for-the-badge" alt="TypeScript">
+  <img src="https://img.shields.io/badge/TypeScript-Type%20Safe-3178C6?style=for-the-badge" alt="TypeScript">
 </p>
 
 <p align="center">
-  <strong>An AI-powered, multilingual and evidence-grounded assistant for Indian Standards and BIS services.</strong>
+  <strong>AI-powered intelligence for Indian Standards, BIS certification, hallmarking and consumer services.</strong>
 </p>
 
 <p align="center">
-  Helping MSMEs, startups, consumers, students and researchers discover,
-  understand and navigate BIS-related information through one intelligent interface.
+  Ask. Discover. Understand. Verify.
+</p>
+
+<p align="center">
+  <a href="https://bis-intelligence.vercel.app">Live Demo</a> •
+  <a href="https://github.com/harshchavan009/BIS-Intelligence-.git">GitHub</a>
 </p>
 
 ---
 
-## 📌 Table of Contents
+## 🚀 About the Project
 
-- [Overview](#-overview)
-- [Why BIS Intelligence?](#-why-bis-intelligence)
-- [Problem Statement](#-problem-statement)
-- [Solution](#-solution)
-- [Key Features](#-key-features)
-- [Core Innovation](#-core-innovation)
-- [System Architecture](#-system-architecture)
-- [End-to-End AI Pipeline](#-end-to-end-ai-pipeline)
-- [Detailed Architecture](#-detailed-architecture)
-- [Application Modules](#-application-modules)
-- [RAG Architecture](#-rag-architecture)
-- [Evidence Verification](#-evidence-verification)
-- [Multilingual Processing](#-multilingual-processing)
-- [Query Orchestration](#-query-orchestration)
-- [Technology Stack](#-technology-stack)
-- [Frontend Architecture](#-frontend-architecture)
-- [Backend Architecture](#-backend-architecture)
-- [Data & Knowledge Architecture](#-data--knowledge-architecture)
-- [Security & Reliability](#-security--reliability)
-- [Use Cases](#-use-cases)
-- [Target Users](#-target-users)
-- [Project Workflow](#-project-workflow)
-- [Getting Started](#-getting-started)
-- [Environment Variables](#-environment-variables)
-- [Running the Project](#-running-the-project)
-- [Deployment](#-deployment)
-- [Evaluation Strategy](#-evaluation-strategy)
-- [Challenges & Mitigation](#-challenges--mitigation)
-- [Limitations](#-limitations)
-- [Future Roadmap](#-future-roadmap)
-- [Smart India Hackathon](#-smart-india-hackathon)
-- [Research Foundation](#-research-foundation)
-- [Screenshots](#-screenshots)
-- [Demo](#-demo)
-- [Project Structure](#-project-structure)
-- [Author](#-author)
-- [License](#-license)
+**BIS Intelligence — Manak Mitra** is a domain-focused AI platform designed to simplify the discovery and understanding of information related to the **Bureau of Indian Standards (BIS)**.
+
+The platform provides a single intelligent interface for information related to:
+
+- Indian Standards
+- BIS certification schemes
+- Product certification
+- Licensing and compliance guidance
+- Hallmarking
+- HUID-related information
+- BIS-recognized laboratories
+- Consumer services
+- Standards-related queries
+- Multilingual BIS information
+
+Instead of making users navigate through multiple portals, documents and technical pages, Manak Mitra allows them to ask questions naturally and receive responses based on retrieved BIS information.
+
+The system is built around a **retrieval-first and evidence-aware AI architecture** rather than a simple chatbot.
 
 ---
 
-# 🌟 Overview
+## 💡 The Problem
 
-**BIS Intelligence — Manak Mitra** is an AI-powered intelligent assistant created to simplify access to information related to the **Bureau of Indian Standards (BIS)**.
+BIS provides a large amount of standards, certification, testing and consumer-related information.
 
-The platform provides a conversational and structured way to discover information about:
+However, users often face practical difficulties such as:
 
-- 🇮🇳 Indian Standards
-- 📋 Certification schemes
-- 🏭 Product certification
-- 💍 Hallmarking and HUID
-- 🧪 BIS-recognized laboratories
-- 👥 Consumer-related BIS services
-- 📚 Compliance and process guidance
-- 🌐 Multilingual BIS information
+- Information being distributed across multiple pages and documents
+- Difficulty identifying the relevant Indian Standard
+- Complex certification and licensing terminology
+- Difficulty understanding technical documents
+- Time-consuming manual search
+- Language barriers for non-English users
+- Risk of unsupported answers when using generic AI assistants
 
-Instead of forcing users to manually navigate through multiple portals, PDFs and technical documents, Manak Mitra provides an intelligent interface where users can ask questions naturally.
+For an MSME, startup, student or consumer, finding an answer is often only part of the problem.
 
-The system combines:
+The bigger challenge is:
 
-**Generative AI + Retrieval-Augmented Generation + Semantic Search + Structured Retrieval + Multilingual NLP + Evidence Verification**
-
-to produce responses that are designed to remain grounded in retrieved BIS information.
-
-The project is based on the idea that a useful standards assistant should not simply generate an answer — it should also be able to **find supporting information, verify it and communicate when evidence is insufficient**.
+> **How do we find the right information, determine whether it applies, verify the evidence, and present it in a simple and useful way?**
 
 ---
 
-# 🎯 Why BIS Intelligence?
+# 🎯 Our Solution
 
-Finding relevant BIS information can be challenging because information related to standards, certification, hallmarking and services may exist across different documents, service pages and portals.
+Manak Mitra approaches BIS information discovery as an **AI-powered retrieval and verification problem**.
 
-A user may need to determine:
+The platform combines:
 
-- Which Indian Standard applies to a product?
-- Which certification scheme is relevant?
-- What is the certification procedure?
-- What documents or requirements are involved?
-- What does a BIS-related term mean?
-- What is the significance of hallmarking or HUID?
-- Where can relevant laboratory information be found?
+**Multilingual NLP + Intent Detection + LangGraph Orchestration + Hybrid Retrieval + RAG + LLM Generation + Evidence Verification**
 
-This becomes especially difficult for:
-
-- MSMEs
-- Startups
-- First-time applicants
-- Consumers
-- Students
-- Researchers
-- Users who are more comfortable using Indian languages
-
-BIS Intelligence addresses this information-discovery problem through an AI-driven retrieval and verification pipeline.
-
----
-
-# ❗ Problem Statement
-
-### The problem
-
-BIS information can be difficult to discover, interpret and connect to a user's exact question.
-
-Traditional document search has several limitations:
-
-1. Users need to know what keywords to search.
-2. Important information may be distributed across multiple resources.
-3. Technical terminology can be difficult for non-expert users.
-4. Search results may provide too much information without explaining relevance.
-5. Generative AI without retrieval can provide unsupported responses.
-6. English-only interfaces can reduce accessibility.
-
-### The core challenge
-
-The goal is not simply:
-
-> **"Build a chatbot for BIS."**
-
-The real challenge is:
-
-> **Build an intelligent information system that can understand the user's intent, retrieve relevant BIS evidence, generate a useful response and verify that the response is supported by the available evidence.**
-
----
-
-# 💡 Solution
-
-**Manak Mitra** introduces a complete AI-powered information pipeline:
+The overall workflow is:
 
 ```text
-User Query
-     ↓
-Language Detection
-     ↓
-Translation / Normalization
-     ↓
-Intent + Entity Detection
-     ↓
-LangGraph Query Routing
-     ↓
-Relevant BIS Knowledge Retrieval
-     ↓
-Structured + Semantic Search
-     ↓
-Context Construction
-     ↓
-LLM Response Generation
-     ↓
-Evidence Verification
-     ↓
-Confidence Evaluation
-     ↓
-Verified Response / Safe Response
+                    USER
+                     │
+                     ▼
+              User Query
+                     │
+                     ▼
+        Language Detection / Translation
+                     │
+                     ▼
+          Intent + Entity Detection
+                     │
+                     ▼
+            LangGraph Orchestrator
+                     │
+        ┌────────────┼────────────┐
+        ▼            ▼            ▼
+   Standards    Certification   Hallmarking
+        │            │            │
+        └────────────┼────────────┘
+                     │
+                     ▼
+             Labs & Consumer
+                     │
+                     ▼
+            Hybrid Retrieval
+             ┌───────┴───────┐
+             ▼               ▼
+       Structured DB      ChromaDB
+       Retrieval          Semantic Search
+             │               │
+             └───────┬───────┘
+                     ▼
+               Retrieved Evidence
+                     │
+                     ▼
+              LLM Generation
+                     │
+                     ▼
+           Evidence Verification
+                     │
+              ┌──────┴──────┐
+              ▼             ▼
+          VERIFIED       NOT VERIFIED
+              │             │
+              ▼             ▼
+      Answer + Sources   Safe Response
+                         + BIS Guidance
