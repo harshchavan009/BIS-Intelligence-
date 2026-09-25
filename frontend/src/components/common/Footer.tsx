@@ -27,19 +27,9 @@ export const Footer: React.FC = () => {
           <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5 sm:mt-0" />
           <p className="text-xs sm:text-[13px] font-medium leading-relaxed text-amber-100">
             <span className="font-bold text-amber-300 uppercase tracking-wide mr-1.5">
-              Notice:
+              {language === 'hi' ? 'सूचना:' : 'Notice:'}
             </span>
-            This is an independent, unofficial project and is not affiliated with, endorsed by, or operated by the Bureau of Indian Standards or the Government of India. Information is provided for reference only — always verify against{' '}
-            <a
-              href="https://www.bis.gov.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-white underline decoration-amber-400 hover:text-amber-300 inline-flex items-center gap-0.5"
-            >
-              bis.gov.in
-              <ExternalLink className="w-3 h-3 ml-0.5" aria-label="(opens in new window)" />
-            </a>
-            .
+            {t('footer.prototype_disclaimer')}
           </p>
         </div>
       </div>
@@ -52,20 +42,24 @@ export const Footer: React.FC = () => {
           <BisIntelligenceLogo size={42} showWordmark={true} wordmarkColor="white" tagline={true} />
           
           <p className="text-xs text-gray-400 leading-relaxed pr-4">
-            An independent AI assistant that explains BIS standards, ISI Mark, CRS, CoC and Hallmarking rules using publicly available BIS documents. Built for MSMEs, industry professionals, and consumers.
+            {language === 'hi'
+              ? 'एक स्वतंत्र एआई सहायक जो सार्वजनिक रूप से उपलब्ध बीआईएस दस्तावेजों का उपयोग करके बीआईएस मानकों, ISI Mark, CRS, CoC और हॉलमार्किंग नियमों की व्याख्या करता है। MSME, उद्योग पेशेवरों और उपभोक्ताओं के लिए निर्मित।'
+              : 'An independent AI assistant that explains BIS standards, ISI Mark, CRS, CoC and Hallmarking rules using publicly available BIS documents. Built for MSMEs, industry professionals, and consumers.'}
           </p>
 
           <div className="bg-white/5 border border-border/40 rounded-xl p-3.5 space-y-2 text-[11.5px]">
             <div className="font-semibold text-white flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span>BIS Intelligence Project Team</span>
+              <span>{language === 'hi' ? 'बीआईएस इंटेलिजेंस प्रोजेक्ट टीम' : 'BIS Intelligence Project Team'}</span>
             </div>
             <div className="text-gray-400 font-mono text-[11px]">
-              Data Sources: Gazette S.O. 191(E), BIS Act 2016 · Last Sync: 24 Sept 2026
+              {language === 'hi'
+                ? 'डेटा स्रोत: राजपत्र S.O. 191(E), बीआईएस अधिनियम 2016 · अंतिम सिंक: 24 सितम्बर 2026'
+                : 'Data Sources: Gazette S.O. 191(E), BIS Act 2016 · Last Sync: 24 Sept 2026'}
             </div>
             <div className="pt-1.5 border-t border-border/40 flex items-center gap-2 text-emerald-400 font-mono text-[10.5px]">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>GIGW 3.0 &amp; WCAG 2.1 Level AA Compliant</span>
+              <span>{language === 'hi' ? 'GIGW 3.0 और WCAG 2.1 स्तर AA अनुपालक' : 'GIGW 3.0 & WCAG 2.1 Level AA Compliant'}</span>
             </div>
           </div>
         </div>
@@ -73,7 +67,7 @@ export const Footer: React.FC = () => {
         {/* Col 2: Quick Links */}
         <div className="md:col-span-3 space-y-3">
           <div className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono">
-            Regulatory Tools
+            {language === 'hi' ? 'नियामक उपकरण' : 'Regulatory Tools'}
           </div>
           <ul className="space-y-2 text-xs text-gray-300">
             <li>
@@ -82,7 +76,7 @@ export const Footer: React.FC = () => {
                 className="hover:text-amber-200 transition-colors flex items-center gap-1.5"
               >
                 <ArrowRight className="w-3 h-3 text-bis-red" />
-                <span>Standards &amp; QCO Directory</span>
+                <span>{language === 'hi' ? 'मानक एवं QCO निर्देशिका' : 'Standards & QCO Directory'}</span>
               </button>
             </li>
             <li>
@@ -91,7 +85,7 @@ export const Footer: React.FC = () => {
                 className="hover:text-amber-200 transition-colors flex items-center gap-1.5"
               >
                 <ArrowRight className="w-3 h-3 text-bis-red" />
-                <span>Certification Schemes Explorer</span>
+                <span>{language === 'hi' ? 'प्रमाणन योजनाएं एक्सप्लोरर' : 'Certification Schemes Explorer'}</span>
               </button>
             </li>
             <li>
@@ -100,7 +94,7 @@ export const Footer: React.FC = () => {
                 className="hover:text-amber-200 transition-colors flex items-center gap-1.5"
               >
                 <ArrowRight className="w-3 h-3 text-bis-red" />
-                <span>Cluster Based Test Facilities (CBTF)</span>
+                <span>{language === 'hi' ? 'क्लस्टर आधारित परीक्षण सुविधाएं (CBTF)' : 'Cluster Based Test Facilities (CBTF)'}</span>
               </button>
             </li>
             <li>
@@ -109,7 +103,7 @@ export const Footer: React.FC = () => {
                 className="hover:text-amber-200 transition-colors flex items-center gap-1.5"
               >
                 <ArrowRight className="w-3 h-3 text-bis-red" />
-                <span>Gold Hallmarking &amp; HUID Guide</span>
+                <span>{language === 'hi' ? 'स्वर्ण हॉलमार्किंग और HUID गाइड' : 'Gold Hallmarking & HUID Guide'}</span>
               </button>
             </li>
             <li>
@@ -118,7 +112,7 @@ export const Footer: React.FC = () => {
                 className="hover:text-amber-200 transition-colors flex items-center gap-1.5"
               >
                 <ArrowRight className="w-3 h-3 text-bis-red" />
-                <span>Consumer Rights &amp; Verification</span>
+                <span>{language === 'hi' ? 'उपभोक्ता अधिकार एवं सत्यापन' : 'Consumer Rights & Verification'}</span>
               </button>
             </li>
             <li>
@@ -127,7 +121,7 @@ export const Footer: React.FC = () => {
                 className="hover:text-amber-200 transition-colors flex items-center gap-1.5 font-semibold text-white"
               >
                 <ArrowRight className="w-3 h-3 text-bis-red" />
-                <span>Ask the AI Assistant</span>
+                <span>{language === 'hi' ? 'एआई सहायक से पूछें' : 'Ask the AI Assistant'}</span>
               </button>
             </li>
           </ul>
@@ -136,7 +130,7 @@ export const Footer: React.FC = () => {
         {/* Col 3: Resources & Transparency */}
         <div className="md:col-span-2 space-y-3">
           <div className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono">
-            Resources
+            {language === 'hi' ? 'संसाधन' : 'Resources'}
           </div>
           <ul className="space-y-2 text-xs text-gray-300">
             <li>
@@ -144,7 +138,7 @@ export const Footer: React.FC = () => {
                 onClick={() => setActiveTab('registry')}
                 className="hover:text-amber-200 transition-colors"
               >
-                Document Registry
+                {language === 'hi' ? 'दस्तावेज़ रजिस्ट्री' : 'Document Registry'}
               </button>
             </li>
             <li>
@@ -152,7 +146,7 @@ export const Footer: React.FC = () => {
                 onClick={() => setActiveTab('glossary')}
                 className="hover:text-amber-200 transition-colors"
               >
-                Regulatory Glossary
+                {language === 'hi' ? 'नियामक शब्दावली' : 'Regulatory Glossary'}
               </button>
             </li>
             <li>
@@ -160,7 +154,7 @@ export const Footer: React.FC = () => {
                 onClick={() => setActiveTab('faq')}
                 className="hover:text-amber-200 transition-colors"
               >
-                Frequently Asked Questions
+                {language === 'hi' ? 'अक्सर पूछे जाने वाले प्रश्न' : 'Frequently Asked Questions'}
               </button>
             </li>
             <li>
@@ -168,7 +162,7 @@ export const Footer: React.FC = () => {
                 onClick={() => setActiveTab('help')}
                 className="hover:text-amber-200 transition-colors"
               >
-                Help Center
+                {language === 'hi' ? 'सहायता केंद्र' : 'Help Center'}
               </button>
             </li>
             <li>
@@ -176,7 +170,7 @@ export const Footer: React.FC = () => {
                 onClick={() => setActiveTab('sitemap')}
                 className="hover:text-amber-200 transition-colors"
               >
-                Portal Sitemap
+                {language === 'hi' ? 'पोर्टल साइटमैप' : 'Portal Sitemap'}
               </button>
             </li>
             <li>
@@ -184,7 +178,7 @@ export const Footer: React.FC = () => {
                 onClick={() => setActiveTab('evaluator-login')}
                 className="hover:text-amber-200 transition-colors font-mono text-[11px] text-amber-300"
               >
-                Evaluator Console
+                {language === 'hi' ? 'मूल्यांकनकर्ता कंसोल' : 'Evaluator Console'}
               </button>
             </li>
           </ul>
@@ -194,12 +188,14 @@ export const Footer: React.FC = () => {
         <div className="md:col-span-3 space-y-3">
           <div className="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
             <ExternalLink className="w-3.5 h-3.5 text-bis-red" />
-            <span>Official Government Portals</span>
+            <span>{language === 'hi' ? 'आधिकारिक सरकारी पोर्टल' : 'Official Government Portals'}</span>
           </div>
 
           <div className="p-3 bg-white/5 rounded-xl border border-border/40 space-y-2 text-[11px] text-gray-300">
             <p className="text-[10.5px] text-amber-200/90 leading-snug">
-              External link notice: You are navigating to official government web properties:
+              {language === 'hi'
+                ? 'बाहरी लिंक सूचना: आप आधिकारिक सरकारी वेब पोर्टल पर जा रहे हैं:'
+                : 'External link notice: You are navigating to official government web properties:'}
             </p>
             <ul className="space-y-1.5 pt-1 text-xs">
               <li>
@@ -209,7 +205,7 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-amber-300 transition-colors inline-flex items-center gap-1.5 text-gray-200"
                 >
-                  <span>Bureau of Indian Standards (bis.gov.in)</span>
+                  <span>{language === 'hi' ? 'भारतीय मानक ब्यूरो (bis.gov.in)' : 'Bureau of Indian Standards (bis.gov.in)'}</span>
                   <ExternalLink className="w-3 h-3 text-gray-400 shrink-0" />
                 </a>
               </li>
@@ -220,7 +216,7 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-amber-300 transition-colors inline-flex items-center gap-1.5 text-gray-200"
                 >
-                  <span>Manakonline e-Services</span>
+                  <span>{language === 'hi' ? 'मानकऑनलाइन ई-सेवाएं' : 'Manakonline e-Services'}</span>
                   <ExternalLink className="w-3 h-3 text-gray-400 shrink-0" />
                 </a>
               </li>
@@ -231,7 +227,7 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-amber-300 transition-colors inline-flex items-center gap-1.5 text-gray-200"
                 >
-                  <span>Dept of Consumer Affairs</span>
+                  <span>{language === 'hi' ? 'उपभोक्ता मामले विभाग' : 'Dept of Consumer Affairs'}</span>
                   <ExternalLink className="w-3 h-3 text-gray-400 shrink-0" />
                 </a>
               </li>
@@ -242,7 +238,7 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-amber-300 transition-colors inline-flex items-center gap-1.5 text-gray-200"
                 >
-                  <span>DPIIT Quality Orders</span>
+                  <span>{language === 'hi' ? 'DPIIT गुणवत्ता नियंत्रण आदेश' : 'DPIIT Quality Orders'}</span>
                   <ExternalLink className="w-3 h-3 text-gray-400 shrink-0" />
                 </a>
               </li>
@@ -268,12 +264,14 @@ export const Footer: React.FC = () => {
             onClick={() => setActiveTab('policies')}
             className="text-amber-300 hover:text-white font-semibold transition-colors"
           >
-            Website Policies
+            {language === 'hi' ? 'वेबसाइट नीतियां' : 'Website Policies'}
           </button>
         </div>
 
         <div className="text-center sm:text-right text-gray-500 font-mono text-[10.5px]">
-          © 2026 BIS Intelligence Team · Independent Research Initiative
+          {language === 'hi'
+            ? '© 2026 बीआईएस इंटेलिजेंस टीम · स्वतंत्र अनुसंधान पहल'
+            : '© 2026 BIS Intelligence Team · Independent Research Initiative'}
         </div>
       </div>
     </footer>

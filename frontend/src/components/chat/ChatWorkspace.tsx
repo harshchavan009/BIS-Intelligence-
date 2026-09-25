@@ -393,13 +393,13 @@ export const ChatWorkspace: React.FC = () => {
           </span>
           <span className="text-[10px] text-text-muted">|</span>
           <span className="text-[11px] text-text-secondary font-mono">
-            7 PDFs Indexed (325 Chunks)
+            {language === 'hi' ? '7 पीडीएफ अनुक्रमित (325 खंड)' : '7 PDFs Indexed (325 Chunks)'}
           </span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-[11px] text-status-success font-medium flex items-center gap-1 bg-surface-alt px-2 py-0.5 rounded border border-status-success/30">
             <ShieldCheck className="w-3 h-3 text-status-success" />
-            Active Source Grounding
+            {language === 'hi' ? 'सक्रिय स्रोत सत्यापन' : 'Active Source Grounding'}
           </span>
         </div>
       </div>
@@ -420,7 +420,7 @@ export const ChatWorkspace: React.FC = () => {
               className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
             >
               <div className="flex items-center gap-2 mb-1 px-1 text-[11px] text-text-muted">
-                <span className="font-semibold">{isUser ? 'You' : 'BIS Intelligent Assistant'}</span>
+                <span className="font-semibold">{isUser ? (language === 'hi' ? 'आप' : 'You') : (language === 'hi' ? 'बीआईएस इंटेलिजेंस सहायक' : 'BIS Intelligent Assistant')}</span>
                 <span>•</span>
                 <span>{msg.timestamp}</span>
                 {!isUser && msg.groundedOverall !== undefined && (
@@ -456,7 +456,7 @@ export const ChatWorkspace: React.FC = () => {
                 {!isUser && msg.sources && msg.sources.length > 0 && (
                   <div className="mt-3.5 pt-3 border-t border-border">
                     <div className="text-[11px] font-semibold text-text-secondary mb-1.5 flex items-center gap-1.5">
-                      <span>Source Citations (Click to inspect highlighted official PDF page):</span>
+                      <span>{language === 'hi' ? 'स्रोत संदर्भ (हाइलाइट किए गए आधिकारिक पृष्ठ देखने हेतु क्लिक करें):' : 'Source Citations (Click to inspect highlighted official PDF page):'}</span>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {msg.sources.map((src, i) => (
@@ -593,7 +593,7 @@ export const ChatWorkspace: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex items-center justify-between pt-2 border-t border-border text-[10px] text-brand-accent font-medium">
-                    <span>Ask assistant</span>
+                    <span>{language === 'hi' ? 'सहायक से पूछें' : 'Ask assistant'}</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </button>
@@ -609,7 +609,7 @@ export const ChatWorkspace: React.FC = () => {
       {!isInitialEmptyState && (
         <div className="bg-surface-alt border-x border-t border-border px-4 py-2 overflow-x-auto scrollbar-none flex items-center gap-1.5">
           <span className="text-[10px] font-semibold text-text-secondary uppercase tracking-wider flex-shrink-0 flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-brand-accent" /> Follow-ups:
+            <Sparkles className="w-3 h-3 text-brand-accent" /> {language === 'hi' ? 'संबंधित प्रश्न:' : 'Follow-ups:'}
           </span>
           {currentPrompts.map((p, idx) => (
             <button
@@ -663,7 +663,9 @@ export const ChatWorkspace: React.FC = () => {
 
       {/* Disclaimer footnote */}
       <p className="text-[10.5px] text-text-secondary text-center mt-1.5 font-light">
-        Informational guidance based on official BIS regulatory documents. Not a substitute for an official determination by the Bureau of Indian Standards.
+        {language === 'hi'
+          ? 'आधिकारिक बीआईएस विनियामक दस्तावेजों पर आधारित सूचनात्मक मार्गदर्शन। भारतीय मानक ब्यूरो द्वारा किसी आधिकारिक विधिक निर्धारण का विकल्प नहीं है।'
+          : 'Informational guidance based on official BIS regulatory documents. Not a substitute for an official determination by the Bureau of Indian Standards.'}
       </p>
     </div>
   );

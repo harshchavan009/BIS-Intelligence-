@@ -34,7 +34,7 @@
     "increase_text": "A+",
     "high_contrast": "High Contrast",
     "standard_contrast": "Standard Contrast",
-    "last_updated": "Last Updated: 07 Sept 2026",
+    "last_updated": "Last Updated: 25 Sept 2026",
     "screen_reader_title": "Screen Reader Compatibility & Accessibility",
     "screen_reader_desc": "This portal adheres to the Guidelines for Indian Government Websites (GIGW 3.0) and WCAG 2.1 Level AA standards.",
     "screen_reader_close": "Close",
@@ -60,9 +60,246 @@
     "analytics": "Evaluator Telemetry & Analytics",
     "about": "About BIS AI Assistant"
   },
+  "hero": {
+    "section_label": "Featured Regulatory Intelligence Highlights",
+    "slide_counter": "Slide {current} of {total}",
+    "pause": "Pause automatic slide rotation",
+    "play": "Resume automatic slide rotation",
+    "prev": "Previous slide",
+    "next": "Next slide",
+    "official_gazette": "Official Gazette Verifiable",
+    "section_16": "Section 16 Mandate",
+    "deterministic_grounding": "Deterministic Grounding",
+    "slides": {
+      "ask-assistant": {
+        "badge": "Independent AI Regulatory Engine",
+        "headline": "Ask BIS Intelligence anything about Indian Standards",
+        "subtext": "Instant, source-grounded answers on certification schemes, testing rules, and compliance requirements.",
+        "ctaText": "Ask the Assistant",
+        "metricLabel": "Evaluation Groundedness",
+        "metricValue": "100% Grounded"
+      },
+      "qco-lookup": {
+        "badge": "Mandatory Compliance Tracking",
+        "headline": "Latest QCOs & Mandatory Certifications",
+        "subtext": "Track gazette notifications, implementation schedules, and MSME provisions across industrial sectors.",
+        "ctaText": "Lookup QCO Orders",
+        "metricLabel": "Indexed Gazettes",
+        "metricValue": "1,343+ Chunks"
+      },
+      "hallmarking-huid": {
+        "badge": "Consumer & Trade Authenticity",
+        "headline": "How Gold Hallmarking & 6-Digit HUID Work",
+        "subtext": "Understand BIS purity marks, assaying centers, and the HUID verification process.",
+        "ctaText": "Explore Hallmarking Guide",
+        "metricLabel": "Mandatory Districts",
+        "metricValue": "343+ Districts"
+      },
+      "isi-mark-check": {
+        "badge": "MSME & Manufacturer Support",
+        "headline": "Check if Your Product Needs ISI Certification",
+        "subtext": "Deterministic mapping for Scheme-I vs CRS Scheme-II and required testing facilities.",
+        "ctaText": "Search Standards Catalog",
+        "metricLabel": "Standard Directory",
+        "metricValue": "IS Product Map"
+      }
+    }
+  },
+  "alerts": {
+    "region_label": "Regulatory Updates Ticker",
+    "title": "Alerts:",
+    "whats_new": "What's New",
+    "popular": "Popular Topics",
+    "updates": "Recent Updates",
+    "events": "Events",
+    "view_all": "View All →",
+    "items": {
+      "wn-1": {
+        "tag": "Gazette",
+        "text": "CMD-I/2:12:7 Market Surveillance & BIS Care App Verification Guidelines in effect"
+      },
+      "wn-2": {
+        "tag": "Regulation",
+        "text": "Gazette S.O. 191(E): BIS (Conformity Assessment) Regulations 2018 Master Schedule active"
+      },
+      "wn-3": {
+        "tag": "QCO Order",
+        "text": "Mandatory Quality Control Orders enforce ISI marking for footwear, steel, and toys"
+      },
+      "pop-1": {
+        "tag": "ISI Mark",
+        "text": "How to distinguish authentic ISI mark from counterfeit licenses using CM/L number"
+      },
+      "pop-2": {
+        "tag": "Cement",
+        "text": "Mandatory testing parameters for IS 269:2015 Ordinary Portland Cement (OPC 33, 43, 53)"
+      },
+      "pop-3": {
+        "tag": "Hallmarking",
+        "text": "6-digit alphanumeric HUID gold jewelry verification process via BIS Care App"
+      },
+      "up-1": {
+        "tag": "MSME CBTF",
+        "text": "Cluster Based Test Facility concessions for small enterprise in-house test apparatus"
+      },
+      "up-2": {
+        "tag": "CRS Validity",
+        "text": "Scheme-IV Certificate of Conformity test report 180-day validity mandate guidelines"
+      },
+      "up-3": {
+        "tag": "Electronics",
+        "text": "Compulsory Registration Scheme (CRS) MeitY safety standards for power adaptors & batteries"
+      },
+      "ev-1": {
+        "tag": "Conclave",
+        "text": "National Standards Conclave — World Standards Day technical workshop & industry panel"
+      },
+      "ev-2": {
+        "tag": "Webinar",
+        "text": "MSME Standards Sensitization: Navigating Mandatory QCOs in engineering & electrical"
+      },
+      "ev-3": {
+        "tag": "Awareness",
+        "text": "Consumer Awareness Program: Verifying Hallmarked Gold and Submitting Complaints"
+      }
+    }
+  },
+  "trust_telemetry": {
+    "region_label": "Public Trust and Accuracy Telemetry",
+    "title": "Trust & Accuracy Telemetry",
+    "verified_badge": "Publicly Verified",
+    "headline": "Zero-Hallucination Architecture Tested on Real Gazette Cases",
+    "badge1_stat": "100.0% Grounded",
+    "badge1_title": "65 Verified Test Cases",
+    "badge1_desc": "Zero hallucinations across 11 sectors",
+    "badge2_stat": "1,343+ Chunks",
+    "badge2_title": "7 Official Publications",
+    "badge2_desc": "Gazette S.O. 191(E), BIS Act & QCOs",
+    "badge3_stat": "Clause-Level Citations",
+    "badge3_title": "Every Answer Cites a Clause",
+    "badge3_desc": "Not a summary · Exact section anchors",
+    "cta": "Public Methodology & Proof"
+  },
+  "search": {
+    "plain_search_title": "Plain Keyword Search for MSMEs & Small Businesses",
+    "plain_search_subtitle": "Prefer direct keyword search over conversational AI? Enter your product or standard number below:",
+    "placeholder": "Search standard by product name or IS code (e.g. Cement, Steel TMT, IS 269, Recycled Plastic)...",
+    "search_button": "Search Standards",
+    "clear": "Clear",
+    "results_count": "Found {count} matching standards in registry",
+    "popular_label": "Popular:"
+  },
+  "quick_access": {
+    "region_label": "Quick Access Services and Tools",
+    "badge": "Instant Assistance & Tools",
+    "title": "Quick-Access Regulatory Navigator",
+    "subtitle": "Select a domain below for direct guidance, standards lookup, or conversational AI assistance.",
+    "cards": {
+      "isi-mark": {
+        "title": "Ask About ISI Mark",
+        "desc": "Scheme-I product certification eligibility, factory audits, marking fees & concession rules.",
+        "primary": "Ask Now",
+        "secondary": "See Details"
+      },
+      "hallmarking": {
+        "title": "Hallmarking / HUID Help",
+        "desc": "Verify 6-digit alphanumeric HUID codes, 916/750 purity grades, and jeweller portal registration.",
+        "primary": "Ask Now",
+        "secondary": "See Details"
+      },
+      "qco-lookup": {
+        "title": "QCO Lookup",
+        "desc": "Find whether Quality Control Orders mandate BIS certification for your specific manufactured product.",
+        "primary": "Lookup QCO",
+        "secondary": "See Details"
+      },
+      "latest-updates": {
+        "title": "Latest Standard Updates",
+        "desc": "Track newly formulated Indian Standards, amendments, gazette notifications & revisions.",
+        "primary": "View Updates",
+        "secondary": "Ask AI"
+      },
+      "crs-status": {
+        "title": "Check CRS Registration Status",
+        "desc": "Compulsory Registration Scheme for electronics, IT equipment, safety standards & test reports.",
+        "primary": "Ask Now",
+        "secondary": "See Details"
+      },
+      "find-by-number": {
+        "title": "Find a Standard by Number",
+        "desc": "Direct search for any Indian Standard code (e.g. IS 269, IS 1786, IS 13252, IS 1489) with scope.",
+        "primary": "Search IS Code",
+        "secondary": "Ask AI"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "desc": "Quick answers for MSMEs, foreign manufacturers, consumers, and laboratory managers.",
+        "primary": "Read FAQ",
+        "secondary": "Ask AI"
+      },
+      "talk-human": {
+        "title": "Talk to a Human",
+        "desc": "Branch office contacts, official grievance redressal, nodal officer emails & directory.",
+        "primary": "Branch Directory",
+        "secondary": "Feedback"
+      }
+    }
+  },
+  "interactive_demo": {
+    "badge": "Verifiable Grounding & Citation Architecture",
+    "heading": "Watch How the Assistant Answers Real Regulatory Inquiries",
+    "subheading": "Every response is synthesized with exact clause citations from gazette notifications and official standards documents.",
+    "live_header": "Simulated Query Execution",
+    "benchmark_badge": "65/65 Tests Grounded (100%)",
+    "inquiry_label": "User Inquiry",
+    "inquiry_query": "Which Indian Standard and Quality Control Order (QCO) governs cement used in construction?",
+    "response_label": "Synthesized Assistant Response",
+    "citations_heading": "Grounding Citations Extracted from Knowledge Base",
+    "source_prefix": "Source",
+    "ask_chat_btn": "Ask this query in Chat Workspace"
+  },
+  "media_gallery": {
+    "badge": "Educational Media & Product Walkthroughs",
+    "heading": "Media & Resources Gallery",
+    "subheading": "Explore photo documentation of laboratory apparatus, video guides on compliance, and interactive step-by-step explainers showing the assistant solving real regulatory queries.",
+    "tab_explainers": "Explainers",
+    "tab_photos": "Photos",
+    "tab_videos": "Videos",
+    "add_media": "Add Media"
+  },
+  "chat": {
+    "header_title": "Verified Regulatory Consultation Workspace",
+    "indexed_docs": "7 PDFs Indexed (325 Chunks)",
+    "active_grounding": "Active Source Grounding",
+    "you": "You",
+    "assistant_name": "BIS Intelligent Assistant",
+    "searching_docs": "Consulting official BIS regulatory standards & QCO clauses...",
+    "source_citations_title": "Source Citations (Click to inspect highlighted official PDF page):",
+    "print_save": "Print / Save PDF",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "helpful": "Helpful?",
+    "escalation_text": "Can't find your answer? Contact your nearest BIS Branch Office for physical officer consultation.",
+    "contact_branch": "Contact Nearest Branch",
+    "suggested_title": "Suggested Consultations (Click to start):",
+    "ask_assistant": "Ask assistant",
+    "follow_ups": "Follow-ups:",
+    "placeholder": "Ask regarding Indian Standards, QCOs, MSME CBTF cluster facilities, Scheme I/II/IV, or consumer rights...",
+    "synthesizing": "Synthesizing...",
+    "send": "Send",
+    "disclaimer": "Informational guidance based on official BIS regulatory documents. Not a substitute for an official determination by the Bureau of Indian Standards."
+  },
+  "source_panel": {
+    "title": "Verified Regulatory Source Record",
+    "subtitle": "Official Gazette Page & Verbatim Clause Inspection",
+    "page": "Page {page}",
+    "clause": "Clause",
+    "open_full_pdf": "Open Official PDF",
+    "grounded_verified": "100% Grounded in Official Corpus"
+  },
   "footer": {
     "managed_by": "Website Content Maintained by: BIS Intelligence Team (Independent Initiative)",
-    "last_reviewed": "Last Reviewed On: 24 Sept 2026",
+    "last_reviewed": "Last Reviewed On: 25 Sept 2026",
     "prototype_disclaimer": "This is an independent, unofficial project and is not affiliated with, endorsed by, or operated by the Bureau of Indian Standards or the Government of India. Information is provided for reference only — always verify against bis.gov.in.",
     "best_viewed": "Best Viewed In: Google Chrome 110+, Mozilla Firefox 110+, Safari 16+, Microsoft Edge. Recommended screen resolution: 1280 × 800 or higher.",
     "copyright": "© 2026 BIS Intelligence Team. Content synthesized from public BIS documents. Independent educational & research initiative.",
@@ -74,14 +311,6 @@
     "sitemap": "Sitemap",
     "feedback": "Website Feedback",
     "grievance": "Grievance Redressal"
-  },
-  "search": {
-    "plain_search_title": "Plain Keyword Search for MSMEs & Small Businesses",
-    "plain_search_subtitle": "Prefer direct keyword search over conversational AI? Enter your product or standard number below:",
-    "placeholder": "e.g. Cement, Steel TMT, Electric Iron, IS 269, Recycled Plastics...",
-    "search_button": "Search Standards",
-    "clear": "Clear",
-    "results_count": "Found {count} matching standards in registry"
   },
   "common": {
     "print": "Print Answer",

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
+import { useTranslation } from '../../i18n/useTranslation';
 import { 
   ShieldCheck, 
   Gem, 
@@ -34,162 +35,184 @@ interface QuickCard {
 
 export const QuickAccessGrid: React.FC = () => {
   const { setActiveTab, setQueryPrefill } = useAppStore();
+  const { t, language } = useTranslation();
 
   const cards: QuickCard[] = [
     {
       id: 'isi-mark',
-      title: 'Ask About ISI Mark',
-      desc: 'Scheme-I product certification eligibility, factory audits, marking fees & concession rules.',
+      title: t('quick_access.cards.isi-mark.title'),
+      desc: t('quick_access.cards.isi-mark.desc'),
       bgToken: 'bg-card-lavender',
       icon: ShieldCheck,
       iconBg: 'bg-indigo-100',
       iconColor: 'text-bis-navy',
       primaryAction: {
-        label: 'Ask Now',
+        label: t('quick_access.cards.isi-mark.primary'),
         action: () => {
-          setQueryPrefill('How do I apply for the BIS ISI Mark under Scheme-I and what are the factory testing prerequisites?');
+          setQueryPrefill(language === 'hi'
+            ? 'मैं योजना-I के तहत बीआईएस ISI मार्क के लिए कैसे आवेदन करूं और कारखाने में परीक्षण की क्या पूर्व-शर्तें हैं?'
+            : 'How do I apply for the BIS ISI Mark under Scheme-I and what are the factory testing prerequisites?'
+          );
           setActiveTab('chat');
         }
       },
       secondaryAction: {
-        label: 'See Details',
+        label: t('quick_access.cards.isi-mark.secondary'),
         action: () => setActiveTab('schemes')
       }
     },
     {
       id: 'hallmarking',
-      title: 'Hallmarking / HUID Help',
-      desc: 'Verify 6-digit alphanumeric HUID codes, 916/750 purity grades, and jeweller portal registration.',
+      title: t('quick_access.cards.hallmarking.title'),
+      desc: t('quick_access.cards.hallmarking.desc'),
       bgToken: 'bg-card-peach',
       icon: Gem,
       iconBg: 'bg-amber-100',
       iconColor: 'text-amber-800',
       primaryAction: {
-        label: 'Ask Now',
+        label: t('quick_access.cards.hallmarking.primary'),
         action: () => {
-          setQueryPrefill('How can I verify a 6-digit HUID number on gold jewelry and what does the mark certify?');
+          setQueryPrefill(language === 'hi'
+            ? 'मैं सोने के आभूषणों पर 6-अंकीय HUID संख्या का सत्यापन कैसे कर सकता हूं और यह चिह्न क्या प्रमाणित करता है?'
+            : 'How can I verify a 6-digit HUID number on gold jewelry and what does the mark certify?'
+          );
           setActiveTab('chat');
         }
       },
       secondaryAction: {
-        label: 'See Details',
+        label: t('quick_access.cards.hallmarking.secondary'),
         action: () => setActiveTab('hallmarking')
       }
     },
     {
       id: 'qco-lookup',
-      title: 'QCO Lookup',
-      desc: 'Find whether Quality Control Orders mandate BIS certification for your specific manufactured product.',
+      title: t('quick_access.cards.qco-lookup.title'),
+      desc: t('quick_access.cards.qco-lookup.desc'),
       bgToken: 'bg-card-mint',
       icon: Search,
       iconBg: 'bg-emerald-100',
       iconColor: 'text-emerald-800',
       primaryAction: {
-        label: 'Lookup QCO',
+        label: t('quick_access.cards.qco-lookup.primary'),
         action: () => {
-          setQueryPrefill('Is my product covered under a mandatory Quality Control Order (QCO) issued under Section 16 of the BIS Act?');
+          setQueryPrefill(language === 'hi'
+            ? 'क्या मेरा उत्पाद बीआईएस अधिनियम की धारा 16 के तहत जारी अनिवार्य गुणवत्ता नियंत्रण आदेश (QCO) के अंतर्गत आता है?'
+            : 'Is my product covered under a mandatory Quality Control Order (QCO) issued under Section 16 of the BIS Act?'
+          );
           setActiveTab('chat');
         }
       },
       secondaryAction: {
-        label: 'See Details',
+        label: t('quick_access.cards.qco-lookup.secondary'),
         action: () => setActiveTab('finder')
       }
     },
     {
       id: 'latest-updates',
-      title: 'Latest Standard Updates',
-      desc: 'Track newly formulated Indian Standards, amendments, gazette notifications & revisions.',
+      title: t('quick_access.cards.latest-updates.title'),
+      desc: t('quick_access.cards.latest-updates.desc'),
       bgToken: 'bg-card-pink',
       icon: FileText,
       iconBg: 'bg-purple-100',
       iconColor: 'text-purple-800',
       primaryAction: {
-        label: 'View Updates',
+        label: t('quick_access.cards.latest-updates.primary'),
         action: () => setActiveTab('registry')
       },
       secondaryAction: {
-        label: 'Ask AI',
+        label: t('quick_access.cards.latest-updates.secondary'),
         action: () => {
-          setQueryPrefill('Summarize the most recent Indian Standards updates and technical committee decisions.');
+          setQueryPrefill(language === 'hi'
+            ? 'हाल के भारतीय मानक अद्यतनों और तकनीकी समिति के निर्णयों का सारांश प्रस्तुत करें।'
+            : 'Summarize the most recent Indian Standards updates and technical committee decisions.'
+          );
           setActiveTab('chat');
         }
       }
     },
     {
       id: 'crs-status',
-      title: 'Check CRS Registration Status',
-      desc: 'Compulsory Registration Scheme for electronics, IT equipment, safety standards & test reports.',
+      title: t('quick_access.cards.crs-status.title'),
+      desc: t('quick_access.cards.crs-status.desc'),
       bgToken: 'bg-card-mint',
       icon: Layers,
       iconBg: 'bg-emerald-100',
       iconColor: 'text-emerald-800',
       primaryAction: {
-        label: 'Ask Now',
+        label: t('quick_access.cards.crs-status.primary'),
         action: () => {
-          setQueryPrefill('What is the procedure for obtaining a BIS CRS registration for IT/electronic products under Scheme-II?');
+          setQueryPrefill(language === 'hi'
+            ? 'योजना-II के तहत आईटी/इलेक्ट्रॉनिक उत्पादों के लिए बीआईएस CRS पंजीकरण प्राप्त करने की प्रक्रिया क्या है?'
+            : 'What is the procedure for obtaining a BIS CRS registration for IT/electronic products under Scheme-II?'
+          );
           setActiveTab('chat');
         }
       },
       secondaryAction: {
-        label: 'See Details',
+        label: t('quick_access.cards.crs-status.secondary'),
         action: () => setActiveTab('schemes')
       }
     },
     {
       id: 'find-by-number',
-      title: 'Find a Standard by Number',
-      desc: 'Direct search for any Indian Standard code (e.g. IS 269, IS 1786, IS 13252, IS 1489) with scope.',
+      title: t('quick_access.cards.find-by-number.title'),
+      desc: t('quick_access.cards.find-by-number.desc'),
       bgToken: 'bg-card-lavender',
       icon: Hash,
       iconBg: 'bg-indigo-100',
       iconColor: 'text-bis-navy',
       primaryAction: {
-        label: 'Search IS Code',
+        label: t('quick_access.cards.find-by-number.primary'),
         action: () => setActiveTab('finder')
       },
       secondaryAction: {
-        label: 'Ask AI',
+        label: t('quick_access.cards.find-by-number.secondary'),
         action: () => {
-          setQueryPrefill('What are the critical testing requirements under Indian Standard IS 1786 for High Strength Deformed Steel Bars?');
+          setQueryPrefill(language === 'hi'
+            ? 'उच्च शक्ति विकृत स्टील बार्स के लिए भारतीय मानक IS 1786 के तहत आवश्यक परीक्षण क्या हैं?'
+            : 'What are the critical testing requirements under Indian Standard IS 1786 for High Strength Deformed Steel Bars?'
+          );
           setActiveTab('chat');
         }
       }
     },
     {
       id: 'faq',
-      title: 'Frequently Asked Questions',
-      desc: 'Quick answers for MSMEs, foreign manufacturers, consumers, and laboratory managers.',
+      title: t('quick_access.cards.faq.title'),
+      desc: t('quick_access.cards.faq.desc'),
       bgToken: 'bg-card-peach',
       icon: HelpCircle,
       iconBg: 'bg-amber-100',
       iconColor: 'text-amber-800',
       primaryAction: {
-        label: 'Read FAQ',
+        label: t('quick_access.cards.faq.primary'),
         action: () => setActiveTab('faq')
       },
       secondaryAction: {
-        label: 'Ask AI',
+        label: t('quick_access.cards.faq.secondary'),
         action: () => {
-          setQueryPrefill('What are the most common questions and fee structures for BIS certification?');
+          setQueryPrefill(language === 'hi'
+            ? 'बीआईएस प्रमाणन के लिए सबसे सामान्य प्रश्न और शुल्क संरचनाएं क्या हैं?'
+            : 'What are the most common questions and fee structures for BIS certification?'
+          );
           setActiveTab('chat');
         }
       }
     },
     {
       id: 'talk-human',
-      title: 'Talk to a Human',
-      desc: 'Branch office contacts, official grievance redressal, nodal officer emails & directory.',
+      title: t('quick_access.cards.talk-human.title'),
+      desc: t('quick_access.cards.talk-human.desc'),
       bgToken: 'bg-card-pink',
       icon: Headphones,
       iconBg: 'bg-purple-100',
       iconColor: 'text-purple-800',
       primaryAction: {
-        label: 'Branch Directory',
+        label: t('quick_access.cards.talk-human.primary'),
         action: () => setActiveTab('contact')
       },
       secondaryAction: {
-        label: 'Feedback',
+        label: t('quick_access.cards.talk-human.secondary'),
         action: () => {
           const { setActiveLegalModal } = useAppStore.getState();
           setActiveLegalModal('feedback');
@@ -200,19 +223,19 @@ export const QuickAccessGrid: React.FC = () => {
 
   return (
     <section 
-      aria-label="Quick Access Services and Tools"
+      aria-label={t('quick_access.region_label')}
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14"
     >
       <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2">
         <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-accent bg-surface-alt border border-brand-accent/30 px-3 py-1 rounded-full">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Instant Assistance &amp; Tools</span>
+          <span>{t('quick_access.badge')}</span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight font-sans">
-          Quick-Access Regulatory Navigator
+          {t('quick_access.title')}
         </h2>
         <p className="text-sm text-text-secondary">
-          Select a domain below for direct guidance, standards lookup, or conversational AI assistance.
+          {t('quick_access.subtitle')}
         </p>
       </div>
 

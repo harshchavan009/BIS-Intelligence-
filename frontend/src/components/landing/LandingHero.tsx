@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAppStore } from '../../store/useAppStore';
+import { useTranslation } from '../../i18n/useTranslation';
 import { 
   Search, 
   Layers, 
@@ -20,7 +21,8 @@ import { MediaGallery } from './MediaGallery';
 import { BisIntelligenceLogo } from '../common/BisIntelligenceLogo';
 
 export const LandingHero: React.FC = () => {
-  const { setActiveTab, setQueryPrefill, openSource, language, evalBenchmark, fetchEvalBenchmark } = useAppStore();
+  const { setActiveTab, setQueryPrefill, openSource, evalBenchmark, fetchEvalBenchmark } = useAppStore();
+  const { t, language } = useTranslation();
 
   useEffect(() => {
     fetchEvalBenchmark();
@@ -28,11 +30,15 @@ export const LandingHero: React.FC = () => {
 
   // Live Typing Demo Simulation
   const sampleDemoAnswer = {
-    query: "Which Indian Standard and Quality Control Order (QCO) governs cement used in construction?",
-    text: "Under the Cement (Quality Control) Order, 2003, mandatory certification is enforced for construction cement [1]. Key applicable standards include:\n• IS 269: 2015 — Ordinary Portland Cement (OPC 33, 43, 53 grade) [1]\n• IS 1489 (Part 1): Portland Pozzolana Cement (Fly-ash based) [1]\n• IS 12330: Sulphate Resisting Portland Cement [1]\n\nScheme: Scheme-I (ISI Mark). Manufacturing or selling without the standard mark is prohibited under Section 17 & 29 of the BIS Act [2].",
+    query: language === 'hi'
+      ? "निर्माण में प्रयुक्त सीमेंट के लिए कौन सा भारतीय मानक और गुणवत्ता नियंत्रण आदेश (QCO) लागू होता है?"
+      : "Which Indian Standard and Quality Control Order (QCO) governs cement used in construction?",
+    text: language === 'hi'
+      ? "सीमेंट (गुणवत्ता नियंत्रण) आदेश, 2003 के अंतर्गत निर्माण सीमेंट हेतु अनिवार्य प्रमाणन लागू है [1]। मुख्य लागू मानक निम्नलिखित हैं:\n• IS 269: 2015 — साधारण पोर्टलैंड सीमेंट (OPC 33, 43, 53 ग्रेड) [1]\n• IS 1489 (भाग 1): पोर्टलैंड पोज़ोलाना सीमेंट (फ्लाई-ऐश आधारित) [1]\n• IS 12330: सल्फेट प्रतिरोधी पोर्टलैंड सीमेंट [1]\n\nयोजना: योजना-I (ISI मार्क)। बीआईएस अधिनियम की धारा 17 एवं 29 के तहत बिना मानक चिह्न निर्माण या विक्रय निषिद्ध है [2]।"
+      : "Under the Cement (Quality Control) Order, 2003, mandatory certification is enforced for construction cement [1]. Key applicable standards include:\n• IS 269: 2015 — Ordinary Portland Cement (OPC 33, 43, 53 grade) [1]\n• IS 1489 (Part 1): Portland Pozzolana Cement (Fly-ash based) [1]\n• IS 12330: Sulphate Resisting Portland Cement [1]\n\nScheme: Scheme-I (ISI Mark). Manufacturing or selling without the standard mark is prohibited under Section 17 & 29 of the BIS Act [2].",
     sources: [
       {
-        document_title: "Scheme-I Specific Product Guidelines & Mandatory QCO Mapping",
+        document_title: language === 'hi' ? "योजना-I विशिष्ट उत्पाद दिशानिर्देश एवं अनिवार्य QCO मैपिंग" : "Scheme-I Specific Product Guidelines & Mandatory QCO Mapping",
         source_file: "scheme1-specific-guidelines.pdf",
         clause_ref: "Sr No. 1 - Cement",
         page_number: 1,
@@ -40,7 +46,7 @@ export const LandingHero: React.FC = () => {
         grounded: true
       },
       {
-        document_title: "Guidance Document on Quality Control Orders (QCOs) under Section 16 of BIS Act, 2016",
+        document_title: language === 'hi' ? "बीआईएस अधिनियम 2016 की धारा 16 के अंतर्गत गुणवत्ता नियंत्रण आदेश (QCO) मार्गदर्शन दस्तावेज" : "Guidance Document on Quality Control Orders (QCOs) under Section 16 of BIS Act, 2016",
         source_file: "qco-guidance.pdf",
         clause_ref: "Clause 7.1",
         page_number: 3,
@@ -72,7 +78,7 @@ export const LandingHero: React.FC = () => {
     }, 16);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [language]);
 
   const handleDirectSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,7 +90,7 @@ export const LandingHero: React.FC = () => {
   const renderTypedContent = (text: string) => {
     const parts = text.split(/(\[\d+\])/g);
     return (
-      <div className="text-xs leading-relaxed text-bis-ink space-y-2 font-sans">
+      <div className="text-xs leading-relaxed text-bis-ink dark:text-text-primary space-y-2 font-sans">
         {parts.map((part, idx) => {
           const match = part.match(/\[(\d+)\]/);
           if (match) {
@@ -109,6 +115,22 @@ export const LandingHero: React.FC = () => {
     );
   };
 
+  const popularTags = language === 'hi' 
+    ? [
+        { label: 'IS 269 सीमेंट', query: 'IS 269 सीमेंट के लिए परीक्षण आवश्यकताएं और अनिवार्य नियम समझाएं' },
+        { label: 'IS 1786 स्टील टीएमटी', query: 'IS 1786 स्टील टीएमटी सरिया हेतु अनिवार्य यांत्रिक परीक्षण समझाएं' },
+        { label: 'IS 13252 इलेक्ट्रॉनिक्स', query: 'IS 13252 के तहत MeitY CRS इलेक्ट्रॉनिक सुरक्षा प्रमाणन समझाएं' },
+        { label: 'स्वर्ण हॉलमार्किंग HUID', query: 'सोने के आभूषणों पर 6-अंकीय अक्षरांकीय HUID सत्यापन प्रक्रिया बताएं' },
+        { label: 'खिलौने QCO', query: 'खिलौनों के लिए अनिवार्य गुणवत्ता नियंत्रण आदेश (QCO) और ISI मार्क नियम बताएं' }
+      ]
+    : [
+        { label: 'IS 269 Cement', query: 'Explain testing specifications and mandatory requirements for IS 269 Cement' },
+        { label: 'IS 1786 Steel TMT', query: 'Explain testing specifications and mandatory requirements for IS 1786 Steel TMT' },
+        { label: 'IS 13252 Electronics', query: 'Explain testing specifications and mandatory requirements for IS 13252 Electronics' },
+        { label: 'Gold Hallmarking HUID', query: 'Explain testing specifications and mandatory requirements for Gold Hallmarking HUID' },
+        { label: 'Toys QCO', query: 'Explain testing specifications and mandatory requirements for Toys QCO' }
+      ];
+
   return (
     <div className="w-full flex flex-col font-sans">
       {/* SECTION 3: Hero Carousel */}
@@ -130,7 +152,7 @@ export const LandingHero: React.FC = () => {
                 type="text"
                 value={quickInput}
                 onChange={(e) => setQuickInput(e.target.value)}
-                placeholder="Search standard by product name or IS code (e.g. Cement, Steel TMT, IS 269, Recycled Plastic)..."
+                placeholder={t('search.placeholder')}
                 className="w-full pl-11 pr-4 py-3 bg-surface rounded-xl border border-border text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-brand-accent shadow-xs font-sans"
               />
             </div>
@@ -138,23 +160,23 @@ export const LandingHero: React.FC = () => {
               type="submit"
               className="w-full sm:w-auto bg-brand-primary hover:brightness-110 text-white font-bold text-sm px-6 py-3 rounded-xl transition-colors shadow-xs flex items-center justify-center gap-2 whitespace-nowrap"
             >
-              <span>Search Standards</span>
+              <span>{t('search.search_button')}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
           <div className="flex items-center gap-2 mt-2.5 text-xs text-text-secondary overflow-x-auto pb-1">
-            <span className="font-semibold text-text-primary shrink-0">Popular:</span>
-            {['IS 269 Cement', 'IS 1786 Steel TMT', 'IS 13252 Electronics', 'Gold Hallmarking HUID', 'Toys QCO'].map(item => (
+            <span className="font-semibold text-text-primary shrink-0">{t('search.popular_label')}</span>
+            {popularTags.map(item => (
               <button
-                key={item}
+                key={item.label}
                 type="button"
                 onClick={() => {
-                  setQueryPrefill(`Explain testing specifications and mandatory requirements for ${item}`);
+                  setQueryPrefill(item.query);
                   setActiveTab('chat');
                 }}
                 className="bg-surface hover:bg-surface-alt text-text-primary px-2.5 py-0.5 rounded-full border border-border shrink-0 transition-colors text-[11px]"
               >
-                {item}
+                {item.label}
               </button>
             ))}
           </div>
@@ -173,13 +195,13 @@ export const LandingHero: React.FC = () => {
           <div className="text-center mb-6 space-y-1">
             <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-status-success bg-surface-alt border border-status-success/30 px-3 py-1 rounded-full">
               <CheckCircle2 className="w-3.5 h-3.5 text-status-success" />
-              <span>Verifiable Grounding &amp; Citation Architecture</span>
+              <span>{t('interactive_demo.badge')}</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-extrabold text-text-primary">
-              Watch How the Assistant Answers Real Regulatory Inquiries
+              {t('interactive_demo.heading')}
             </h2>
             <p className="text-xs text-text-secondary max-w-xl mx-auto">
-              Every response is synthesized with exact clause citations from gazette notifications and official standards documents.
+              {t('interactive_demo.subheading')}
             </p>
           </div>
 
@@ -188,10 +210,10 @@ export const LandingHero: React.FC = () => {
             <div className="bg-brand-primary dark:bg-surface-alt px-5 py-3 text-white flex items-center justify-between border-b border-border">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
-                <span className="font-bold text-xs">Simulated Query Execution</span>
+                <span className="font-bold text-xs">{t('interactive_demo.live_header')}</span>
               </div>
               <div className="text-[11px] font-mono text-emerald-300 bg-white/10 px-2 py-0.5 rounded">
-                65/65 Tests Grounded (100%)
+                {t('interactive_demo.benchmark_badge')}
               </div>
             </div>
 
@@ -199,7 +221,7 @@ export const LandingHero: React.FC = () => {
               {/* Question */}
               <div className="bg-surface-alt p-3.5 rounded-lg border border-border">
                 <div className="text-[11px] font-mono uppercase text-text-muted font-bold mb-1">
-                  User Inquiry
+                  {t('interactive_demo.inquiry_label')}
                 </div>
                 <div className="font-bold text-sm text-text-primary">
                   "{sampleDemoAnswer.query}"
@@ -210,7 +232,7 @@ export const LandingHero: React.FC = () => {
               <div className="p-4 bg-surface-alt rounded-lg border border-border">
                 <div className="text-[11px] font-mono uppercase text-brand-primary font-bold mb-2 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-brand-accent" />
-                  <span>Synthesized Assistant Response</span>
+                  <span>{t('interactive_demo.response_label')}</span>
                 </div>
                 {renderTypedContent(typedText)}
                 {!typingDone && (
@@ -221,7 +243,7 @@ export const LandingHero: React.FC = () => {
               {/* Citations Preview */}
               <div className="space-y-2">
                 <div className="text-xs font-bold text-brand-primary uppercase tracking-wider font-mono">
-                  Grounding Citations Extracted from Knowledge Base
+                  {t('interactive_demo.citations_heading')}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {sampleDemoAnswer.sources.map((src, idx) => (
@@ -233,7 +255,7 @@ export const LandingHero: React.FC = () => {
                       tabIndex={0}
                     >
                       <div className="flex items-center justify-between text-[11px] font-mono text-text-secondary">
-                        <span className="font-bold text-brand-primary">Source [{idx + 1}]</span>
+                        <span className="font-bold text-brand-primary">{t('interactive_demo.source_prefix')} [{idx + 1}]</span>
                         <span className="bg-surface px-1.5 py-0.5 rounded border border-border text-brand-accent font-semibold">{src.clause_ref}</span>
                       </div>
                       <div className="text-xs font-semibold text-text-primary truncate">{src.document_title}</div>
@@ -253,7 +275,7 @@ export const LandingHero: React.FC = () => {
                   }}
                   className="bg-brand-accent hover:brightness-110 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 shadow-sm"
                 >
-                  <span>Ask this query in Chat Workspace</span>
+                  <span>{t('interactive_demo.ask_chat_btn')}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>

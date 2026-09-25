@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../../store/useAppStore';
+import { useTranslation } from '../../i18n/useTranslation';
 import { 
   Camera, 
   Video, 
@@ -39,6 +40,7 @@ export interface MediaItem {
 
 export const MediaGallery: React.FC = () => {
   const { setActiveTab, setQueryPrefill } = useAppStore();
+  const { t, language } = useTranslation();
   const [activeTab, setActiveTabState] = useState<MediaType>('explainers');
   
   // Lightbox & Video Player State
@@ -267,13 +269,13 @@ export const MediaGallery: React.FC = () => {
         <div>
           <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary bg-surface-alt border border-brand-primary/30 px-3 py-1 rounded-full mb-2">
             <Sparkles className="w-3.5 h-3.5 text-brand-accent" />
-            <span>Educational Media &amp; Product Walkthroughs</span>
+            <span>{t('media_gallery.badge')}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight font-sans">
-            Media &amp; Resources Gallery
+            {t('media_gallery.heading')}
           </h2>
           <p className="text-sm text-text-secondary mt-1 max-w-2xl">
-            Explore photo documentation of laboratory apparatus, video guides on compliance, and interactive step-by-step explainers showing the assistant solving real regulatory queries.
+            {t('media_gallery.subheading')}
           </p>
         </div>
 
@@ -291,7 +293,7 @@ export const MediaGallery: React.FC = () => {
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Explainers</span>
+              <span>{t('media_gallery.tab_explainers')}</span>
             </button>
 
             <button
@@ -305,7 +307,7 @@ export const MediaGallery: React.FC = () => {
               }`}
             >
               <Camera className="w-3.5 h-3.5" />
-              <span>Photos ({mediaItems.filter(m => m.type === 'photos').length})</span>
+              <span>{t('media_gallery.tab_photos')} ({mediaItems.filter(m => m.type === 'photos').length})</span>
             </button>
 
             <button
@@ -319,7 +321,7 @@ export const MediaGallery: React.FC = () => {
               }`}
             >
               <Video className="w-3.5 h-3.5" />
-              <span>Videos ({mediaItems.filter(m => m.type === 'videos').length})</span>
+              <span>{t('media_gallery.tab_videos')} ({mediaItems.filter(m => m.type === 'videos').length})</span>
             </button>
           </div>
 
@@ -329,7 +331,7 @@ export const MediaGallery: React.FC = () => {
             title="Add Media Item (JSON / CMS Pattern)"
           >
             <Plus className="w-4 h-4 text-brand-accent" />
-            <span className="hidden sm:inline">Add Media</span>
+            <span className="hidden sm:inline">{t('media_gallery.add_media')}</span>
           </button>
         </div>
       </div>
@@ -367,7 +369,7 @@ export const MediaGallery: React.FC = () => {
                   {/* Status Badges */}
                   <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 bg-black/75 backdrop-blur-xs text-white text-[10px] font-mono px-2.5 py-1 rounded-md">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Live Screen Recording</span>
+                    <span>{language === 'hi' ? 'सक्रिय स्क्रीन रिकॉर्डिंग' : 'Live Screen Recording'}</span>
                   </div>
                   {item.duration && (
                     <div className="absolute bottom-2.5 right-2.5 bg-black/80 text-white text-[11px] font-mono px-2 py-0.5 rounded">
@@ -382,18 +384,18 @@ export const MediaGallery: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-status-success animate-pulse" />
                     <span className="text-xs font-mono font-bold uppercase tracking-wider text-status-success bg-surface-alt px-2 py-0.5 rounded border border-status-success/30">
-                      Interactive Live Query
+                      {language === 'hi' ? 'संवादात्मक लाइव प्रश्न' : 'Interactive Live Query'}
                     </span>
                   </div>
                   <span className="text-[11px] font-mono text-text-muted">
-                    Source Verified
+                    {language === 'hi' ? 'स्रोत सत्यापित' : 'Source Verified'}
                   </span>
                 </div>
 
                 {/* Query Header */}
                 <div className="bg-surface-alt p-3 rounded-lg border border-border">
                   <div className="text-[11px] font-mono uppercase text-text-muted font-bold mb-1">
-                    User Regulatory Query
+                    {language === 'hi' ? 'उपयोगकर्ता का विनियामक प्रश्न' : 'User Regulatory Query'}
                   </div>
                   <p className="text-sm font-bold text-text-primary">
                     "{item.explainerData?.query}"
@@ -404,7 +406,7 @@ export const MediaGallery: React.FC = () => {
                 <div className="space-y-2">
                   <div className="text-[11px] font-mono uppercase text-brand-primary font-bold flex items-center gap-1">
                     <Sparkles className="w-3 h-3 text-brand-accent" />
-                    <span>Assistant Grounded Answer</span>
+                    <span>{language === 'hi' ? 'सहायक का प्रमाणित उत्तर' : 'Assistant Grounded Answer'}</span>
                   </div>
                   <p className="text-xs leading-relaxed text-text-primary bg-surface-alt p-3 rounded-lg border border-border">
                     {item.explainerData?.answer}
@@ -432,7 +434,7 @@ export const MediaGallery: React.FC = () => {
                   className="text-brand-primary hover:text-brand-accent text-xs font-bold transition-colors flex items-center gap-1.5"
                 >
                   <Play className="w-3.5 h-3.5 fill-current text-brand-accent" />
-                  <span>Watch Clip ({item.duration || '0:38'})</span>
+                  <span>{language === 'hi' ? 'क्लिप देखें' : 'Watch Clip'} ({item.duration || '0:38'})</span>
                 </button>
                 <button
                   onClick={() => {
@@ -443,7 +445,7 @@ export const MediaGallery: React.FC = () => {
                   }}
                   className="bg-brand-primary hover:brightness-110 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
                 >
-                  <span>Test in Assistant</span>
+                  <span>{language === 'hi' ? 'सहायक में जांचें' : 'Test in Assistant'}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>

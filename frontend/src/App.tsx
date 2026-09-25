@@ -71,9 +71,10 @@ export const App: React.FC = () => {
     };
   }, [setActiveTab]);
 
-  // Synchronize persistent GIGW accessibility and theme preferences to document root
+  // Synchronize persistent GIGW accessibility, language, and theme preferences to document root
   React.useEffect(() => {
     const root = document.documentElement;
+    root.lang = language;
     root.setAttribute('data-theme', theme);
     if (theme === 'dark') {
       root.classList.add('dark');
@@ -92,7 +93,7 @@ export const App: React.FC = () => {
     } else {
       root.classList.remove('high-contrast');
     }
-  }, [theme, highContrast, fontSize]);
+  }, [theme, highContrast, fontSize, language]);
 
   return (
     <div className={`min-h-screen flex flex-col bg-background text-text-primary transition-colors duration-150`}>

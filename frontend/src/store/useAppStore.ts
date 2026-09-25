@@ -158,9 +158,22 @@ const getStoredToken = (): string | null => {
   return null;
 };
 
+const getStoredLanguage = (): 'en' | 'hi' => {
+  try {
+    const saved = localStorage.getItem('bis_language');
+    if (saved === 'en' || saved === 'hi') return saved;
+  } catch (e) {}
+  return 'en';
+};
+
 export const useAppStore = create<AppState>((set, get) => ({
-  language: 'en',
-  setLanguage: (language) => set({ language }),
+  language: getStoredLanguage(),
+  setLanguage: (language) => {
+    try {
+      localStorage.setItem('bis_language', language);
+    } catch (e) {}
+    set({ language });
+  },
   activeTab: 'landing',
   setActiveTab: (activeTab) => set({ activeTab }),
   selectedSource: null,

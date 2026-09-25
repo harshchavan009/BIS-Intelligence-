@@ -1,13 +1,15 @@
 import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
+import { useTranslation } from '../../i18n/useTranslation';
 import { ShieldCheck, Database, FileCheck2, ArrowRight, Sparkles } from 'lucide-react';
 
 export const TrustAccuracyStrip: React.FC = () => {
   const { setActiveTab } = useAppStore();
+  const { t, language } = useTranslation();
 
   return (
     <section 
-      aria-label="Public Trust and Accuracy Telemetry" 
+      aria-label={t('trust_telemetry.region_label')} 
       className="bg-brand-primary dark:bg-surface-alt text-white border-b border-white/10 dark:border-border py-4 px-4 sm:px-6 lg:px-8 shadow-sm"
     >
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
@@ -20,14 +22,14 @@ export const TrustAccuracyStrip: React.FC = () => {
           <div>
             <div className="flex items-center justify-center lg:justify-start gap-1.5">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-300">
-                Trust &amp; Accuracy Telemetry
+                {t('trust_telemetry.title')}
               </span>
               <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
-                Publicly Verified
+                {t('trust_telemetry.verified_badge')}
               </span>
             </div>
             <div className="text-sm font-bold text-white">
-              Zero-Hallucination Architecture Tested on Real Gazette Cases
+              {t('trust_telemetry.headline')}
             </div>
           </div>
         </div>
@@ -39,17 +41,17 @@ export const TrustAccuracyStrip: React.FC = () => {
           <button
             onClick={() => setActiveTab('methodology')}
             className="p-3 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-amber-300/60 rounded-xl text-left transition-all duration-150 group cursor-pointer"
-            title="Read Groundedness Evaluation Methodology"
+            title={language === 'hi' ? 'सत्यनिष्ठा मूल्यांकन कार्यप्रणाली पढ़ें' : 'Read Groundedness Evaluation Methodology'}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-emerald-400">100.0% Grounded</span>
+              <span className="text-xs font-mono font-bold text-emerald-400">{t('trust_telemetry.badge1_stat')}</span>
               <Sparkles className="w-3.5 h-3.5 text-amber-300 opacity-60 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="text-xs font-bold text-white mt-0.5 group-hover:text-amber-200 transition-colors">
-              65 Verified Test Cases
+              {t('trust_telemetry.badge1_title')}
             </div>
             <div className="text-[11px] text-gray-300 mt-1 line-clamp-1">
-              Zero hallucinations across 11 sectors
+              {t('trust_telemetry.badge1_desc')}
             </div>
           </button>
 
@@ -57,17 +59,17 @@ export const TrustAccuracyStrip: React.FC = () => {
           <button
             onClick={() => setActiveTab('methodology')}
             className="p-3 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-amber-300/60 rounded-xl text-left transition-all duration-150 group cursor-pointer"
-            title="Inspect Knowledge Base Publications"
+            title={language === 'hi' ? 'ज्ञानकोष प्रकाशनों का निरीक्षण करें' : 'Inspect Knowledge Base Publications'}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-amber-300">1,343+ Chunks</span>
+              <span className="text-xs font-mono font-bold text-amber-300">{t('trust_telemetry.badge2_stat')}</span>
               <Database className="w-3.5 h-3.5 text-amber-300 opacity-60 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="text-xs font-bold text-white mt-0.5 group-hover:text-amber-200 transition-colors">
-              7 Official Publications
+              {t('trust_telemetry.badge2_title')}
             </div>
             <div className="text-[11px] text-gray-300 mt-1 line-clamp-1">
-              Gazette S.O. 191(E), BIS Act &amp; QCOs
+              {t('trust_telemetry.badge2_desc')}
             </div>
           </button>
 
@@ -75,17 +77,17 @@ export const TrustAccuracyStrip: React.FC = () => {
           <button
             onClick={() => setActiveTab('methodology')}
             className="p-3 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-amber-300/60 rounded-xl text-left transition-all duration-150 group cursor-pointer"
-            title="Learn how exact clause citations are extracted"
+            title={language === 'hi' ? 'जानें कि सटीक खंड संदर्भ कैसे निकाले जाते हैं' : 'Learn how exact clause citations are extracted'}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-sky-300">Clause-Level Citations</span>
+              <span className="text-xs font-mono font-bold text-sky-300">{t('trust_telemetry.badge3_stat')}</span>
               <FileCheck2 className="w-3.5 h-3.5 text-sky-300 opacity-60 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="text-xs font-bold text-white mt-0.5 group-hover:text-amber-200 transition-colors">
-              Every Answer Cites a Clause
+              {t('trust_telemetry.badge3_title')}
             </div>
             <div className="text-[11px] text-gray-300 mt-1 line-clamp-1">
-              Not a summary · Exact section anchors
+              {t('trust_telemetry.badge3_desc')}
             </div>
           </button>
 
@@ -97,7 +99,7 @@ export const TrustAccuracyStrip: React.FC = () => {
             onClick={() => setActiveTab('methodology')}
             className="inline-flex items-center gap-1.5 text-xs font-bold bg-bis-red hover:bg-red-700 text-white px-4 py-2 rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer group"
           >
-            <span>Public Methodology &amp; Proof</span>
+            <span>{t('trust_telemetry.cta')}</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
           </button>
         </div>

@@ -42,14 +42,14 @@ export const SourcePanel: React.FC = () => {
                 {language === 'hi' ? 'सत्यापित विनियामक संदर्भ स्रोत' : 'Verified Regulatory Source Record'}
               </h3>
               <p className="text-[11px] text-gray-300">
-                Official Gazette Page & Verbatim Clause Inspection
+                {language === 'hi' ? 'आधिकारिक राजपत्र पृष्ठ एवं शब्दशः खंड निरीक्षण' : 'Official Gazette Page & Verbatim Clause Inspection'}
               </p>
             </div>
           </div>
           <button
             onClick={() => setIsSourceDrawerOpen(false)}
             className="text-gray-300 hover:text-white p-1.5 rounded hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-brand-accent"
-            aria-label="Close source inspection drawer"
+            aria-label={language === 'hi' ? 'स्रोत निरीक्षण पैनल बंद करें' : 'Close source inspection drawer'}
           >
             <X className="w-5 h-5" />
           </button>
@@ -62,7 +62,7 @@ export const SourcePanel: React.FC = () => {
               {selectedSource.clause_ref}
             </span>
             <span className="text-xs text-text-secondary font-mono">
-              Page {selectedSource.page_number}
+              {language === 'hi' ? `पृष्ठ ${selectedSource.page_number}` : `Page ${selectedSource.page_number}`}
             </span>
           </div>
 
@@ -76,7 +76,7 @@ export const SourcePanel: React.FC = () => {
               }`}
             >
               <ImageIcon className="w-3.5 h-3.5" />
-              <span>Official PDF Page</span>
+              <span>{language === 'hi' ? 'आधिकारिक पीडीएफ पृष्ठ' : 'Official PDF Page'}</span>
             </button>
             <button
               onClick={() => setActiveView('text')}
@@ -87,7 +87,7 @@ export const SourcePanel: React.FC = () => {
               }`}
             >
               <BookOpen className="w-3.5 h-3.5" />
-              <span>Verbatim OCR</span>
+              <span>{language === 'hi' ? 'शब्दशः OCR' : 'Verbatim OCR'}</span>
             </button>
           </div>
         </div>
@@ -98,20 +98,22 @@ export const SourcePanel: React.FC = () => {
           <div className="bg-surface-alt border border-border rounded-lg p-4 shadow-sm space-y-2 text-xs">
             <div className="flex items-start justify-between gap-2">
               <div className="space-y-0.5">
-                <span className="text-[10px] uppercase font-mono text-text-secondary/70">Official Publication</span>
+                <span className="text-[10px] uppercase font-mono text-text-secondary/70">
+                  {language === 'hi' ? 'आधिकारिक प्रकाशन' : 'Official Publication'}
+                </span>
                 <h4 className="font-serif font-bold text-text-primary text-sm">
                   {selectedSource.document_title}
                 </h4>
               </div>
               <span className="inline-flex items-center gap-1 text-[10px] text-status-success bg-status-success/15 px-2 py-0.5 rounded border border-status-success/30 flex-shrink-0">
                 <ShieldCheck className="w-3 h-3" />
-                Grounded Clause
+                {language === 'hi' ? 'प्रमाणित खंड' : 'Grounded Clause'}
               </span>
             </div>
 
             <div className="pt-2 border-t border-border/60 flex items-center justify-between text-text-secondary font-mono text-[11px]">
-              <span className="truncate max-w-[280px]">File: {selectedSource.source_file}</span>
-              <span>Physical Page: {selectedSource.page_number}</span>
+              <span className="truncate max-w-[280px]">{language === 'hi' ? 'फ़ाइल:' : 'File:'} {selectedSource.source_file}</span>
+              <span>{language === 'hi' ? 'भौतिक पृष्ठ:' : 'Physical Page:'} {selectedSource.page_number}</span>
             </div>
           </div>
 
@@ -121,7 +123,7 @@ export const SourcePanel: React.FC = () => {
               <div className="flex items-center justify-between text-xs text-text-secondary">
                 <div className="flex items-center gap-1.5 font-medium text-status-warning bg-status-warning/15 px-2.5 py-1 rounded border border-status-warning/30">
                   <span className="w-2 h-2 rounded-full bg-status-warning animate-pulse"></span>
-                  <span>Target Clause Highlighted in Regulatory Yellow</span>
+                  <span>{language === 'hi' ? 'लक्षित खंड विनियामक पीले रंग में चिह्नित' : 'Target Clause Highlighted in Regulatory Yellow'}</span>
                 </div>
                 
                 {/* Zoom Controls */}
@@ -129,7 +131,7 @@ export const SourcePanel: React.FC = () => {
                   <button
                     onClick={() => setZoomLevel(Math.max(0.8, zoomLevel - 0.2))}
                     className="p-1 text-text-secondary hover:text-text-primary rounded hover:bg-surface-alt"
-                    title="Zoom Out"
+                    title={language === 'hi' ? 'ज़ूम आउट' : 'Zoom Out'}
                     aria-label="Zoom out PDF page"
                   >
                     <ZoomOut className="w-3.5 h-3.5" />
@@ -138,7 +140,7 @@ export const SourcePanel: React.FC = () => {
                   <button
                     onClick={() => setZoomLevel(Math.min(2.0, zoomLevel + 0.2))}
                     className="p-1 text-text-secondary hover:text-text-primary rounded hover:bg-surface-alt"
-                    title="Zoom In"
+                    title={language === 'hi' ? 'ज़ूम इन' : 'Zoom In'}
                     aria-label="Zoom in PDF page"
                   >
                     <ZoomIn className="w-3.5 h-3.5" />
@@ -148,7 +150,7 @@ export const SourcePanel: React.FC = () => {
                     target="_blank"
                     rel="noreferrer"
                     className="p-1 text-text-secondary hover:text-brand-primary rounded hover:bg-surface-alt ml-1 border-l border-border"
-                    title="Open Full Page Image in New Tab"
+                    title={language === 'hi' ? 'नए टैब में पूरी छवि खोलें' : 'Open Full Page Image in New Tab'}
                     aria-label="Open full page image in new window"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -161,14 +163,20 @@ export const SourcePanel: React.FC = () => {
                 {imageLoading && (
                   <div className="absolute inset-0 bg-surface/80 flex flex-col items-center justify-center gap-2 z-10">
                     <span className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin"></span>
-                    <span className="text-xs text-text-secondary">Rendering official PDF page with annotations...</span>
+                    <span className="text-xs text-text-secondary">
+                      {language === 'hi' ? 'टिप्पणियों के साथ आधिकारिक पीडीएफ पृष्ठ रेंडर हो रहा है...' : 'Rendering official PDF page with annotations...'}
+                    </span>
                   </div>
                 )}
 
                 {imageError ? (
                   <div className="p-8 text-center text-xs text-text-secondary space-y-2">
                     <FileText className="w-8 h-8 text-text-secondary/50 mx-auto" />
-                    <p>Image preview unavailable. Switch to the Verbatim OCR tab to inspect extracted text.</p>
+                    <p>
+                      {language === 'hi'
+                        ? 'छवि पूर्वावलोकन अनुपलब्ध है। निकाले गए पाठ का निरीक्षण करने के लिए शब्दशः OCR टैब पर जाएं।'
+                        : 'Image preview unavailable. Switch to the Verbatim OCR tab to inspect extracted text.'}
+                    </p>
                   </div>
                 ) : (
                   <img
@@ -193,9 +201,11 @@ export const SourcePanel: React.FC = () => {
               <div className="flex items-center justify-between">
                 <h5 className="text-xs font-semibold uppercase tracking-wider text-text-primary flex items-center gap-1.5">
                   <BookOpen className="w-3.5 h-3.5 text-brand-primary" />
-                  <span>Verbatim Regulatory Passage</span>
+                  <span>{language === 'hi' ? 'शब्दशः विनियामक अंश' : 'Verbatim Regulatory Passage'}</span>
                 </h5>
-                <span className="text-[11px] text-text-secondary font-mono">Authentic Text Layer</span>
+                <span className="text-[11px] text-text-secondary font-mono">
+                  {language === 'hi' ? 'प्रामाणिक पाठ परत' : 'Authentic Text Layer'}
+                </span>
               </div>
               
               <div className="p-4 rounded-md bg-surface border border-border font-serif text-sm leading-relaxed text-text-primary border-l-4 border-l-brand-accent shadow-sm">
@@ -203,29 +213,37 @@ export const SourcePanel: React.FC = () => {
               </div>
 
               <div className="p-3.5 bg-surface-alt rounded border border-border text-xs space-y-1 text-text-secondary font-mono">
-                <div className="font-bold text-text-primary">Grounding Verification Checklist:</div>
-                <div>• Matched Document: {selectedSource.source_file}</div>
-                <div>• Validated Clause: {selectedSource.clause_ref}</div>
-                <div>• Citation Groundedness: 100% Provenance Confirmed</div>
+                <div className="font-bold text-text-primary">
+                  {language === 'hi' ? 'सत्यापन चेकलिस्ट:' : 'Grounding Verification Checklist:'}
+                </div>
+                <div>• {language === 'hi' ? 'मिलान किया गया दस्तावेज:' : 'Matched Document:'} {selectedSource.source_file}</div>
+                <div>• {language === 'hi' ? 'सत्यापित खंड:' : 'Validated Clause:'} {selectedSource.clause_ref}</div>
+                <div>• {language === 'hi' ? 'उद्धरण विश्वसनीयता: 100% उत्पत्ति की पुष्टि' : 'Citation Groundedness: 100% Provenance Confirmed'}</div>
               </div>
             </div>
           )}
 
           {/* Institutional Provenance Footnote */}
           <div className="p-3 rounded bg-surface-alt border border-border text-[11px] text-text-secondary leading-relaxed">
-            <strong className="text-text-primary font-semibold">Institutional Provenance: </strong>
-            This clause is extracted directly from official notifications published by the Central Marks Departments (CMD-I / CMD-II) under the Bureau of Indian Standards Act, 2016.
+            <strong className="text-text-primary font-semibold">
+              {language === 'hi' ? 'संस्थागत स्रोत:' : 'Institutional Provenance:'}{' '}
+            </strong>
+            {language === 'hi'
+              ? 'यह खंड भारतीय मानक ब्यूरो अधिनियम, 2016 के अंतर्गत केंद्रीय चिह्न विभागों (CMD-I / CMD-II) द्वारा प्रकाशित आधिकारिक अधिसूचनाओं से सीधे निकाला गया है।'
+              : 'This clause is extracted directly from official notifications published by the Central Marks Departments (CMD-I / CMD-II) under the Bureau of Indian Standards Act, 2016.'}
           </div>
         </div>
 
         {/* Footer */}
         <div className="bg-surface border-t border-border px-6 py-3 flex justify-between items-center text-xs flex-shrink-0">
-          <span className="text-text-secondary text-[11px] font-mono">BIS Gazette Verification Engine</span>
+          <span className="text-text-secondary text-[11px] font-mono">
+            {language === 'hi' ? 'बीआईएस राजपत्र सत्यापन इंजन' : 'BIS Gazette Verification Engine'}
+          </span>
           <button
             onClick={() => setIsSourceDrawerOpen(false)}
             className="px-4 py-1.5 bg-brand-primary hover:brightness-110 text-white rounded text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brand-accent"
           >
-            Close Panel
+            {language === 'hi' ? 'पैनल बंद करें' : 'Close Panel'}
           </button>
         </div>
       </div>
